@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:mmg/app/home/view%20model/home_provider.dart';
 import 'package:mmg/app/home/view/global_screen.dart';
+import 'package:mmg/app/utils/app%20style/responsive.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -13,19 +16,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-         ChangeNotifierProvider(
+        ChangeNotifierProvider(
           create: (crete) => HomeProvider(),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-         
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: const GlobalScreen(),
-      ),
+      child: LayoutBuilder(builder: (context, constraints) {
+        return OrientationBuilder(builder: (context, orientation) {
+          Responsive().init(constraints, orientation);
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            home: const GlobalScreen(),
+          );
+        });
+      }),
     );
   }
 }
