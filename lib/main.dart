@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mmg/app/home/view%20model/home_provider.dart';
 import 'package:mmg/app/home/view/global_screen.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
+import 'package:mmg/app/utils/providers.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -15,11 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (crete) => HomeProvider(),
-        ),
-      ],
+      providers: providers,
       child: LayoutBuilder(builder: (context, constraints) {
         return OrientationBuilder(builder: (context, orientation) {
           Responsive().init(constraints, orientation);

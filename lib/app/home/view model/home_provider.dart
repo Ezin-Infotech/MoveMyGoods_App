@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mmg/app/auth/view/login_screen.dart';
 
 import 'package:mmg/app/bookings/view/booking_screen.dart';
 import 'package:mmg/app/home/view/home_screen.dart';
@@ -7,8 +8,8 @@ import 'package:mmg/app/settings/view/settings_screen.dart';
 
 class HomeProvider with ChangeNotifier {
   List pageList = [
-    const HomeScreen(),
-    // const LoginScreen(),
+    // const HomeScreen(),
+    const LoginScreen(),
     const BookingScreen(),
     const SettingsScreen(),
   ];

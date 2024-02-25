@@ -1,18 +1,22 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:mmg/app/auth/view/login_screen.dart';
+import 'package:mmg/app/home/view%20model/home_provider.dart';
 
 import 'package:mmg/app/home/widgets/box_container.dart';
 import 'package:mmg/app/utils/app%20style/app_images.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<HomeProvider>(context, listen: false);
     return Scaffold(
         backgroundColor: AppColors.bgColor,
         body: InkWell(
@@ -113,9 +117,9 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 40,
               ),
-              ButtonWidgets(
-                onPressed: () {},
-              )
+              ButtonWidgets(onPressed: () {
+                // context.push(const LoginScreen());
+              })
             ],
           ),
         ));

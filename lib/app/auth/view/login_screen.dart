@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:mmg/app/auth/view/view%20model/auth_provider.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
+import 'package:mmg/app/utils/app%20style/responsive.dart';
 import 'package:mmg/app/utils/common%20widgets/app_bar.dart';
 import 'package:mmg/app/utils/common%20widgets/textform.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: const PreferredSize(
@@ -21,13 +25,13 @@ class LoginScreen extends StatelessWidget {
             decoration: BoxDecoration(
                 color: AppColors.primary,
                 borderRadius: BorderRadius.circular(10)),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 36,
                 ),
-                Text(
+                const Text(
                   'Welcome Back ',
                   style: TextStyle(
                     color: Color(0xffffffff),
@@ -36,7 +40,26 @@ class LoginScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                TextFormFieldWidgets()
+                const LabelText(
+                  text: 'Email',
+                ),
+                CommonTextForm(
+                  onChanged: (p0) {},
+                  controller: authProvider.emailController,
+                  fillColor: AppColors.bgColor,
+                  hintText: 'exampleple@gmail.com',
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const LabelText(
+                  text: 'Email',
+                ),
+                CommonTextForm(
+                  onChanged: (p0) {},
+                  controller: authProvider.emailController,
+                  fillColor: AppColors.bgColor,
+                  hintText: 'exampleple@gmail.com',
+                  keyboardType: TextInputType.emailAddress,
+                )
               ],
             ),
           ),
