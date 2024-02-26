@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:mmg/app/utils/app%20style/colors.dart';
+
+TextTheme textThemeLight() {
+  return TextTheme(
+    displayLarge: GoogleFonts.poppins(
+        height: 1.2,
+        fontSize: 34,
+        fontWeight: FontWeight.w700,
+        fontStyle: FontStyle.normal,
+        color: AppColors.kLight),
+    displayMedium: GoogleFonts.poppins(
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+        fontStyle: FontStyle.normal,
+        color: AppColors.kLight),
+    displaySmall: GoogleFonts.poppins(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        fontStyle: FontStyle.normal,
+        color: AppColors.kLight),
+    headlineMedium: GoogleFonts.poppins(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.normal,
+        color: AppColors.kLight),
+    headlineSmall: GoogleFonts.poppins(
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+        fontStyle: FontStyle.normal,
+        color: AppColors.kLight),
+    bodyLarge: GoogleFonts.poppins(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        fontStyle: FontStyle.normal,
+        color: AppColors.kLight),
+    bodyMedium: GoogleFonts.poppins(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        fontStyle: FontStyle.normal,
+        color: AppColors.kLight),
+    titleMedium: GoogleFonts.poppins(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.normal,
+        color: AppColors.kLight),
+    titleSmall: GoogleFonts.poppins(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.normal,
+        color: AppColors.kLight),
+    bodySmall: GoogleFonts.poppins(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.normal,
+        color: AppColors.kLight),
+    labelLarge: GoogleFonts.poppins(
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.normal,
+        color: AppColors.kLight),
+    titleLarge: GoogleFonts.poppins(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      fontStyle: FontStyle.normal,
+      color: const Color(0xff181C1F),
+    ),
+  );
+}

@@ -9,20 +9,39 @@ class AppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(color: AppColors.primary),
-      padding: EdgeInsets.only(right: 16,left: 16,top: 28,bottom: 17),
+      padding: const EdgeInsets.only(right: 16, left: 16, top: 28, bottom: 17),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
                   children: [
-                    Image.asset(AppImages.whiteLogo),
+                    Image.asset(
+                      AppImages.whiteLogo,
+                      width: 44,
+                      height: 44,
+                    ),
                     const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Move My Goods'),
-                        Text('Digital Logistic Platform')
+                        Text(
+                          'Move My Goods',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                        ),
+                        Text(
+                          'Digital Logistic Platform',
+                          style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w300,
+                              color: Colors.white),
+                        )
                       ],
                     )
                   ],
@@ -31,7 +50,8 @@ class AppBarWidget extends StatelessWidget {
             ),
           ),
           const CircleAvatar(
-            maxRadius: 30,
+            maxRadius: 20,
+            backgroundImage: AssetImage('assets/avathar.png'),
           )
         ],
       ),

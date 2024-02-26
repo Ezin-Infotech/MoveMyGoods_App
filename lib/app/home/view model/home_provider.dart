@@ -8,8 +8,8 @@ import 'package:mmg/app/settings/view/settings_screen.dart';
 
 class HomeProvider with ChangeNotifier {
   List pageList = [
-    // const HomeScreen(),
-    const LoginScreen(),
+    const HomeScreen(),
+    // const LoginScreen(),
     const BookingScreen(),
     const SettingsScreen(),
   ];

@@ -19,10 +19,8 @@ class HomeScreen extends StatelessWidget {
     final authProvider = Provider.of<HomeProvider>(context, listen: false);
     return Scaffold(
         backgroundColor: AppColors.bgColor,
-        body: InkWell(
-          onTap: () {
-            log(Responsive.height.toString());
-          },
+        body: SingleChildScrollView(
+          physics: const ScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -118,6 +116,11 @@ class HomeScreen extends StatelessWidget {
                 height: 40,
               ),
               ButtonWidgets(onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ));
                 // context.push(const LoginScreen());
               })
             ],

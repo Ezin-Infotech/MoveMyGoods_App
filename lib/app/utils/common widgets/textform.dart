@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
+import 'package:mmg/app/utils/extensions.dart';
 
 class CommonTextForm extends StatelessWidget {
   final Function(String)? onChanged;
@@ -80,8 +81,10 @@ class CommonTextForm extends StatelessWidget {
             borderSide: BorderSide(color: AppColors.primary),
             borderRadius: BorderRadius.circular(radius ?? 10)),
         hintText: hintText,
-        hintStyle: TextStyle(
-            fontSize: 16, color: AppColors.grey, fontWeight: FontWeight.w400),
+        hintStyle: context.textTheme.bodyLarge!.copyWith(
+            fontSize: 16,
+            color: const Color(0xff888888),
+            fontWeight: FontWeight.w400),
       ),
       onChanged: onChanged,
     );
