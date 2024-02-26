@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/auth/view/sign_up.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
-import 'package:mmg/app/utils/common%20widgets/app_bar.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
 import 'package:mmg/app/utils/common%20widgets/textform.dart';
