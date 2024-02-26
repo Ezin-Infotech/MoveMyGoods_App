@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:mmg/app/home/view%20model/home_provider.dart';
 import 'package:mmg/app/home/view/global_screen.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
@@ -20,12 +21,9 @@ class MyApp extends StatelessWidget {
       child: LayoutBuilder(builder: (context, constraints) {
         return OrientationBuilder(builder: (context, orientation) {
           Responsive().init(constraints, orientation);
-          return MaterialApp(
+          return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              useMaterial3: true,
-            ),
+            theme: ThemeData(),
             home: const GlobalScreen(),
           );
         });

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
-import 'package:mmg/app/auth/view/sign_up.dart';
+import 'package:mmg/app/auth/view/login_screen.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
-import 'package:mmg/app/utils/common%20widgets/app_bar.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
 import 'package:mmg/app/utils/common%20widgets/textform.dart';
@@ -10,8 +9,8 @@ import 'package:mmg/app/utils/extensions.dart';
 import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class LoginScreen extends StatelessWidget {
               children: [
                 Center(
                   child: Text(
-                    'Welcome Back ',
+                    'Sign up',
                     style: context.textTheme.bodyMedium!.copyWith(
                       color: const Color(0xffffffff),
                       fontSize: 22,
@@ -40,11 +39,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizeBoxH(20),
-                const LabelText(
-                  text: 'Email',
-                ),
-                const SizeBoxH(8),
+                const SizeBoxH(33),
                 CommonTextForm(
                   onChanged: (p0) {},
                   prefixIcon: Icon(
@@ -53,14 +48,10 @@ class LoginScreen extends StatelessWidget {
                   ),
                   controller: authProvider.emailController,
                   fillColor: AppColors.bgColor,
-                  hintText: 'exampleple@gmail.com',
+                  hintText: 'Mobile No',
                   keyboardType: TextInputType.emailAddress,
                 ),
-                const SizeBoxH(18),
-                const LabelText(
-                  text: 'Password',
-                ),
-                const SizeBoxH(8),
+                const SizeBoxH(42),
                 CommonTextForm(
                   onChanged: (p0) {},
                   prefixIcon: Icon(
@@ -69,49 +60,33 @@ class LoginScreen extends StatelessWidget {
                   ),
                   controller: authProvider.emailController,
                   fillColor: AppColors.bgColor,
-                  hintText: 'exampleple@gmail.com',
+                  hintText: 'Password',
                   keyboardType: TextInputType.emailAddress,
                   suffixIcon: Icon(
                     Icons.remove_red_eye,
                     color: AppColors.primary,
                   ),
                 ),
-                const SizeBoxH(28),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: true,
-                          activeColor: AppColors.primary,
-                          side: const BorderSide(
-                              color: Colors.white, width: 2, strokeAlign: 2),
-                          onChanged: (value) {},
-                        ),
-                        Text(
-                          'Remember Me',
-                          style: context.textTheme.bodyMedium!.copyWith(
-                            color: const Color(0xffffffff),
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      'Forgot Password?',
-                      style: context.textTheme.bodyMedium!.copyWith(
-                        color: const Color(0xffffffff),
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    )
-                  ],
+                const SizeBoxH(42),
+                CommonTextForm(
+                  onChanged: (p0) {},
+                  prefixIcon: Icon(
+                    Icons.lock,
+                    color: AppColors.primary,
+                  ),
+                  controller: authProvider.emailController,
+                  fillColor: AppColors.bgColor,
+                  hintText: 'Confirm Password',
+                  keyboardType: TextInputType.emailAddress,
+                  suffixIcon: Icon(
+                    Icons.remove_red_eye,
+                    color: AppColors.primary,
+                  ),
                 ),
                 const SizeBoxH(31),
                 Center(
                   child: ButtonWidgets(
+                      buttonText: 'Sign up',
                       bgColor: AppColors.kLight,
                       textColor: AppColors.primary,
                       onPressed: () {
@@ -123,37 +98,6 @@ class LoginScreen extends StatelessWidget {
                         // context.push(const LoginScreen());
                       }),
                 ),
-                const SizeBoxH(40),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Don’t have an account ? ',
-                      style: context.textTheme.bodyLarge!.copyWith(
-                        color: const Color(0xffffffff),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SignUpScreen(),
-                            ));
-                      },
-                      child: Text(
-                        'Sign Up',
-                        style: context.textTheme.bodyLarge!.copyWith(
-                          color: const Color(0xffffffff),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
               ],
             ),
           ),

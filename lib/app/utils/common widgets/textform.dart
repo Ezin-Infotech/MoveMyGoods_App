@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
+import 'package:mmg/app/utils/extensions.dart';
 
 class CommonTextForm extends StatelessWidget {
   final Function(String)? onChanged;
@@ -18,6 +19,10 @@ class CommonTextForm extends StatelessWidget {
   final TextStyle? labelStyle;
   final EdgeInsetsGeometry? contentPadding;
   final TextInputType? keyboardType;
+  final Color? enabledBorder;
+  final Color? borderColor;
+  final Color? focusedBorder;
+  final TextStyle? hintTextStyle;
   const CommonTextForm({
     super.key,
     required this.onChanged,
@@ -36,6 +41,10 @@ class CommonTextForm extends StatelessWidget {
     this.labelStyle,
     this.contentPadding,
     this.keyboardType,
+    this.enabledBorder,
+    this.borderColor,
+    this.focusedBorder,
+    this.hintTextStyle,
   });
 
   @override
@@ -63,7 +72,8 @@ class CommonTextForm extends StatelessWidget {
         suffixIcon: suffixIcon ?? const SizedBox.shrink(),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.grey.withOpacity(0.4),
+              width: 1,
+              color: enabledBorder ?? Colors.grey.withOpacity(0.4),
             ),
             borderRadius: BorderRadius.circular(radius ?? 20)),
         errorBorder: OutlineInputBorder(
@@ -73,15 +83,18 @@ class CommonTextForm extends StatelessWidget {
             borderSide: const BorderSide(color: Colors.transparent),
             borderRadius: BorderRadius.circular(radius ?? 10)),
         focusedBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Colors.transparent, width: width ?? 3),
+            borderSide: BorderSide(
+                color: focusedBorder ?? Colors.transparent, width: width ?? 1),
             borderRadius: BorderRadius.circular(radius ?? 20)),
         border: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.primary),
+            borderSide: BorderSide(color: borderColor ?? AppColors.primary),
             borderRadius: BorderRadius.circular(radius ?? 10)),
         hintText: hintText,
-        hintStyle: TextStyle(
-            fontSize: 16, color: AppColors.grey, fontWeight: FontWeight.w400),
+        hintStyle: hintTextStyle ??
+            context.textTheme.bodyLarge!.copyWith(
+                fontSize: 16,
+                color: const Color(0xff888888),
+                fontWeight: FontWeight.w400),
       ),
       onChanged: onChanged,
     );

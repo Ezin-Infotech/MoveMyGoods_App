@@ -11,7 +11,9 @@ class HomeProvider with ChangeNotifier {
   List pageList = [
     // const HomeScreen(),
     // const LoginScreen(),
-    const AllBookingScreen(),
+
+    const HomeScreen(),
+
     const BookingScreen(),
     const SettingsScreen(),
   ];
