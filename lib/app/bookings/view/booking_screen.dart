@@ -7,7 +7,6 @@ import 'package:mmg/app/utils/common%20widgets/textform.dart';
 import 'package:mmg/app/utils/extensions.dart';
 import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/src/material/dropdown.dart';
 
 class BookingScreen extends StatelessWidget {
   const BookingScreen({super.key});
