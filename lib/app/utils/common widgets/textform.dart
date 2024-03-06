@@ -23,6 +23,7 @@ class CommonTextForm extends StatelessWidget {
   final Color? borderColor;
   final Color? focusedBorder;
   final TextStyle? hintTextStyle;
+  final Color? hintTextColor;
   const CommonTextForm({
     super.key,
     required this.onChanged,
@@ -45,6 +46,7 @@ class CommonTextForm extends StatelessWidget {
     this.borderColor,
     this.focusedBorder,
     this.hintTextStyle,
+    this.hintTextColor,
   });
 
   @override
@@ -65,6 +67,7 @@ class CommonTextForm extends StatelessWidget {
           style:
               labelStyle ?? const TextStyle(color: Colors.black, fontSize: 16),
         ),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
         focusColor: Colors.grey,
         fillColor: fillColor ?? Colors.grey,
         filled: true,
@@ -93,7 +96,7 @@ class CommonTextForm extends StatelessWidget {
         hintStyle: hintTextStyle ??
             context.textTheme.bodyLarge!.copyWith(
                 fontSize: 16,
-                color: const Color(0xff888888),
+                color: hintTextColor ?? const Color(0xff888888),
                 fontWeight: FontWeight.w400),
       ),
       onChanged: onChanged,
