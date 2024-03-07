@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/bookings/view/widgets/drop_down_widgets.dart';
-import 'package:mmg/app/bookings/view/widgets/map_screen.dart';
 import 'package:mmg/app/utils/app%20style/app_images.dart';
 
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
-import 'package:mmg/app/utils/common%20widgets/textform.dart';
+import 'package:mmg/app/utils/common%20widgets/label_and_textfield.dart';
+import 'package:mmg/app/utils/common%20widgets/toggle_widget.dart';
 import 'package:mmg/app/utils/extensions.dart';
 import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
+
+import '../../utils/common widgets/custom_text.dart';
 
 class BookingScreen extends StatelessWidget {
   const BookingScreen({super.key});
@@ -26,7 +27,7 @@ class BookingScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // MapScreen()
-          const MapWidgets(),
+          // const MapWidgets(),
           const CustomText(
             text: 'Source *',
           ),
@@ -263,90 +264,4 @@ class BookingScreen extends StatelessWidget {
   }
 }
 
-class CustomText extends StatelessWidget {
-  final String? text;
-  const CustomText({this.text, super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text ?? '',
-      style: context.textTheme.displaySmall!.copyWith(
-          fontFamily: 'Inter',
-          color: AppColors.primary,
-          fontSize: 18,
-          fontWeight: FontWeight.w500),
-    );
-  }
-}
-
 List<String> items = ['Item 1', 'Item 2', 'Item 3'];
-
-class MyToggleIconButton extends StatefulWidget {
-  const MyToggleIconButton({super.key});
-
-  @override
-  _MyToggleIconButtonState createState() => _MyToggleIconButtonState();
-}
-
-class _MyToggleIconButtonState extends State<MyToggleIconButton> {
-  bool isToggled = false; // Initial state
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: isToggled
-          ? const Icon(Icons.favorite, color: Colors.red)
-          : const Icon(Icons.favorite_border),
-      onPressed: () {
-        setState(() {
-          isToggled = !isToggled;
-        });
-      },
-    );
-  }
-}
-
-class BookingTextFieldWidgets extends StatelessWidget {
-  final String? labeText;
-  final TextEditingController? controller;
-  final String? hintText;
-  final TextInputType? keyboardType;
-
-  const BookingTextFieldWidgets(
-      {required this.controller,
-      required this.labeText,
-      required this.hintText,
-      this.keyboardType,
-      super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final bookingProvider =
-        Provider.of<BookingProvider>(context, listen: false);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizeBoxH(10),
-        CustomText(
-          text: labeText ?? 'Source',
-        ),
-        const SizeBoxH(8),
-        CommonTextForm(
-          controller: controller ?? bookingProvider.sourceController,
-          onChanged: (p0) {},
-          radius: 4.0,
-          fillColor: Colors.transparent,
-          enabledBorder: const Color(0xffDBDBDB),
-          borderColor: const Color(0xffDBDBDB),
-          focusedBorder: const Color(0xffDBDBDB),
-          hintText: hintText ?? 'mysore,karnadaka',
-          keyboardType: keyboardType ?? TextInputType.text,
-          hintTextStyle: context.textTheme.titleMedium!.copyWith(
-              fontWeight: FontWeight.w300, color: const Color(0xff222222)),
-          hintTextColor: AppColors.darkGrey,
-        ),
-      ],
-    );
-  }
-}
