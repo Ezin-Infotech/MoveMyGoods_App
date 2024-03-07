@@ -109,14 +109,16 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 40,
               ),
-              ButtonWidgets(onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginScreen(),
-                    ));
-                // context.push(const LoginScreen());
-              })
+              ButtonWidgets(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ));
+                  // context.push(const LoginScreen());
+                },
+              ),
             ],
           ),
         ));

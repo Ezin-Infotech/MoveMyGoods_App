@@ -6,4 +6,6 @@ class AppImages {
   static String homeScreenBackGroundImage = 'assets/road.png';
   static String truckImage = 'assets/Truck 3 1.png';
   static String blakLogo = 'assets/Logo 2 1.png';
+  static String filterLogo = 'assets/mingcute_filter-2-fill.png';
+  static String smallvehicleImage = 'assets/download (1) 1.png';
 }
