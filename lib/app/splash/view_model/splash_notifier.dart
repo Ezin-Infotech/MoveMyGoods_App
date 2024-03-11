@@ -9,7 +9,7 @@ class SplashProvider extends ChangeNotifier {
   bool isLoad = false;
   Future<void> changeScreen() async {
     await Future.delayed(
-      const Duration(seconds: 5),
+      const Duration(seconds: 8),
     );
 
     // if (AppPref.isFirst == true) {

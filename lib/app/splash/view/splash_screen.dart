@@ -30,20 +30,12 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.kLight,
-      body: SizedBox(
+      body: Container(
         height: context.height,
         width: context.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/Logo 2 1.png',
-              color: AppColors.primary,
-            ),
-            const SizeBoxH(20),
-            const Text("MOVE MY GOODS")
-          ],
-        ),
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/gif-mmg.gif'), fit: BoxFit.cover)),
       ),
     );
   }
