@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class SmallBoxontainerWidget extends StatelessWidget {
   final Color? numberColor;
-  const SmallBoxontainerWidget({this.numberColor, super.key});
+  final String title;
+  const SmallBoxontainerWidget(
+      {required this.title, this.numberColor, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +19,9 @@ class SmallBoxontainerWidget extends StatelessWidget {
           const SizedBox(
             height: 12,
           ),
-          const Text(
-            'All bookings',
-            style: TextStyle(
+          Text(
+            title,
+            style: const TextStyle(
                 // color: Color(0xffFFFFFF),
                 fontSize: 16,
                 fontWeight: FontWeight.w500,

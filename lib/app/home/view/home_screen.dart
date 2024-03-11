@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mmg/app/auth/view/login_screen.dart';
+import 'package:mmg/app/home/view%20model/home_provider.dart';
 import 'package:mmg/app/home/widgets/box_container.dart';
 import 'package:mmg/app/utils/app%20style/app_images.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,7 +26,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Container(
                     width: double.infinity,
-                    height: Responsive.height * 36,
+                    height: Responsive.height * 38,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image:
@@ -75,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 98,
+                height: 118,
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -89,25 +91,28 @@ class HomeScreen extends StatelessWidget {
                       mainAxisSpacing: 46,
                       childAspectRatio: 8 / 6),
                   itemBuilder: (context, int index) {
-                    return SmallBoxontainerWidget(
-                        numberColor: index == 0
-                            ? const Color(0xffab00af)
-                            : index == 1
-                                ? const Color(0xff006eef)
-                                : index == 2
-                                    ? const Color(0xff847f00)
-                                    : index == 3
-                                        ? const Color(0xff00c108)
-                                        : index == 4
-                                            ? const Color(0xff009ba4)
-                                            : index == 5
-                                                ? const Color(0xffDF0E0E)
-                                                : null);
+                    return Consumer<HomeProvider>(builder: (context, value, _) {
+                      return SmallBoxontainerWidget(
+                          title: value.bookingTiltes[index],
+                          numberColor: index == 0
+                              ? const Color(0xffab00af)
+                              : index == 1
+                                  ? const Color(0xff006eef)
+                                  : index == 2
+                                      ? const Color(0xff847f00)
+                                      : index == 3
+                                          ? const Color(0xff00c108)
+                                          : index == 4
+                                              ? const Color(0xff009ba4)
+                                              : index == 5
+                                                  ? const Color(0xffDF0E0E)
+                                                  : null);
+                    });
                   },
                 ),
               ),
               const SizedBox(
-                height: 40,
+                height: 24,
               ),
               ButtonWidgets(
                 onPressed: () {

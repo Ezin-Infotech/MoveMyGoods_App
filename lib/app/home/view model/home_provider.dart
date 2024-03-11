@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mmg/app/auth/view/login_screen.dart';
-import 'package:mmg/app/bookings/view/all_booking_Screen..dart';
-
-import 'package:mmg/app/bookings/view/booking_screen.dart';
+import 'package:mmg/app/bookings/view/booking_list.dart';
 import 'package:mmg/app/home/view/home_screen.dart';
 
 import 'package:mmg/app/settings/view/settings_screen.dart';
@@ -14,7 +11,7 @@ class HomeProvider with ChangeNotifier {
 
     const HomeScreen(),
 
-    const BookingScreen(),
+    const BookingListScreen(),
     const SettingsScreen(),
   ];
   int curentIndex = 0;
@@ -23,4 +20,13 @@ class HomeProvider with ChangeNotifier {
     curentIndex = index;
     notifyListeners();
   }
+
+  List<String> bookingTiltes = [
+    'All bookings',
+    'Bookings',
+    'Pending',
+    'Active',
+    'Completed',
+    'Cancelled',
+  ];
 }
