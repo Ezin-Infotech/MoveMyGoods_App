@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mmg/app/auth/view/login_screen.dart';
-import 'package:mmg/app/bookings/view/all_booking_Screen..dart';
 
 import 'package:mmg/app/bookings/view/booking_screen.dart';
 import 'package:mmg/app/home/view/home_screen.dart';
