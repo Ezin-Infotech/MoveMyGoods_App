@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class SettingsProvider with ChangeNotifier {
   TextEditingController firstNameController = TextEditingController();
@@ -29,4 +30,28 @@ class SettingsProvider with ChangeNotifier {
     Icons.android,
     Icons.logout
   ];
+
+  int loadingPercentage = 0;
+
+  void init(WebViewController webViewController, String url) {
+    webViewController
+      ..setNavigationDelegate(NavigationDelegate(
+        onPageStarted: (url) {
+          loadingPercentage = 0;
+
+          notifyListeners();
+        },
+        onProgress: (progress) {
+          loadingPercentage = progress;
+          notifyListeners();
+        },
+        onPageFinished: (url) {
+          loadingPercentage = 100;
+          notifyListeners();
+        },
+      ))
+      ..loadRequest(
+        Uri.parse(url),
+      );
+  }
 }

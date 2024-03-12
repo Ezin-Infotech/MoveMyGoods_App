@@ -40,4 +40,6 @@ class BookingProvider with ChangeNotifier {
     'BUISSINESS',
     'OTHER'
   ];
+
+  List<String> goodsWight = ['100', '200', '300', '400', '500', '750'];
 }

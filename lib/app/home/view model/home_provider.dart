@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mmg/app/auth/view/otp_screen.dart';
 
+import 'package:mmg/app/bookings/view/booking_list.dart';
+import 'package:mmg/app/home/model/booking_count_model.dart';
+import 'package:mmg/app/home/services/home_services.dart';
 import 'package:mmg/app/home/view/home_screen.dart';
 
 import 'package:mmg/app/settings/view/settings_screen.dart';
+import 'package:mmg/app/utils/enums.dart';
 
 class HomeProvider with ChangeNotifier {
   List pageList = [
@@ -11,8 +14,9 @@ class HomeProvider with ChangeNotifier {
     // const LoginScreen(),
 
     const HomeScreen(),
+    const BookingListScreen(),
     // const CompletedBookingScreen(),
-    const Otp(),
+
     // const BookingScreen(),
     // const BookingListScreen(),
     const SettingsScreen(),
@@ -32,4 +36,29 @@ class HomeProvider with ChangeNotifier {
     'Completed',
     'Cancelled',
   ];
+
+  /*-------- API SERVICES ------------*/
+
+  HomeServices services = HomeServices();
+
+  /* Dashboard Booking Counts */
+  GetAllBookingCountStatus getAllBookingCountStatus =
+      GetAllBookingCountStatus.initial;
+  DashboardBookingCountModel bookingCountData = DashboardBookingCountModel();
+  getBookingCountFn() async {
+    getAllBookingCountStatus = GetAllBookingCountStatus.loading;
+    notifyListeners();
+    try {
+      final countRespose = await services.dashboardBookingCountService();
+
+      bookingCountData = countRespose;
+
+      getAllBookingCountStatus = GetAllBookingCountStatus.loaded;
+      notifyListeners();
+      // ignore: deprecated_member_use
+    } catch (e) {
+      getAllBookingCountStatus = GetAllBookingCountStatus.error;
+      notifyListeners();
+    }
+  }
 }

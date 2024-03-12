@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mmg/app/bookings/view/booking_success_completed.dart';
 import 'package:mmg/app/home/view/global_screen.dart';
+import 'package:mmg/app/home/view/showcase/showcasewidget.dart';
 import 'package:mmg/app/splash/view/splash_screen.dart';
+import 'package:mmg/app/utils/common%20widgets/no_internet_screen.dart';
 import 'package:mmg/app/utils/routes/route_names.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -20,13 +22,19 @@ class RouteGenerator {
       case AppRoutes.loginOrHome:
         return pagetransition(
           settings: settings,
-          widget: const GlobalScreen(),
+          widget: const MyShowCaseWidget(),
         ); //
       case AppRoutes.bookingSuccessFullycompleted:
         return pagetransition(
           settings: settings,
           widget: const BookingSuccessFullyCompletedScreen(),
         ); //
+
+      case AppRoutes.noInternetScreen:
+        return pagetransition(
+          settings: settings,
+          widget: const NoInternetScreen(),
+        );
     }
     return MaterialPageRoute(
         builder: (_) => const Scaffold(

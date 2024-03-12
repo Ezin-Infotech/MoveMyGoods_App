@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 class SmallBoxontainerWidget extends StatelessWidget {
   final Color? numberColor;
   final String title;
+  final String subTitle;
   const SmallBoxontainerWidget(
-      {required this.title, this.numberColor, super.key});
+      {required this.title,
+      required this.subTitle,
+      this.numberColor,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class SmallBoxontainerWidget extends StatelessWidget {
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Poppins'),
           ),
-          Text('0',
+          Text(subTitle,
               style: TextStyle(
                   color: numberColor ?? const Color(0xffFFFFFF),
                   fontSize: 30,

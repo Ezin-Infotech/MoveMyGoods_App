@@ -20,122 +20,124 @@ class OtpState extends State<Otp> {
       resizeToAvoidBottomInset: true,
       backgroundColor: AppColors.bgColor,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: const Icon(
-                    Icons.arrow_back,
-                    size: 32,
-                    color: Colors.black54,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: const Icon(
+                      Icons.arrow_back,
+                      size: 32,
+                      color: Colors.black54,
+                    ),
                   ),
                 ),
-              ),
-              SizeBoxH(Responsive.height * 10),
-              Image.asset(
-                AppImages.blakLogo,
-              ),
-              SizeBoxH(Responsive.height * 2.5),
-              const Text(
-                'Verification',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
+                SizeBoxH(Responsive.height * 10),
+                Image.asset(
+                  AppImages.blakLogo,
                 ),
-              ),
-              SizeBoxH(Responsive.height * 1),
-              const Text(
-                "Enter your OTP code number",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black38,
+                SizeBoxH(Responsive.height * 2.5),
+                const Text(
+                  'Verification',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
-              SizeBoxH(Responsive.height * 3),
-              Container(
-                // padding: const EdgeInsets.all(28),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
+                SizeBoxH(Responsive.height * 1),
+                const Text(
+                  "Enter your OTP code number",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black38,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        textFieldOTP(first: true, last: false),
-                        textFieldOTP(first: false, last: false),
-                        textFieldOTP(first: false, last: false),
-                        textFieldOTP(first: false, last: true),
-                      ],
-                    ),
-                    SizeBoxH(Responsive.height * 2.5),
-                    ButtonWidgets(
-                      width: double.infinity,
-                      height: 50,
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
-                            ));
-                        // context.push(const LoginScreen());
-                      },
-                    ),
-                    // SizedBox(
-                    //   width: double.infinity,
-                    //   child: ElevatedButton(
-                    //     onPressed: () {},
-                    //     style: ButtonStyle(
-                    //       foregroundColor:
-                    //           MaterialStateProperty.all<Color>(Colors.white),
-                    //       backgroundColor: MaterialStateProperty.all<Color>(
-                    //           AppColors.primary),
-                    //       shape:
-                    //           MaterialStateProperty.all<RoundedRectangleBorder>(
-                    //         RoundedRectangleBorder(
-                    //           borderRadius: BorderRadius.circular(24.0),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     child: const Padding(
-                    //       padding: EdgeInsets.all(14.0),
-                    //       child: Text(
-                    //         'Verify',
-                    //         style: TextStyle(fontSize: 16),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // )
-                  ],
+                SizeBoxH(Responsive.height * 3),
+                Container(
+                  // padding: const EdgeInsets.all(28),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          textFieldOTP(first: true, last: false),
+                          textFieldOTP(first: false, last: false),
+                          textFieldOTP(first: false, last: false),
+                          textFieldOTP(first: false, last: true),
+                        ],
+                      ),
+                      SizeBoxH(Responsive.height * 2.5),
+                      ButtonWidgets(
+                        width: double.infinity,
+                        height: 50,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginScreen(),
+                              ));
+                          // context.push(const LoginScreen());
+                        },
+                      ),
+                      // SizedBox(
+                      //   width: double.infinity,
+                      //   child: ElevatedButton(
+                      //     onPressed: () {},
+                      //     style: ButtonStyle(
+                      //       foregroundColor:
+                      //           MaterialStateProperty.all<Color>(Colors.white),
+                      //       backgroundColor: MaterialStateProperty.all<Color>(
+                      //           AppColors.primary),
+                      //       shape:
+                      //           MaterialStateProperty.all<RoundedRectangleBorder>(
+                      //         RoundedRectangleBorder(
+                      //           borderRadius: BorderRadius.circular(24.0),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     child: const Padding(
+                      //       padding: EdgeInsets.all(14.0),
+                      //       child: Text(
+                      //         'Verify',
+                      //         style: TextStyle(fontSize: 16),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // )
+                    ],
+                  ),
                 ),
-              ),
-              SizeBoxH(Responsive.height * 2),
-              const Text(
-                "Didn't you receive any code?",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black38,
+                SizeBoxH(Responsive.height * 2),
+                const Text(
+                  "Didn't you receive any code?",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black38,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-              SizeBoxH(Responsive.height * 2),
-              Text(
-                "Resend New Code",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.secondPrimary,
+                SizeBoxH(Responsive.height * 2),
+                Text(
+                  "Resend New Code",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.secondPrimary,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

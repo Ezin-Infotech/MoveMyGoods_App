@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
-import 'package:mmg/app/bookings/view/booking_screen.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/common%20widgets/custom_text.dart';
 import 'package:mmg/app/utils/common%20widgets/textform.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
+import 'package:mmg/app/auth/view/otp_screen.dart';
 import 'package:mmg/app/auth/view/sign_up.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
@@ -117,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
+                              builder: (context) => const Otp(),
                             ));
                         // context.push(const LoginScreen());
                       }),
