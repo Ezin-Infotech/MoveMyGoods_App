@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mmg/app/auth/view/login_screen.dart';
 import 'package:mmg/app/home/view%20model/home_provider.dart';
 import 'package:mmg/app/home/view/widgets/box_container.dart';
 import 'package:mmg/app/utils/app%20style/app_images.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
-import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/enums.dart';
+import 'package:mmg/app/utils/routes/route_names.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -144,11 +145,12 @@ class HomeScreen extends StatelessWidget {
           ),
           ButtonWidgets(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginScreen(),
-                  ));
+              Get.toNamed(AppRoutes.bookingScreen);
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => const LoginScreen(),
+              //     ));
               // context.push(const LoginScreen());
             },
           ),

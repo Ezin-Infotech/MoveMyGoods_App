@@ -17,7 +17,7 @@ class _GlobalScreenState extends State<GlobalScreen> {
   @override
   void initState() {
     AppPref.userProfileId = 'b0270f1e-bed8-47cb-b490-662f9f4b51ff';
-    AppPref.userToken = 'deb04f14-96f0-476a-acfe-1b588db31dbf';
+    AppPref.userToken = 'bf08a9d8-0542-4c1a-8a01-906bce989b11';
     context.read<HomeProvider>().getBookingCountFn();
     super.initState();
   }

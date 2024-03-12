@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mmg/app/bookings/view/booking_screen.dart';
 import 'package:mmg/app/home/view/showcase/showcasewidget.dart';
 import 'package:mmg/app/splash/view/splash_screen.dart';
 import 'package:mmg/app/utils/common%20widgets/no_internet_screen.dart';
@@ -27,6 +28,11 @@ class RouteGenerator {
         return pagetransition(
           settings: settings,
           widget: const NoInternetScreen(),
+        );
+      case AppRoutes.bookingScreen:
+        return pagetransition(
+          settings: settings,
+          widget: const BookingScreen(),
         );
     }
     return MaterialPageRoute(

@@ -9,7 +9,6 @@ import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
 import 'package:mmg/app/utils/common%20widgets/label_and_textfield.dart';
 import 'package:mmg/app/utils/common%20widgets/toggle_widget.dart';
-import 'package:mmg/app/utils/extensions.dart';
 import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
 
@@ -100,7 +99,10 @@ class BookingScreen extends StatelessWidget {
                         const MyToggleIconButton(),
                         Text(
                           'Upto 750kg  ₹ 312.5',
-                          style: context.textTheme.bodyMedium!.copyWith(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(),
                         ),
                       ],
                     );
@@ -122,7 +124,7 @@ class BookingScreen extends StatelessWidget {
             children: [
               Text(
                 'Total Amount:394/-',
-                style: context.textTheme.displaySmall!.copyWith(
+                style: Theme.of(context).textTheme.displaySmall!.copyWith(
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w400,
                     fontSize: 16,
@@ -141,7 +143,7 @@ class BookingScreen extends StatelessWidget {
             children: [
               Text(
                 '*The price is an indicative and actual pricemay vary ',
-                style: context.textTheme.displaySmall!.copyWith(
+                style: Theme.of(context).textTheme.displaySmall!.copyWith(
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w400,
                     fontSize: 14,
@@ -164,7 +166,7 @@ class BookingScreen extends StatelessWidget {
           SizeBoxH(Responsive.height * 4),
           Text(
             '*Receiver Details',
-            style: context.textTheme.displaySmall!.copyWith(
+            style: Theme.of(context).textTheme.displaySmall!.copyWith(
                 fontWeight: FontWeight.w500,
                 fontSize: 18,
                 color: const Color(0xff222222)),
@@ -212,7 +214,7 @@ class BookingScreen extends StatelessWidget {
           SizeBoxH(Responsive.height * 2),
           Text(
             '*Shipper Details',
-            style: context.textTheme.displaySmall!.copyWith(
+            style: Theme.of(context).textTheme.displaySmall!.copyWith(
                 fontWeight: FontWeight.w500,
                 fontSize: 18,
                 color: const Color(0xff222222)),

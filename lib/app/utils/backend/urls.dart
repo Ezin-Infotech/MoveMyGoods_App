@@ -3,7 +3,7 @@ import 'package:mmg/app/utils/backend/interceptor.dart';
 
 class Urls {
   static const baseUrl = 'http://103.160.153.57:8087/mmg/api';
-
+  static const imageBaseUrl = 'https://storage.googleapis.com/admin-mmg/';
   void statuscode(Response<dynamic> response, double code) {
     if (response.statusCode != code) {
       throw Exception(response.data);
@@ -27,9 +27,9 @@ class Urls {
   final createprofile = '$baseUrl/user-profile/create';
   final getAllProfile = '$baseUrl/user-profile/all';
 
-  /* PHARMA */
+  /* BOOKING */
   final bookingCount = "$baseUrl/v1/dashboard/booking/profile";
-  final pharmaSingleProduct = "$baseUrl/product/single";
+  final bookingByStatus = "$baseUrl/v2";
 
   final pharmaLatestProducts = "$baseUrl/product/pharma";
   final pharmaCartProducts = "$baseUrl/cart/";
