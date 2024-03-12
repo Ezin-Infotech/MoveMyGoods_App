@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
+import 'package:mmg/app/utils/alert_dialog.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
+import 'package:mmg/app/utils/common%20widgets/toggle_widget.dart';
 import 'package:mmg/app/utils/enums.dart';
 import 'package:mmg/app/utils/extensions.dart';
 import 'package:mmg/app/utils/helpers.dart';
@@ -17,8 +20,13 @@ class BookingListScreen extends StatefulWidget {
 class _BookingListScreenState extends State<BookingListScreen> {
   @override
   void initState() {
-    final cntroller = Provider.of<BookingProvider>(context, listen: false);
-    cntroller.getBookingByStatusFn();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final cntroller = Provider.of<BookingProvider>(context, listen: false);
+      cntroller.tempSelectedStatus == 'All'
+          ? cntroller.getAllBookingByStatusFn()
+          : cntroller.getBookingByStatusFn();
+    });
+
     super.initState();
   }
 
@@ -32,17 +40,66 @@ class _BookingListScreenState extends State<BookingListScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'All Bookings',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge!
-                      .copyWith(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                const Icon(
-                  Icons.filter_list_rounded,
-                  size: 18,
-                )
+                value.tempSelectedStatus == 'All'
+                    ? Text(
+                        'All Bookings',
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            fontSize: 18, fontWeight: FontWeight.w600),
+                      )
+                    : Row(
+                        children: [
+                          Text(
+                            '${value.tempSelectedStatus} Bookings',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(
+                                    color: value.tempSelectedStatus
+                                                .toUpperCase() ==
+                                            'PENDING'
+                                        ? const Color(0xffAE9C00)
+                                        : value.tempSelectedStatus
+                                                    .toUpperCase() ==
+                                                'ACTIVE'
+                                            ? const Color(0xff00A51A)
+                                            : value.tempSelectedStatus
+                                                        .toUpperCase() ==
+                                                    'CANCELLED'
+                                                ? const Color(0xffA51E00)
+                                                : const Color(0xff0076E3),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600),
+                          ),
+                          const SizeBoxV(8),
+                          Icon(
+                            value.tempSelectedStatus.toUpperCase() == 'PENDING'
+                                ? Icons.access_time_rounded
+                                : value.tempSelectedStatus.toUpperCase() ==
+                                        'CANCELLED'
+                                    ? Icons.cancel_rounded
+                                    : value.tempSelectedStatus.toUpperCase() ==
+                                            'ACTIVE'
+                                        ? Icons.speed_rounded
+                                        : Icons.check_circle_rounded,
+                            color: value.tempSelectedStatus.toUpperCase() ==
+                                    'PENDING'
+                                ? const Color(0xffAE9C00)
+                                : value.tempSelectedStatus.toUpperCase() ==
+                                        'ACTIVE'
+                                    ? const Color(0xff00A51A)
+                                    : value.tempSelectedStatus.toUpperCase() ==
+                                            'CANCELLED'
+                                        ? const Color(0xffA51E00)
+                                        : const Color(0xff0076E3),
+                          ),
+                        ],
+                      ),
+                IconButton(
+                    icon: const Icon(
+                      Icons.filter_list_rounded,
+                      size: 18,
+                    ),
+                    onPressed: () => filterDialog(context))
               ],
             ),
             const SizeBoxH(8),
@@ -272,5 +329,80 @@ class _BookingListScreenState extends State<BookingListScreen> {
         );
       }),
     );
+  }
+}
+
+Future filterDialog(BuildContext context) async {
+  return await showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return const SimpleDialog(
+          contentPadding: EdgeInsets.all(16),
+          insetPadding: EdgeInsets.all(16),
+          children: <Widget>[
+            FilterWidget(
+              title: 'All',
+            ),
+            SizeBoxH(10),
+            FilterWidget(
+              title: 'Pending',
+            ),
+            SizeBoxH(10),
+            FilterWidget(
+              title: 'Active',
+            ),
+            SizeBoxH(10),
+            FilterWidget(
+              title: 'Completed',
+            ),
+            SizeBoxH(10),
+            FilterWidget(
+              title: 'Cancelled',
+            ),
+          ],
+        );
+      });
+}
+
+class FilterWidget extends StatelessWidget {
+  final String title;
+  const FilterWidget({
+    super.key,
+    required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<BookingProvider>(builder: (context, value, _) {
+      return GestureDetector(
+        onTap: () => context
+            .read<BookingProvider>()
+            .filterFunction(status: title, context: context),
+        child: SizedBox(
+          height: 30,
+          child: Row(
+            children: [
+              MyToggleIconButtonFilter(
+                isToggled: title.toLowerCase() ==
+                    value.tempSelectedStatus.toLowerCase(),
+              ),
+              const SizeBoxV(8),
+              Expanded(
+                child: Container(
+                  child: Text(
+                    "$title Bookings",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    });
   }
 }
