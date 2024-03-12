@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
+import 'package:mmg/app/bookings/view/booking_success_completed.dart';
 import 'package:mmg/app/bookings/view/widgets/drop_down_widgets.dart';
 import 'package:mmg/app/utils/app%20style/app_images.dart';
 
@@ -254,6 +255,12 @@ class BookingScreen extends StatelessWidget {
                 buttonText: 'Proceed to Pay',
                 onPressed: () {
                   // context.push(const LoginScreen());
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const BookingSuccessFullyCompletedScreen(),
+                      ));
                 },
               ),
             ],

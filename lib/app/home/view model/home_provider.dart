@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mmg/app/bookings/view/booking_list.dart';
+import 'package:mmg/app/auth/view/otp_screen.dart';
+
 import 'package:mmg/app/home/view/home_screen.dart';
 
 import 'package:mmg/app/settings/view/settings_screen.dart';
@@ -10,8 +11,10 @@ class HomeProvider with ChangeNotifier {
     // const LoginScreen(),
 
     const HomeScreen(),
-
-    const BookingListScreen(),
+    // const CompletedBookingScreen(),
+    const Otp(),
+    // const BookingScreen(),
+    // const BookingListScreen(),
     const SettingsScreen(),
   ];
   int curentIndex = 0;

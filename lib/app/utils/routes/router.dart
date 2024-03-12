@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mmg/app/bookings/view/booking_success_completed.dart';
 import 'package:mmg/app/home/view/global_screen.dart';
 import 'package:mmg/app/splash/view/splash_screen.dart';
 import 'package:mmg/app/utils/routes/route_names.dart';
@@ -20,6 +21,11 @@ class RouteGenerator {
         return pagetransition(
           settings: settings,
           widget: const GlobalScreen(),
+        ); //
+      case AppRoutes.bookingSuccessFullycompleted:
+        return pagetransition(
+          settings: settings,
+          widget: const BookingSuccessFullyCompletedScreen(),
         ); //
     }
     return MaterialPageRoute(

@@ -31,4 +31,13 @@ class BookingProvider with ChangeNotifier {
     'BUISSINESS',
     'OTHER'
   ];
+
+  List<String> reciptContent = [
+    'DOCTOR',
+    'ENGINEER',
+    'DEVELOPER',
+    'SOCIALWORK',
+    'BUISSINESS',
+    'OTHER'
+  ];
 }
