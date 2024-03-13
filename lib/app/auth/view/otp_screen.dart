@@ -128,7 +128,7 @@ class OtpState extends State<Otp> {
                 ),
                 SizeBoxH(Responsive.height * 2),
                 Text(
-                  "Resend New Code",
+                  "Resend New Code ",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
