@@ -74,9 +74,14 @@ class LoginScreen extends StatelessWidget {
                     fillColor: AppColors.bgColor,
                     hintText: 'Enter Your Password',
                     keyboardType: TextInputType.emailAddress,
-                    suffixIcon: Icon(
-                      Icons.remove_red_eye,
-                      color: AppColors.primary,
+                    suffixIcon: GestureDetector(
+                      onTap: () => authProvider.loginShowPasswordFn(),
+                      child: Icon(
+                        authProvider.loginShowPassword == true
+                            ? Icons.remove_red_eye
+                            : Icons.visibility_off,
+                        color: AppColors.primary,
+                      ),
                     ),
                   ),
                   const SizeBoxH(28),

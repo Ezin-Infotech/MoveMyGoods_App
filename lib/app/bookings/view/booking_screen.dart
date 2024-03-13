@@ -37,37 +37,37 @@ class _BookingScreenState extends State<BookingScreen> {
       padding: 0,
       children: Column(
         children: [
-          // SizedBox(
-          //   height: Responsive.height * 30,
-          //   child: MapPicker(
-          //     iconWidget: const Icon(
-          //       Icons.location_on,
-          //       size: 50,
-          //       color: Colors.red,
-          //     ),
-          //     mapPickerController: bookingProvider!.mapPickerController,
-          //     child: Consumer<BookingProvider>(
-          //       builder: (ctx, obj, _) {
-          //         return GoogleMap(
-          //           myLocationEnabled: true,
-          //           zoomControlsEnabled: false,
-          //           myLocationButtonEnabled: false,
-          //           mapType: MapType.hybrid,
-          //           initialCameraPosition: obj.cameraPosition,
-          //           onMapCreated: (GoogleMapController controller) {
-          //             obj.controller.complete(controller);
-          //           },
-          //           onCameraMoveStarted: () {
-          //             obj.mapPickerController.mapMoving!();
-          //           },
-          //           onCameraMove: (cameraPosition) {
-          //             obj.cameraPosition = cameraPosition;
-          //           },
-          //         );
-          //       },
-          //     ),
-          //   ),
-          // ),
+          SizedBox(
+            height: Responsive.height * 30,
+            child: MapPicker(
+              iconWidget: const Icon(
+                Icons.location_on,
+                size: 50,
+                color: Colors.red,
+              ),
+              mapPickerController: bookingProvider!.mapPickerController,
+              child: Consumer<BookingProvider>(
+                builder: (ctx, obj, _) {
+                  return GoogleMap(
+                    myLocationEnabled: true,
+                    zoomControlsEnabled: false,
+                    myLocationButtonEnabled: false,
+                    mapType: MapType.hybrid,
+                    initialCameraPosition: obj.cameraPosition,
+                    onMapCreated: (GoogleMapController controller) {
+                      obj.controller.complete(controller);
+                    },
+                    onCameraMoveStarted: () {
+                      obj.mapPickerController.mapMoving!();
+                    },
+                    onCameraMove: (cameraPosition) {
+                      obj.cameraPosition = cameraPosition;
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 16,

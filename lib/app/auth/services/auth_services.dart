@@ -2,8 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:mmg/app/auth/modal/country_model.dart';
-import 'package:mmg/app/bookings/model/booking_model.dart';
-import 'package:mmg/app/utils/apppref.dart';
+
 import 'package:mmg/app/utils/backend/urls.dart';
 
 class AuthServices extends Urls {

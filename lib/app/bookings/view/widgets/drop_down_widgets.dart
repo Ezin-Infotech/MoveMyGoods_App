@@ -5,7 +5,8 @@ import 'package:mmg/app/utils/extensions.dart';
 import 'package:provider/provider.dart';
 
 class DropdownInsideTextFormField extends StatefulWidget {
-  const DropdownInsideTextFormField({super.key});
+  final bool? isGoodsWeight;
+  const DropdownInsideTextFormField({this.isGoodsWeight, super.key});
 
   @override
   _DropdownInsideTextFormFieldState createState() =>

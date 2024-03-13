@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:mmg/app/bookings/view/booking_list.dart';
 import 'package:mmg/app/home/model/booking_count_model.dart';
 import 'package:mmg/app/home/services/home_services.dart';
@@ -13,8 +14,11 @@ class HomeProvider with ChangeNotifier {
     // const LoginScreen(),
 
     const HomeScreen(),
-
     const BookingListScreen(),
+    // const CompletedBookingScreen(),
+
+    // const BookingScreen(),
+    // const BookingListScreen(),
     const SettingsScreen(),
   ];
   int curentIndex = 0;
