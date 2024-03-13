@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
@@ -22,6 +24,12 @@ class AuthProvider with ChangeNotifier {
   TextEditingController otp3Controller = TextEditingController();
   TextEditingController otp4Controller = TextEditingController();
   AuthServices services = AuthServices();
+
+  bool loginShowPassword = false;
+  loginShowPasswordFn() {
+    loginShowPassword = loginShowPassword;
+    notifyListeners();
+  }
 
   List<CountryList> countryList = [];
   /* API Functions */

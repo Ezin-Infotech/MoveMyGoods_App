@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
-import 'package:mmg/app/auth/view/otp_screen.dart';
 import 'package:mmg/app/auth/view/sign_up.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
@@ -75,9 +74,14 @@ class LoginScreen extends StatelessWidget {
                     fillColor: AppColors.bgColor,
                     hintText: 'Enter Your Password',
                     keyboardType: TextInputType.emailAddress,
-                    suffixIcon: Icon(
-                      Icons.remove_red_eye,
-                      color: AppColors.primary,
+                    suffixIcon: GestureDetector(
+                      onTap: () => authProvider.loginShowPasswordFn(),
+                      child: Icon(
+                        authProvider.loginShowPassword == true
+                            ? Icons.remove_red_eye
+                            : Icons.visibility_off,
+                        color: AppColors.primary,
+                      ),
                     ),
                   ),
                   const SizeBoxH(28),
