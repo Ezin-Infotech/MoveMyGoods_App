@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
-import 'package:mmg/app/utils/alert_dialog.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
+import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
 import 'package:mmg/app/utils/common%20widgets/toggle_widget.dart';
 import 'package:mmg/app/utils/enums.dart';
@@ -20,12 +19,16 @@ class BookingListScreen extends StatefulWidget {
 class _BookingListScreenState extends State<BookingListScreen> {
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final cntroller = Provider.of<BookingProvider>(context, listen: false);
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+
+    final cntroller = Provider.of<BookingProvider>(context, listen: false);
+    if (AppPref.userToken != '') {
       cntroller.tempSelectedStatus == 'All'
           ? cntroller.getAllBookingByStatusFn()
           : cntroller.getBookingByStatusFn();
-    });
+    }
+
+    // });
 
     super.initState();
   }
@@ -115,8 +118,14 @@ class _BookingListScreenState extends State<BookingListScreen> {
                       child: CircularProgressIndicator(),
                     ),
                   )
-                : value.bookingata.list!.isEmpty
-                    ? const SizedBox.shrink()
+                : value.getBookingStatus == GetBookingStatus.initial ||
+                        value.bookingata.list!.isEmpty ||
+                        value.bookingata.list == null
+                    ? Container(
+                        child: const Center(
+                          child: Text('No Bookings'),
+                        ),
+                      )
                     : ListView.separated(
                         shrinkWrap: true,
                         physics: const ScrollPhysics(),

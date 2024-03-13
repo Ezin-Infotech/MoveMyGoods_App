@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mmg/app/auth/view/login_screen.dart';
+import 'package:mmg/app/auth/view/otp_screen.dart';
+import 'package:mmg/app/auth/view/profile_screen.dart';
 import 'package:mmg/app/bookings/view/booking_screen.dart';
 import 'package:mmg/app/home/view/showcase/showcasewidget.dart';
 import 'package:mmg/app/splash/view/splash_screen.dart';
@@ -24,6 +27,17 @@ class RouteGenerator {
           widget: const MyShowCaseWidget(),
         ); //
 
+      case AppRoutes.login:
+        return pagetransition(
+          settings: settings,
+          widget: const LoginScreen(),
+        ); //
+      case AppRoutes.otpScreen:
+        return pagetransition(
+          settings: settings,
+          widget: const OtpScreen(),
+        ); //
+
       case AppRoutes.noInternetScreen:
         return pagetransition(
           settings: settings,
@@ -33,6 +47,11 @@ class RouteGenerator {
         return pagetransition(
           settings: settings,
           widget: const BookingScreen(),
+        );
+      case AppRoutes.signUpProfileScreen:
+        return pagetransition(
+          settings: settings,
+          widget: const SignUpProfileScreen(),
         );
     }
     return MaterialPageRoute(

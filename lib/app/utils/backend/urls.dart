@@ -18,9 +18,11 @@ class Urls {
       ApiInterceptor(),
     );
   /* ONBOARDING */
-  final onboardUser = "$baseUrl/auth/sign-in";
-  final onboardSignUpUser = "$baseUrl/auth/sign-up";
-  final verifyOtpOnboard = "$baseUrl/auth/verify-email";
+  final onboardUser = "http://103.160.153.57:8083/mmg/api/v2/login";
+  final onboardSignUpUser =
+      "http://103.160.153.57:8083/mmg/api/v2/profile/sms/otp";
+  final verifyOtpOnboard =
+      "http://103.160.153.57:8083/mmg/api/v2/profile/validateOtp";
   final validateForgotOtpOnboard = "$baseUrl/auth/validate-otp";
   final onboardForgetPassword = "$baseUrl/auth/forgot-password";
   final onboardResendOtp = "$baseUrl/auth/resend-otp";
@@ -31,7 +33,7 @@ class Urls {
   final bookingCount = "$baseUrl/v1/dashboard/booking/profile";
   final bookingByStatus = "$baseUrl/v2";
 
-  final pharmaLatestProducts = "$baseUrl/product/pharma";
+  final countryUrl = "$baseUrl/v1/country";
   final pharmaCartProducts = "$baseUrl/cart/";
   final pharmaCartAddOrRemove = "$baseUrl/cart/";
   final pharmaCartProductRemove = "$baseUrl/cart/remove-from-cart/";

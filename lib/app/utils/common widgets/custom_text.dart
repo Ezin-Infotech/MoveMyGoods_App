@@ -13,7 +13,7 @@ class CustomText extends StatelessWidget {
       style: context.textTheme.displaySmall!.copyWith(
           fontFamily: 'Inter',
           color: AppColors.primary,
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: FontWeight.w500),
     );
   }

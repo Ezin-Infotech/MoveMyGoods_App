@@ -37,37 +37,37 @@ class _BookingScreenState extends State<BookingScreen> {
       padding: 0,
       children: Column(
         children: [
-          SizedBox(
-            height: Responsive.height * 30,
-            child: MapPicker(
-              iconWidget: const Icon(
-                Icons.location_on,
-                size: 50,
-                color: Colors.red,
-              ),
-              mapPickerController: bookingProvider!.mapPickerController,
-              child: Consumer<BookingProvider>(
-                builder: (ctx, obj, _) {
-                  return GoogleMap(
-                    myLocationEnabled: true,
-                    zoomControlsEnabled: false,
-                    myLocationButtonEnabled: false,
-                    mapType: MapType.hybrid,
-                    initialCameraPosition: obj.cameraPosition,
-                    onMapCreated: (GoogleMapController controller) {
-                      obj.controller.complete(controller);
-                    },
-                    onCameraMoveStarted: () {
-                      obj.mapPickerController.mapMoving!();
-                    },
-                    onCameraMove: (cameraPosition) {
-                      obj.cameraPosition = cameraPosition;
-                    },
-                  );
-                },
-              ),
-            ),
-          ),
+          // SizedBox(
+          //   height: Responsive.height * 30,
+          //   child: MapPicker(
+          //     iconWidget: const Icon(
+          //       Icons.location_on,
+          //       size: 50,
+          //       color: Colors.red,
+          //     ),
+          //     mapPickerController: bookingProvider!.mapPickerController,
+          //     child: Consumer<BookingProvider>(
+          //       builder: (ctx, obj, _) {
+          //         return GoogleMap(
+          //           myLocationEnabled: true,
+          //           zoomControlsEnabled: false,
+          //           myLocationButtonEnabled: false,
+          //           mapType: MapType.hybrid,
+          //           initialCameraPosition: obj.cameraPosition,
+          //           onMapCreated: (GoogleMapController controller) {
+          //             obj.controller.complete(controller);
+          //           },
+          //           onCameraMoveStarted: () {
+          //             obj.mapPickerController.mapMoving!();
+          //           },
+          //           onCameraMove: (cameraPosition) {
+          //             obj.cameraPosition = cameraPosition;
+          //           },
+          //         );
+          //       },
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 16,
@@ -112,7 +112,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 ),
                 BookingTextFieldWidgets(
                   hintText: 'Mysore, Karnataka',
-                  controller: bookingProvider?.destinationController,
+                  controller: bookingProvider!.destinationController,
                   labeText: 'Destination *',
                 ),
                 const SizeBoxH(10),
@@ -123,13 +123,13 @@ class _BookingScreenState extends State<BookingScreen> {
                 const DropdownInsideTextFormField(),
                 BookingTextFieldWidgets(
                   hintText: '300',
-                  controller: bookingProvider?.goodsValueController,
+                  controller: bookingProvider!.goodsValueController,
                   labeText: 'Goods Value *',
                   keyboardType: TextInputType.number,
                 ),
                 BookingTextFieldWidgets(
                   hintText: '6',
-                  controller: bookingProvider?.numberOfLabourController,
+                  controller: bookingProvider!.numberOfLabourController,
                   labeText: 'Number of Labours *',
                   keyboardType: TextInputType.number,
                 ),
@@ -255,18 +255,18 @@ class _BookingScreenState extends State<BookingScreen> {
                 ),
                 BookingTextFieldWidgets(
                   hintText: 'Name',
-                  controller: bookingProvider?.receiverNameController,
+                  controller: bookingProvider!.receiverNameController,
                   labeText: 'Name',
                 ),
                 BookingTextFieldWidgets(
                   hintText: 'Email',
-                  controller: bookingProvider?.receiverEmailController,
+                  controller: bookingProvider!.receiverEmailController,
                   labeText: 'Email Address',
                   keyboardType: TextInputType.emailAddress,
                 ),
                 BookingTextFieldWidgets(
                   hintText: 'Number',
-                  controller: bookingProvider?.receiverMobileNoController,
+                  controller: bookingProvider!.receiverMobileNoController,
                   labeText: 'Mobile No.',
                   keyboardType: TextInputType.phone,
                 ),
@@ -285,12 +285,12 @@ class _BookingScreenState extends State<BookingScreen> {
                 const DropdownInsideTextFormField(),
                 BookingTextFieldWidgets(
                   hintText: '(eg.DUMPA1234)',
-                  controller: bookingProvider?.receiverPanNoController,
+                  controller: bookingProvider!.receiverPanNoController,
                   labeText: 'PAN No.',
                 ),
                 BookingTextFieldWidgets(
                   hintText: '(eg.GHXXXXXXXX000)',
-                  controller: bookingProvider?.receiverGstNoController,
+                  controller: bookingProvider!.receiverGstNoController,
                   labeText: 'GST No.',
                 ),
                 SizeBoxH(Responsive.height * 2),
@@ -304,30 +304,30 @@ class _BookingScreenState extends State<BookingScreen> {
                 // SizeBoxH(Responsive.height * 1),
                 BookingTextFieldWidgets(
                   hintText: 'Name',
-                  controller: bookingProvider?.shipperNameController,
+                  controller: bookingProvider!.shipperNameController,
                   labeText: 'Name',
                 ),
                 BookingTextFieldWidgets(
                   hintText: 'Email',
-                  controller: bookingProvider?.shipperemailController,
+                  controller: bookingProvider!.shipperemailController,
                   labeText: 'Email Address',
                   keyboardType: TextInputType.emailAddress,
                 ),
                 BookingTextFieldWidgets(
                   hintText: 'Number',
-                  controller: bookingProvider?.shipperMobileNoController,
+                  controller: bookingProvider!.shipperMobileNoController,
                   labeText: 'Mobile No.',
                   keyboardType: TextInputType.phone,
                 ),
 
                 BookingTextFieldWidgets(
                   hintText: '(eg.DUMPA1234)',
-                  controller: bookingProvider?.shipperpanNOController,
+                  controller: bookingProvider!.shipperpanNOController,
                   labeText: 'PAN No.',
                 ),
                 BookingTextFieldWidgets(
                   hintText: '(eg.GHXXXXXXXX000)',
-                  controller: bookingProvider?.shipperGstNoController,
+                  controller: bookingProvider!.shipperGstNoController,
                   labeText: 'GST No.',
                 ),
                 SizeBoxH(Responsive.height * 2),

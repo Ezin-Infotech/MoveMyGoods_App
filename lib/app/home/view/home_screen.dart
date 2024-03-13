@@ -101,26 +101,30 @@ class HomeScreen extends StatelessWidget {
                           ),
                         )
                       : SmallBoxontainerWidget(
-                          subTitle: index == 0
-                              ? value.bookingCountData.data!.total.toString()
-                              : index == 1
+                          subTitle: value.bookingCountData.data == null
+                              ? '0'
+                              : index == 0
                                   ? value.bookingCountData.data!.total
                                       .toString()
-                                  : index == 2
-                                      ? value.bookingCountData.data!.pending
+                                  : index == 1
+                                      ? value.bookingCountData.data!.total
                                           .toString()
-                                      : index == 3
-                                          ? value.bookingCountData.data!.active
+                                      : index == 2
+                                          ? value.bookingCountData.data!.pending
                                               .toString()
-                                          : index == 4
-                                              ? value.bookingCountData.data!
-                                                  .completed
+                                          : index == 3
+                                              ? value
+                                                  .bookingCountData.data!.active
                                                   .toString()
-                                              : index == 5
+                                              : index == 4
                                                   ? value.bookingCountData.data!
-                                                      .cancelled
+                                                      .completed
                                                       .toString()
-                                                  : "0",
+                                                  : index == 5
+                                                      ? value.bookingCountData
+                                                          .data!.cancelled
+                                                          .toString()
+                                                      : "0",
                           title: value.bookingTiltes[index],
                           numberColor: index == 0
                               ? const Color(0xffab00af)
@@ -144,7 +148,7 @@ class HomeScreen extends StatelessWidget {
           ),
           ButtonWidgets(
             onPressed: () {
-              Get.toNamed(AppRoutes.bookingScreen);
+              Get.toNamed(AppRoutes.login);
               // Navigator.push(
               //     context,
               //     MaterialPageRoute(

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:location/location.dart';
+// import 'package:location/location.dart';
 import 'package:mmg/app/utils/routes/route_names.dart';
 
 class SplashProvider extends ChangeNotifier {
@@ -16,17 +16,17 @@ class SplashProvider extends ChangeNotifier {
     // if (AppPref.isFirst == true) {
 
     Get.offAllNamed(AppRoutes.loginOrHome);
-    Location location = Location();
-    bool serviceEnabled;
-    PermissionStatus permissionGranted;
-    LocationData locationData;
-    serviceEnabled = await location.serviceEnabled();
-    if (!serviceEnabled) {
-      serviceEnabled = await location.requestService();
-      if (!serviceEnabled) {
-        return;
-      }
-    }
+    // Location location = Location();
+    // bool serviceEnabled;
+    // PermissionStatus permissionGranted;
+    // LocationData locationData;
+    // serviceEnabled = await location.serviceEnabled();
+    // if (!serviceEnabled) {
+    //   serviceEnabled = await location.requestService();
+    //   if (!serviceEnabled) {
+    //     return;
+    //   }
+    // }
 
     // } else {
     //   Get.offAllNamed(AppRoutes.getStarted);
