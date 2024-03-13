@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mmg/app/splash/view_model/splash_notifier.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/extensions.dart';
-import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {

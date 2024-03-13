@@ -2,10 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
+// import 'package:location/location.dart';
 // import 'package:location/location.dart';
 import 'package:map_picker/map_picker.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mmg/app/bookings/model/booking_details_model.dart';
 import 'package:mmg/app/bookings/model/booking_model.dart';
 import 'package:mmg/app/bookings/services/booking_services.dart';
 import 'package:mmg/app/utils/enums.dart';
@@ -34,6 +35,7 @@ class BookingProvider with ChangeNotifier {
 
   String selectedStatus = 'booking';
   String tempSelectedStatus = 'All';
+  bool showRecieverDetails = false;
 // 'PENDING';
 // 'CANCELLED'
 // 'COMPLETED'
@@ -58,6 +60,11 @@ class BookingProvider with ChangeNotifier {
   ];
 
   List<String> goodsWight = ['100', '200', '300', '400', '500', '750'];
+  changeShowRecieverDetails({required bool isShow}) {
+    showRecieverDetails = isShow;
+    notifyListeners();
+  }
+
   filterFunction({required String status, required BuildContext context}) {
     tempSelectedStatus = status;
     notifyListeners();
@@ -74,6 +81,26 @@ class BookingProvider with ChangeNotifier {
   /*-------- API SERVICES ------------*/
 
   BookingServices services = BookingServices();
+
+  /* Dashboard Booking Counts */
+  GetBookingDetialsStatus getBookingDetailStatus =
+      GetBookingDetialsStatus.initial;
+  BookingDetailsModel bookingDetail = BookingDetailsModel();
+  getBookingDetailsByIdFn({required String id}) async {
+    getBookingDetailStatus = GetBookingDetialsStatus.loading;
+    // notifyListeners();
+    try {
+      final countRespose = await services.getBookingDetailsByIdService(id: id);
+      bookingDetail = countRespose;
+
+      getBookingDetailStatus = GetBookingDetialsStatus.loaded;
+      notifyListeners();
+      // ignore: deprecated_member_use
+    } catch (e) {
+      getBookingDetailStatus = GetBookingDetialsStatus.error;
+      notifyListeners();
+    }
+  }
 
   /* Dashboard Booking Counts */
   GetBookingStatus getBookingStatus = GetBookingStatus.initial;
@@ -117,36 +144,36 @@ class BookingProvider with ChangeNotifier {
     target: LatLng(0.00, 0.00),
     zoom: 14.4746,
   );
-  Location location = Location();
-  bool serviceEnabled = false;
-  PermissionStatus permissionGranted = PermissionStatus.denied;
-  LocationData? locationData;
+  // Location location = Location();
+  // bool serviceEnabled = false;
+  // PermissionStatus permissionGranted = PermissionStatus.denied;
+  // LocationData? locationData;
 
-  Future<void> checkLocationPermission() async {
-    serviceEnabled = await location.serviceEnabled();
-    if (!serviceEnabled) {
-      serviceEnabled = await location.requestService();
-      if (!serviceEnabled) {
-        return;
-      }
-    }
+  // Future<void> checkLocationPermission() async {
+  //   serviceEnabled = await location.serviceEnabled();
+  //   if (!serviceEnabled) {
+  //     serviceEnabled = await location.requestService();
+  //     if (!serviceEnabled) {
+  //       return;
+  //     }
+  //   }
 
-    permissionGranted = await location.hasPermission();
-    if (permissionGranted == PermissionStatus.denied) {
-      permissionGranted = await location.requestPermission();
-      if (permissionGranted != PermissionStatus.granted) {
-        return;
-      }
-    }
-    locationData = await location.getLocation();
-    LatLng currentLocation = LatLng(
-      locationData?.latitude ?? 0.00,
-      locationData?.longitude ?? 0.00,
-    );
-    cameraPosition = CameraPosition(
-      target: currentLocation,
-      zoom: 14.4746,
-    );
-    notifyListeners();
-  }
+  //   permissionGranted = await location.hasPermission();
+  //   if (permissionGranted == PermissionStatus.denied) {
+  //     permissionGranted = await location.requestPermission();
+  //     if (permissionGranted != PermissionStatus.granted) {
+  //       return;
+  //     }
+  //   }
+  //   locationData = await location.getLocation();
+  //   LatLng currentLocation = LatLng(
+  //     locationData?.latitude ?? 0.00,
+  //     locationData?.longitude ?? 0.00,
+  //   );
+  //   cameraPosition = CameraPosition(
+  //     target: currentLocation,
+  //     zoom: 14.4746,
+  //   );
+  //   notifyListeners();
+  // }
 }

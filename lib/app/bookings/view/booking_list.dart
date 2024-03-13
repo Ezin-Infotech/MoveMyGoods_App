@@ -135,8 +135,6 @@ class _BookingListScreenState extends State<BookingListScreen> {
                           DateTime dateTime =
                               DateTime.fromMillisecondsSinceEpoch(
                                   item.pickUpDateTime!);
-
-                          // Separate date and time components
                           int year = dateTime.year;
                           String month =
                               dateTime.month.toString().padLeft(2, '0');

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/home/view%20model/home_provider.dart';
 import 'package:mmg/app/utils/app%20style/app_images.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
-import 'package:mmg/app/utils/apppref.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -15,17 +13,6 @@ class GlobalScreen extends StatefulWidget {
 }
 
 class _GlobalScreenState extends State<GlobalScreen> {
-  @override
-  void initState() {
-    // AppPref.userToken = 'c1bab648-d27d-4393-92ca-298c2b9a5fc3';
-    if (AppPref.userToken != '') {
-      context.read<HomeProvider>().getBookingCountFn();
-      context.read<AuthProvider>().getCountryFn(context: context);
-    }
-
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeProvider>(builder: (context, value, _) {

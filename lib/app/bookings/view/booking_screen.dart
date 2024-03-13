@@ -199,7 +199,6 @@ class _BookingScreenState extends State<BookingScreen> {
                   width: Responsive.width * 216,
                   height: Responsive.height * 16,
                 ),
-
                 SizeBoxH(Responsive.height * 1),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -240,108 +239,137 @@ class _BookingScreenState extends State<BookingScreen> {
                     ButtonWidgets(
                       buttonText: 'Continue',
                       onPressed: () {
+                        context
+                            .read<BookingProvider>()
+                            .changeShowRecieverDetails(isShow: true);
                         // context.push(const LoginScreen());
                       },
                     ),
                   ],
                 ),
                 SizeBoxH(Responsive.height * 4),
-                Text(
-                  '*Receiver Details',
-                  style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18,
-                      color: const Color(0xff222222)),
-                ),
-                BookingTextFieldWidgets(
-                  hintText: 'Name',
-                  controller: bookingProvider!.receiverNameController,
-                  labeText: 'Name',
-                ),
-                BookingTextFieldWidgets(
-                  hintText: 'Email',
-                  controller: bookingProvider!.receiverEmailController,
-                  labeText: 'Email Address',
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                BookingTextFieldWidgets(
-                  hintText: 'Number',
-                  controller: bookingProvider!.receiverMobileNoController,
-                  labeText: 'Mobile No.',
-                  keyboardType: TextInputType.phone,
-                ),
-                const SizeBoxH(10),
-                const CustomText(
-                  text: 'Reference Numbers',
-                ),
-                const SizeBoxH(8),
-                const DropdownInsideTextFormField(),
+                Consumer<BookingProvider>(builder: (context, value, _) {
+                  return value.showRecieverDetails
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '*Receiver Details',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displaySmall!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 18,
+                                      color: const Color(0xff222222)),
+                            ),
+                            BookingTextFieldWidgets(
+                              hintText: 'Name',
+                              controller:
+                                  bookingProvider!.receiverNameController,
+                              labeText: 'Name',
+                            ),
+                            BookingTextFieldWidgets(
+                              hintText: 'Email',
+                              controller:
+                                  bookingProvider!.receiverEmailController,
+                              labeText: 'Email Address',
+                              keyboardType: TextInputType.emailAddress,
+                            ),
+                            BookingTextFieldWidgets(
+                              hintText: 'Number',
+                              controller:
+                                  bookingProvider!.receiverMobileNoController,
+                              labeText: 'Mobile No.',
+                              keyboardType: TextInputType.phone,
+                            ),
+                            const SizeBoxH(10),
+                            const CustomText(
+                              text: 'Reference Numbers',
+                            ),
+                            const SizeBoxH(8),
+                            const DropdownInsideTextFormField(),
 
-                const SizeBoxH(10),
-                const CustomText(
-                  text: 'Location',
-                ),
-                const SizeBoxH(8),
-                const DropdownInsideTextFormField(),
-                BookingTextFieldWidgets(
-                  hintText: '(eg.DUMPA1234)',
-                  controller: bookingProvider!.receiverPanNoController,
-                  labeText: 'PAN No.',
-                ),
-                BookingTextFieldWidgets(
-                  hintText: '(eg.GHXXXXXXXX000)',
-                  controller: bookingProvider!.receiverGstNoController,
-                  labeText: 'GST No.',
-                ),
-                SizeBoxH(Responsive.height * 2),
-                Text(
-                  '*Shipper Details',
-                  style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18,
-                      color: const Color(0xff222222)),
-                ),
-                // SizeBoxH(Responsive.height * 1),
-                BookingTextFieldWidgets(
-                  hintText: 'Name',
-                  controller: bookingProvider!.shipperNameController,
-                  labeText: 'Name',
-                ),
-                BookingTextFieldWidgets(
-                  hintText: 'Email',
-                  controller: bookingProvider!.shipperemailController,
-                  labeText: 'Email Address',
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                BookingTextFieldWidgets(
-                  hintText: 'Number',
-                  controller: bookingProvider!.shipperMobileNoController,
-                  labeText: 'Mobile No.',
-                  keyboardType: TextInputType.phone,
-                ),
+                            const SizeBoxH(10),
+                            const CustomText(
+                              text: 'Location',
+                            ),
+                            const SizeBoxH(8),
+                            const DropdownInsideTextFormField(),
+                            BookingTextFieldWidgets(
+                              hintText: '(eg.DUMPA1234)',
+                              controller:
+                                  bookingProvider!.receiverPanNoController,
+                              labeText: 'PAN No.',
+                            ),
+                            BookingTextFieldWidgets(
+                              hintText: '(eg.GHXXXXXXXX000)',
+                              controller:
+                                  bookingProvider!.receiverGstNoController,
+                              labeText: 'GST No.',
+                            ),
+                            SizeBoxH(Responsive.height * 2),
+                            Text(
+                              '*Shipper Details',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displaySmall!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 18,
+                                      color: const Color(0xff222222)),
+                            ),
+                            // SizeBoxH(Responsive.height * 1),
+                            BookingTextFieldWidgets(
+                              hintText: 'Name',
+                              controller:
+                                  bookingProvider!.shipperNameController,
+                              labeText: 'Name',
+                            ),
+                            BookingTextFieldWidgets(
+                              hintText: 'Email',
+                              controller:
+                                  bookingProvider!.shipperemailController,
+                              labeText: 'Email Address',
+                              keyboardType: TextInputType.emailAddress,
+                            ),
+                            BookingTextFieldWidgets(
+                              hintText: 'Number',
+                              controller:
+                                  bookingProvider!.shipperMobileNoController,
+                              labeText: 'Mobile No.',
+                              keyboardType: TextInputType.phone,
+                            ),
 
-                BookingTextFieldWidgets(
-                  hintText: '(eg.DUMPA1234)',
-                  controller: bookingProvider!.shipperpanNOController,
-                  labeText: 'PAN No.',
-                ),
-                BookingTextFieldWidgets(
-                  hintText: '(eg.GHXXXXXXXX000)',
-                  controller: bookingProvider!.shipperGstNoController,
-                  labeText: 'GST No.',
-                ),
-                SizeBoxH(Responsive.height * 2),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ButtonWidgets(
-                      buttonText: 'Proceed to Pay',
-                      onPressed: () {
-                        // context.push(const LoginScreen());
-                      },
-                    ),
-                  ],
-                ),
+                            BookingTextFieldWidgets(
+                              hintText: '(eg.DUMPA1234)',
+                              controller:
+                                  bookingProvider!.shipperpanNOController,
+                              labeText: 'PAN No.',
+                            ),
+                            BookingTextFieldWidgets(
+                              hintText: '(eg.GHXXXXXXXX000)',
+                              controller:
+                                  bookingProvider!.shipperGstNoController,
+                              labeText: 'GST No.',
+                            ),
+                            SizeBoxH(Responsive.height * 2),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ButtonWidgets(
+                                  buttonText: 'Proceed to Pay',
+                                  onPressed: () {
+                                    // context.push(const LoginScreen());
+                                  },
+                                ),
+                              ],
+                            ),
+                            const SizeBoxH(10),
+                          ],
+                        )
+                      : const SizedBox.shrink();
+                }),
               ],
             ),
           ),

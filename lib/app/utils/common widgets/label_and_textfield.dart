@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/common%20widgets/custom_text.dart';
 import 'package:mmg/app/utils/common%20widgets/textform.dart';
 import 'package:mmg/app/utils/extensions.dart';
 import 'package:mmg/app/utils/helpers.dart';
-import 'package:provider/provider.dart';
 
 class BookingTextFieldWidgets extends StatelessWidget {
   final String labeText;

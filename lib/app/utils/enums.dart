@@ -41,3 +41,10 @@ enum GetBookingStatus {
   loaded,
   error,
 }
+
+enum GetBookingDetialsStatus {
+  initial,
+  loading,
+  loaded,
+  error,
+}

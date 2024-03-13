@@ -1,16 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mmg/app/auth/view%20model/auth_provider.dart';
+import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/home/view%20model/home_provider.dart';
 import 'package:mmg/app/home/view/widgets/box_container.dart';
 import 'package:mmg/app/utils/app%20style/app_images.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
+import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/enums.dart';
 import 'package:mmg/app/utils/routes/route_names.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    if (AppPref.userToken != '') {
+      context.read<HomeProvider>().getBookingCountFn();
+      context.read<AuthProvider>().getCountryFn(context: context);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +155,8 @@ class HomeScreen extends StatelessWidget {
                                               ? const Color(0xff009ba4)
                                               : index == 5
                                                   ? const Color(0xffDF0E0E)
-                                                  : null);
+                                                  : null,
+                        );
                 });
               },
             ),
@@ -148,13 +166,14 @@ class HomeScreen extends StatelessWidget {
           ),
           ButtonWidgets(
             onPressed: () {
-              Get.toNamed(AppRoutes.login);
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => const LoginScreen(),
-              //     ));
-              // context.push(const LoginScreen());
+              if (AppPref.userToken != '') {
+                context
+                    .read<BookingProvider>()
+                    .changeShowRecieverDetails(isShow: false);
+                Get.toNamed(AppRoutes.bookingScreen);
+              } else {
+                Get.toNamed(AppRoutes.login);
+              }
             },
           ),
         ],

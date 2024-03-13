@@ -7,10 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:mmg/app/auth/modal/country_model.dart';
 import 'package:mmg/app/auth/services/auth_services.dart';
+import 'package:mmg/app/home/view%20model/home_provider.dart';
 import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/common%20widgets/dialogs.dart';
 import 'package:mmg/app/utils/common%20widgets/loading_overlay.dart';
 import 'package:mmg/app/utils/routes/route_names.dart';
+import 'package:provider/provider.dart';
 
 class AuthProvider with ChangeNotifier {
   TextEditingController emailController = TextEditingController();
@@ -46,6 +48,8 @@ class AuthProvider with ChangeNotifier {
       AppPref.userProfileId = signInDataResponse["data"]["id"];
       LoadingOverlay.of(context).hide();
       // clearLoginController();
+      context.read<HomeProvider>().getBookingCountFn();
+      getCountryFn(context: context);
       Get.offNamed(AppRoutes.bookingScreen);
       // ignore: deprecated_member_use
     } on DioError catch (e) {
@@ -126,6 +130,7 @@ class AuthProvider with ChangeNotifier {
       countryList = countryResponse.data!.list!;
       // ignore: deprecated_member_use
     } on DioError catch (e) {
+      log(e.message!);
       // errorBottomSheetDialogs(
       //     isDismissible: false,
       //     enableDrag: false,
