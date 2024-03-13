@@ -118,7 +118,7 @@ class OtpState extends State<Otp> {
                 ),
                 SizeBoxH(Responsive.height * 2),
                 const Text(
-                  "Didn't you receive any code?",
+                  "Didn't you receive any code? ",
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
