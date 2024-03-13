@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:mmg/app/auth/view/login_screen.dart';
+import 'package:get/route_manager.dart';
+import 'package:mmg/app/auth/view%20model/auth_provider.dart';
+
 import 'package:mmg/app/utils/app%20style/app_images.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/helpers.dart';
+import 'package:mmg/app/utils/routes/route_names.dart';
+import 'package:provider/provider.dart';
 
-class Otp extends StatefulWidget {
-  const Otp({super.key});
+class OtpScreen extends StatefulWidget {
+  const OtpScreen({super.key});
 
   @override
-  OtpState createState() => OtpState();
+  OtpScreenState createState() => OtpScreenState();
 }
 
-class OtpState extends State<Otp> {
+class OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,17 +29,6 @@ class OtpState extends State<Otp> {
             padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
             child: Column(
               children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: const Icon(
-                      Icons.arrow_back,
-                      size: 32,
-                      color: Colors.black54,
-                    ),
-                  ),
-                ),
                 SizeBoxH(Responsive.height * 10),
                 Image.asset(
                   AppImages.blakLogo,
@@ -50,7 +43,7 @@ class OtpState extends State<Otp> {
                 ),
                 SizeBoxH(Responsive.height * 1),
                 const Text(
-                  "Enter your OTP code number",
+                  "Enter your OTP code",
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -58,63 +51,78 @@ class OtpState extends State<Otp> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizeBoxH(Responsive.height * 3),
+                SizeBoxH(Responsive.height * 10),
                 Container(
                   // padding: const EdgeInsets.all(28),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          textFieldOTP(first: true, last: false),
-                          textFieldOTP(first: false, last: false),
-                          textFieldOTP(first: false, last: false),
-                          textFieldOTP(first: false, last: true),
-                        ],
-                      ),
-                      SizeBoxH(Responsive.height * 2.5),
-                      ButtonWidgets(
-                        width: double.infinity,
-                        height: 50,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const LoginScreen(),
-                              ));
-                          // context.push(const LoginScreen());
-                        },
-                      ),
-                      // SizedBox(
-                      //   width: double.infinity,
-                      //   child: ElevatedButton(
-                      //     onPressed: () {},
-                      //     style: ButtonStyle(
-                      //       foregroundColor:
-                      //           MaterialStateProperty.all<Color>(Colors.white),
-                      //       backgroundColor: MaterialStateProperty.all<Color>(
-                      //           AppColors.primary),
-                      //       shape:
-                      //           MaterialStateProperty.all<RoundedRectangleBorder>(
-                      //         RoundedRectangleBorder(
-                      //           borderRadius: BorderRadius.circular(24.0),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     child: const Padding(
-                      //       padding: EdgeInsets.all(14.0),
-                      //       child: Text(
-                      //         'Verify',
-                      //         style: TextStyle(fontSize: 16),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // )
-                    ],
-                  ),
+                  child: Consumer<AuthProvider>(builder: (context, value, _) {
+                    return Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            textFieldOTP(
+                                first: true,
+                                last: false,
+                                controller: value.otp1Controller),
+                            textFieldOTP(
+                                first: false,
+                                last: false,
+                                controller: value.otp2Controller),
+                            textFieldOTP(
+                                first: false,
+                                last: false,
+                                controller: value.otp3Controller),
+                            textFieldOTP(
+                                first: false,
+                                last: true,
+                                controller: value.otp4Controller),
+                          ],
+                        ),
+                        SizeBoxH(Responsive.height * 2.5),
+                        ButtonWidgets(
+                          buttonText: 'Verify',
+                          width: double.infinity,
+                          height: 50,
+                          onPressed: () {
+                            // context
+                            //     .read<AuthProvider>()
+                            //     .verifySignUpOTPFn(context: context);
+                            Get.toNamed(AppRoutes.signUpProfileScreen);
+                            // context.push(const LoginScreen());
+                          },
+                        ),
+                        // SizedBox(
+                        //   width: double.infinity,
+                        //   child: ElevatedButton(
+                        //     onPressed: () {},
+                        //     style: ButtonStyle(
+                        //       foregroundColor:
+                        //           MaterialStateProperty.all<Color>(Colors.white),
+                        //       backgroundColor: MaterialStateProperty.all<Color>(
+                        //           AppColors.primary),
+                        //       shape:
+                        //           MaterialStateProperty.all<RoundedRectangleBorder>(
+                        //         RoundedRectangleBorder(
+                        //           borderRadius: BorderRadius.circular(24.0),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     child: const Padding(
+                        //       padding: EdgeInsets.all(14.0),
+                        //       child: Text(
+                        //         'Verify',
+                        //         style: TextStyle(fontSize: 16),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // )
+                      ],
+                    );
+                  }),
                 ),
                 SizeBoxH(Responsive.height * 2),
                 const Text(
@@ -144,12 +152,14 @@ class OtpState extends State<Otp> {
     );
   }
 
-  Widget textFieldOTP({bool? first, last}) {
+  Widget textFieldOTP(
+      {required TextEditingController? controller, bool? first, last}) {
     return SizedBox(
       height: 85,
       child: AspectRatio(
-        aspectRatio: 1.0,
+        aspectRatio: 0.7,
         child: TextField(
+          controller: controller,
           autofocus: true,
           onChanged: (value) {
             if (value.length == 1 && last == false) {

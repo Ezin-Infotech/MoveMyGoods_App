@@ -3,7 +3,7 @@ import 'package:mmg/app/utils/backend/interceptor.dart';
 
 class Urls {
   static const baseUrl = 'http://103.160.153.57:8087/mmg/api';
-
+  static const imageBaseUrl = 'https://storage.googleapis.com/admin-mmg/';
   void statuscode(Response<dynamic> response, double code) {
     if (response.statusCode != code) {
       throw Exception(response.data);
@@ -18,20 +18,22 @@ class Urls {
       ApiInterceptor(),
     );
   /* ONBOARDING */
-  final onboardUser = "$baseUrl/auth/sign-in";
-  final onboardSignUpUser = "$baseUrl/auth/sign-up";
-  final verifyOtpOnboard = "$baseUrl/auth/verify-email";
+  final onboardUser = "http://103.160.153.57:8083/mmg/api/v2/login";
+  final onboardSignUpUser =
+      "http://103.160.153.57:8083/mmg/api/v2/profile/sms/otp";
+  final verifyOtpOnboard =
+      "http://103.160.153.57:8083/mmg/api/v2/profile/validateOtp";
   final validateForgotOtpOnboard = "$baseUrl/auth/validate-otp";
   final onboardForgetPassword = "$baseUrl/auth/forgot-password";
   final onboardResendOtp = "$baseUrl/auth/resend-otp";
   final createprofile = '$baseUrl/user-profile/create';
   final getAllProfile = '$baseUrl/user-profile/all';
 
-  /* PHARMA */
+  /* BOOKING */
   final bookingCount = "$baseUrl/v1/dashboard/booking/profile";
-  final pharmaSingleProduct = "$baseUrl/product/single";
+  final bookingByStatus = "$baseUrl/v2";
 
-  final pharmaLatestProducts = "$baseUrl/product/pharma";
+  final countryUrl = "$baseUrl/v1/country";
   final pharmaCartProducts = "$baseUrl/cart/";
   final pharmaCartAddOrRemove = "$baseUrl/cart/";
   final pharmaCartProductRemove = "$baseUrl/cart/remove-from-cart/";

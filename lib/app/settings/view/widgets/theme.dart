@@ -11,7 +11,7 @@ class MyTheme {
     indicatorColor: AppColors.primary,
     primaryColorDark: AppConstants.white,
     primaryColorLight: AppConstants.appMainGreyColor,
-    scaffoldBackgroundColor: AppColors.bgColor,
+    scaffoldBackgroundColor: AppConstants.darkbg,
     primaryColor: AppColors.primary,
     iconButtonTheme: const IconButtonThemeData(
         style: ButtonStyle(

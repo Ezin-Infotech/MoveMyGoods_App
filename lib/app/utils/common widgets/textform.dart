@@ -58,7 +58,8 @@ class CommonTextForm extends StatelessWidget {
       keyboardType: keyboardType ?? TextInputType.name,
       cursorColor: Colors.black,
       obscureText: obscureText ?? false,
-      style: const TextStyle(color: Colors.black, fontSize: 16),
+      style: context.textTheme.bodyLarge!
+          .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
       validator: validator,
       decoration: InputDecoration(
         contentPadding: contentPadding ?? const EdgeInsets.all(8),

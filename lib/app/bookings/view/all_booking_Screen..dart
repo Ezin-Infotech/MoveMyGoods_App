@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import '../app style/app_images.dart';
-import '../app style/colors.dart';
+import 'package:mmg/app/utils/app%20style/app_images.dart';
+import 'package:mmg/app/utils/app%20style/colors.dart';
 
-class CommonScaffold extends StatelessWidget {
-  final Widget children;
-  final double? padding;
-  const CommonScaffold(
-      {super.key, required this.children, this.padding = 16.0});
+class AllBookingScreen extends StatelessWidget {
+  const AllBookingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.bgColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.primary,
@@ -60,12 +58,22 @@ class CommonScaffold extends StatelessWidget {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        physics: const ScrollPhysics(),
-        child: Padding(
-          padding: EdgeInsets.all(padding ?? 16.0),
-          child: children,
-        ),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              const Text(
+                'All Bookings',
+                style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                    color: Color(0xff222222)),
+              ),
+              ImageIcon(AssetImage(AppImages.filterLogo))
+            ],
+          )
+        ],
       ),
     );
   }

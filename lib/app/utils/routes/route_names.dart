@@ -4,5 +4,9 @@ class AppRoutes {
   static const login = '/login';
   static const videoHome = '/signUp';
   static const bookingSuccessFullycompleted = '/bookingSuccessFullycompleted';
+  static const signUp = '/signUp';
+  static const otpScreen = '/otpScreen';
   static const noInternetScreen = '/noInternetScreen';
+  static const bookingScreen = '/bookingScreen';
+  static const signUpProfileScreen = '/signUpProfileScreen';
 }

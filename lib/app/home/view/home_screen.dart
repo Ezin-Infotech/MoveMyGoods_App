@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mmg/app/auth/view/login_screen.dart';
-import 'package:mmg/app/bookings/view/booking_screen.dart';
+import 'package:get/get.dart';
 import 'package:mmg/app/home/view%20model/home_provider.dart';
 import 'package:mmg/app/home/view/widgets/box_container.dart';
 import 'package:mmg/app/utils/app%20style/app_images.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
-import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/enums.dart';
+import 'package:mmg/app/utils/routes/route_names.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -102,26 +101,30 @@ class HomeScreen extends StatelessWidget {
                           ),
                         )
                       : SmallBoxontainerWidget(
-                          subTitle: index == 0
-                              ? value.bookingCountData.data!.total.toString()
-                              : index == 1
+                          subTitle: value.bookingCountData.data == null
+                              ? '0'
+                              : index == 0
                                   ? value.bookingCountData.data!.total
                                       .toString()
-                                  : index == 2
-                                      ? value.bookingCountData.data!.pending
+                                  : index == 1
+                                      ? value.bookingCountData.data!.total
                                           .toString()
-                                      : index == 3
-                                          ? value.bookingCountData.data!.active
+                                      : index == 2
+                                          ? value.bookingCountData.data!.pending
                                               .toString()
-                                          : index == 4
-                                              ? value.bookingCountData.data!
-                                                  .completed
+                                          : index == 3
+                                              ? value
+                                                  .bookingCountData.data!.active
                                                   .toString()
-                                              : index == 5
+                                              : index == 4
                                                   ? value.bookingCountData.data!
-                                                      .cancelled
+                                                      .completed
                                                       .toString()
-                                                  : "0",
+                                                  : index == 5
+                                                      ? value.bookingCountData
+                                                          .data!.cancelled
+                                                          .toString()
+                                                      : "0",
                           title: value.bookingTiltes[index],
                           numberColor: index == 0
                               ? const Color(0xffab00af)
@@ -145,11 +148,12 @@ class HomeScreen extends StatelessWidget {
           ),
           ButtonWidgets(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const BookingScreen(),
-                  ));
+              Get.toNamed(AppRoutes.login);
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => const LoginScreen(),
+              //     ));
               // context.push(const LoginScreen());
             },
           ),
