@@ -25,9 +25,9 @@ class AuthProvider with ChangeNotifier {
   TextEditingController otp4Controller = TextEditingController();
   AuthServices services = AuthServices();
 
-  bool loginShowPassword = false;
-  loginShowPasswordFn() {
-    loginShowPassword = loginShowPassword;
+  bool loginShowPassword = true;
+  void loginShowPasswordFn() {
+    loginShowPassword = !loginShowPassword;
     notifyListeners();
   }
 

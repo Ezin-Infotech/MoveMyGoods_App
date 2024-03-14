@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/auth/view/sign_up.dart';
@@ -64,26 +66,32 @@ class LoginScreen extends StatelessWidget {
                     text: 'Password',
                   ),
                   const SizeBoxH(8),
-                  CommonTextForm(
-                    onChanged: (p0) {},
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      color: AppColors.primary,
-                    ),
-                    controller: authProvider.passWordController,
-                    fillColor: AppColors.bgColor,
-                    hintText: 'Enter Your Password',
-                    keyboardType: TextInputType.emailAddress,
-                    suffixIcon: GestureDetector(
-                      onTap: () => authProvider.loginShowPasswordFn(),
-                      child: Icon(
-                        authProvider.loginShowPassword == true
-                            ? Icons.remove_red_eye
-                            : Icons.visibility_off,
+                  Consumer<AuthProvider>(builder: (context, value, child) {
+                    return CommonTextForm(
+                      onChanged: (p0) {},
+                      prefixIcon: Icon(
+                        Icons.lock,
                         color: AppColors.primary,
                       ),
-                    ),
-                  ),
+                      controller: value.passWordController,
+                      fillColor: AppColors.bgColor,
+                      hintText: 'Enter Your Password',
+                      keyboardType: TextInputType.emailAddress,
+                      obscureText: value.loginShowPassword,
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          value.loginShowPasswordFn();
+                          log('abcd');
+                        },
+                        child: Icon(
+                          value.loginShowPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    );
+                  }),
                   const SizeBoxH(28),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
