@@ -40,9 +40,10 @@ class Urls {
       "http://103.160.153.57:8090/mmg/api/v1/fare/calculation/weight";
   final goodsVehicleUrl =
       "http://103.160.153.57:8086/mmg/api/v2/vehicle/nearest";
-  final pharmaFavoriteProducts = "$baseUrl/favourites/";
-  final pharmaOrders = "$baseUrl/order/pharma/orders";
+  final bookingFarePriceUrl =
+      "http://103.160.153.57:8087/mmg/api/v2/booking/fare";
 
+  final userProfileImage = "http://103.160.153.57:8083/mmg/api/v2/image";
   final pharmaSubCategory = '$baseUrl/sub-categories/';
   final pharmaSubCategoryProduct = '$baseUrl/product/sub-category/';
   final pharmaCategoryProducts = '$baseUrl/product/all-products/';

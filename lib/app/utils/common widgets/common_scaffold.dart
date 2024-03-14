@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mmg/app/auth/view%20model/auth_provider.dart';
+import 'package:mmg/app/utils/enums.dart';
+import 'package:provider/provider.dart';
+
 import '../app style/app_images.dart';
 import '../app style/colors.dart';
 
@@ -14,51 +18,50 @@ class CommonScaffold extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.primary,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        AppImages.whiteLogo,
-                        width: 44,
-                        height: 44,
-                      ),
-                      const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Move My Goods',
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white),
-                          ),
-                          Text(
-                            'Digital Logistic Platform',
-                            style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w300,
-                                color: Colors.white),
-                          )
-                        ],
-                      )
-                    ],
-                  )
-                ],
+        title: Consumer<AuthProvider>(builder: (context, auth, _) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(
+                          AppImages.whiteLogo,
+                          width: 44,
+                          height: 44,
+                        ),
+                        const Text(
+                          'Move My Goods',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
-            ),
-            const CircleAvatar(
-              maxRadius: 20,
-              backgroundImage: AssetImage('assets/avathar.png'),
-            )
-          ],
-        ),
+              auth.isUserLogged
+                  ? auth.getUserProfilePicStatus ==
+                          GetUserProfilePicStatus.loading
+                      ? const CircularProgressIndicator()
+                      : CircleAvatar(
+                          maxRadius: 20,
+                          backgroundImage: NetworkImage(
+                              "https://storage.googleapis.com/common-mmg/${auth.userProfilePic![0].path}"),
+                        )
+                  : const CircleAvatar(
+                      maxRadius: 20,
+                      backgroundImage: AssetImage('assets/avathar.png'),
+                    )
+            ],
+          );
+        }),
       ),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),

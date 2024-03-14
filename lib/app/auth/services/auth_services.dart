@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:mmg/app/auth/modal/country_model.dart';
 import 'package:mmg/app/auth/modal/profile_model.dart';
-
+import 'package:mmg/app/auth/modal/user_profile_picture_model.dart';
 import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/backend/urls.dart';
 
@@ -78,5 +78,19 @@ class AuthServices extends Urls {
         ));
     // print(response);
     return profileDataModelFromJson(jsonEncode(response.data));
+  }
+
+  Future<UserProfilePicModel> getUserProfilePicService() async {
+    final response = await dio.get(
+        '$userProfileImage/${AppPref.userProfileId}?category=PROFILE&roleId=1',
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${AppPref.userToken}',
+            'x-api-key': 'MMGATPL'
+          },
+        ));
+    // print(response);
+    return userProfilePicModelFromJson(jsonEncode(response.data));
   }
 }

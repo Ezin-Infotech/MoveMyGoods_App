@@ -24,6 +24,7 @@ class CommonTextForm extends StatelessWidget {
   final Color? focusedBorder;
   final TextStyle? hintTextStyle;
   final Color? hintTextColor;
+  final int? maxLength;
   const CommonTextForm({
     super.key,
     required this.onChanged,
@@ -47,11 +48,14 @@ class CommonTextForm extends StatelessWidget {
     this.focusedBorder,
     this.hintTextStyle,
     this.hintTextColor,
+    this.maxLength,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLength: maxLength,
+      textInputAction: TextInputAction.go,
       onTap: onTap,
       readOnly: readOnly ?? false,
       controller: controller,

@@ -5,6 +5,7 @@ import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/home/view%20model/home_provider.dart';
 import 'package:mmg/app/home/view/widgets/box_container.dart';
 import 'package:mmg/app/utils/app%20style/app_images.dart';
+import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
 import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
@@ -26,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
       context.read<HomeProvider>().getBookingCountFn();
       context.read<BookingProvider>().getGoodsTypeFn();
       context.read<AuthProvider>().getCountryFn(context: context);
+      context.read<AuthProvider>().getUserProfilePicFn();
     }
     super.initState();
   }
@@ -54,32 +56,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   top: 39,
                   child: Image.asset(
                     AppImages.blakLogo,
-                    color: Colors.black,
+                    color: Colors.pink,
                     width: 70.59,
                     height: 70.59,
                   )),
-              const Positioned(
-                  top: 100,
+              Positioned(
+                  top: 102,
                   child: Column(
                     children: [
                       Text(
                         'Move My Goods',
                         textAlign: TextAlign.center,
                         style: TextStyle(
+                          color: AppColors.primary,
                           fontFamily: 'Poppins',
                           fontSize: 22,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Text(
-                        'Digital Logistic Platform',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 10.89,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      )
                     ],
                   )),
               Positioned(

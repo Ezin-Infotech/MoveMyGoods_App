@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:mmg/app/bookings/model/booking_details_model.dart';
+import 'package:mmg/app/bookings/model/booking_fare_price_details_model.dart';
 import 'package:mmg/app/bookings/model/booking_model.dart';
 import 'package:mmg/app/bookings/model/booking_weight_model.dart';
 import 'package:mmg/app/bookings/model/goods_type_model.dart';
@@ -103,5 +104,20 @@ class BookingServices extends Urls {
         ));
     print(response);
     return goodsVehicleDetailsModelFromJson(jsonEncode(response.data));
+  }
+
+  Future<BookingFarePriceDetailsModel> getBookingFarePriceService(
+      {required dynamic data}) async {
+    final response = await dio.post(bookingFarePriceUrl,
+        data: data,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${AppPref.userToken}',
+            'x-api-key': 'MMGATPL'
+          },
+        ));
+    print(response);
+    return bookingFarePriceDetailsModelFromJson(jsonEncode(response.data));
   }
 }

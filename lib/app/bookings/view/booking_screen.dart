@@ -128,6 +128,8 @@ class _BookingScreenState extends State<BookingScreen> {
                   SizedBox(
                     height: Responsive.height * 6,
                     child: DropDownSearchField(
+                      hideKeyboard: true,
+                      hideOnEmpty: true,
                       textFieldConfiguration: TextFieldConfiguration(
                         controller: booking.goodsTypeController,
                         autofocus: false,
@@ -166,10 +168,11 @@ class _BookingScreenState extends State<BookingScreen> {
                     keyboardType: TextInputType.number,
                   ),
                   BookingTextFieldWidgets(
-                    hintText: '6',
+                    hintText: 'Maximum 5 Labours',
                     controller: bookingProvider!.numberOfLabourController,
                     labeText: 'Number of Labours *',
                     keyboardType: TextInputType.number,
+                    maxLength: 1,
                   ),
                   const SizeBoxH(10),
                   const CustomText(
@@ -287,10 +290,10 @@ class _BookingScreenState extends State<BookingScreen> {
                       : const SizedBox.shrink(),
                   booking.showFarePrice
                       ? Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Total Amount:394/-',
+                              'Total Amount: ₹ ${booking.bookingFarePriceDetailsModel.data!.totalAmount} /-',
                               style: Theme.of(context)
                                   .textTheme
                                   .displaySmall!
@@ -300,7 +303,6 @@ class _BookingScreenState extends State<BookingScreen> {
                                       fontSize: 16,
                                       color: const Color(0xff0D9F00)),
                             ),
-                            SizeBoxV(Responsive.width * 25),
                             const Icon(
                               Icons.arrow_drop_down,
                               size: 28,
@@ -316,7 +318,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              '*The price is an indicative and actual pricemay vary ',
+                              '*The price is an indicative and actual price may vary ',
                               style: Theme.of(context)
                                   .textTheme
                                   .displaySmall!
@@ -330,20 +332,22 @@ class _BookingScreenState extends State<BookingScreen> {
                         )
                       : const SizedBox.shrink(),
                   SizeBoxH(Responsive.height * 3),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ButtonWidgets(
-                        buttonText: 'Continue',
-                        onPressed: () {
-                          context
-                              .read<BookingProvider>()
-                              .changeShowRecieverDetails(isShow: true);
-                          // context.push(const LoginScreen());
-                        },
-                      ),
-                    ],
-                  ),
+                  booking.showRecieverDetails
+                      ? const SizedBox.shrink()
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ButtonWidgets(
+                              buttonText: 'Continue',
+                              onPressed: () {
+                                context
+                                    .read<BookingProvider>()
+                                    .changeShowRecieverDetails(isShow: true);
+                                // context.push(const LoginScreen());
+                              },
+                            ),
+                          ],
+                        ),
                   SizeBoxH(Responsive.height * 4),
                   Consumer<BookingProvider>(builder: (context, value, _) {
                     return value.showRecieverDetails
