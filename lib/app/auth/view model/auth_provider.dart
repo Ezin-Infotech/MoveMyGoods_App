@@ -8,7 +8,6 @@ import 'package:get/route_manager.dart';
 import 'package:mmg/app/auth/modal/country_model.dart';
 import 'package:mmg/app/auth/services/auth_services.dart';
 import 'package:mmg/app/home/view%20model/home_provider.dart';
-import 'package:mmg/app/settings/view%20model/settings_controller.dart';
 import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/common%20widgets/dialogs.dart';
 import 'package:mmg/app/utils/common%20widgets/loading_overlay.dart';
@@ -40,7 +39,7 @@ class AuthProvider with ChangeNotifier {
   bool loginShowPassword = false;
 
   loginShowPasswordFn() {
-    loginShowPassword = loginShowPassword;
+    loginShowPassword = !loginShowPassword;
     notifyListeners();
   }
 

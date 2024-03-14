@@ -158,6 +158,7 @@ class BookingProvider with ChangeNotifier {
     zoom: 14.4746,
   );
   // Location location = Location();
+  bool serviceEnabled = false;
   // bool serviceEnabled = false;
   // PermissionStatus permissionGranted = PermissionStatus.denied;
   // LocationData? locationData;
