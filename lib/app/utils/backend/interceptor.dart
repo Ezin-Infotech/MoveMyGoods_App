@@ -1,9 +1,11 @@
 // ignore_for_file: deprecated_member_use
 
 import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:get/route_manager.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/routes/route_names.dart';
 
 class ApiInterceptor extends Interceptor {
@@ -26,22 +28,25 @@ class ApiInterceptor extends Interceptor {
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
-    log("❌🌍❌ Error [${err.response?.statusCode}] => ${err.requestOptions.path} | Details: ${err.response?.data}");
-
+    // log("❌🌍❌ Error [${err.response?.statusCode}] => ${err.requestOptions.path} | Details: ${err.response?.data}");
+    log(err.response?.data['message']);
     // ignore: unused_local_variable
     final isInvalidUser = err.response?.statusCode == 401 &&
-        err.response?.data['error'].toString().toLowerCase() == "invalid user";
+        err.response!.data['message']
+            .toString()
+            .contains("Invalid access token:");
     if (err.message == 'The connection errored: Network is unreachable') {
       Get.toNamed(AppRoutes.noInternetScreen);
     }
-    // if (isInvalidUser && kIsWeb && Get.currentRoute != AppRoutes.login) {
-    //   // AppPref().clear();
-    //   // auth.signOut();
-    //   // Get.offAllNamed(AppRoutes.login);
+    if (isInvalidUser) {
+      log('invaliiiiiiiiiiiiiiiiiiiiiiiiiiid');
+      AppPref.userToken = '';
+      // auth.signOut();
+      // Get.offAllNamed(AppRoutes.login);
 
-    //   handler.resolve(
-    //       Response(statusCode: 200, requestOptions: err.requestOptions));
-    // }
+      handler.resolve(
+          Response(statusCode: 200, requestOptions: err.requestOptions));
+    }
     handler.next(err);
   }
 
