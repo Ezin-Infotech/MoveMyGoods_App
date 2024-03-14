@@ -36,6 +36,7 @@ class BookingProvider with ChangeNotifier {
   String selectedStatus = 'booking';
   String tempSelectedStatus = 'All';
   bool showRecieverDetails = false;
+  bool showPriceDetails = false;
 // 'PENDING';
 // 'CANCELLED'
 // 'COMPLETED'
@@ -62,6 +63,11 @@ class BookingProvider with ChangeNotifier {
   List<String> goodsWight = ['100', '200', '300', '400', '500', '750'];
   changeShowRecieverDetails({required bool isShow}) {
     showRecieverDetails = isShow;
+    notifyListeners();
+  }
+
+  changeShowPriceDetails({required bool isShow}) {
+    showPriceDetails = isShow;
     notifyListeners();
   }
 
@@ -92,11 +98,12 @@ class BookingProvider with ChangeNotifier {
     try {
       final countRespose = await services.getBookingDetailsByIdService(id: id);
       bookingDetail = countRespose;
-
+      print(bookingDetail);
       getBookingDetailStatus = GetBookingDetialsStatus.loaded;
       notifyListeners();
       // ignore: deprecated_member_use
     } catch (e) {
+      print('bookingDetail $e');
       getBookingDetailStatus = GetBookingDetialsStatus.error;
       notifyListeners();
     }

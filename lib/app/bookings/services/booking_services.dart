@@ -46,7 +46,7 @@ class BookingServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    // print(response);
+    print(response);
     return bookingDetailsModelFromJson(jsonEncode(response.data));
   }
 }

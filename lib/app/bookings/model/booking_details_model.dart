@@ -24,55 +24,55 @@ class BookingDetailsModel {
 }
 
 class BookingDetailsData {
-  int? id;
+  dynamic id;
   String? bookingType;
   String? referenceId;
   String? vendorType;
   String? profileId;
-  double? sourcelatitude;
-  double? sourcelongitude;
+  dynamic sourcelatitude;
+  dynamic sourcelongitude;
   String? sStreet;
   String? sCity;
   String? sState;
   String? sCountry;
   String? sLandMark;
-  int? sPincode;
-  double? destinationlatitude;
-  double? destinationlongitude;
+  dynamic sPincode;
+  dynamic destinationlatitude;
+  dynamic destinationlongitude;
   String? dStreet;
   String? dCity;
   String? dState;
   String? dCountry;
-  int? dPincode;
-  double? distance;
-  int? goodsWeightId;
-  int? goodsTypeId;
+  dynamic dPincode;
+  dynamic distance;
+  dynamic goodsWeightId;
+  dynamic goodsTypeId;
   String? vehicleCategoryId;
-  int? perKm;
-  int? baseFare;
+  dynamic perKm;
+  dynamic baseFare;
   String? vehicleId;
-  int? numberofLabours;
-  int? goodsvalue;
-  int? pickUpDateTime;
+  dynamic numberofLabours;
+  dynamic goodsvalue;
+  dynamic pickUpDateTime;
   String? consignorName;
   String? consignorNumber;
   String? consigneeName;
   String? consigneeNumber;
   String? consigneeGst;
   String? consigneePan;
-  int? bookedGoodsTypes;
-  int? bookingAmount;
-  int? labourCharges;
-  int? labourChargesPerHead;
-  int? totalAmount;
-  int? advCompType;
-  int? paymentMode;
-  int? paymentMethod;
-  int? creationDate;
-  int? modifiedDate;
+  dynamic bookedGoodsTypes;
+  dynamic bookingAmount;
+  dynamic labourCharges;
+  dynamic labourChargesPerHead;
+  dynamic totalAmount;
+  dynamic advCompType;
+  dynamic paymentMode;
+  dynamic paymentMethod;
+  dynamic creationDate;
+  dynamic modifiedDate;
   String? status;
   bool? isActive;
-  int? cancelledByCustomer;
+  dynamic cancelledByCustomer;
   String? bookedBy;
   List<dynamic>? bookedItems;
   VehicleImage? vehicleImage;
@@ -81,14 +81,14 @@ class BookingDetailsData {
   String? source;
   String? destination;
   Customer? customer;
-  int? fodBy;
+  dynamic fodBy;
   List<dynamic>? packageDetails;
   String? supplyType;
-  int? customerFare;
-  int? actualFare;
-  int? offerAmount;
-  double? cgst;
-  double? sgst;
+  dynamic customerFare;
+  dynamic actualFare;
+  dynamic offerAmount;
+  dynamic cgst;
+  dynamic sgst;
 
   BookingDetailsData({
     this.id,
@@ -165,22 +165,22 @@ class BookingDetailsData {
         referenceId: json["referenceId"],
         vendorType: json["vendorType"],
         profileId: json["profileId"],
-        sourcelatitude: json["sourcelatitude"].toDouble(),
-        sourcelongitude: json["sourcelongitude"].toDouble(),
+        sourcelatitude: json["sourcelatitude"],
+        sourcelongitude: json["sourcelongitude"],
         sStreet: json["sStreet"],
         sCity: json["sCity"],
         sState: json["sState"],
         sCountry: json["sCountry"],
         sLandMark: json["sLandMark"],
         sPincode: json["sPincode"],
-        destinationlatitude: json["destinationlatitude"].toDouble(),
-        destinationlongitude: json["destinationlongitude"].toDouble(),
+        destinationlatitude: json["destinationlatitude"],
+        destinationlongitude: json["destinationlongitude"],
         dStreet: json["dStreet"],
         dCity: json["dCity"],
         dState: json["dState"],
         dCountry: json["dCountry"],
         dPincode: json["dPincode"],
-        distance: json["distance"].toDouble(),
+        distance: json["distance"],
         goodsWeightId: json["goodsWeightId"],
         goodsTypeId: json["goodsTypeId"],
         vehicleCategoryId: json["vehicleCategoryId"],
@@ -224,8 +224,8 @@ class BookingDetailsData {
         customerFare: json["customerFare"],
         actualFare: json["actualFare"],
         offerAmount: json["offerAmount"],
-        cgst: json["cgst"].toDouble(),
-        sgst: json["sgst"].toDouble(),
+        cgst: json["cgst"],
+        sgst: json["sgst"],
       );
 }
 
@@ -259,7 +259,7 @@ class Customer {
 
 class GoodsTypeName {
   String? name;
-  int? id;
+  dynamic id;
 
   GoodsTypeName({
     this.name,
@@ -279,7 +279,7 @@ class GoodsTypeName {
 
 class GoodsWeightName {
   String? weight;
-  int? goodsId;
+  dynamic goodsId;
 
   GoodsWeightName({
     this.weight,

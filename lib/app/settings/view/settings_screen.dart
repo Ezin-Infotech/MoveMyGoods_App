@@ -7,14 +7,20 @@ import 'package:mmg/app/settings/view/webview/terms_and_privacy.dart';
 import 'package:mmg/app/settings/view/widgets/profile_page.dart';
 import 'package:mmg/app/utils/alert_dialog.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
+import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
 import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
@@ -50,6 +56,11 @@ class SettingsScreen extends StatelessWidget {
                               content: 'Are you sure yow want to Logout?',
                               buttonLabel: 'Logout',
                               onTapYes: () {
+                                setState(() {
+                                  AppPref.userProfileId = '';
+                                  AppPref.userToken = '';
+                                });
+                                Get.back();
                                 // value.foodCartProductRemovefn(
                                 //     productIds:
                                 //         items.product!.id.toString());

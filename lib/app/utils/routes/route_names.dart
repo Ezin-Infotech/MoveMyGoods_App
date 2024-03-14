@@ -10,4 +10,7 @@ class AppRoutes {
   static const bookingScreen = '/bookingScreen';
   static const bookingListScreen = '/bookingListScreen';
   static const signUpProfileScreen = '/signUpProfileScreen';
+  static const completedBookingScreen = '/completedBookingScreen';
+  static const bookingSuccessFullyCompletedScreen =
+      '/bookingSuccessFullyCompletedScreen';
 }
