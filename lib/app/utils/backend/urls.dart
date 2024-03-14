@@ -35,8 +35,11 @@ class Urls {
 
   final countryUrl = "http://103.160.153.57:8085/mmg/api/v1/country";
   final bookingDetails = "$baseUrl/v2/booking";
-  final pharmaCartAddOrRemove = "$baseUrl/cart/";
-  final pharmaCartProductRemove = "$baseUrl/cart/remove-from-cart/";
+  final goodsTypeUrl = "http://103.160.153.57:8085/mmg/api/v1/goodsType";
+  final goodsWeightUrl =
+      "http://103.160.153.57:8090/mmg/api/v1/fare/calculation/weight";
+  final goodsVehicleUrl =
+      "http://103.160.153.57:8086/mmg/api/v2/vehicle/nearest";
   final pharmaFavoriteProducts = "$baseUrl/favourites/";
   final pharmaOrders = "$baseUrl/order/pharma/orders";
 

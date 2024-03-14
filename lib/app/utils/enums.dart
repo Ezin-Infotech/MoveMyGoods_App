@@ -48,3 +48,24 @@ enum GetBookingDetialsStatus {
   loaded,
   error,
 }
+
+enum GetGoodsTypeStatus {
+  initial,
+  loading,
+  loaded,
+  error,
+}
+
+enum GetGoodsWeightStatus {
+  initial,
+  loading,
+  loaded,
+  error,
+}
+
+enum GetGoodsVehicleStatus {
+  initial,
+  loading,
+  loaded,
+  error,
+}

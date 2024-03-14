@@ -77,7 +77,7 @@ class SignUpScreen extends StatelessWidget {
                       Icons.email_rounded,
                       color: AppColors.primary,
                     ),
-                    controller: authProvider.signUpemailController,
+                    controller: authProvider.signUpEmailController,
                     fillColor: AppColors.bgColor,
                     hintText: 'Email (Optional)',
                     keyboardType: TextInputType.emailAddress,

@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    context.read<SplashProvider>().changeScreen();
+    context.read<SplashProvider>().changeScreen(context: context);
 
     super.initState();
   }

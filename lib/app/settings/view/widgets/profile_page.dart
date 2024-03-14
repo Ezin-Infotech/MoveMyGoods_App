@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:mmg/app/bookings/view/widgets/drop_down_widgets.dart';
 import 'package:mmg/app/settings/view%20model/settings_controller.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
@@ -41,7 +40,10 @@ class ProfileScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                const MyToggleIconButton(),
+                MyToggleIconButton(
+                  isToggled: false,
+                  onPressed: () {},
+                ),
                 Text(
                   'Male',
                   style: context.textTheme.bodySmall!.copyWith(
@@ -54,7 +56,10 @@ class ProfileScreen extends StatelessWidget {
             const SizeBoxV(65),
             Row(
               children: [
-                const MyToggleIconButton(),
+                MyToggleIconButton(
+                  isToggled: false,
+                  onPressed: () {},
+                ),
                 Text(
                   'Female',
                   style: context.textTheme.bodySmall!.copyWith(

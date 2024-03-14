@@ -1,7 +1,11 @@
 import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:mmg/app/bookings/model/booking_details_model.dart';
 import 'package:mmg/app/bookings/model/booking_model.dart';
+import 'package:mmg/app/bookings/model/booking_weight_model.dart';
+import 'package:mmg/app/bookings/model/goods_type_model.dart';
+import 'package:mmg/app/bookings/model/vehicle_details_model.dart';
 import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/backend/urls.dart';
 
@@ -48,5 +52,56 @@ class BookingServices extends Urls {
         ));
     print(response);
     return bookingDetailsModelFromJson(jsonEncode(response.data));
+  }
+
+  Future<GoodsTypeModel> getGoodsTypeService() async {
+    final response = await dio.get(goodsTypeUrl,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${AppPref.userToken}',
+            'x-api-key': 'MMGATPL'
+          },
+        ));
+    print(response);
+    return goodsTypeModelFromJson(jsonEncode(response.data));
+  }
+
+  Future<GoodsWeightModel> getGoodsWeightService(
+      {required dynamic data}) async {
+    final response = await dio.post(goodsWeightUrl,
+        data: data,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${AppPref.userToken}',
+            'x-api-key': 'MMGATPL'
+          },
+        ));
+    print(response);
+    return goodsWeightModelFromJson(jsonEncode(response.data));
+  }
+
+  Future<GoodsVehicleDetailsModel> getGoodsVehicleDetailsService(
+      {required int goodsTypeId,
+      required int kerbWeightId,
+      required dynamic latitude,
+      required dynamic longitude}) async {
+    final response = await dio.get(
+        '$goodsVehicleUrl/latitude/$latitude/longitude/$longitude',
+        queryParameters: {
+          "goodsTypeId": goodsTypeId,
+          "kerbWeightId": kerbWeightId,
+          "role": 1,
+        },
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${AppPref.userToken}',
+            'x-api-key': 'MMGATPL'
+          },
+        ));
+    print(response);
+    return goodsVehicleDetailsModelFromJson(jsonEncode(response.data));
   }
 }

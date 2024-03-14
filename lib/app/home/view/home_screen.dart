@@ -24,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     if (AppPref.userToken != '') {
       context.read<HomeProvider>().getBookingCountFn();
+      context.read<BookingProvider>().getGoodsTypeFn();
       context.read<AuthProvider>().getCountryFn(context: context);
     }
     super.initState();
@@ -107,56 +108,80 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisSpacing: 46,
                   childAspectRatio: 8 / 6),
               itemBuilder: (context, int index) {
-                return Consumer<HomeProvider>(builder: (context, value, _) {
-                  return value.getAllBookingCountStatus ==
-                          GetAllBookingCountStatus.loading
-                      ? const SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        )
-                      : SmallBoxontainerWidget(
-                          subTitle: value.bookingCountData.data == null
-                              ? '0'
-                              : index == 0
-                                  ? value.bookingCountData.data!.total
-                                      .toString()
-                                  : index == 1
-                                      ? value.bookingCountData.data!.total
-                                          .toString()
-                                      : index == 2
-                                          ? value.bookingCountData.data!.pending
-                                              .toString()
-                                          : index == 3
-                                              ? value
-                                                  .bookingCountData.data!.active
-                                                  .toString()
-                                              : index == 4
-                                                  ? value.bookingCountData.data!
-                                                      .completed
-                                                      .toString()
-                                                  : index == 5
-                                                      ? value.bookingCountData
-                                                          .data!.cancelled
-                                                          .toString()
-                                                      : "0",
-                          title: value.bookingTiltes[index],
-                          numberColor: index == 0
-                              ? const Color(0xffab00af)
-                              : index == 1
-                                  ? const Color(0xff006eef)
-                                  : index == 2
-                                      ? const Color(0xff847f00)
-                                      : index == 3
-                                          ? const Color(0xff00c108)
-                                          : index == 4
-                                              ? const Color(0xff009ba4)
-                                              : index == 5
-                                                  ? const Color(0xffDF0E0E)
-                                                  : null,
-                        );
+                return Consumer<AuthProvider>(builder: (context, auth, _) {
+                  return Consumer<HomeProvider>(builder: (context, value, _) {
+                    return auth.isUserLogged
+                        ? value.getAllBookingCountStatus ==
+                                GetAllBookingCountStatus.loading
+                            ? const SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              )
+                            : SmallBoxontainerWidget(
+                                subTitle: value.bookingCountData.data == null
+                                    ? '0'
+                                    : index == 0
+                                        ? value.bookingCountData.data!.total
+                                            .toString()
+                                        : index == 1
+                                            ? value.bookingCountData.data!.total
+                                                .toString()
+                                            : index == 2
+                                                ? value.bookingCountData.data!
+                                                    .pending
+                                                    .toString()
+                                                : index == 3
+                                                    ? value.bookingCountData
+                                                        .data!.active
+                                                        .toString()
+                                                    : index == 4
+                                                        ? value.bookingCountData
+                                                            .data!.completed
+                                                            .toString()
+                                                        : index == 5
+                                                            ? value
+                                                                .bookingCountData
+                                                                .data!
+                                                                .cancelled
+                                                                .toString()
+                                                            : "0",
+                                title: value.bookingTiltes[index],
+                                numberColor: index == 0
+                                    ? const Color(0xffab00af)
+                                    : index == 1
+                                        ? const Color(0xff006eef)
+                                        : index == 2
+                                            ? const Color(0xff847f00)
+                                            : index == 3
+                                                ? const Color(0xff00c108)
+                                                : index == 4
+                                                    ? const Color(0xff009ba4)
+                                                    : index == 5
+                                                        ? const Color(
+                                                            0xffDF0E0E)
+                                                        : null,
+                              )
+                        : SmallBoxontainerWidget(
+                            subTitle: '0',
+                            title: value.bookingTiltes[index],
+                            numberColor: index == 0
+                                ? const Color(0xffab00af)
+                                : index == 1
+                                    ? const Color(0xff006eef)
+                                    : index == 2
+                                        ? const Color(0xff847f00)
+                                        : index == 3
+                                            ? const Color(0xff00c108)
+                                            : index == 4
+                                                ? const Color(0xff009ba4)
+                                                : index == 5
+                                                    ? const Color(0xffDF0E0E)
+                                                    : null,
+                          );
+                  });
                 });
               },
             ),
@@ -170,6 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 context
                     .read<BookingProvider>()
                     .changeShowRecieverDetails(isShow: false);
+                context.read<BookingProvider>().clearBooingVariables();
                 Get.toNamed(AppRoutes.bookingScreen);
               } else {
                 Get.toNamed(AppRoutes.login);
