@@ -41,7 +41,7 @@ class AuthProvider with ChangeNotifier {
   bool loginShowPassword = false;
 
   loginShowPasswordFn() {
-    loginShowPassword = loginShowPassword;
+    loginShowPassword = !loginShowPassword;
     notifyListeners();
   }
 
