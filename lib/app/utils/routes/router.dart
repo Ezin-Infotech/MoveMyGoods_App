@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mmg/app/bookings/view/booking_details_screen.dart';
 import 'package:mmg/app/bookings/view/booking_success_completed.dart';
-import 'package:mmg/app/home/view/global_screen.dart';
 import 'package:mmg/app/auth/view/login_screen.dart';
 import 'package:mmg/app/auth/view/otp_screen.dart';
 import 'package:mmg/app/auth/view/profile_screen.dart';
+import 'package:mmg/app/bookings/view/booking_list.dart';
 import 'package:mmg/app/bookings/view/booking_screen.dart';
 import 'package:mmg/app/home/view/showcase/showcasewidget.dart';
 import 'package:mmg/app/splash/view/splash_screen.dart';
@@ -55,10 +56,25 @@ class RouteGenerator {
           settings: settings,
           widget: const BookingScreen(),
         );
+      case AppRoutes.bookingListScreen:
+        return pagetransition(
+          settings: settings,
+          widget: const BookingListScreen(),
+        );
       case AppRoutes.signUpProfileScreen:
         return pagetransition(
           settings: settings,
           widget: const SignUpProfileScreen(),
+        );
+      case AppRoutes.completedBookingScreen:
+        return pagetransition(
+          settings: settings,
+          widget: const CompletedBookingScreen(),
+        );
+      case AppRoutes.bookingSuccessFullyCompletedScreen:
+        return pagetransition(
+          settings: settings,
+          widget: const BookingSuccessFullyCompletedScreen(),
         );
     }
     return MaterialPageRoute(

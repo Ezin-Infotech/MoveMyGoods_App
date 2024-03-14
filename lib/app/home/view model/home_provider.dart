@@ -47,7 +47,6 @@ class HomeProvider with ChangeNotifier {
   DashboardBookingCountModel bookingCountData = DashboardBookingCountModel();
   getBookingCountFn() async {
     getAllBookingCountStatus = GetAllBookingCountStatus.loading;
-    notifyListeners();
     try {
       final countRespose = await services.dashboardBookingCountService();
 

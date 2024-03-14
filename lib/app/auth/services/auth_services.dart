@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:mmg/app/auth/modal/country_model.dart';
+import 'package:mmg/app/auth/modal/profile_model.dart';
 
+import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/backend/urls.dart';
 
 class AuthServices extends Urls {
@@ -55,9 +57,26 @@ class AuthServices extends Urls {
   Future<CountryModel> getCountryService() async {
     final response = await dio.get(countryUrl,
         options: Options(
-          headers: {'Content-Type': 'application/json', 'x-api-key': 'MMGATPL'},
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${AppPref.userToken}',
+            'x-api-key': 'MMGATPL'
+          },
         ));
     // print(response);
     return countryModelFromJson(jsonEncode(response.data));
+  }
+
+  Future<ProfileDataModel> getProfileDetailService() async {
+    final response = await dio.get(countryUrl,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${AppPref.userToken}',
+            'x-api-key': 'MMGATPL'
+          },
+        ));
+    // print(response);
+    return profileDataModelFromJson(jsonEncode(response.data));
   }
 }

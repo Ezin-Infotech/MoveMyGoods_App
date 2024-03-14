@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 
-import 'package:mmg/app/bookings/view/widgets/drop_down_widgets.dart';
 import 'package:mmg/app/settings/view%20model/settings_controller.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
-import 'package:mmg/app/utils/common%20widgets/custom_text.dart';
 import 'package:mmg/app/utils/common%20widgets/label_and_textfield.dart';
 import 'package:mmg/app/utils/common%20widgets/toggle_widget.dart';
 import 'package:mmg/app/utils/extensions.dart';

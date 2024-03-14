@@ -7,34 +7,42 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:mmg/app/auth/modal/country_model.dart';
 import 'package:mmg/app/auth/services/auth_services.dart';
+import 'package:mmg/app/home/view%20model/home_provider.dart';
 import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/common%20widgets/dialogs.dart';
 import 'package:mmg/app/utils/common%20widgets/loading_overlay.dart';
 import 'package:mmg/app/utils/routes/route_names.dart';
+import 'package:provider/provider.dart';
 
 class AuthProvider with ChangeNotifier {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passWordController = TextEditingController();
-
-  TextEditingController signUpemailController = TextEditingController();
-  TextEditingController signUpPhoneController = TextEditingController();
-
-  TextEditingController otp1Controller = TextEditingController();
-  TextEditingController otp2Controller = TextEditingController();
-  TextEditingController otp3Controller = TextEditingController();
-  TextEditingController otp4Controller = TextEditingController();
   AuthServices services = AuthServices();
 
-  bool loginShowPassword = true;
-  void loginShowPasswordFn() {
+  checkIsUserLoggedOnCacheFn() {
+    if (AppPref.userToken == '') {
+      isUserLogged = false;
+      notifyListeners();
+    } else {
+      isUserLogged = true;
+      notifyListeners();
+    }
+  }
+
+  bool isUserLogged = false;
+  isUserLoggedFn({required bool isLogged}) {
+    isUserLogged = isLogged;
+    notifyListeners();
+  }
+
+  /* Login */
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passWordController = TextEditingController();
+  bool loginShowPassword = false;
+
+  loginShowPasswordFn() {
     loginShowPassword = !loginShowPassword;
     notifyListeners();
   }
 
-  List<CountryList> countryList = [];
-  /* API Functions */
-
-  /* SIGN IN */
   onboardSignInFn({required BuildContext context}) async {
     LoadingOverlay.of(context).show();
 
@@ -46,6 +54,9 @@ class AuthProvider with ChangeNotifier {
       AppPref.userProfileId = signInDataResponse["data"]["id"];
       LoadingOverlay.of(context).hide();
       // clearLoginController();
+      isUserLoggedFn(isLogged: true);
+      context.read<HomeProvider>().getBookingCountFn();
+      getCountryFn(context: context);
       Get.offNamed(AppRoutes.bookingScreen);
       // ignore: deprecated_member_use
     } on DioError catch (e) {
@@ -60,17 +71,21 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  /* SIGN UP OTP REQUEST */
+  /* SIGN UP */
+  TextEditingController signUpEmailController = TextEditingController();
+  TextEditingController signUpPhoneController = TextEditingController();
+  TextEditingController otp1Controller = TextEditingController();
+  TextEditingController otp2Controller = TextEditingController();
+  TextEditingController otp3Controller = TextEditingController();
+  TextEditingController otp4Controller = TextEditingController();
+
   getSignUpOTPFn({required BuildContext context}) async {
     LoadingOverlay.of(context).show();
-
     try {
       final signInDataResponse = await services.postSignUpOtpService(
-          email: signUpemailController.text, phone: signUpPhoneController.text);
-      // signInData = signInDataResponse.data!;
+          email: signUpEmailController.text, phone: signUpPhoneController.text);
       print(signInDataResponse);
       LoadingOverlay.of(context).hide();
-      // clearLoginController();
       Get.offNamed(AppRoutes.otpScreen);
       // ignore: deprecated_member_use
     } on DioError catch (e) {
@@ -118,7 +133,9 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  /* SIGN UP OTP REQUEST */
+  /* COUNTRY LIST */
+  List<CountryList> countryList = [];
+
   getCountryFn({required BuildContext context}) async {
     try {
       final countryResponse = await services.getCountryService();
@@ -126,6 +143,7 @@ class AuthProvider with ChangeNotifier {
       countryList = countryResponse.data!.list!;
       // ignore: deprecated_member_use
     } on DioError catch (e) {
+      log(e.message!);
       // errorBottomSheetDialogs(
       //     isDismissible: false,
       //     enableDrag: false,

@@ -8,5 +8,9 @@ class AppRoutes {
   static const otpScreen = '/otpScreen';
   static const noInternetScreen = '/noInternetScreen';
   static const bookingScreen = '/bookingScreen';
+  static const bookingListScreen = '/bookingListScreen';
   static const signUpProfileScreen = '/signUpProfileScreen';
+  static const completedBookingScreen = '/completedBookingScreen';
+  static const bookingSuccessFullyCompletedScreen =
+      '/bookingSuccessFullyCompletedScreen';
 }
