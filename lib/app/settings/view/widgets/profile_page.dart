@@ -30,6 +30,7 @@ class ProfileScreen extends StatelessWidget {
           controller: profileProvider.lastNameController,
         ),
         BookingTextFieldWidgets(
+          readOnly: true,
           labeText: 'Mobile Number',
           hintText: '+919744213176',
           controller: profileProvider.mobileNumberController,

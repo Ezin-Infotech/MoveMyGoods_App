@@ -13,6 +13,7 @@ class BookingTextFieldWidgets extends StatelessWidget {
   final dynamic Function(String)? onChanged;
   final int? maxLength;
   final String? Function(String?)? validator;
+  final bool? readOnly;
   const BookingTextFieldWidgets(
       {required this.controller,
       required this.labeText,
@@ -21,6 +22,7 @@ class BookingTextFieldWidgets extends StatelessWidget {
       this.keyboardType,
       this.maxLength,
       this.validator,
+      this.readOnly = false,
       super.key});
 
   @override
@@ -34,6 +36,7 @@ class BookingTextFieldWidgets extends StatelessWidget {
         ),
         const SizeBoxH(8),
         CommonTextForm(
+          readOnly: readOnly,
           maxLength: maxLength,
           controller: controller,
           onChanged: onChanged ?? (p0) {},
