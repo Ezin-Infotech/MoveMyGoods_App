@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-<<<<<<< HEAD
 import 'package:mmg/app/auth/view/forget_password.dart';
 import 'package:mmg/app/auth/view/forget_password_second_page.dart';
 import 'package:mmg/app/auth/view/login_screen.dart';
 import 'package:mmg/app/auth/view/otp_screen.dart';
 import 'package:mmg/app/auth/view/profile_screen.dart';
-=======
-import 'package:mmg/app/auth/view/login_screen.dart';
-import 'package:mmg/app/auth/view/otp_screen.dart';
-import 'package:mmg/app/auth/view/profile_screen.dart';
 import 'package:mmg/app/auth/view/sign_up.dart';
->>>>>>> 3fe9006094fcd850e3b9e2e91cfe9e523199411f
 import 'package:mmg/app/bookings/view/booking_details_screen.dart';
 import 'package:mmg/app/bookings/view/booking_screen.dart';
 import 'package:mmg/app/bookings/view/booking_success_completed.dart';
