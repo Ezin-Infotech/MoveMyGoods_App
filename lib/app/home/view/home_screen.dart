@@ -26,9 +26,11 @@ class _HomeScreenState extends State<HomeScreen> {
     if (AppPref.userToken != '') {
       context.read<HomeProvider>().getBookingCountFn();
       context.read<BookingProvider>().getGoodsTypeFn();
-      context.read<AuthProvider>().getCountryFn(context: context);
+
       context.read<AuthProvider>().getUserProfilePicFn();
+      context.read<AuthProvider>().getUserProfileDetailsFn();
     }
+    context.read<AuthProvider>().getCountryFn(context: context);
     super.initState();
   }
 

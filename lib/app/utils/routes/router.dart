@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mmg/app/bookings/view/booking_details_screen.dart';
-import 'package:mmg/app/bookings/view/booking_success_completed.dart';
 import 'package:mmg/app/auth/view/login_screen.dart';
 import 'package:mmg/app/auth/view/otp_screen.dart';
 import 'package:mmg/app/auth/view/profile_screen.dart';
+import 'package:mmg/app/auth/view/sign_up.dart';
+import 'package:mmg/app/bookings/view/booking_details_screen.dart';
 import 'package:mmg/app/bookings/view/booking_list.dart';
 import 'package:mmg/app/bookings/view/booking_screen.dart';
+import 'package:mmg/app/bookings/view/booking_success_completed.dart';
 import 'package:mmg/app/home/view/showcase/showcasewidget.dart';
 import 'package:mmg/app/splash/view/splash_screen.dart';
 import 'package:mmg/app/utils/common%20widgets/no_internet_screen.dart';
@@ -40,6 +41,11 @@ class RouteGenerator {
           settings: settings,
           widget: const LoginScreen(),
         ); //
+      case AppRoutes.signUp:
+        return pagetransition(
+          settings: settings,
+          widget: const SignUpScreen(),
+        );
       case AppRoutes.otpScreen:
         return pagetransition(
           settings: settings,

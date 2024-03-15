@@ -174,6 +174,11 @@ class _BookingScreenState extends State<BookingScreen> {
                     keyboardType: TextInputType.number,
                     maxLength: 1,
                   ),
+                  // Text(
+                  //   'Number of labours should not exceed more than 5',
+                  //   style: context.textTheme.bodyMedium!
+                  //       .copyWith(color: Colors.red),
+                  // ),
                   const SizeBoxH(10),
                   const CustomText(
                     text: 'Goods Weight *',

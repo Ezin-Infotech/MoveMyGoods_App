@@ -354,7 +354,9 @@ class BookingProvider with ChangeNotifier {
         "vendorType": goodsVehicleDetailsModel.data![0].vendorType,
         "profileId": "b0270f1e-bed8-47cb-b490-662f9f4b51ff",
         "goodsvalue": int.parse(goodsValueController.text),
-        "numberofLabours": int.parse(numberOfLabourController.text),
+        "numberofLabours": int.parse(numberOfLabourController.text == ''
+            ? '0'
+            : numberOfLabourController.text),
         "goodsWeighId": int.parse(goodsWeightId),
         "totalNoOfTon": "",
         "goodsTypeId": int.parse(goodsTypeId),

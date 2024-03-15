@@ -12,6 +12,7 @@ class BookingTextFieldWidgets extends StatelessWidget {
   final TextInputType? keyboardType;
   final dynamic Function(String)? onChanged;
   final int? maxLength;
+  final String? Function(String?)? validator;
   const BookingTextFieldWidgets(
       {required this.controller,
       required this.labeText,
@@ -19,6 +20,7 @@ class BookingTextFieldWidgets extends StatelessWidget {
       this.onChanged,
       this.keyboardType,
       this.maxLength,
+      this.validator,
       super.key});
 
   @override
@@ -35,6 +37,7 @@ class BookingTextFieldWidgets extends StatelessWidget {
           maxLength: maxLength,
           controller: controller,
           onChanged: onChanged ?? (p0) {},
+          validator: validator,
           radius: 4.0,
           fillColor: Colors.transparent,
           enabledBorder: const Color(0xffDBDBDB),

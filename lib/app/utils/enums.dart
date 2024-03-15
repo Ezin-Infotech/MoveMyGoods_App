@@ -83,3 +83,10 @@ enum GetUserProfilePicStatus {
   loaded,
   error,
 }
+
+enum GetUserProfileDetailsStatus {
+  initial,
+  loading,
+  loaded,
+  error,
+}

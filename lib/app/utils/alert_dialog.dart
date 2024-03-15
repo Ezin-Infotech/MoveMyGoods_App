@@ -7,14 +7,14 @@ import 'package:mmg/app/utils/app%20style/colors.dart';
 class DeleteAlertDialog extends StatelessWidget {
   final void Function() onTapYes;
 
-  final String titile;
+  final String title;
   final String content;
   final String? buttonLabel;
   // final bool isDarkMode;
   const DeleteAlertDialog({
     required this.onTapYes,
     required this.content,
-    required this.titile,
+    required this.title,
     this.buttonLabel,
     // required this.isDarkMode,
     super.key,
@@ -28,7 +28,7 @@ class DeleteAlertDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       backgroundColor: AppColors.kLight,
       title: Text(
-        titile.tr,
+        title.tr,
         style: context.textTheme.bodyMedium!.copyWith(
           color: AppColors.black,
           fontSize: 17,
