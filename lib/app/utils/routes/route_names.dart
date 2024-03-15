@@ -13,4 +13,6 @@ class AppRoutes {
   static const completedBookingScreen = '/completedBookingScreen';
   static const bookingSuccessFullyCompletedScreen =
       '/bookingSuccessFullyCompletedScreen';
+  static const forgetPasswordPage = '/forgetPassword';
+  static const forgetPasswordEnterPage = '/passwordEnterPage';
 }
