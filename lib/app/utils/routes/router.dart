@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mmg/app/bookings/view/booking_details_screen.dart';
-import 'package:mmg/app/bookings/view/booking_success_completed.dart';
+import 'package:mmg/app/auth/view/forget_password.dart';
+import 'package:mmg/app/auth/view/forget_password_second_page.dart';
 import 'package:mmg/app/auth/view/login_screen.dart';
 import 'package:mmg/app/auth/view/otp_screen.dart';
 import 'package:mmg/app/auth/view/profile_screen.dart';
+import 'package:mmg/app/bookings/view/booking_details_screen.dart';
 import 'package:mmg/app/bookings/view/booking_list.dart';
 import 'package:mmg/app/bookings/view/booking_screen.dart';
+import 'package:mmg/app/bookings/view/booking_success_completed.dart';
 import 'package:mmg/app/home/view/showcase/showcasewidget.dart';
 import 'package:mmg/app/splash/view/splash_screen.dart';
 import 'package:mmg/app/utils/common%20widgets/no_internet_screen.dart';
@@ -75,6 +77,16 @@ class RouteGenerator {
         return pagetransition(
           settings: settings,
           widget: const BookingSuccessFullyCompletedScreen(),
+        );
+      case AppRoutes.forgetPasswordPage:
+        return pagetransition(
+          settings: settings,
+          widget: const forgetPasswordScreen(),
+        );
+      case AppRoutes.forgetPasswordEnterPage:
+        return pagetransition(
+          settings: settings,
+          widget: const ForgetPaswordEnterScreen(),
         );
     }
     return MaterialPageRoute(

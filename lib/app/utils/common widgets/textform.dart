@@ -58,6 +58,7 @@ class CommonTextForm extends StatelessWidget {
       keyboardType: keyboardType ?? TextInputType.name,
       cursorColor: Colors.black,
       obscureText: obscureText ?? false,
+      onTapOutside: (event) => FocusScope.of(context).unfocus(),
       style: context.textTheme.bodyLarge!
           .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
       validator: validator,

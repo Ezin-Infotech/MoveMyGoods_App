@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/auth/view/sign_up.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
@@ -10,6 +11,7 @@ import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
 import 'package:mmg/app/utils/common%20widgets/textform.dart';
 import 'package:mmg/app/utils/extensions.dart';
 import 'package:mmg/app/utils/helpers.dart';
+import 'package:mmg/app/utils/routes/route_names.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -115,12 +117,15 @@ class LoginScreen extends StatelessWidget {
                       //     ),
                       //   ],
                       // ),
-                      Text(
-                        'Forgot Password?',
-                        style: context.textTheme.bodyMedium!.copyWith(
-                          color: const Color(0xffffffff),
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
+                      InkWell(
+                        onTap: () => Get.toNamed(AppRoutes.forgetPasswordPage),
+                        child: Text(
+                          'Forgot Password?',
+                          style: context.textTheme.bodyMedium!.copyWith(
+                            color: const Color(0xffffffff),
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       )
                     ],
@@ -151,10 +156,11 @@ class LoginScreen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const SignUpScreen(),
-                              ));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignUpScreen(),
+                            ),
+                          );
                         },
                         child: Text(
                           'Sign Up',

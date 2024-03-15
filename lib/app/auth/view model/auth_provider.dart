@@ -33,7 +33,6 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  /* Login */
   TextEditingController emailController = TextEditingController();
   TextEditingController passWordController = TextEditingController();
   bool loginShowPassword = false;
@@ -43,6 +42,22 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  TextEditingController forgetNewPasswordController = TextEditingController();
+  TextEditingController forgetConfirmPasswordController =
+      TextEditingController();
+  bool forgetNewPassword = false;
+  forgetNewPasswordFn() {
+    forgetNewPassword = !forgetNewPassword;
+    notifyListeners();
+  }
+
+  bool forgetConfirmPassword = false;
+  forgetConfirmPasswordFn() {
+    forgetConfirmPassword = !forgetConfirmPassword;
+    notifyListeners();
+  }
+
+  /* Login */
   onboardSignInFn({required BuildContext context}) async {
     LoadingOverlay.of(context).show();
 
@@ -78,6 +93,7 @@ class AuthProvider with ChangeNotifier {
   TextEditingController otp2Controller = TextEditingController();
   TextEditingController otp3Controller = TextEditingController();
   TextEditingController otp4Controller = TextEditingController();
+  TextEditingController forgetphoneNumberController = TextEditingController();
 
   getSignUpOTPFn({required BuildContext context}) async {
     LoadingOverlay.of(context).show();
