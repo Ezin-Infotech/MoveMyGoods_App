@@ -23,6 +23,9 @@ class Urls {
       "http://103.160.153.57:8083/mmg/api/v2/profile/sms/otp";
   final verifyOtpOnboard =
       "http://103.160.153.57:8083/mmg/api/v2/profile/validateOtp";
+  final getTermsAndCondition =
+      "http://103.160.153.57:8085/mmg/api/v1/terms/conditions/role/1?isActive=true";
+
   final validateForgotOtpOnboard = "$baseUrl/auth/validate-otp";
   final onboardForgetPassword = "$baseUrl/auth/forgot-password";
   final onboardResendOtp = "$baseUrl/auth/resend-otp";
@@ -34,17 +37,22 @@ class Urls {
   final bookingByStatus = "$baseUrl/v2";
 
   final countryUrl = "http://103.160.153.57:8085/mmg/api/v1/country";
+  final stateUrl = "http://103.160.153.57:8085/mmg/api/v1/State/country";
+  final cityUrl = "http://103.160.153.57:8085/mmg/api/v1/city";
+
   final bookingDetails = "$baseUrl/v2/booking";
   final goodsTypeUrl = "http://103.160.153.57:8085/mmg/api/v1/goodsType";
   final goodsWeightUrl =
       "http://103.160.153.57:8090/mmg/api/v1/fare/calculation/weight";
   final goodsVehicleUrl =
       "http://103.160.153.57:8086/mmg/api/v2/vehicle/nearest";
-  final pharmaFavoriteProducts = "$baseUrl/favourites/";
-  final pharmaOrders = "$baseUrl/order/pharma/orders";
+  final bookingFarePriceUrl =
+      "http://103.160.153.57:8087/mmg/api/v2/booking/fare";
 
-  final pharmaSubCategory = '$baseUrl/sub-categories/';
-  final pharmaSubCategoryProduct = '$baseUrl/product/sub-category/';
+  final userProfileImage = "http://103.160.153.57:8083/mmg/api/v2/image";
+  final userProfileDetails =
+      'http://103.160.153.57:8083/mmg/api/v2/profile/b0270f1e-bed8-47cb-b490-662f9f4b51ff?roleId=1';
+  final createProfile = 'http://103.160.153.57:8083/mmg/api/v2/profile';
   final pharmaCategoryProducts = '$baseUrl/product/all-products/';
   final applyCoupon = '$baseUrl/coupon/apply';
   final getUserCoupon = '$baseUrl/coupon/get-all';

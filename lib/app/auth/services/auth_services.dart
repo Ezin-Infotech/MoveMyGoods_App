@@ -1,9 +1,12 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:mmg/app/auth/modal/city_list_model.dart';
 import 'package:mmg/app/auth/modal/country_model.dart';
 import 'package:mmg/app/auth/modal/profile_model.dart';
-
+import 'package:mmg/app/auth/modal/state_list_model.dart';
+import 'package:mmg/app/auth/modal/terms_n_condition_model.dart';
+import 'package:mmg/app/auth/modal/user_profile_picture_model.dart';
 import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/backend/urls.dart';
 
@@ -59,7 +62,7 @@ class AuthServices extends Urls {
         options: Options(
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ${AppPref.userToken}',
+            // 'Authorization': 'Bearer ${AppPref.userToken}',
             'x-api-key': 'MMGATPL'
           },
         ));
@@ -67,8 +70,21 @@ class AuthServices extends Urls {
     return countryModelFromJson(jsonEncode(response.data));
   }
 
+  Future<GetTermsNConditionModel> getTermsNConditionService() async {
+    final response = await dio.get(getTermsAndCondition,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'Bearer ${AppPref.userToken}',
+            'x-api-key': 'MMGATPL'
+          },
+        ));
+    // print(response);
+    return getTermsNConditionModelFromJson(jsonEncode(response.data));
+  }
+
   Future<ProfileDataModel> getProfileDetailService() async {
-    final response = await dio.get(countryUrl,
+    final response = await dio.get(userProfileDetails,
         options: Options(
           headers: {
             'Content-Type': 'application/json',
@@ -78,5 +94,59 @@ class AuthServices extends Urls {
         ));
     // print(response);
     return profileDataModelFromJson(jsonEncode(response.data));
+  }
+
+  Future<UserProfilePicModel> getUserProfilePicService() async {
+    final response = await dio.get(
+        '$userProfileImage/${AppPref.userProfileId}?category=PROFILE&roleId=1',
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${AppPref.userToken}',
+            'x-api-key': 'MMGATPL'
+          },
+        ));
+    print(response);
+    return userProfilePicModelFromJson(jsonEncode(response.data));
+  }
+
+  Future<CityListModel> getCityService({required String stateId}) async {
+    final response = await dio.get('$cityUrl/$stateId',
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'Bearer ${AppPref.userToken}',
+            'x-api-key': 'MMGATPL'
+          },
+        ));
+    print(response);
+    return cityListModelFromJson(jsonEncode(response.data));
+  }
+
+  Future<StateListModel> getStateService({required String countryId}) async {
+    final response = await dio.get("$stateUrl/$countryId",
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'Bearer ${AppPref.userToken}',
+            'x-api-key': 'MMGATPL'
+          },
+        ));
+    print(response);
+    return stateListModelFromJson(jsonEncode(response.data));
+  }
+
+  Future postCreateProfileService({
+    required dynamic data,
+  }) async {
+    final response = await dio.post(
+      createProfile,
+      options: Options(
+        headers: {'Content-Type': 'application/json', 'x-api-key': 'MMGATPL'},
+      ),
+      data: data,
+    );
+    print(response);
+    return response.data;
   }
 }

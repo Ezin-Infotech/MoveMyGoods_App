@@ -69,3 +69,24 @@ enum GetGoodsVehicleStatus {
   loaded,
   error,
 }
+
+enum GetBookingFarePriceStatus {
+  initial,
+  loading,
+  loaded,
+  error,
+}
+
+enum GetUserProfilePicStatus {
+  initial,
+  loading,
+  loaded,
+  error,
+}
+
+enum GetUserProfileDetailsStatus {
+  initial,
+  loading,
+  loaded,
+  error,
+}

@@ -31,6 +31,7 @@ class ProfileDetails {
   num? dob;
   num? aadharNumber;
   String? panNumber;
+
   String? profileSource;
   List<Address>? address;
   List<BankAccount>? bankAccount;
@@ -98,7 +99,7 @@ class Address {
   String? cityName;
   String? stateName;
   String? countryName;
-
+  String? pincode;
   Address({
     this.uuid,
     this.roleId,
@@ -113,6 +114,7 @@ class Address {
     this.cityName,
     this.stateName,
     this.countryName,
+    this.pincode,
   });
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
@@ -124,6 +126,7 @@ class Address {
         countryId: json["countryId"],
         stateId: json["stateId"],
         cityId: json["cityId"],
+        pincode: json["pincode"],
         type: json["type"],
         isActive: json["isActive"],
         cityName: json["cityName"],

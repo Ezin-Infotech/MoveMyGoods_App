@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mmg/app/utils/helpers.dart';
+
 import 'button.dart';
 
 void commonBottomSheetDialog(BuildContext context, double max, double initial,
@@ -50,7 +51,6 @@ errorBottomSheetDialogs({
   Widget? button,
   bool isDismissible = true,
   bool enableDrag = true,
-  required bool isdarkmode,
 }) {
   showModalBottomSheet(
     isDismissible: true,
@@ -67,7 +67,7 @@ errorBottomSheetDialogs({
         subtitle: subtitle,
         title: title,
         button: button,
-        errorstatus: errorStatus,
+        errorStatus: errorStatus,
       );
     },
   );
@@ -77,13 +77,13 @@ class CommonSheetWidget extends StatelessWidget {
   final String title;
   final String subtitle;
   final Widget? button;
-  final String errorstatus;
+  final String errorStatus;
   const CommonSheetWidget({
     super.key,
     required this.title,
     required this.subtitle,
     this.button,
-    this.errorstatus = 'error',
+    this.errorStatus = 'error',
   });
 
   @override
@@ -106,7 +106,7 @@ class CommonSheetWidget extends StatelessWidget {
             children: <Widget>[
               //    if (!kIsWeb) CommonSheetHolder(),
               SizedBox(height: context.height * 0.03),
-              errorstatus == 'error'
+              errorStatus == 'error'
                   ? Image.asset(
                       'assets/error_image.png',
                       scale: 1,

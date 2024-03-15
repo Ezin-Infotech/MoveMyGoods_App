@@ -7,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:location/location.dart';
 import 'package:map_picker/map_picker.dart';
 import 'package:mmg/app/bookings/model/booking_details_model.dart';
+import 'package:mmg/app/bookings/model/booking_fare_price_details_model.dart';
 import 'package:mmg/app/bookings/model/booking_model.dart';
 import 'package:mmg/app/bookings/model/booking_weight_model.dart';
 import 'package:mmg/app/bookings/model/goods_type_model.dart';
@@ -321,11 +322,54 @@ class BookingProvider with ChangeNotifier {
       print(goodsVehicleDetailsModel);
       getGoodsVehicleStatus = GetGoodsVehicleStatus.loaded;
       showVehicleImage = true;
+      getBookingFarePriceFn();
       notifyListeners();
       // ignore: deprecated_member_use
     } catch (e) {
       print('bookingDetail $e');
       getGoodsVehicleStatus = GetGoodsVehicleStatus.error;
+      notifyListeners();
+    }
+  }
+
+  GetBookingFarePriceStatus getBookingFarePriceStatus =
+      GetBookingFarePriceStatus.initial;
+  BookingFarePriceDetailsModel bookingFarePriceDetailsModel =
+      BookingFarePriceDetailsModel();
+  getBookingFarePriceFn() async {
+    getBookingFarePriceStatus = GetBookingFarePriceStatus.loading;
+    // notifyListeners();
+    try {
+      final goodsResponse = await services.getBookingFarePriceService(data: {
+        "sourcelatitude": 12.2544597,
+        "sourcelongitude": 76.7170574,
+        "destinationlatitude": 12.2958104,
+        "destinationlongitude": 76.6393805,
+        "vehicleCategoryId":
+            goodsVehicleDetailsModel.data![0].vehicleCategoryId,
+        "sCountry": "India",
+        "sState": "Karnataka",
+        "sCity": "Mysore Division",
+        "referenceId": "",
+        "vendorType": goodsVehicleDetailsModel.data![0].vendorType,
+        "profileId": "b0270f1e-bed8-47cb-b490-662f9f4b51ff",
+        "goodsvalue": int.parse(goodsValueController.text),
+        "numberofLabours": int.parse(numberOfLabourController.text == ''
+            ? '0'
+            : numberOfLabourController.text),
+        "goodsWeighId": int.parse(goodsWeightId),
+        "totalNoOfTon": "",
+        "goodsTypeId": int.parse(goodsTypeId),
+      });
+      bookingFarePriceDetailsModel = goodsResponse;
+      print(bookingFarePriceDetailsModel);
+      getBookingFarePriceStatus = GetBookingFarePriceStatus.loaded;
+      showFarePrice = true;
+      notifyListeners();
+      // ignore: deprecated_member_use
+    } catch (e) {
+      print('bookingDetail $e');
+      getBookingFarePriceStatus = GetBookingFarePriceStatus.error;
       notifyListeners();
     }
   }

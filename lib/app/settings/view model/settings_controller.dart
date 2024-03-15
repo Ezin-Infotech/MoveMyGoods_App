@@ -10,16 +10,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SettingsProvider with ChangeNotifier {
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController mobileNumberController = TextEditingController();
-  TextEditingController addressLineOneController = TextEditingController();
-  TextEditingController addressLineTwoController = TextEditingController();
-  TextEditingController landMarkController = TextEditingController();
-  TextEditingController selectStateController = TextEditingController();
-  TextEditingController picCodeController = TextEditingController();
-  TextEditingController alternativeNumberController = TextEditingController();
-
   List<String> settingsText = [
     'Profile',
     'Dark Mode',
@@ -87,6 +77,7 @@ class SettingsProvider with ChangeNotifier {
 
   userLoggedFn({required int index, required BuildContext context}) {
     if (index == 0) {
+      context.read<AuthProvider>().setProfileValues(context: context);
       Get.to(const ProfileScreen());
     } else if (index == 2) {
       Get.to(const TermsAndPrivacy(
@@ -105,7 +96,7 @@ class SettingsProvider with ChangeNotifier {
         builder: (context) {
           return DeleteAlertDialog(
             // isDarkMode: value.isDarkMode,
-            titile: 'Logout',
+            title: 'Logout',
             content: 'Are you sure yow want to Logout?',
             buttonLabel: 'Logout',
             onTapYes: () {
