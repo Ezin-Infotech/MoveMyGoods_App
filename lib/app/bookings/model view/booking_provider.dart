@@ -91,6 +91,19 @@ class BookingProvider with ChangeNotifier {
     Navigator.pop(context);
   }
 
+  filterFromHomeFunction(
+      {required String status, required BuildContext context}) {
+    tempSelectedStatus = status;
+    notifyListeners();
+    if (status.toLowerCase() == 'all') {
+      selectedStatus = 'booking';
+      getAllBookingByStatusFn();
+    } else {
+      selectedStatus = status.toUpperCase();
+      getBookingByStatusFn();
+    }
+  }
+
   /*-------- API SERVICES ------------*/
 
   BookingServices services = BookingServices();
