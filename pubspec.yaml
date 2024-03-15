@@ -27,11 +27,12 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   lottie: ^3.1.0
   google_maps_flutter: ^2.6.0
-  map_picker: ^0.0.3
   # location:
-  drop_down_search_field: ^1.0.4
+  # drop_down_search_field:
   flutter_spinkit: ^5.2.0
-  dropdown_button2: ^2.3.9
+  # dropdown_button2: ^2.3.9
+  geolocator:
+  advanced_search:
 
  
 

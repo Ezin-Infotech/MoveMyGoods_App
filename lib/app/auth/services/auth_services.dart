@@ -57,6 +57,39 @@ class AuthServices extends Urls {
     return response.data;
   }
 
+  Future forgotPasswordSendOtpService({
+    required String phone,
+  }) async {
+    final response = await dio.get(
+      '$forgotPasswordGetOtp/$phone',
+      options: Options(
+        headers: {'Content-Type': 'application/json', 'x-api-key': 'MMGATPL'},
+      ),
+    );
+    print(response);
+    return response.data;
+  }
+
+  Future updatePassWordService({
+    required String phone,
+    required String password,
+    required String confirmPassword,
+  }) async {
+    final response = await dio.post(
+      updatePassWord,
+      options: Options(
+        headers: {'Content-Type': 'application/json', 'x-api-key': 'MMGATPL'},
+      ),
+      data: {
+        "password": password,
+        "confirmPassword": confirmPassword,
+        "mobileNumber": phone
+      },
+    );
+    print(response);
+    return response.data;
+  }
+
   Future<CountryModel> getCountryService() async {
     final response = await dio.get(countryUrl,
         options: Options(

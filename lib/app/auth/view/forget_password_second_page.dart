@@ -12,8 +12,8 @@ import '../../utils/common widgets/textform.dart';
 import '../../utils/helpers.dart';
 import '../view model/auth_provider.dart';
 
-class ForgetPaswordEnterScreen extends StatelessWidget {
-  const ForgetPaswordEnterScreen({super.key});
+class ForgotPasswordEnterScreen extends StatelessWidget {
+  const ForgotPasswordEnterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class ForgetPaswordEnterScreen extends StatelessWidget {
                 enabledBorder: AppColors.secondPrimary,
                 focusedBorder: AppColors.secondPrimary,
                 fillColor: AppColors.bgColor,
-                hintText: 'Confirm Passsword',
+                hintText: 'Confirm Password',
                 radius: 2,
                 controller: value.forgetConfirmPasswordController,
                 keyboardType: TextInputType.text,
@@ -84,7 +84,7 @@ class ForgetPaswordEnterScreen extends StatelessWidget {
             }),
             SizeBoxH(Responsive.height * 3),
             ButtonWidgets(
-              buttonText: 'Send OTP',
+              buttonText: 'Change Password',
               bgColor: AppColors.secondPrimary,
               textColor: Colors.white,
               onPressed: () {

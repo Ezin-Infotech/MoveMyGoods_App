@@ -198,13 +198,16 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "cSpell.words": [
+        "avathar",
         "destinationlatitude",
         "destinationlongitude",
         "Detials",
+        "failurtoast",
         "Fullycompleted",
         "ifsc",
         "Karnataka",
         "pagetransition",
+        "Passsword",
         "Profilestatus",
         "showcasewidget",
         "showvehicle",

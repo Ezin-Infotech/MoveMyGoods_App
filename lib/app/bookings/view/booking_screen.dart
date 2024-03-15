@@ -1,9 +1,10 @@
-import 'package:drop_down_search_field/drop_down_search_field.dart';
+import 'dart:developer';
+
+import 'package:advanced_search/advanced_search.dart';
+// import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:map_picker/map_picker.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/bookings/view/widgets/drop_down_widgets.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
@@ -29,11 +30,38 @@ class BookingScreen extends StatefulWidget {
 
 class _BookingScreenState extends State<BookingScreen> {
   BookingProvider? bookingProvider;
+  LatLng currentLocation = const LatLng(12.2958, 76.6394);
+  Marker? currentLocationMarker;
+  Set<Marker> markers = {};
+  GoogleMapController? mapController;
 
   @override
   void initState() {
     super.initState();
     bookingProvider = context.read<BookingProvider?>();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      getLatitudeAndLongitude();
+    });
+  }
+
+  void getLatitudeAndLongitude() async {
+    LatLng? data = await bookingProvider?.getLocation();
+    setState(() {
+      currentLocation = data ?? const LatLng(12.2958, 76.6394);
+    });
+    currentLocationMarker = Marker(
+      markerId: const MarkerId(""),
+      position: currentLocation,
+      infoWindow: const InfoWindow(title: 'Current Location'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+    );
+    markers.add(currentLocationMarker!);
+    mapController?.animateCamera(CameraUpdate.newCameraPosition(
+      CameraPosition(
+        target: currentLocation,
+        zoom: 15.1746,
+      ),
+    ));
   }
 
   @override
@@ -43,36 +71,26 @@ class _BookingScreenState extends State<BookingScreen> {
       children: Consumer<BookingProvider>(builder: (context, booking, _) {
         return Column(
           children: [
-            SizedBox(
-              height: Responsive.height * 30,
-              child: MapPicker(
-                iconWidget: const Icon(
-                  Icons.location_on,
-                  size: 50,
-                  color: Colors.red,
-                ),
-                mapPickerController: bookingProvider!.mapPickerController,
-                child: Consumer<BookingProvider>(
-                  builder: (ctx, obj, _) {
-                    return GoogleMap(
-                      myLocationEnabled: true,
-                      zoomControlsEnabled: false,
-                      myLocationButtonEnabled: false,
-                      mapType: MapType.hybrid,
-                      initialCameraPosition: obj.cameraPosition,
-                      onMapCreated: (GoogleMapController controller) {
-                        obj.controller.complete(controller);
-                      },
-                      onCameraMoveStarted: () {
-                        obj.mapPickerController.mapMoving!();
-                      },
-                      onCameraMove: (cameraPosition) {
-                        obj.cameraPosition = cameraPosition;
-                      },
-                    );
-                  },
-                ),
-              ),
+            Consumer<BookingProvider>(
+              builder: (ctx, obj, _) {
+                return SizedBox(
+                  height: Responsive.height * 30,
+                  child: GoogleMap(
+                    myLocationEnabled: true,
+                    zoomControlsEnabled: false,
+                    myLocationButtonEnabled: true,
+                    mapType: MapType.terrain,
+                    initialCameraPosition: CameraPosition(
+                      target: currentLocation,
+                      zoom: 14.4746,
+                    ),
+                    markers: markers,
+                    onMapCreated: (GoogleMapController controller) {
+                      mapController = controller;
+                    },
+                  ),
+                );
+              },
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -86,34 +104,40 @@ class _BookingScreenState extends State<BookingScreen> {
                     text: 'Source *',
                   ),
                   const SizeBoxH(8),
-                  SizedBox(
-                    height: Responsive.height * 6,
-                    child: DropDownSearchField(
-                      hideKeyboard: true,
-                      textFieldConfiguration: TextFieldConfiguration(
-                        autofocus: F,
-                        style: DefaultTextStyle.of(context).style.copyWith(
-                              fontStyle: FontStyle.italic,
+                  Consumer<BookingProvider>(
+                    builder: (context, booking, _) {
+                      return AdvancedSearch(
+                        hintText: 'Search your location',
+                        borderRadius: 4,
+                        searchItems:
+                            booking.searchResults.map((e) => e.name).toList(),
+                        maxElementsToDisplay: 7,
+                        onItemTap: (index, da) async {
+                          log("on submitted $da");
+                          PlaceSuggestion place = booking.searchResults
+                              .firstWhere((element) => element.name == da);
+                          LatLng latLng = await booking.getPlaceDetails(
+                            place.placeId,
+                          );
+                          log("Lat Long $latLng");
+                          mapController
+                              ?.animateCamera(CameraUpdate.newCameraPosition(
+                            CameraPosition(
+                              target: latLng,
+                              zoom: 15.1746,
                             ),
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                      suggestionsCallback: (pattern) async {
-                        return items.where((item) {
-                          return item.toLowerCase().contains(
-                                pattern.toLowerCase(),
-                              );
-                        }).toList();
-                      },
-                      itemBuilder: (context, suggestion) {
-                        return ListTile(
-                            leading: const Icon(Icons.shopping_cart),
-                            title: Text(suggestion.toString()));
-                      },
-                      onSuggestionSelected: (suggestion) {},
-                      displayAllSuggestionWhenTap: true,
-                    ),
+                          ));
+                        },
+                        onSearchClear: () {
+                          booking.searchResults.clear();
+                          bookingProvider?.searchLocation(query: '');
+                        },
+                        onEditingProgress: (value, value2) {
+                          log("value $value");
+                          booking.searchLocation(query: value);
+                        },
+                      );
+                    },
                   ),
                   BookingTextFieldWidgets(
                     hintText: 'Mysore, Karnataka',
@@ -125,42 +149,42 @@ class _BookingScreenState extends State<BookingScreen> {
                     text: 'Goods Type *',
                   ),
                   const SizeBoxH(8),
-                  SizedBox(
-                    height: Responsive.height * 6,
-                    child: DropDownSearchField(
-                      hideKeyboard: true,
-                      hideOnEmpty: true,
-                      textFieldConfiguration: TextFieldConfiguration(
-                        controller: booking.goodsTypeController,
-                        autofocus: false,
-                        style: context.textTheme.bodyLarge!.copyWith(
-                            fontSize: 16, fontWeight: FontWeight.w400),
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                      suggestionsCallback: (pattern) async {
-                        return booking.goodsTypeData.list!.where((items) {
-                          return items.name.toString().toLowerCase().contains(
-                                pattern.toLowerCase(),
-                              );
-                        }).toList();
-                      },
-                      itemBuilder: (context, suggestion) {
-                        return ListTile(
-                            title: Text(suggestion.name.toString()));
-                      },
-                      onSuggestionSelected: (suggestion) {
-                        print("$suggestion tapped");
-                        context
-                            .read<BookingProvider>()
-                            .changeGoodsTypeController(
-                                id: suggestion.id.toString(),
-                                value: suggestion.name.toString());
-                      },
-                      displayAllSuggestionWhenTap: true,
-                    ),
-                  ),
+                  // SizedBox(
+                  //   height: Responsive.height * 6,
+                  //   child: DropDownSearchField(
+                  //     hideKeyboard: true,
+                  //     hideOnEmpty: true,
+                  //     textFieldConfiguration: TextFieldConfiguration(
+                  //       controller: booking.goodsTypeController,
+                  //       autofocus: false,
+                  //       style: context.textTheme.bodyLarge!.copyWith(
+                  //           fontSize: 16, fontWeight: FontWeight.w400),
+                  //       decoration: const InputDecoration(
+                  //         border: OutlineInputBorder(),
+                  //       ),
+                  //     ),
+                  //     suggestionsCallback: (pattern) async {
+                  //       return booking.goodsTypeData.list!.where((items) {
+                  //         return items.name.toString().toLowerCase().contains(
+                  //               pattern.toLowerCase(),
+                  //             );
+                  //       }).toList();
+                  //     },
+                  //     itemBuilder: (context, suggestion) {
+                  //       return ListTile(
+                  //           title: Text(suggestion.name.toString()));
+                  //     },
+                  //     onSuggestionSelected: (suggestion) {
+                  //       print("$suggestion tapped");
+                  //       context
+                  //           .read<BookingProvider>()
+                  //           .changeGoodsTypeController(
+                  //               id: suggestion.id.toString(),
+                  //               value: suggestion.name.toString());
+                  //     },
+                  //     displayAllSuggestionWhenTap: true,
+                  //   ),
+                  // ),
                   BookingTextFieldWidgets(
                     hintText: '300',
                     controller: bookingProvider!.goodsValueController,
