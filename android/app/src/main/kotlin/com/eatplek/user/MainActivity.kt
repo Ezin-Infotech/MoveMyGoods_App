@@ -1,0 +1,6 @@
+package com.eatplek.user
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
