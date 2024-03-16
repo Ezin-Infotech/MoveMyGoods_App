@@ -4,6 +4,7 @@ import 'package:mmg/app/utils/app%20style/app_images.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
+import 'package:mmg/app/utils/extensions.dart';
 import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
 
@@ -85,9 +86,11 @@ class OtpScreenState extends State<OtpScreen> {
                           width: double.infinity,
                           height: 50,
                           onPressed: () {
-                            context
-                                .read<AuthProvider>()
-                                .verifySignUpOTPFn(context: context);
+                            context.read<AuthProvider>().verifySignUpOTPFn(
+                                context: context,
+                                isFromForgot:
+                                    context.args['isFromForgotPassword'] ??
+                                        false);
 
                             // context.push(const LoginScreen());
                           },

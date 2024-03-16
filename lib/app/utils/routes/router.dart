@@ -49,11 +49,12 @@ class RouteGenerator {
           widget: const SignUpScreen(),
         );
       case AppRoutes.otpScreen:
-        return pagetransition(
-          settings: settings,
-          widget: const OtpScreen(),
-        ); //
-
+        if (args is Map) {
+          return pagetransition(
+            settings: settings,
+            widget: const OtpScreen(),
+          ); //
+        }
       case AppRoutes.noInternetScreen:
         return pagetransition(
           settings: settings,
@@ -92,7 +93,7 @@ class RouteGenerator {
       case AppRoutes.forgetPasswordEnterPage:
         return pagetransition(
           settings: settings,
-          widget: const ForgetPaswordEnterScreen(),
+          widget: const ForgotPasswordEnterScreen(),
         );
     }
     return MaterialPageRoute(

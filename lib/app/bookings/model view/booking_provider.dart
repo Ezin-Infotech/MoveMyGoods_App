@@ -1,11 +1,12 @@
 import 'dart:async';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:location/location.dart';
 // import 'package:location/location.dart';
-import 'package:map_picker/map_picker.dart';
 import 'package:mmg/app/bookings/model/booking_details_model.dart';
 import 'package:mmg/app/bookings/model/booking_fare_price_details_model.dart';
 import 'package:mmg/app/bookings/model/booking_model.dart';
@@ -164,46 +165,6 @@ class BookingProvider with ChangeNotifier {
       notifyListeners();
     }
   }
-
-  final controller = Completer<GoogleMapController>();
-  MapPickerController mapPickerController = MapPickerController();
-  CameraPosition cameraPosition = const CameraPosition(
-    target: LatLng(0.00, 0.00),
-    zoom: 14.4746,
-  );
-  // Location location = Location();
-  bool serviceEnabled = false;
-  // bool serviceEnabled = false;
-  // PermissionStatus permissionGranted = PermissionStatus.denied;
-  // LocationData? locationData;
-
-  // Future<void> checkLocationPermission() async {
-  //   serviceEnabled = await location.serviceEnabled();
-  //   if (!serviceEnabled) {
-  //     serviceEnabled = await location.requestService();
-  //     if (!serviceEnabled) {
-  //       return;
-  //     }
-  //   }
-
-  //   permissionGranted = await location.hasPermission();
-  //   if (permissionGranted == PermissionStatus.denied) {
-  //     permissionGranted = await location.requestPermission();
-  //     if (permissionGranted != PermissionStatus.granted) {
-  //       return;
-  //     }
-  //   }
-  //   locationData = await location.getLocation();
-  //   LatLng currentLocation = LatLng(
-  //     locationData?.latitude ?? 0.00,
-  //     locationData?.longitude ?? 0.00,
-  //   );
-  //   cameraPosition = CameraPosition(
-  //     target: currentLocation,
-  //     zoom: 14.4746,
-  //   );
-  //   notifyListeners();
-  // }
 
 /* Dashboard Booking Counts */
   GetGoodsTypeStatus getGoodsTypeStatus = GetGoodsTypeStatus.initial;
@@ -386,4 +347,105 @@ class BookingProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  // GOOGLE MAP INTEGRATION
+
+  Future<LatLng> getLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error('Location permissions are permanently denied');
+    }
+    Position position = await Geolocator.getCurrentPosition();
+    return LatLng(position.latitude, position.longitude);
+  }
+
+  final String _apiKey = 'AIzaSyBOHuJ-4CqJBjmSi_RugeonwPU5cBVqbeA';
+  final String _baseUrl = 'https://maps.googleapis.com/maps/api/place';
+  List<PlaceSuggestion> searchResults = [];
+  List<PlaceSuggestion> destinationSearchResults = [];
+
+  Future<void> searchLocation({
+    required String query,
+    required bool dest,
+  }) async {
+    try {
+      final response = await Dio().get(
+        '$_baseUrl/autocomplete/json',
+        queryParameters: {
+          'input': query,
+          'types': '(cities)',
+          'key': _apiKey,
+        },
+      );
+      if (response.statusCode == 200) {
+        if (dest) {
+          destinationSearchResults = [];
+          for (var place in response.data['predictions']) {
+            destinationSearchResults.add(
+              PlaceSuggestion(
+                name: place['description'],
+                placeId: place['place_id'],
+              ),
+            );
+          }
+        } else {
+          searchResults = [];
+          for (var place in response.data['predictions']) {
+            searchResults.add(
+              PlaceSuggestion(
+                name: place['description'],
+                placeId: place['place_id'],
+              ),
+            );
+          }
+        }
+        notifyListeners();
+      } else {
+        throw Exception("Failed to load data");
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<LatLng> getPlaceDetails(String placeId) async {
+    try {
+      final response = await Dio().get(
+        '$_baseUrl/details/json',
+        queryParameters: {
+          'place_id': placeId,
+          'fields': 'geometry',
+          'key': _apiKey,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final location = response.data['result']['geometry']['location'];
+        return LatLng(location['lat'], location['lng']);
+      } else {
+        throw Exception("Failed to load place details");
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+}
+
+class PlaceSuggestion {
+  String name;
+  String placeId;
+
+  PlaceSuggestion({required this.name, required this.placeId});
 }

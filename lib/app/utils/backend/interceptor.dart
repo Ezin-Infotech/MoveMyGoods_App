@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:get/route_manager.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/routes/route_names.dart';
 
@@ -41,6 +42,7 @@ class ApiInterceptor extends Interceptor {
     if (isInvalidUser) {
       log('invaliiiiiiiiiiiiiiiiiiiiiiiiiiid');
       AppPref.userToken = '';
+      AuthProvider().isUserLoggedFn(isLogged: false);
       // auth.signOut();
       // Get.offAllNamed(AppRoutes.login);
 

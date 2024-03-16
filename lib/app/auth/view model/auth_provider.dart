@@ -99,7 +99,7 @@ class AuthProvider with ChangeNotifier {
   TextEditingController otp2Controller = TextEditingController();
   TextEditingController otp3Controller = TextEditingController();
   TextEditingController otp4Controller = TextEditingController();
-  TextEditingController forgetphoneNumberController = TextEditingController();
+  TextEditingController forgotPhoneNumberController = TextEditingController();
 
   getSignUpOTPFn({required BuildContext context}) async {
     if (signUpPhoneController.text.isEmpty) {
@@ -112,7 +112,9 @@ class AuthProvider with ChangeNotifier {
             phone: signUpPhoneController.text);
         print(signInDataResponse);
         LoadingOverlay.of(context).hide();
-        Get.offNamed(AppRoutes.otpScreen);
+        Get.offNamed(AppRoutes.otpScreen, arguments: {
+          'isFromForgotPassword': false,
+        });
         // ignore: deprecated_member_use
       } on DioError catch (e) {
         LoadingOverlay.of(context).hide();
@@ -128,7 +130,8 @@ class AuthProvider with ChangeNotifier {
   }
 
   /* SIGN UP VERIFY OTP */
-  verifySignUpOTPFn({required BuildContext context}) async {
+  verifySignUpOTPFn(
+      {required BuildContext context, required bool isFromForgot}) async {
     if (otp1Controller.text.isNotEmpty &&
         otp2Controller.text.isNotEmpty &&
         otp3Controller.text.isNotEmpty &&
@@ -141,9 +144,12 @@ class AuthProvider with ChangeNotifier {
             otp: otp, phone: signUpPhoneController.text);
         // signInData = signInDataResponse.data!;
         LoadingOverlay.of(context).hide();
-
-        Get.toNamed(AppRoutes.signUpProfileScreen);
-        getTermsNConditionFn();
+        if (isFromForgot) {
+          Get.toNamed(AppRoutes.forgetPasswordEnterPage);
+        } else {
+          Get.toNamed(AppRoutes.signUpProfileScreen);
+          getTermsNConditionFn();
+        }
 
         // clearLoginController();
         // Get.offNamed(AppRoutes.otpScreen);
@@ -160,6 +166,78 @@ class AuthProvider with ChangeNotifier {
       }
     } else {
       failurtoast(title: 'Please fill all fields');
+    }
+  }
+
+  /* SIGN UP VERIFY OTP */
+  sendOtpToPhoneOnForgotPasswordFn({required BuildContext context}) async {
+    if (signUpPhoneController.text.isNotEmpty) {
+      LoadingOverlay.of(context).show();
+
+      try {
+        await services.forgotPasswordSendOtpService(
+            phone: signUpPhoneController.text);
+        LoadingOverlay.of(context).hide();
+        Get.toNamed(AppRoutes.otpScreen, arguments: {
+          'isFromForgotPassword': true,
+        });
+        // ignore: deprecated_member_use
+      } on DioError catch (e) {
+        LoadingOverlay.of(context).hide();
+        errorBottomSheetDialogs(
+          isDismissible: false,
+          enableDrag: false,
+          context: context,
+          title: '${e.response!.data['message']}',
+          subtitle: '',
+        );
+      }
+    } else {
+      failurtoast(title: 'Please Enter Your Phone Number');
+    }
+  }
+
+  /* SIGN UP VERIFY OTP */
+  changePasswordFn({
+    required BuildContext context,
+  }) async {
+    if (forgetNewPasswordController.text.isEmpty &&
+        forgetConfirmPasswordController.text.isEmpty) {
+      failurtoast(title: 'Please fill all fields');
+    }
+    // else if(){
+
+    // }
+
+    else {
+      LoadingOverlay.of(context).show();
+      final String otp =
+          '${otp1Controller.text}${otp2Controller.text}${otp3Controller.text}${otp4Controller.text}';
+      try {
+        await services.postVerifyOtpService(
+            otp: otp, phone: signUpPhoneController.text);
+        // signInData = signInDataResponse.data!;
+        LoadingOverlay.of(context).hide();
+        // if (isFromForgot) {
+        //   Get.toNamed(AppRoutes.forgetPasswordEnterPage);
+        // } else {
+        //   Get.toNamed(AppRoutes.signUpProfileScreen);
+        //   getTermsNConditionFn();
+        // }
+
+        // clearLoginController();
+        // Get.offNamed(AppRoutes.otpScreen);
+        // ignore: deprecated_member_use
+      } on DioError catch (e) {
+        LoadingOverlay.of(context).hide();
+        errorBottomSheetDialogs(
+          isDismissible: false,
+          enableDrag: false,
+          context: context,
+          title: '${e.response!.data['message']}',
+          subtitle: '',
+        );
+      }
     }
   }
 

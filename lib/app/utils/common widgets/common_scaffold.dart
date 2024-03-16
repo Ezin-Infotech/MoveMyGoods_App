@@ -50,11 +50,16 @@ class CommonScaffold extends StatelessWidget {
                   ? auth.getUserProfilePicStatus ==
                           GetUserProfilePicStatus.loading
                       ? const CircularProgressIndicator()
-                      : CircleAvatar(
-                          maxRadius: 20,
-                          backgroundImage: NetworkImage(
-                              "https://storage.googleapis.com/common-mmg/${auth.userProfilePic![0].path}"),
-                        )
+                      : auth.userProfilePic!.isNotEmpty
+                          ? CircleAvatar(
+                              maxRadius: 20,
+                              backgroundImage: NetworkImage(
+                                  "https://storage.googleapis.com/common-mmg/${auth.userProfilePic![0].path}"),
+                            )
+                          : const CircleAvatar(
+                              maxRadius: 20,
+                              backgroundImage: AssetImage('assets/avathar.png'),
+                            )
                   : const CircleAvatar(
                       maxRadius: 20,
                       backgroundImage: AssetImage('assets/avathar.png'),

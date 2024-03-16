@@ -53,8 +53,10 @@ class Urls {
   final userProfileDetails =
       'http://103.160.153.57:8083/mmg/api/v2/profile/b0270f1e-bed8-47cb-b490-662f9f4b51ff?roleId=1';
   final createProfile = 'http://103.160.153.57:8083/mmg/api/v2/profile';
-  final pharmaCategoryProducts = '$baseUrl/product/all-products/';
-  final applyCoupon = '$baseUrl/coupon/apply';
+  final forgotPasswordGetOtp =
+      'http://103.160.153.57:8083/mmg/api/v2/profile/forgotpassword/mobile';
+  final updatePassWord =
+      'http://103.160.153.57:8083/mmg/api/v2/profile/password';
   final getUserCoupon = '$baseUrl/coupon/get-all';
   final getUserAllAdress = '$baseUrl/address';
   final cartCheckout = '$baseUrl/order';
