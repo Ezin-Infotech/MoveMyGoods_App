@@ -1,7 +1,6 @@
-import 'dart:developer';
+import 'dart:math';
 
 import 'package:advanced_search/advanced_search.dart';
-// import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -33,7 +32,11 @@ class _BookingScreenState extends State<BookingScreen> {
   LatLng currentLocation = const LatLng(12.2958, 76.6394);
   Marker? currentLocationMarker;
   Set<Marker> markers = {};
+  Set<Polyline> polylines = {};
   GoogleMapController? mapController;
+  LatLng? fromLocation;
+  LatLng? destinationLocation;
+  bool hasFromLocationBeenSelected = false;
 
   @override
   void initState() {
@@ -49,19 +52,63 @@ class _BookingScreenState extends State<BookingScreen> {
     setState(() {
       currentLocation = data ?? const LatLng(12.2958, 76.6394);
     });
-    currentLocationMarker = Marker(
-      markerId: const MarkerId(""),
-      position: currentLocation,
-      infoWindow: const InfoWindow(title: 'Current Location'),
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-    );
-    markers.add(currentLocationMarker!);
     mapController?.animateCamera(CameraUpdate.newCameraPosition(
       CameraPosition(
         target: currentLocation,
         zoom: 15.1746,
       ),
     ));
+  }
+
+  void updatePolyline() {
+    if (fromLocation == null || destinationLocation == null) return;
+
+    const String polylineIdVal = 'user_route';
+    const PolylineId polylineId = PolylineId(polylineIdVal);
+    final Polyline polyline = Polyline(
+      polylineId: polylineId,
+      points: [fromLocation!, destinationLocation!],
+      width: 5,
+      color: Colors.blue,
+    );
+
+    double southLat = min(
+      fromLocation!.latitude,
+      destinationLocation!.latitude,
+    );
+    double northLat = max(
+      fromLocation!.latitude,
+      destinationLocation!.latitude,
+    );
+    double westLng = min(
+      fromLocation!.longitude,
+      destinationLocation!.longitude,
+    );
+    double eastLng = max(
+      fromLocation!.longitude,
+      destinationLocation!.longitude,
+    );
+    LatLngBounds bounds = LatLngBounds(
+      southwest: LatLng(southLat, westLng),
+      northeast: LatLng(northLat, eastLng),
+    );
+    setState(() {
+      polylines.removeWhere((poly) => poly.polylineId == polylineId);
+      polylines.add(polyline);
+    });
+    Future.delayed(const Duration(milliseconds: 500), () {
+      mapController?.animateCamera(CameraUpdate.newLatLngBounds(bounds, 60));
+    });
+  }
+
+  void onSelectLocation(LatLng location, bool isFromLocation) {
+    if (isFromLocation) {
+      fromLocation = location;
+      hasFromLocationBeenSelected = true;
+    } else if (hasFromLocationBeenSelected && fromLocation != null) {
+      destinationLocation = location;
+      updatePolyline();
+    }
   }
 
   @override
@@ -85,6 +132,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       zoom: 14.4746,
                     ),
                     markers: markers,
+                    polylines: polylines,
                     onMapCreated: (GoogleMapController controller) {
                       mapController = controller;
                     },
@@ -112,14 +160,22 @@ class _BookingScreenState extends State<BookingScreen> {
                         searchItems:
                             booking.searchResults.map((e) => e.name).toList(),
                         maxElementsToDisplay: 7,
+                        searchResultsBgColor: AppColors.bgColor,
                         onItemTap: (index, da) async {
-                          log("on submitted $da");
                           PlaceSuggestion place = booking.searchResults
                               .firstWhere((element) => element.name == da);
                           LatLng latLng = await booking.getPlaceDetails(
                             place.placeId,
                           );
-                          log("Lat Long $latLng");
+                          onSelectLocation(latLng, true);
+                          markers.add(Marker(
+                            markerId: const MarkerId(""),
+                            position: latLng,
+                            infoWindow: const InfoWindow(title: 'Source'),
+                            icon: BitmapDescriptor.defaultMarkerWithHue(
+                              BitmapDescriptor.hueGreen,
+                            ),
+                          ));
                           mapController
                               ?.animateCamera(CameraUpdate.newCameraPosition(
                             CameraPosition(
@@ -130,19 +186,73 @@ class _BookingScreenState extends State<BookingScreen> {
                         },
                         onSearchClear: () {
                           booking.searchResults.clear();
-                          bookingProvider?.searchLocation(query: '');
+                          bookingProvider?.searchLocation(
+                            query: '',
+                            dest: false,
+                          );
                         },
                         onEditingProgress: (value, value2) {
-                          log("value $value");
-                          booking.searchLocation(query: value);
+                          booking.searchLocation(
+                            query: value,
+                            dest: false,
+                          );
                         },
                       );
                     },
                   ),
-                  BookingTextFieldWidgets(
-                    hintText: 'Mysore, Karnataka',
-                    controller: bookingProvider!.destinationController,
-                    labeText: 'Destination *',
+                  const SizeBoxH(10),
+                  const CustomText(
+                    text: 'Destination *',
+                  ),
+                  const SizeBoxH(8),
+                  Consumer<BookingProvider>(
+                    builder: (context, booking, _) {
+                      return AdvancedSearch(
+                        hintText: 'Search your destination',
+                        borderRadius: 4,
+                        searchItems: booking.destinationSearchResults
+                            .map((e) => e.name)
+                            .toList(),
+                        maxElementsToDisplay: 7,
+                        onItemTap: (index, da) async {
+                          PlaceSuggestion place = booking
+                              .destinationSearchResults
+                              .firstWhere((element) => element.name == da);
+                          LatLng latLng = await booking.getPlaceDetails(
+                            place.placeId,
+                          );
+                          onSelectLocation(latLng, false);
+                          markers.add(Marker(
+                            markerId: const MarkerId(""),
+                            position: latLng,
+                            infoWindow: const InfoWindow(title: 'Destination'),
+                            icon: BitmapDescriptor.defaultMarkerWithHue(
+                              BitmapDescriptor.hueRed,
+                            ),
+                          ));
+                          mapController
+                              ?.animateCamera(CameraUpdate.newCameraPosition(
+                            CameraPosition(
+                              target: latLng,
+                              zoom: 15.1746,
+                            ),
+                          ));
+                        },
+                        onSearchClear: () {
+                          booking.destinationSearchResults.clear();
+                          bookingProvider?.searchLocation(
+                            query: '',
+                            dest: true,
+                          );
+                        },
+                        onEditingProgress: (value, value2) {
+                          booking.searchLocation(
+                            query: value,
+                            dest: true,
+                          );
+                        },
+                      );
+                    },
                   ),
                   const SizeBoxH(10),
                   const CustomText(
