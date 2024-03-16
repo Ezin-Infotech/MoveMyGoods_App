@@ -48,9 +48,9 @@ class _BookingScreenState extends State<BookingScreen> {
   }
 
   void getLatitudeAndLongitude() async {
-    LatLng? data = await bookingProvider?.getLocation();
+    // LatLng? data = await bookingProvider?.getLocation();
     setState(() {
-      currentLocation = data ?? const LatLng(12.2958, 76.6394);
+      // currentLocation = data ?? const LatLng(12.2958, 76.6394);
     });
     mapController?.animateCamera(CameraUpdate.newCameraPosition(
       CameraPosition(
