@@ -211,11 +211,11 @@ class AuthProvider with ChangeNotifier {
 
     else {
       LoadingOverlay.of(context).show();
-      final String otp =
-          '${otp1Controller.text}${otp2Controller.text}${otp3Controller.text}${otp4Controller.text}';
       try {
-        await services.postVerifyOtpService(
-            otp: otp, phone: signUpPhoneController.text);
+        await services.updatePassWordService(
+            confirmPassword: forgetConfirmPasswordController.text,
+            phone: signUpPhoneController.text,
+            password: forgetNewPasswordController.text);
         // signInData = signInDataResponse.data!;
         LoadingOverlay.of(context).hide();
         // if (isFromForgot) {

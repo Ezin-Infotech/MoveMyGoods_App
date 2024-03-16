@@ -75,7 +75,7 @@ class AuthServices extends Urls {
     required String password,
     required String confirmPassword,
   }) async {
-    final response = await dio.post(
+    final response = await dio.put(
       updatePassWord,
       options: Options(
         headers: {'Content-Type': 'application/json', 'x-api-key': 'MMGATPL'},
