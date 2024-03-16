@@ -374,8 +374,12 @@ class BookingProvider with ChangeNotifier {
   final String _apiKey = 'AIzaSyBOHuJ-4CqJBjmSi_RugeonwPU5cBVqbeA';
   final String _baseUrl = 'https://maps.googleapis.com/maps/api/place';
   List<PlaceSuggestion> searchResults = [];
+  List<PlaceSuggestion> destinationSearchResults = [];
 
-  Future<void> searchLocation({required String query}) async {
+  Future<void> searchLocation({
+    required String query,
+    required bool dest,
+  }) async {
     try {
       final response = await Dio().get(
         '$_baseUrl/autocomplete/json',
@@ -386,12 +390,26 @@ class BookingProvider with ChangeNotifier {
         },
       );
       if (response.statusCode == 200) {
-        searchResults.clear();
-        for (var item in response.data['predictions']) {
-          searchResults.add(PlaceSuggestion(
-            name: item['description'],
-            placeId: item['place_id'],
-          ));
+        if (dest) {
+          destinationSearchResults = [];
+          for (var place in response.data['predictions']) {
+            destinationSearchResults.add(
+              PlaceSuggestion(
+                name: place['description'],
+                placeId: place['place_id'],
+              ),
+            );
+          }
+        } else {
+          searchResults = [];
+          for (var place in response.data['predictions']) {
+            searchResults.add(
+              PlaceSuggestion(
+                name: place['description'],
+                placeId: place['place_id'],
+              ),
+            );
+          }
         }
         notifyListeners();
       } else {
