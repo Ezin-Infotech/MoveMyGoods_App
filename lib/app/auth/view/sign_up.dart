@@ -9,6 +9,7 @@ import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/app style/responsive.dart';
+import '../../utils/common widgets/toast.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -89,9 +90,18 @@ class SignUpScreen extends StatelessWidget {
                         bgColor: AppColors.kLight,
                         textColor: AppColors.primary,
                         onPressed: () {
-                          context
-                              .read<AuthProvider>()
-                              .getSignUpOTPFn(context: context);
+                          if (authProvider
+                                  .signUpPhoneController.text.isNotEmpty &&
+                              authProvider
+                                  .signUpEmailController.text.isNotEmpty) {
+                            context
+                                .read<AuthProvider>()
+                                .getSignUpOTPFn(context: context);
+                          } else {
+                            toast(context,
+                                backgroundColor: Colors.red,
+                                title: 'please enter email and password');
+                          }
 
                           // context.push(const LoginScreen());
                         }),

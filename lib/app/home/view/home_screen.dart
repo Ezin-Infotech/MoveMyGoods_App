@@ -12,6 +12,9 @@ import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/enums.dart';
 import 'package:mmg/app/utils/routes/route_names.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '../../settings/view/widgets/theme.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -109,14 +112,25 @@ class _HomeScreenState extends State<HomeScreen> {
                     return auth.isUserLogged
                         ? value.getAllBookingCountStatus ==
                                 GetAllBookingCountStatus.loading
-                            ? const SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              )
-                            : SmallBoxontainerWidget(
+                            ? Shimmer.fromColors(
+                                baseColor: AppConstants.appMainGreyColor,
+                                highlightColor: Colors.grey.shade500,
+                                child: const SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  // child: Center(
+                                  //   child: CircularProgressIndicator(),
+                                  // ),
+                                ))
+                            :
+                            // const SizedBox(
+                            //     width: 50,
+                            //     height: 50,
+                            //     child: Center(
+                            //       child: CircularProgressIndicator(),
+                            //     ),
+                            //   )
+                            SmallBoxontainerWidget(
                                 subTitle: value.bookingCountData.data == null
                                     ? '0'
                                     : index == 0

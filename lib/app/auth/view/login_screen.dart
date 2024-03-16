@@ -9,13 +9,15 @@ import 'package:mmg/app/utils/app%20style/responsive.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
 import 'package:mmg/app/utils/common%20widgets/textform.dart';
+import 'package:mmg/app/utils/common%20widgets/toast.dart';
 import 'package:mmg/app/utils/extensions.dart';
 import 'package:mmg/app/utils/helpers.dart';
 import 'package:mmg/app/utils/routes/route_names.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,146 +36,173 @@ class LoginScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   color: AppColors.primary,
                   borderRadius: BorderRadius.circular(10)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Text(
-                      'Welcome Back ',
-                      style: context.textTheme.bodyMedium!.copyWith(
-                        color: const Color(0xffffffff),
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Text(
+                        'Welcome Back ',
+                        style: context.textTheme.bodyMedium!.copyWith(
+                          color: const Color(0xffffffff),
+                          fontSize: 22,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizeBoxH(20),
-                  const LabelText(
-                    text: 'Email / Phone',
-                  ),
-                  const SizeBoxH(8),
-                  CommonTextForm(
-                    onChanged: (p0) {},
-                    prefixIcon: Icon(
-                      Icons.person,
-                      color: AppColors.primary,
+                    const SizeBoxH(20),
+                    const LabelText(
+                      text: 'Email / Phone',
                     ),
-                    controller: authProvider.emailController,
-                    fillColor: AppColors.bgColor,
-                    hintText: 'mmg@gmail.com',
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  const SizeBoxH(18),
-                  const LabelText(
-                    text: 'Password',
-                  ),
-                  const SizeBoxH(8),
-                  Consumer<AuthProvider>(builder: (context, value, child) {
-                    return CommonTextForm(
+                    const SizeBoxH(8),
+                    CommonTextForm(
                       onChanged: (p0) {},
                       prefixIcon: Icon(
-                        Icons.lock,
+                        Icons.person,
                         color: AppColors.primary,
                       ),
-                      controller: value.passWordController,
+                      controller: authProvider.emailController,
                       fillColor: AppColors.bgColor,
-                      hintText: 'Enter Your Password',
+                      hintText: 'mmg@gmail.com',
                       keyboardType: TextInputType.emailAddress,
-                      obscureText: value.loginShowPassword,
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          value.loginShowPasswordFn();
-                          log('abcd');
-                        },
-                        child: Icon(
-                          value.loginShowPassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
+                      // validator: (value) {
+                      //   if (value == null || value.isEmpty) {
+                      //     return null;
+                      //   } else {
+                      //     return null;
+                      //   }
+                      // },
+                    ),
+                    const SizeBoxH(18),
+                    const LabelText(
+                      text: 'Password',
+                    ),
+                    const SizeBoxH(8),
+                    Consumer<AuthProvider>(builder: (context, value, child) {
+                      return CommonTextForm(
+                        onChanged: (p0) {},
+                        prefixIcon: Icon(
+                          Icons.lock,
                           color: AppColors.primary,
                         ),
-                      ),
-                    );
-                  }),
-                  const SizeBoxH(28),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      // Row(
-                      //   children: [
-                      //     Checkbox(
-                      //       value: true,
-                      //       activeColor: AppColors.primary,
-                      //       side: const BorderSide(
-                      //           color: Colors.white, width: 2, strokeAlign: 2),
-                      //       onChanged: (value) {},
-                      //     ),
-                      //     Text(
-                      //       'Remember Me',
-                      //       style: context.textTheme.bodyMedium!.copyWith(
-                      //         color: const Color(0xffffffff),
-                      //         fontSize: 15,
-                      //         fontWeight: FontWeight.w600,
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-                      InkWell(
-                        onTap: () => Get.toNamed(AppRoutes.forgetPasswordPage),
-                        child: Text(
-                          'Forgot Password?',
-                          style: context.textTheme.bodyMedium!.copyWith(
-                            color: const Color(0xffffffff),
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
+                        controller: value.passWordController,
+                        fillColor: AppColors.bgColor,
+                        hintText: 'Enter Your Password',
+                        keyboardType: TextInputType.emailAddress,
+                        obscureText: value.loginShowPassword,
+                        // validator: (value) {
+                        //   if (value == null || value.isEmpty) {
+                        //     return 'Please enter a password';
+                        //   } else {
+                        //     return null;
+                        //   }
+                        // },
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            value.loginShowPasswordFn();
+                            log('abcd');
+                          },
+                          child: Icon(
+                            value.loginShowPassword
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: AppColors.primary,
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                  const SizeBoxH(31),
-                  Center(
-                    child: ButtonWidgets(
-                        buttonText: 'Login',
-                        bgColor: AppColors.kLight,
-                        textColor: AppColors.primary,
-                        onPressed: () {
-                          authProvider.onboardSignInFn(context: context);
-                          // context.push(const LoginScreen());
-                        }),
-                  ),
-                  const SizeBoxH(40),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Don’t have an account ? ',
-                        style: context.textTheme.bodyLarge!.copyWith(
-                          color: const Color(0xffffffff),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SignUpScreen(),
+                      );
+                    }),
+                    const SizeBoxH(28),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        // Row(
+                        //   children: [
+                        //     Checkbox(
+                        //       value: true,
+                        //       activeColor: AppColors.primary,
+                        //       side: const BorderSide(
+                        //           color: Colors.white, width: 2, strokeAlign: 2),
+                        //       onChanged: (value) {},
+                        //     ),
+                        //     Text(
+                        //       'Remember Me',
+                        //       style: context.textTheme.bodyMedium!.copyWith(
+                        //         color: const Color(0xffffffff),
+                        //         fontSize: 15,
+                        //         fontWeight: FontWeight.w600,
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
+                        InkWell(
+                          onTap: () =>
+                              Get.toNamed(AppRoutes.forgetPasswordPage),
+                          child: Text(
+                            'Forgot Password?',
+                            style: context.textTheme.bodyMedium!.copyWith(
+                              color: const Color(0xffffffff),
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
                             ),
-                          );
-                        },
-                        child: Text(
-                          'Sign Up',
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizeBoxH(31),
+                    Center(
+                      child: ButtonWidgets(
+                          buttonText: 'Login',
+                          bgColor: AppColors.kLight,
+                          textColor: AppColors.primary,
+                          onPressed: () {
+                            if (authProvider.emailController.text.isNotEmpty &&
+                                authProvider
+                                    .passWordController.text.isNotEmpty) {
+                              authProvider.onboardSignInFn(context: context);
+                            } else {
+                              toast(context,
+                                  backgroundColor: Colors.red,
+                                  title: 'please enter email and password');
+                            }
+
+                            // context.push(const LoginScreen());
+                          }),
+                    ),
+                    const SizeBoxH(40),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Don’t have an account ? ',
                           style: context.textTheme.bodyLarge!.copyWith(
                             color: const Color(0xffffffff),
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
-                      ),
-                    ],
-                  )
-                ],
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SignUpScreen(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Sign Up',
+                            style: context.textTheme.bodyLarge!.copyWith(
+                              color: const Color(0xffffffff),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ],

@@ -41,7 +41,7 @@ class RouteGenerator {
       case AppRoutes.login:
         return pagetransition(
           settings: settings,
-          widget: const LoginScreen(),
+          widget: LoginScreen(),
         ); //
       case AppRoutes.signUp:
         return pagetransition(
@@ -72,7 +72,7 @@ class RouteGenerator {
       case AppRoutes.signUpProfileScreen:
         return pagetransition(
           settings: settings,
-          widget: const SignUpProfileScreen(),
+          widget: SignUpProfileScreen(),
         );
       case AppRoutes.completedBookingScreen:
         return pagetransition(

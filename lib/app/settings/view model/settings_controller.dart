@@ -44,6 +44,7 @@ class SettingsProvider with ChangeNotifier {
     Icons.android,
     Icons.logout
   ];
+  TextEditingController dateController = TextEditingController();
 
   int loadingPercentage = 0;
 

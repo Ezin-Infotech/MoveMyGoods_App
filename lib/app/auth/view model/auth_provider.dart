@@ -367,10 +367,11 @@ class AuthProvider with ChangeNotifier {
             "address1": addressLineOneController.text,
             "address2": addressLineTwoController.text,
             "landmark": landMarkController.text,
-            "cityId": int.parse(cityId),
-            "stateId": int.parse(stateId),
-            "countryId": int.parse(countryId),
-            "pincode": picCodeController.text,
+            "cityId": cityId.isEmpty ? 0 : int.parse(cityId),
+            "stateId": stateId.isEmpty ? 0 : int.parse(stateId),
+            "countryId": countryId.isEmpty ? 0 : int.parse(countryId),
+            "pincode":
+                picCodeController.text.isEmpty ? 0 : picCodeController.text,
             "type": "HOME"
           }
         ],

@@ -14,6 +14,7 @@ class BookingTextFieldWidgets extends StatelessWidget {
   final int? maxLength;
   final String? Function(String?)? validator;
   final bool? readOnly;
+
   const BookingTextFieldWidgets(
       {required this.controller,
       required this.labeText,
