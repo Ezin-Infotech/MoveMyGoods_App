@@ -179,74 +179,74 @@ class SignUpProfileScreen extends StatelessWidget {
             text: 'Select State *',
           ),
           const SizeBoxH(8),
-          // SizedBox(
-          //   height: Responsive.height * 6,
-          //   child: DropDownSearchField(
-          //     hideKeyboard: true,
-          //     hideOnEmpty: true,
-          //     textFieldConfiguration: TextFieldConfiguration(
-          //       controller: authProvider.stateController,
-          //       autofocus: false,
-          //       style: context.textTheme.bodyLarge!
-          //           .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
-          //       decoration: const InputDecoration(
-          //         border: OutlineInputBorder(),
-          //       ),
-          //     ),
-          //     suggestionsCallback: (pattern) async {
-          //       return authProvider.stateListElement.where((items) {
-          //         return items.name.toString().toLowerCase().contains(
-          //               pattern.toLowerCase(),
-          //             );
-          //       }).toList();
-          //     },
-          //     itemBuilder: (context, suggestion) {
-          //       return ListTile(title: Text(suggestion.name.toString()));
-          //     },
-          //     onSuggestionSelected: (suggestion) {
-          //       print("$suggestion tapped");
-          //       context.read<AuthProvider>().changeStateController(
-          //           id: suggestion.id.toString(),
-          //           value: suggestion.name.toString());
-          //     },
-          //     displayAllSuggestionWhenTap: true,
-          //   ),
-          // ),
+          SizedBox(
+            height: Responsive.height * 6,
+            child: DropDownSearchField(
+              hideKeyboard: true,
+              hideOnEmpty: true,
+              textFieldConfiguration: TextFieldConfiguration(
+                controller: authProvider.stateController,
+                autofocus: false,
+                style: context.textTheme.bodyLarge!
+                    .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              suggestionsCallback: (pattern) async {
+                return authProvider.stateListElement.where((items) {
+                  return items.name.toString().toLowerCase().contains(
+                        pattern.toLowerCase(),
+                      );
+                }).toList();
+              },
+              itemBuilder: (context, suggestion) {
+                return ListTile(title: Text(suggestion.name.toString()));
+              },
+              onSuggestionSelected: (suggestion) {
+                print("$suggestion tapped");
+                context.read<AuthProvider>().changeStateController(
+                    id: suggestion.id.toString(),
+                    value: suggestion.name.toString());
+              },
+              displayAllSuggestionWhenTap: true,
+            ),
+          ),
           const CustomText(
             text: 'Select City *',
           ),
           const SizeBoxH(8),
-          // SizedBox(
-          //   height: Responsive.height * 6,
-          //   child: DropDownSearchField(
-          //     textFieldConfiguration: TextFieldConfiguration(
-          //       controller: authProvider.cityController,
-          //       autofocus: false,
-          //       style: context.textTheme.bodyLarge!
-          //           .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
-          //       decoration: const InputDecoration(
-          //         border: OutlineInputBorder(),
-          //       ),
-          //     ),
-          //     suggestionsCallback: (pattern) async {
-          //       return authProvider.cityListElement.where((items) {
-          //         return items.name.toString().toLowerCase().contains(
-          //               pattern.toLowerCase(),
-          //             );
-          //       }).toList();
-          //     },
-          //     itemBuilder: (context, suggestion) {
-          //       return ListTile(title: Text(suggestion.name.toString()));
-          //     },
-          //     onSuggestionSelected: (suggestion) {
-          //       print("$suggestion tapped");
-          //       context.read<AuthProvider>().changeCityController(
-          //           id: suggestion.id.toString(),
-          //           value: suggestion.name.toString());
-          //     },
-          //     displayAllSuggestionWhenTap: true,
-          //   ),
-          // ),
+          SizedBox(
+            height: Responsive.height * 6,
+            child: DropDownSearchField(
+              textFieldConfiguration: TextFieldConfiguration(
+                controller: authProvider.cityController,
+                autofocus: false,
+                style: context.textTheme.bodyLarge!
+                    .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              suggestionsCallback: (pattern) async {
+                return authProvider.cityListElement.where((items) {
+                  return items.name.toString().toLowerCase().contains(
+                        pattern.toLowerCase(),
+                      );
+                }).toList();
+              },
+              itemBuilder: (context, suggestion) {
+                return ListTile(title: Text(suggestion.name.toString()));
+              },
+              onSuggestionSelected: (suggestion) {
+                print("$suggestion tapped");
+                context.read<AuthProvider>().changeCityController(
+                    id: suggestion.id.toString(),
+                    value: suggestion.name.toString());
+              },
+              displayAllSuggestionWhenTap: true,
+            ),
+          ),
           BookingTextFieldWidgets(
             labeText: 'Alternate Number',
             hintText: '+919744213176',

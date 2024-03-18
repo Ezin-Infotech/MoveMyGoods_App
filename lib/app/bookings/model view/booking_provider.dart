@@ -123,7 +123,7 @@ class BookingProvider with ChangeNotifier {
     try {
       final countRespose = await services.getBookingDetailsByIdService(id: id);
       bookingDetail = countRespose;
-      print(bookingDetail);
+      print("bookingDetail: $bookingDetail");
       getBookingDetailStatus = GetBookingDetialsStatus.loaded;
       notifyListeners();
       // ignore: deprecated_member_use
@@ -454,7 +454,8 @@ class BookingProvider with ChangeNotifier {
     LoadingOverlayDark.of(context).show();
     // notifyListeners();
     try {
-      final goodsResponse = await services.postConfirmBookingService(data: {
+      final confirmBookingResponse =
+          await services.postConfirmBookingService(data: {
         "sourcelatitude": 12.2958104,
         "sourcelongitude": 76.6393805,
         "destinationlatitude": 12.9532583,
@@ -501,7 +502,11 @@ class BookingProvider with ChangeNotifier {
         "bookedSource": "Web",
         "bookedBy": "CUSTOMER"
       });
+      print("confirmBookingResponse: ${confirmBookingResponse["data"]["id"]}");
       LoadingOverlayDark.of(context).hide();
+      getBookingDetailsByIdFn(
+          id: confirmBookingResponse["data"]["id"].toString());
+
       Get.toNamed(AppRoutes.bookingSuccessFullyCompletedScreen);
 
       confirmBookingStatus = ConfirmBookingStatus.loaded;

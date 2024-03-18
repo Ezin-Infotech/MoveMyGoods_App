@@ -183,4 +183,23 @@ class AuthServices extends Urls {
     print(response);
     return response.data;
   }
+
+  Future putUpdateProfileService({
+    required dynamic data,
+  }) async {
+    print(data);
+    final response = await dio.put(
+      createProfile,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${AppPref.userToken}',
+          'x-api-key': 'MMGATPL'
+        },
+      ),
+      data: data,
+    );
+    print(response);
+    return response.data;
+  }
 }
