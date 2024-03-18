@@ -12,17 +12,21 @@ class BookingTextFieldWidgets extends StatelessWidget {
   final TextInputType? keyboardType;
   final dynamic Function(String)? onChanged;
   final int? maxLength;
-  final String? Function(String?)? validator;
+  dynamic Function()? onTap;
+
   final bool? readOnly;
-  const BookingTextFieldWidgets(
+  final String? requiredText;
+
+  BookingTextFieldWidgets(
       {required this.controller,
       required this.labeText,
       required this.hintText,
       this.onChanged,
       this.keyboardType,
       this.maxLength,
-      this.validator,
+      this.requiredText,
       this.readOnly = false,
+      this.onTap,
       super.key});
 
   @override
@@ -40,7 +44,7 @@ class BookingTextFieldWidgets extends StatelessWidget {
           maxLength: maxLength,
           controller: controller,
           onChanged: onChanged ?? (p0) {},
-          validator: validator,
+          requiredText: requiredText,
           radius: 4.0,
           fillColor: Colors.transparent,
           enabledBorder: const Color(0xffDBDBDB),
@@ -51,6 +55,7 @@ class BookingTextFieldWidgets extends StatelessWidget {
           hintTextStyle: context.textTheme.titleMedium!.copyWith(
               fontWeight: FontWeight.w300, color: const Color(0xff222222)),
           hintTextColor: AppColors.darkGrey,
+          onTap: onTap,
         ),
       ],
     );

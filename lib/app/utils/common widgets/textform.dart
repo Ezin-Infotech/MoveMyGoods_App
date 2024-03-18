@@ -14,7 +14,7 @@ class CommonTextForm extends StatelessWidget {
   final Color? fillColor;
   final Function()? onTap;
   final bool? readOnly;
-  final String? Function(String?)? validator;
+
   final double? width;
   final TextStyle? labelStyle;
   final EdgeInsetsGeometry? contentPadding;
@@ -25,31 +25,31 @@ class CommonTextForm extends StatelessWidget {
   final TextStyle? hintTextStyle;
   final Color? hintTextColor;
   final int? maxLength;
-  const CommonTextForm({
-    super.key,
-    required this.onChanged,
-    required this.controller,
-    this.hintText,
-    this.suffixIcon,
-    this.readOnly,
-    this.onTap,
-    this.prefixIcon,
-    this.obscureText,
-    this.validator,
-    this.labelText,
-    this.width,
-    this.fillColor,
-    this.radius,
-    this.labelStyle,
-    this.contentPadding,
-    this.keyboardType,
-    this.enabledBorder,
-    this.borderColor,
-    this.focusedBorder,
-    this.hintTextStyle,
-    this.hintTextColor,
-    this.maxLength,
-  });
+  final String? requiredText;
+  const CommonTextForm(
+      {super.key,
+      required this.onChanged,
+      required this.controller,
+      this.hintText,
+      this.suffixIcon,
+      this.readOnly,
+      this.onTap,
+      this.prefixIcon,
+      this.obscureText,
+      this.labelText,
+      this.width,
+      this.fillColor,
+      this.radius,
+      this.labelStyle,
+      this.contentPadding,
+      this.keyboardType,
+      this.enabledBorder,
+      this.borderColor,
+      this.focusedBorder,
+      this.hintTextStyle,
+      this.hintTextColor,
+      this.maxLength,
+      this.requiredText});
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,10 @@ class CommonTextForm extends StatelessWidget {
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
       style: context.textTheme.bodyLarge!
           .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
-      validator: validator,
+      validator: (value) {
+        if (value.toString().trim().isEmpty) return requiredText;
+        return null;
+      },
       decoration: InputDecoration(
         contentPadding: contentPadding ?? const EdgeInsets.all(8),
         label: Text(

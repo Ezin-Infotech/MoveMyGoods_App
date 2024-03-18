@@ -9,6 +9,7 @@ import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/app style/responsive.dart';
+import '../../utils/common widgets/dialogs.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -52,7 +53,7 @@ class SignUpScreen extends StatelessWidget {
                     controller: authProvider.signUpPhoneController,
                     fillColor: AppColors.bgColor,
                     hintText: 'Mobile No',
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.phone,
                   ),
                   const SizeBoxH(42),
                   // CommonTextForm(
@@ -89,9 +90,22 @@ class SignUpScreen extends StatelessWidget {
                         bgColor: AppColors.kLight,
                         textColor: AppColors.primary,
                         onPressed: () {
-                          context
-                              .read<AuthProvider>()
-                              .getSignUpOTPFn(context: context);
+                          if (authProvider
+                                  .signUpPhoneController.text.isNotEmpty &&
+                              authProvider
+                                  .signUpEmailController.text.isNotEmpty) {
+                            context
+                                .read<AuthProvider>()
+                                .getSignUpOTPFn(context: context);
+                          } else {
+                            errorBottomSheetDialogs(
+                              isDismissible: false,
+                              enableDrag: false,
+                              context: context,
+                              title: 'please enter email and password',
+                              subtitle: '',
+                            );
+                          }
 
                           // context.push(const LoginScreen());
                         }),

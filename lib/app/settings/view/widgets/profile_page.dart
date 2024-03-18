@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/bookings/view/widgets/drop_down_widgets.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
@@ -9,9 +10,18 @@ import 'package:mmg/app/utils/extensions.dart';
 import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
 
-class ProfileScreen extends StatelessWidget {
+import '../../../utils/app style/colors.dart';
+import '../../../utils/common widgets/textform.dart';
+import '../../view model/settings_controller.dart';
+
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final profileProvider = Provider.of<AuthProvider>(context, listen: false);
@@ -35,6 +45,46 @@ class ProfileScreen extends StatelessWidget {
           hintText: '+919744213176',
           controller: profileProvider.mobileNumberController,
         ),
+        const SizeBoxH(18),
+        const CustomText(
+          text: 'Date Of Bith',
+        ),
+        const SizeBoxH(8),
+        Consumer<SettingsProvider>(builder: (context, value, child) {
+          return CommonTextForm(
+            readOnly: true,
+            controller: value.dateController,
+            onChanged: (p0) {},
+            radius: 4.0,
+            fillColor: Colors.transparent,
+            enabledBorder: const Color(0xffDBDBDB),
+            borderColor: const Color(0xffDBDBDB),
+            focusedBorder: const Color(0xffDBDBDB),
+            hintText: 'MM/DD/YY',
+            hintTextStyle: context.textTheme.titleMedium!.copyWith(
+                fontWeight: FontWeight.w300, color: const Color(0xff222222)),
+            hintTextColor: AppColors.darkGrey,
+            suffixIcon: const Icon(Icons.calendar_month),
+            onTap: () async {
+              DateTime? pickedDate = await showDatePicker(
+                context: context,
+                // initialDate: DateTime.now(),
+                firstDate: DateTime(1940),
+                lastDate: DateTime(2006),
+              );
+              if (pickedDate != null) {
+                int timestamp = pickedDate.millisecondsSinceEpoch;
+                String formattedDate =
+                    DateFormat("yyyy-MM-dd").format(pickedDate);
+
+                setState(() {
+                  value.dateController.text = formattedDate.toString();
+                });
+              } else {}
+            },
+          );
+        }),
+        const SizeBoxH(18),
         Consumer<AuthProvider>(builder: (context, obj, _) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.start,
