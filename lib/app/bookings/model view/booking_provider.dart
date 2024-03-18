@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:location/location.dart';
 // import 'package:location/location.dart';
@@ -14,7 +15,10 @@ import 'package:mmg/app/bookings/model/booking_weight_model.dart';
 import 'package:mmg/app/bookings/model/goods_type_model.dart';
 import 'package:mmg/app/bookings/model/vehicle_details_model.dart';
 import 'package:mmg/app/bookings/services/booking_services.dart';
+import 'package:mmg/app/utils/common%20widgets/loading_overlay.dart';
 import 'package:mmg/app/utils/enums.dart';
+
+import '../../utils/routes/route_names.dart';
 
 class BookingProvider with ChangeNotifier {
   TextEditingController sourceController = TextEditingController();
@@ -385,11 +389,12 @@ class BookingProvider with ChangeNotifier {
         '$_baseUrl/autocomplete/json',
         queryParameters: {
           'input': query,
-          'types': '(cities)',
+          // 'types': '(cities)',
           'key': _apiKey,
         },
       );
       if (response.statusCode == 200) {
+        print("searchLocation: ${response.data}");
         if (dest) {
           destinationSearchResults = [];
           for (var place in response.data['predictions']) {
@@ -432,6 +437,7 @@ class BookingProvider with ChangeNotifier {
       );
 
       if (response.statusCode == 200) {
+        print('PLACE DETAILS: ${response.data}');
         final location = response.data['result']['geometry']['location'];
         return LatLng(location['lat'], location['lng']);
       } else {
@@ -439,6 +445,73 @@ class BookingProvider with ChangeNotifier {
       }
     } catch (e) {
       throw Exception(e.toString());
+    }
+  }
+
+  ConfirmBookingStatus confirmBookingStatus = ConfirmBookingStatus.initial;
+  confirmBookingFn({required BuildContext context}) async {
+    confirmBookingStatus = ConfirmBookingStatus.loading;
+    LoadingOverlayDark.of(context).show();
+    // notifyListeners();
+    try {
+      final goodsResponse = await services.postConfirmBookingService(data: {
+        "sourcelatitude": 12.2958104,
+        "sourcelongitude": 76.6393805,
+        "destinationlatitude": 12.9532583,
+        "destinationlongitude": 77.5434616,
+        "vehicleCategoryId": 152,
+        "sStreet": "Mysuru, Karnataka, India",
+        "sCity": "Mysore Division",
+        "sState": "Karnataka",
+        "sCountry": "India",
+        "sLandMark": "Mysuru",
+        "sPincode": "",
+        "referenceId": "95827126",
+        "vendorType": "FRANCHISE",
+        "profileId": "ba255ec8-908b-4c44-933f-9898b10f04e3",
+        "goodsvalue": 500,
+        "labourCharges": 0,
+        "ewayBillNo": "",
+        "ewayBillDate": "",
+        "numberofLabours": 5,
+        "vehicleId": "92478668",
+        "pickUpDateTime": 1710761005194,
+        "goodsTypeId": 10,
+        "status": "PENDING",
+        "goodsWeightId": 1,
+        "fodBy": 1,
+        "advCompType": 2,
+        "paymentMode": 1,
+        "dStreet":
+            "XG3V+9CQ, Mysore Rd, Telecom Colony, Srinagar, Banashankari, Bengaluru, Karnataka 560026, India",
+        "dCity": "Bangalore Division",
+        "dState": "Karnataka",
+        "dCountry": "India",
+        "dPincode": "560026",
+        "consignorName": "Pranav",
+        "consignorNumber": "7034888756",
+        "consigneeName": "pranav",
+        "consigneeNumber": "7034888756",
+        "consigneeGST": "",
+        "consigneePAN": "",
+        "bookedGoodsTypes": 1,
+        "bookedItems": [],
+        "bookingType": "",
+        "totalNoOfTon": "",
+        "bookedSource": "Web",
+        "bookedBy": "CUSTOMER"
+      });
+      LoadingOverlayDark.of(context).hide();
+      Get.toNamed(AppRoutes.bookingSuccessFullyCompletedScreen);
+
+      confirmBookingStatus = ConfirmBookingStatus.loaded;
+      notifyListeners();
+      // ignore: deprecated_member_use
+    } catch (e) {
+      LoadingOverlayDark.of(context).hide();
+      print('bookingDetail $e');
+      confirmBookingStatus = ConfirmBookingStatus.error;
+      notifyListeners();
     }
   }
 }
@@ -449,3 +522,4 @@ class PlaceSuggestion {
 
   PlaceSuggestion({required this.name, required this.placeId});
 }
+// 

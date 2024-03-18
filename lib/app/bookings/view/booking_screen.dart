@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:advanced_search/advanced_search.dart';
+import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -15,7 +16,6 @@ import 'package:mmg/app/utils/common%20widgets/label_and_textfield.dart';
 import 'package:mmg/app/utils/common%20widgets/toggle_widget.dart';
 import 'package:mmg/app/utils/enums.dart';
 import 'package:mmg/app/utils/helpers.dart';
-import 'package:mmg/app/utils/routes/route_names.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/common widgets/custom_text.dart';
@@ -218,6 +218,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           PlaceSuggestion place = booking
                               .destinationSearchResults
                               .firstWhere((element) => element.name == da);
+                          print(place);
                           LatLng latLng = await booking.getPlaceDetails(
                             place.placeId,
                           );
@@ -259,42 +260,42 @@ class _BookingScreenState extends State<BookingScreen> {
                     text: 'Goods Type *',
                   ),
                   const SizeBoxH(8),
-                  // SizedBox(
-                  //   height: Responsive.height * 6,
-                  //   child: DropDownSearchField(
-                  //     hideKeyboard: true,
-                  //     hideOnEmpty: true,
-                  //     textFieldConfiguration: TextFieldConfiguration(
-                  //       controller: booking.goodsTypeController,
-                  //       autofocus: false,
-                  //       style: context.textTheme.bodyLarge!.copyWith(
-                  //           fontSize: 16, fontWeight: FontWeight.w400),
-                  //       decoration: const InputDecoration(
-                  //         border: OutlineInputBorder(),
-                  //       ),
-                  //     ),
-                  //     suggestionsCallback: (pattern) async {
-                  //       return booking.goodsTypeData.list!.where((items) {
-                  //         return items.name.toString().toLowerCase().contains(
-                  //               pattern.toLowerCase(),
-                  //             );
-                  //       }).toList();
-                  //     },
-                  //     itemBuilder: (context, suggestion) {
-                  //       return ListTile(
-                  //           title: Text(suggestion.name.toString()));
-                  //     },
-                  //     onSuggestionSelected: (suggestion) {
-                  //       print("$suggestion tapped");
-                  //       context
-                  //           .read<BookingProvider>()
-                  //           .changeGoodsTypeController(
-                  //               id: suggestion.id.toString(),
-                  //               value: suggestion.name.toString());
-                  //     },
-                  //     displayAllSuggestionWhenTap: true,
-                  //   ),
-                  // ),
+                  SizedBox(
+                    height: Responsive.height * 6,
+                    child: DropDownSearchField(
+                      hideKeyboard: true,
+                      hideOnEmpty: true,
+                      textFieldConfiguration: TextFieldConfiguration(
+                        controller: booking.goodsTypeController,
+                        autofocus: false,
+                        style: context.textTheme.bodyLarge!.copyWith(
+                            fontSize: 16, fontWeight: FontWeight.w400),
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      suggestionsCallback: (pattern) async {
+                        return booking.goodsTypeData.list!.where((items) {
+                          return items.name.toString().toLowerCase().contains(
+                                pattern.toLowerCase(),
+                              );
+                        }).toList();
+                      },
+                      itemBuilder: (context, suggestion) {
+                        return ListTile(
+                            title: Text(suggestion.name.toString()));
+                      },
+                      onSuggestionSelected: (suggestion) {
+                        print("$suggestion tapped");
+                        context
+                            .read<BookingProvider>()
+                            .changeGoodsTypeController(
+                                id: suggestion.id.toString(),
+                                value: suggestion.name.toString());
+                      },
+                      displayAllSuggestionWhenTap: true,
+                    ),
+                  ),
                   BookingTextFieldWidgets(
                     hintText: '300',
                     controller: bookingProvider!.goodsValueController,
@@ -600,8 +601,10 @@ class _BookingScreenState extends State<BookingScreen> {
                                   ButtonWidgets(
                                     buttonText: 'Book Now',
                                     onPressed: () {
-                                      Get.toNamed(AppRoutes
-                                          .bookingSuccessFullyCompletedScreen);
+                                      context
+                                          .read<BookingProvider>()
+                                          .confirmBookingFn(context: context);
+
                                       // context.push(const LoginScreen());
                                     },
                                   ),

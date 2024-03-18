@@ -30,6 +30,7 @@ dependencies:
   flutter_spinkit: ^5.2.0
   geolocator:
   advanced_search:
+  drop_down_search_field: ^1.0.4
 
  
 

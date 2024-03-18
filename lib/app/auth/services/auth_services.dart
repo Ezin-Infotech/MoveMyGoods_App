@@ -86,7 +86,7 @@ class AuthServices extends Urls {
         "mobileNumber": phone
       },
     );
-    print(response);
+    print("5555555555555 $response");
     return response.data;
   }
 
@@ -117,15 +117,16 @@ class AuthServices extends Urls {
   }
 
   Future<ProfileDataModel> getProfileDetailService() async {
-    final response = await dio.get(userProfileDetails,
-        options: Options(
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ${AppPref.userToken}',
-            'x-api-key': 'MMGATPL'
-          },
-        ));
-    // print(response);
+    final response =
+        await dio.get("$userProfileDetails/${AppPref.userProfileId}?roleId=1",
+            options: Options(
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ${AppPref.userToken}',
+                'x-api-key': 'MMGATPL'
+              },
+            ));
+    print("Response getUserProfileDetailsFn  $response");
     return profileDataModelFromJson(jsonEncode(response.data));
   }
 

@@ -163,19 +163,27 @@ class CommonSheetWidget extends StatelessWidget {
   }
 }
 
-void failurtoast({title, duration = 2}) {
+void failurtoast({title, duration = 2, bool? isSuccess = false}) {
+  FocusManager.instance.primaryFocus?.unfocus();
+
   HapticFeedback.lightImpact();
   if (Get.isSnackbarOpen) {
     Get.closeCurrentSnackbar();
   } else {
     Get.showSnackbar(
       GetSnackBar(
-        icon: const Icon(
-          Icons.warning_amber_outlined,
-          size: 18,
-          color: Colors.white,
-        ),
-        backgroundColor: Colors.red,
+        icon: isSuccess == true
+            ? const Icon(
+                Icons.done,
+                size: 18,
+                color: Colors.white,
+              )
+            : const Icon(
+                Icons.warning_amber_outlined,
+                size: 18,
+                color: Colors.white,
+              ),
+        backgroundColor: isSuccess == true ? Colors.green : Colors.red,
         message: title != '' ? title : 'Something went wrong',
         duration: Duration(seconds: duration),
         snackStyle: SnackStyle.FLOATING,
@@ -203,7 +211,7 @@ void successtoast({title, duration = 2}) {
       margin: const EdgeInsets.all(20),
       borderRadius: 10,
       isDismissible: true,
-      dismissDirection: DismissDirection.down,
+      dismissDirection: DismissDirection.endToStart,
     ),
   );
 }

@@ -120,4 +120,18 @@ class BookingServices extends Urls {
     print(response);
     return bookingFarePriceDetailsModelFromJson(jsonEncode(response.data));
   }
+
+  Future postConfirmBookingService({required dynamic data}) async {
+    final response = await dio.post(confirmBookingUrl,
+        data: data,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${AppPref.userToken}',
+            'x-api-key': 'MMGATPL'
+          },
+        ));
+    print(response);
+    return response.data;
+  }
 }

@@ -90,32 +90,39 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           obj.getUserProfilePicStatus ==
                                   GetUserProfilePicStatus.loading
                               ? const CircularProgressIndicator()
-                              : CircleAvatar(
-                                  maxRadius: 20,
-                                  backgroundImage: NetworkImage(
-                                      "https://storage.googleapis.com/common-mmg/${obj.userProfilePic![0].path}"),
-                                ),
+                              : obj.profileDataModel.data == null
+                                  ? const SizedBox.shrink()
+                                  : CircleAvatar(
+                                      maxRadius: 20,
+                                      backgroundImage: NetworkImage(
+                                          "https://storage.googleapis.com/common-mmg/${obj.userProfilePic![0].path}"),
+                                    ),
                           SizeBoxV(Responsive.width * 2),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "${obj.profileDataModel.data!.firstName ?? ''}  ${obj.profileDataModel.data!.lastName ?? ''}",
-                                style: context.textTheme.bodySmall!.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              SizeBoxH(Responsive.height * 0.1),
-                              Text(
-                                obj.profileDataModel.data!.mobileNumber ?? '',
-                                style: context.textTheme.bodySmall!.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12,
-                                ),
-                              )
-                            ],
-                          )
+                          obj.profileDataModel.data == null
+                              ? const SizedBox.shrink()
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${obj.profileDataModel.data!.firstName ?? ''}  ${obj.profileDataModel.data!.lastName ?? ''}",
+                                      style:
+                                          context.textTheme.bodySmall!.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                    SizeBoxH(Responsive.height * 0.1),
+                                    Text(
+                                      obj.profileDataModel.data!.mobileNumber ??
+                                          '',
+                                      style:
+                                          context.textTheme.bodySmall!.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 12,
+                                      ),
+                                    )
+                                  ],
+                                )
                         ],
                       ),
                     ),
