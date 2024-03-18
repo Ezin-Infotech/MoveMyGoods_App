@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:get/instance_manager.dart';
 import 'package:mmg/app/home/view%20model/home_provider.dart';
 import 'package:mmg/app/utils/app%20style/app_images.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 class GlobalScreen extends StatefulWidget {
   const GlobalScreen({super.key});
@@ -13,6 +17,23 @@ class GlobalScreen extends StatefulWidget {
 }
 
 class _GlobalScreenState extends State<GlobalScreen> {
+  @override
+  void initState() {
+    final homeProvider = Provider.of<HomeProvider>(context, listen: false);
+    log('message');
+    ambiguate(WidgetsBinding.instance)?.addPostFrameCallback(
+      (_) => ShowCaseWidget.of(context).startShowCase([
+        homeProvider.globalKey1,
+        homeProvider.globalKey2,
+        homeProvider.globalKey3,
+        homeProvider.globalKey4,
+        homeProvider.globalKey5,
+        homeProvider.globalKey6
+      ]),
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeProvider>(builder: (context, value, _) {
