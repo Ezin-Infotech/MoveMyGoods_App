@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
 import 'package:mmg/app/utils/extensions.dart';
-import 'package:mmg/app/utils/routes/route_names.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/app style/colors.dart';
@@ -88,7 +86,7 @@ class ForgotPasswordEnterScreen extends StatelessWidget {
               bgColor: AppColors.secondPrimary,
               textColor: Colors.white,
               onPressed: () {
-                Get.toNamed(AppRoutes.forgetPasswordEnterPage);
+                authProvider.changePasswordFn(context: context);
               },
             ),
           ],
