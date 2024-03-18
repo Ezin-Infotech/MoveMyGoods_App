@@ -2,6 +2,7 @@ import 'dart:developer';
 
 // import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
@@ -11,6 +12,8 @@ import 'package:mmg/app/utils/common%20widgets/toggle_widget.dart';
 import 'package:mmg/app/utils/extensions.dart';
 import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
+
+import '../../utils/common widgets/dialogs.dart';
 
 class SignUpProfileScreen extends StatelessWidget {
   SignUpProfileScreen({super.key});
@@ -29,37 +32,19 @@ class SignUpProfileScreen extends StatelessWidget {
             labeText: 'First Name *',
             hintText: 'john',
             controller: authProvider.firstNameController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter First Name';
-              } else {
-                return null;
-              }
-            },
+            requiredText: 'Please enter First Name',
           ),
           BookingTextFieldWidgets(
             labeText: 'Last Name',
             hintText: 'joseph',
             controller: authProvider.lastNameController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter Last Name';
-              } else {
-                return null;
-              }
-            },
+            requiredText: 'Please enter Last Name',
           ),
           BookingTextFieldWidgets(
             labeText: 'Mobile Number *',
             hintText: '+919744213176',
             controller: authProvider.signUpPhoneController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter Mobile Number';
-              } else {
-                return null;
-              }
-            },
+            requiredText: 'Please enter Mobile Number',
           ),
           const SizeBoxH(18),
           Consumer<AuthProvider>(builder: (context, obj, _) {
@@ -108,61 +93,45 @@ class SignUpProfileScreen extends StatelessWidget {
             labeText: 'Date of Birth *',
             hintText: '12-01-1998',
             controller: authProvider.dateController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter Date Of Birth';
-              } else {
-                return null;
-              }
+            requiredText: 'Please enter Date Of Birth',
+            keyboardType: TextInputType.number,
+            onTap: () async {
+              DateTime? pickedDate = await showDatePicker(
+                context: context,
+                initialDate: DateTime(2006),
+                firstDate: DateTime(1900),
+                lastDate: DateTime(2006),
+              );
+              if (pickedDate != null) {
+                String formattedDate =
+                    DateFormat("yyyy-MM-dd").format(pickedDate);
+                authProvider.setdateFn(formattedDate);
+              } else {}
             },
           ),
           BookingTextFieldWidgets(
             labeText: 'Email *',
             hintText: 'john@example.com',
             controller: authProvider.profileEmailController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter Email';
-              } else {
-                return null;
-              }
-            },
+            requiredText: 'Please enter Email',
           ),
           BookingTextFieldWidgets(
             labeText: 'Address Line 1 *',
             hintText: 'Mysore Road',
             controller: authProvider.addressLineOneController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter Address Line 1';
-              } else {
-                return null;
-              }
-            },
+            requiredText: 'Please enter Address Line 1',
           ),
           BookingTextFieldWidgets(
             labeText: 'Address Line 2',
             hintText: 'Near Canara Bank',
             controller: authProvider.addressLineTwoController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter Last Address Line 2';
-              } else {
-                return null;
-              }
-            },
+            requiredText: 'Please enter Last Address Line 2',
           ),
           BookingTextFieldWidgets(
             labeText: 'Landmark',
             hintText: 'Near canara bank',
             controller: authProvider.landMarkController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter Landmark';
-              } else {
-                return null;
-              }
-            },
+            requiredText: 'Please enter Landmark',
           ),
           // BookingTextFieldWidgets(
           //   labeText: 'Select Country *',
@@ -281,37 +250,23 @@ class SignUpProfileScreen extends StatelessWidget {
             labeText: 'Alternate Number',
             hintText: '+919744213176',
             controller: authProvider.alternativeNumberController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter Alternate Number';
-              } else {
-                return null;
-              }
-            },
+            requiredText: 'Please enter Alternate Number',
+            keyboardType: TextInputType.phone,
           ),
           BookingTextFieldWidgets(
             labeText: 'Password *',
             hintText: 'Password',
             controller: authProvider.passwordController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter Password';
-              } else {
-                return null;
-              }
-            },
+            requiredText: 'Please enter Password',
             onChanged: (p0) => log(p0),
           ),
           BookingTextFieldWidgets(
             labeText: 'Confirm Password *',
             hintText: 'Confirm Password',
             controller: authProvider.confirmPasswordController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter Confirm Password';
-              } else {
-                return null;
-              }
+            requiredText: 'Please enter Confirm Password',
+            onChanged: (value) {
+              Provider.of<AuthProvider>(context, listen: false).validate(value);
             },
           ),
           const SizeBoxH(20),
@@ -320,9 +275,20 @@ class SignUpProfileScreen extends StatelessWidget {
               buttonText: 'Submit',
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  context
-                      .read<AuthProvider>()
-                      .createProfileFN(context: context);
+                  if (authProvider.confirmPasswordController.text ==
+                      authProvider.passwordController.text) {
+                    context
+                        .read<AuthProvider>()
+                        .createProfileFN(context: context);
+                  } else {
+                    errorBottomSheetDialogs(
+                      isDismissible: false,
+                      enableDrag: false,
+                      context: context,
+                      title: 'Please check password and confirm password',
+                      subtitle: '',
+                    );
+                  }
                 }
               },
             ),

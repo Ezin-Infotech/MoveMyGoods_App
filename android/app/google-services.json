@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "299414993195",
+    "project_id": "eatplek-ef290",
+    "storage_bucket": "eatplek-ef290.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299414993195:android:43b9e97e7956dfe50a6d6e",
+        "android_client_info": {
+          "package_name": "com.eatplek.user"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHe_9atIsk1-AK7BtWkzBHPFCu-LrZe3s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

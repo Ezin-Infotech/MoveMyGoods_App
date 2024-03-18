@@ -33,7 +33,7 @@ class Urls {
   final getAllProfile = '$baseUrl/user-profile/all';
 
   /* BOOKING */
-  final bookingCount = "$baseUrl/v1/dashboard/booking/profile";
+  final bookingCount = "$baseUrl/v1/dashboard/booking/Good#888";
   final bookingByStatus = "$baseUrl/v2";
 
   final countryUrl = "http://103.160.153.57:8085/mmg/api/v1/country";

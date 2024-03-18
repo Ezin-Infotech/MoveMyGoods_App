@@ -63,6 +63,22 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  setdateFn(String formattedDate) {
+    dateController.text = formattedDate;
+    notifyListeners();
+  }
+
+  bool isValid = false;
+
+  void validate(String value) {
+    // Password regex pattern
+    final RegExp regex = RegExp(
+      r'^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$',
+    );
+    isValid = regex.hasMatch(value);
+    notifyListeners();
+  }
+
   /* Login */
   onboardSignInFn({required BuildContext context}) async {
     LoadingOverlay.of(context).show();
