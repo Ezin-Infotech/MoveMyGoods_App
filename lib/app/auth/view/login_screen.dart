@@ -67,13 +67,6 @@ class LoginScreen extends StatelessWidget {
                       fillColor: AppColors.bgColor,
                       hintText: 'mmg@gmail.com',
                       keyboardType: TextInputType.emailAddress,
-                      // validator: (value) {
-                      //   if (value == null || value.isEmpty) {
-                      //     return null;
-                      //   } else {
-                      //     return null;
-                      //   }
-                      // },
                     ),
                     const SizeBoxH(18),
                     const LabelText(
@@ -154,14 +147,29 @@ class LoginScreen extends StatelessWidget {
                                 authProvider
                                     .passWordController.text.isNotEmpty) {
                               authProvider.onboardSignInFn(context: context);
+                              // if (authProvider
+                              //     .isEmail(authProvider.emailController.text)) {
+                              //   authProvider.onboardSignInFn(context: context);
+                              // } else if (authProvider.isPhoneNumber(
+                              //     authProvider.passWordController.text)) {
+
+                              // } else {
+                              //   errorBottomSheetDialogs(
+                              //     isDismissible: false,
+                              //     enableDrag: false,
+                              //     context: context,
+                              //     title:
+                              //         'please enter valid  email or phonenumber',
+                              //     subtitle: '',
+                              //   );
+                              // }
                             } else {
                               errorBottomSheetDialogs(
-                                isDismissible: false,
-                                enableDrag: false,
-                                context: context,
-                                title: 'please enter email and password',
-                                subtitle: '',
-                              );
+                                  isDismissible: false,
+                                  enableDrag: false,
+                                  context: context,
+                                  title: 'please enter email and password',
+                                  subtitle: '');
                             }
 
                             // context.push(const LoginScreen());

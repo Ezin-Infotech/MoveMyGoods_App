@@ -3,15 +3,18 @@ import 'package:get/route_manager.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/settings/view%20model/theme_notifier.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
+import 'package:mmg/app/utils/app%20style/responsive.dart';
 import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
 import 'package:mmg/app/utils/common%20widgets/toggle_widget.dart';
-
 import 'package:mmg/app/utils/enums.dart';
 import 'package:mmg/app/utils/extensions.dart';
 import 'package:mmg/app/utils/helpers.dart';
 import 'package:mmg/app/utils/routes/route_names.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '../../settings/view/widgets/theme.dart';
 
 class BookingListScreen extends StatefulWidget {
   const BookingListScreen({super.key});
@@ -171,202 +174,242 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                 },
                                 child: Column(
                                   children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'Booking Id # ',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge!
-                                              .copyWith(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600),
-                                        ),
-                                        Text(
-                                          item.id.toString(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge!
-                                              .copyWith(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w400),
-                                        )
-                                      ],
-                                    ),
+                                    value.getBookingStatus ==
+                                            GetBookingStatus.loading
+                                        ? Shimmer.fromColors(
+                                            baseColor:
+                                                AppConstants.appMainGreyColor,
+                                            highlightColor:
+                                                Colors.grey.shade500,
+                                            child: SizedBox(
+                                              width: Responsive.width * 100,
+                                              height: 50,
+                                              // child: Center(
+                                              //   child: CircularProgressIndicator(),
+                                              // ),
+                                            ))
+                                        : Row(
+                                            children: [
+                                              Text(
+                                                'Booking Id # ',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyLarge!
+                                                    .copyWith(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                              ),
+                                              Text(
+                                                item.id.toString(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyLarge!
+                                                    .copyWith(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                              )
+                                            ],
+                                          ),
                                     const SizeBoxH(8),
-                                    Container(
-                                      padding: const EdgeInsets.all(16),
-                                      decoration: BoxDecoration(
-                                          color: val.isDarkMode
-                                              ? AppColors.bgDarkContainer
-                                              : AppColors.kLight,
-                                          borderRadius:
-                                              BorderRadius.circular(18),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: val.isDarkMode
-                                                  ? const Color.fromARGB(
-                                                      26, 255, 255, 255)
-                                                  : const Color.fromARGB(
-                                                      145, 158, 158, 158),
-                                              offset: const Offset(
-                                                5.0,
-                                                5.0,
-                                              ),
-                                              blurRadius: 10.0,
-                                              spreadRadius: 1.0,
-                                            ), //BoxShadow
-                                            BoxShadow(
-                                              color: val.isDarkMode
-                                                  ? AppColors.bgDarkContainer
-                                                  : Colors.white,
-                                              offset: const Offset(0.0, 0.0),
-                                              blurRadius: 0.0,
-                                              spreadRadius: 0.0,
-                                            ), //BoxShadow
-                                          ],
-                                          border: Border.all(
-                                              color: AppColors.black
-                                                  .withOpacity(0.1))),
-                                      child: Row(
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Date',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyLarge!
-                                                    .copyWith(
-                                                        fontSize: 14,
-                                                        color: const Color(
-                                                            0xff979797),
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                              ),
-                                              Text(
-                                                convertedDate,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyLarge!
-                                                    .copyWith(
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                              )
-                                            ],
-                                          ),
-                                          const SizeBoxV(20),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Time',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyLarge!
-                                                    .copyWith(
-                                                        fontSize: 14,
-                                                        color: const Color(
-                                                            0xff979797),
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                              ),
-                                              Text(
-                                                convertedTime,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyLarge!
-                                                    .copyWith(
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                              )
-                                            ],
-                                          ),
-                                          const SizeBoxV(20),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Status',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyLarge!
-                                                    .copyWith(
-                                                        fontSize: 14,
-                                                        color: const Color(
-                                                            0xff979797),
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Icon(
-                                                    item.status == 'PENDING'
-                                                        ? Icons
-                                                            .access_time_rounded
-                                                        : item.status ==
-                                                                'CANCELLED'
-                                                            ? Icons
-                                                                .cancel_rounded
-                                                            : item.status ==
-                                                                    'ACTIVE'
-                                                                ? Icons
-                                                                    .speed_rounded
-                                                                : Icons
-                                                                    .check_circle_rounded,
-                                                    color: item.status ==
-                                                            'PENDING'
-                                                        ? const Color(
-                                                            0xffAE9C00)
-                                                        : item.status ==
-                                                                'ACTIVE'
-                                                            ? const Color(
-                                                                0xff00A51A)
-                                                            : item.status ==
-                                                                    'CANCELLED'
-                                                                ? const Color(
-                                                                    0xffA51E00)
-                                                                : const Color(
-                                                                    0xff0076E3),
-                                                  ),
-                                                  const SizeBoxV(8),
-                                                  Text(
-                                                    item.status.toString(),
-                                                    style: context
-                                                        .textTheme.bodyLarge!
-                                                        .copyWith(
-                                                            color: item.status ==
-                                                                    'PENDING'
-                                                                ? const Color(
-                                                                    0xffAE9C00)
-                                                                : item.status ==
-                                                                        'ACTIVE'
-                                                                    ? const Color(
-                                                                        0xff00A51A)
-                                                                    : item.status ==
-                                                                            'CANCELLED'
-                                                                        ? const Color(
-                                                                            0xffA51E00)
-                                                                        : const Color(
-                                                                            0xff0076E3),
-                                                            fontSize: 14,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                  ),
+                                    value.getBookingStatus ==
+                                            GetBookingStatus.loading
+                                        ? Shimmer.fromColors(
+                                            baseColor:
+                                                AppConstants.appMainGreyColor,
+                                            highlightColor:
+                                                Colors.grey.shade500,
+                                            child: SizedBox(
+                                              width: Responsive.width * 100,
+                                              height: 50,
+                                              // child: Center(
+                                              //   child: CircularProgressIndicator(),
+                                              // ),
+                                            ))
+                                        : Container(
+                                            padding: const EdgeInsets.all(16),
+                                            decoration: BoxDecoration(
+                                                color: val.isDarkMode
+                                                    ? AppColors.bgDarkContainer
+                                                    : AppColors.kLight,
+                                                borderRadius:
+                                                    BorderRadius.circular(18),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: val.isDarkMode
+                                                        ? const Color.fromARGB(
+                                                            26, 255, 255, 255)
+                                                        : const Color.fromARGB(
+                                                            145, 158, 158, 158),
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 10.0,
+                                                    spreadRadius: 1.0,
+                                                  ), //BoxShadow
+                                                  BoxShadow(
+                                                    color: val.isDarkMode
+                                                        ? AppColors
+                                                            .bgDarkContainer
+                                                        : Colors.white,
+                                                    offset:
+                                                        const Offset(0.0, 0.0),
+                                                    blurRadius: 0.0,
+                                                    spreadRadius: 0.0,
+                                                  ), //BoxShadow
                                                 ],
-                                              )
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    )
+                                                border: Border.all(
+                                                    color: AppColors.black
+                                                        .withOpacity(0.1))),
+                                            child: Row(
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Date',
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyLarge!
+                                                          .copyWith(
+                                                              fontSize: 14,
+                                                              color: const Color(
+                                                                  0xff979797),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                    ),
+                                                    Text(
+                                                      convertedDate,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyLarge!
+                                                          .copyWith(
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                    )
+                                                  ],
+                                                ),
+                                                const SizeBoxV(20),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Time',
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyLarge!
+                                                          .copyWith(
+                                                              fontSize: 14,
+                                                              color: const Color(
+                                                                  0xff979797),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                    ),
+                                                    Text(
+                                                      convertedTime,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyLarge!
+                                                          .copyWith(
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                    )
+                                                  ],
+                                                ),
+                                                const SizeBoxV(20),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Status',
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyLarge!
+                                                          .copyWith(
+                                                              fontSize: 14,
+                                                              color: const Color(
+                                                                  0xff979797),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Icon(
+                                                          item.status ==
+                                                                  'PENDING'
+                                                              ? Icons
+                                                                  .access_time_rounded
+                                                              : item.status ==
+                                                                      'CANCELLED'
+                                                                  ? Icons
+                                                                      .cancel_rounded
+                                                                  : item.status ==
+                                                                          'ACTIVE'
+                                                                      ? Icons
+                                                                          .speed_rounded
+                                                                      : Icons
+                                                                          .check_circle_rounded,
+                                                          color: item.status ==
+                                                                  'PENDING'
+                                                              ? const Color(
+                                                                  0xffAE9C00)
+                                                              : item.status ==
+                                                                      'ACTIVE'
+                                                                  ? const Color(
+                                                                      0xff00A51A)
+                                                                  : item.status ==
+                                                                          'CANCELLED'
+                                                                      ? const Color(
+                                                                          0xffA51E00)
+                                                                      : const Color(
+                                                                          0xff0076E3),
+                                                        ),
+                                                        const SizeBoxV(8),
+                                                        Text(
+                                                          item.status
+                                                              .toString(),
+                                                          style: context
+                                                              .textTheme
+                                                              .bodyLarge!
+                                                              .copyWith(
+                                                                  color: item.status ==
+                                                                          'PENDING'
+                                                                      ? const Color(
+                                                                          0xffAE9C00)
+                                                                      : item.status ==
+                                                                              'ACTIVE'
+                                                                          ? const Color(
+                                                                              0xff00A51A)
+                                                                          : item.status ==
+                                                                                  'CANCELLED'
+                                                                              ? const Color(
+                                                                                  0xffA51E00)
+                                                                              : const Color(
+                                                                                  0xff0076E3),
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400),
+                                                        ),
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          )
                                   ],
                                 ),
                               );

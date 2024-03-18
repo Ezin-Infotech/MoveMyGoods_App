@@ -94,9 +94,39 @@ class SignUpScreen extends StatelessWidget {
                                   .signUpPhoneController.text.isNotEmpty &&
                               authProvider
                                   .signUpEmailController.text.isNotEmpty) {
-                            context
-                                .read<AuthProvider>()
-                                .getSignUpOTPFn(context: context);
+                            if (authProvider.isStrongPassword(
+                                authProvider.signUpEmailController.text)) {
+                              if (authProvider.isEmail(
+                                  authProvider.signUpPhoneController.text)) {
+                                context
+                                    .read<AuthProvider>()
+                                    .getSignUpOTPFn(context: context);
+                              } else if (authProvider.isPhoneNumber(
+                                  authProvider.signUpPhoneController.text)) {
+                                context
+                                    .read<AuthProvider>()
+                                    .getSignUpOTPFn(context: context);
+                              } else {
+                                errorBottomSheetDialogs(
+                                  isDismissible: false,
+                                  enableDrag: false,
+                                  context: context,
+                                  title:
+                                      'please enter valid  email or phonenumber',
+                                  subtitle: '',
+                                );
+                              }
+                            } else {
+                              errorBottomSheetDialogs(
+                                isDismissible: false,
+                                enableDrag: false,
+                                context: context,
+                                title:
+                                    ' please check below mention  contaions ',
+                                subtitle:
+                                    'please use at least 8 characters, one uppercase letter,one lowercase letter, least one digit,one special character',
+                              );
+                            }
                           } else {
                             errorBottomSheetDialogs(
                               isDismissible: false,
