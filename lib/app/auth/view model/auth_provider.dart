@@ -63,6 +63,22 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  setdateFn(String formattedDate) {
+    dateController.text = formattedDate;
+    notifyListeners();
+  }
+
+  bool isValid = false;
+
+  void validate(String value) {
+    // Password regex pattern
+    final RegExp regex = RegExp(
+      r'^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$',
+    );
+    isValid = regex.hasMatch(value);
+    notifyListeners();
+  }
+
   /* Login */
   onboardSignInFn({required BuildContext context}) async {
     LoadingOverlay.of(context).show();
@@ -445,10 +461,11 @@ class AuthProvider with ChangeNotifier {
             "address1": addressLineOneController.text,
             "address2": addressLineTwoController.text,
             "landmark": landMarkController.text,
-            "cityId": int.parse(cityId),
-            "stateId": int.parse(stateId),
-            "countryId": int.parse(countryId),
-            "pincode": picCodeController.text,
+            "cityId": cityId.isEmpty ? 0 : int.parse(cityId),
+            "stateId": stateId.isEmpty ? 0 : int.parse(stateId),
+            "countryId": countryId.isEmpty ? 0 : int.parse(countryId),
+            "pincode":
+                picCodeController.text.isEmpty ? 0 : picCodeController.text,
             "type": "HOME"
           }
         ],
