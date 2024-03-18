@@ -275,6 +275,10 @@ class AuthProvider with ChangeNotifier {
             password: forgetNewPasswordController.text);
         // signInData = signInDataResponse.data!;
         LoadingOverlay.of(context).hide();
+        Get.back();
+        Get.back();
+        Get.back();
+        failurtoast(title: 'Password Updated Successfully.', isSuccess: true);
         // if (isFromForgot) {
         //   Get.toNamed(AppRoutes.forgetPasswordEnterPage);
         // } else {
@@ -409,13 +413,14 @@ class AuthProvider with ChangeNotifier {
   getUserProfileDetailsFn() async {
     getUserProfileDetailsStatus = GetUserProfileDetailsStatus.loading;
     try {
+      print("try getUserProfileDetailsFn");
       final countryResponse = await services.getProfileDetailService();
       profileDataModel = countryResponse;
       getUserProfileDetailsStatus = GetUserProfileDetailsStatus.loaded;
       // ignore: deprecated_member_use
     } on DioError catch (e) {
       getUserProfileDetailsStatus = GetUserProfileDetailsStatus.error;
-      log(e.message!);
+      log("DioError getUserProfileDetailsFn${e.message!}");
       // errorBottomSheetDialogs(
       //     isDismissible: false,
       //     enableDrag: false,
@@ -453,7 +458,7 @@ class AuthProvider with ChangeNotifier {
     addressLineTwoController.text = data.data!.address![0].address2.toString();
     landMarkController.text = data.data!.address![0].landmark.toString();
     selectStateController.text = data.data!.address![0].stateName.toString();
-    picCodeController.text = data.data!.address![0].pincode ?? '';
+    picCodeController.text = data.data!.address![0].pincode.toString();
     alternativeNumberController.text = data.data!.alternativeNumber.toString();
     profileEmailController.text = data.data!.emailId.toString();
     genderId = int.parse(data.data!.genderId.toString());

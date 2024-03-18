@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:advanced_search/advanced_search.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
@@ -14,7 +13,6 @@ import 'package:mmg/app/utils/common%20widgets/label_and_textfield.dart';
 import 'package:mmg/app/utils/common%20widgets/toggle_widget.dart';
 import 'package:mmg/app/utils/enums.dart';
 import 'package:mmg/app/utils/helpers.dart';
-import 'package:mmg/app/utils/routes/route_names.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/common widgets/custom_text.dart';
@@ -617,8 +615,10 @@ class _BookingScreenState extends State<BookingScreen> {
                                       buttonText: 'Book Now',
                                       onPressed: () {
                                         if (_formKey.currentState!.validate()) {
-                                          Get.toNamed(AppRoutes
-                                              .bookingSuccessFullyCompletedScreen);
+                                          context
+                                              .read<BookingProvider>()
+                                              .confirmBookingFn(
+                                                  context: context);
                                         }
 
                                         // context.push(const LoginScreen());

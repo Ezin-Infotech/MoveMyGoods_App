@@ -1,9 +1,10 @@
 import 'dart:developer';
 
-// import 'package:drop_down_search_field/drop_down_search_field.dart';
+import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
+import 'package:mmg/app/utils/app%20style/responsive.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
 import 'package:mmg/app/utils/common%20widgets/custom_text.dart';
@@ -142,37 +143,37 @@ class SignUpProfileScreen extends StatelessWidget {
             text: 'Select Country *',
           ),
           const SizeBoxH(8),
-          // SizedBox(
-          //   height: Responsive.height * 6,
-          //   child: DropDownSearchField(
-          //     textFieldConfiguration: TextFieldConfiguration(
-          //       controller: authProvider.countryController,
-          //       autofocus: false,
-          //       style: context.textTheme.bodyLarge!
-          //           .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
-          //       decoration: const InputDecoration(
-          //         border: OutlineInputBorder(),
-          //       ),
-          //     ),
-          //     suggestionsCallback: (pattern) async {
-          //       return authProvider.countryList.where((items) {
-          //         return items.name.toString().toLowerCase().contains(
-          //               pattern.toLowerCase(),
-          //             );
-          //       }).toList();
-          //     },
-          //     itemBuilder: (context, suggestion) {
-          //       return ListTile(title: Text(suggestion.name.toString()));
-          //     },
-          //     onSuggestionSelected: (suggestion) {
-          //       print("$suggestion tapped");
-          //       context.read<AuthProvider>().changeCountryController(
-          //           id: suggestion.id.toString(),
-          //           value: suggestion.name.toString());
-          //     },
-          //     displayAllSuggestionWhenTap: true,
-          //   ),
-          // ),
+          SizedBox(
+            height: Responsive.height * 6,
+            child: DropDownSearchField(
+              textFieldConfiguration: TextFieldConfiguration(
+                controller: authProvider.countryController,
+                autofocus: false,
+                style: context.textTheme.bodyLarge!
+                    .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              suggestionsCallback: (pattern) async {
+                return authProvider.countryList.where((items) {
+                  return items.name.toString().toLowerCase().contains(
+                        pattern.toLowerCase(),
+                      );
+                }).toList();
+              },
+              itemBuilder: (context, suggestion) {
+                return ListTile(title: Text(suggestion.name.toString()));
+              },
+              onSuggestionSelected: (suggestion) {
+                print("$suggestion tapped");
+                context.read<AuthProvider>().changeCountryController(
+                    id: suggestion.id.toString(),
+                    value: suggestion.name.toString());
+              },
+              displayAllSuggestionWhenTap: true,
+            ),
+          ),
 
           const CustomText(
             text: 'Select State *',

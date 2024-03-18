@@ -48,10 +48,10 @@ class Urls {
       "http://103.160.153.57:8086/mmg/api/v2/vehicle/nearest";
   final bookingFarePriceUrl =
       "http://103.160.153.57:8087/mmg/api/v2/booking/fare";
+  final confirmBookingUrl = "http://103.160.153.57:8087/mmg/api/v2/booking";
 
   final userProfileImage = "http://103.160.153.57:8083/mmg/api/v2/image";
-  final userProfileDetails =
-      'http://103.160.153.57:8083/mmg/api/v2/profile/b0270f1e-bed8-47cb-b490-662f9f4b51ff?roleId=1';
+  final userProfileDetails = 'http://103.160.153.57:8083/mmg/api/v2/profile';
   final createProfile = 'http://103.160.153.57:8083/mmg/api/v2/profile';
   final forgotPasswordGetOtp =
       'http://103.160.153.57:8083/mmg/api/v2/profile/forgotpassword/mobile';

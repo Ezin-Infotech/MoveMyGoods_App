@@ -90,3 +90,10 @@ enum GetUserProfileDetailsStatus {
   loaded,
   error,
 }
+
+enum ConfirmBookingStatus {
+  initial,
+  loading,
+  loaded,
+  error,
+}
