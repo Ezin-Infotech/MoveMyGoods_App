@@ -9,7 +9,7 @@ import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/app style/responsive.dart';
-import '../../utils/common widgets/toast.dart';
+import '../../utils/common widgets/dialogs.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -53,7 +53,7 @@ class SignUpScreen extends StatelessWidget {
                     controller: authProvider.signUpPhoneController,
                     fillColor: AppColors.bgColor,
                     hintText: 'Mobile No',
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.phone,
                   ),
                   const SizeBoxH(42),
                   // CommonTextForm(
@@ -98,9 +98,13 @@ class SignUpScreen extends StatelessWidget {
                                 .read<AuthProvider>()
                                 .getSignUpOTPFn(context: context);
                           } else {
-                            toast(context,
-                                backgroundColor: Colors.red,
-                                title: 'please enter email and password');
+                            errorBottomSheetDialogs(
+                              isDismissible: false,
+                              enableDrag: false,
+                              context: context,
+                              title: 'please enter email and password',
+                              subtitle: '',
+                            );
                           }
 
                           // context.push(const LoginScreen());

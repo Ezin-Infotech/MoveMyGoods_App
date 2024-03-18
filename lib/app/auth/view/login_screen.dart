@@ -9,11 +9,12 @@ import 'package:mmg/app/utils/app%20style/responsive.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
 import 'package:mmg/app/utils/common%20widgets/textform.dart';
-import 'package:mmg/app/utils/common%20widgets/toast.dart';
 import 'package:mmg/app/utils/extensions.dart';
 import 'package:mmg/app/utils/helpers.dart';
 import 'package:mmg/app/utils/routes/route_names.dart';
 import 'package:provider/provider.dart';
+
+import '../../utils/common widgets/dialogs.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -89,15 +90,8 @@ class LoginScreen extends StatelessWidget {
                         controller: value.passWordController,
                         fillColor: AppColors.bgColor,
                         hintText: 'Enter Your Password',
-                        keyboardType: TextInputType.emailAddress,
+                        keyboardType: TextInputType.visiblePassword,
                         obscureText: value.loginShowPassword,
-                        // validator: (value) {
-                        //   if (value == null || value.isEmpty) {
-                        //     return 'Please enter a password';
-                        //   } else {
-                        //     return null;
-                        //   }
-                        // },
                         suffixIcon: GestureDetector(
                           onTap: () {
                             value.loginShowPasswordFn();
@@ -161,9 +155,13 @@ class LoginScreen extends StatelessWidget {
                                     .passWordController.text.isNotEmpty) {
                               authProvider.onboardSignInFn(context: context);
                             } else {
-                              toast(context,
-                                  backgroundColor: Colors.red,
-                                  title: 'please enter email and password');
+                              errorBottomSheetDialogs(
+                                isDismissible: false,
+                                enableDrag: false,
+                                context: context,
+                                title: 'please enter email and password',
+                                subtitle: '',
+                              );
                             }
 
                             // context.push(const LoginScreen());
