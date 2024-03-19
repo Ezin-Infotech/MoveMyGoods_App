@@ -100,7 +100,7 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                       ),
                       TextFieldAndText(
                         textField: 'Order ID :',
-                        text: obj.bookingDetail.data!.id.toString() ?? '',
+                        text: obj.bookingDetail.data!.id.toString(),
                       ),
                       TextFieldAndText(
                         textField: 'Source : ',
@@ -116,8 +116,7 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                       ),
                       TextFieldAndText(
                         textField: 'Goods Value : ',
-                        text:
-                            obj.bookingDetail.data!.goodsvalue.toString() ?? '',
+                        text: obj.bookingDetail.data!.goodsvalue.toString(),
                       ),
                       TextFieldAndText(
                         textField: 'Number of Labours : ',

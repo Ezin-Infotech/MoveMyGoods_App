@@ -169,8 +169,7 @@ class _BookingScreenState extends State<BookingScreen> {
                             PlaceSuggestion place = booking.searchResults
                                 .firstWhere((element) => element.name == da);
                             LatLng latLng = await booking.getPlaceDetails(
-                              place.placeId,
-                            );
+                                place.placeId, context, true);
                             onSelectLocation(latLng, true);
                             markers.add(Marker(
                               markerId: const MarkerId(""),
@@ -223,8 +222,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                 .destinationSearchResults
                                 .firstWhere((element) => element.name == da);
                             LatLng latLng = await booking.getPlaceDetails(
-                              place.placeId,
-                            );
+                                place.placeId, context, false);
                             onSelectLocation(latLng, false);
                             markers.add(Marker(
                               markerId: const MarkerId(""),
@@ -307,14 +305,14 @@ class _BookingScreenState extends State<BookingScreen> {
                       keyboardType: TextInputType.number,
                       requiredText: 'Please enter Goods Value',
                     ),
-                    BookingTextFieldWidgets(
-                      hintText: 'Maximum 5 Labours',
-                      controller: bookingProvider!.numberOfLabourController,
-                      labeText: 'Number of Labours *',
-                      keyboardType: TextInputType.number,
-                      maxLength: 1,
-                      requiredText: 'Please enter Number of Labours',
-                    ),
+                    // BookingTextFieldWidgets(
+                    //   hintText: 'Maximum 5 Labours',
+                    //   controller: bookingProvider!.numberOfLabourController,
+                    //   labeText: 'Number of Labours *',
+                    //   keyboardType: TextInputType.number,
+                    //   maxLength: 1,
+                    //   requiredText: 'Please enter Number of Labours',
+                    // ),
                     // Text(
                     //   'Number of labours should not exceed more than 5',
                     //   style: context.textTheme.bodyMedium!
@@ -518,16 +516,16 @@ class _BookingScreenState extends State<BookingScreen> {
                                   labeText: 'Name',
                                   requiredText: 'Enter Your Name',
                                 ),
+                                // BookingTextFieldWidgets(
+                                //   hintText: 'Email',
+                                //   controller:
+                                //       bookingProvider!.receiverEmailController,
+                                //   labeText: 'Email Address',
+                                //   keyboardType: TextInputType.emailAddress,
+                                //   requiredText: 'Enter Your Email',
+                                // ),
                                 BookingTextFieldWidgets(
-                                  hintText: 'Email',
-                                  controller:
-                                      bookingProvider!.receiverEmailController,
-                                  labeText: 'Email Address',
-                                  keyboardType: TextInputType.emailAddress,
-                                  requiredText: 'Enter Your Email',
-                                ),
-                                BookingTextFieldWidgets(
-                                  hintText: 'Number',
+                                  hintText: 'Enter Your Mobile No',
                                   controller: bookingProvider!
                                       .receiverMobileNoController,
                                   labeText: 'Mobile No.',
@@ -547,13 +545,13 @@ class _BookingScreenState extends State<BookingScreen> {
                                 // ),
                                 // const SizeBoxH(8),
                                 // const DropdownInsideTextFormField(),
-                                BookingTextFieldWidgets(
-                                  hintText: '(eg.DUMPA1234)',
-                                  controller:
-                                      bookingProvider!.receiverPanNoController,
-                                  labeText: 'PAN No.',
-                                  requiredText: 'Enter Your PAN No ',
-                                ),
+                                // BookingTextFieldWidgets(
+                                //   hintText: '(eg.DUMPA1234)',
+                                //   controller:
+                                //       bookingProvider!.receiverPanNoController,
+                                //   labeText: 'PAN No.',
+                                //   requiredText: 'Enter Your PAN No ',
+                                // ),
                                 // BookingTextFieldWidgets(
                                 //   hintText: '(eg.GHXXXXXXXX000)',
                                 //   controller:
@@ -577,16 +575,16 @@ class _BookingScreenState extends State<BookingScreen> {
                                   controller:
                                       bookingProvider!.shipperNameController,
                                   labeText: 'Name',
-                                  requiredText: 'Enter Your Email ',
+                                  requiredText: 'Enter Your name ',
                                 ),
-                                BookingTextFieldWidgets(
-                                  hintText: 'Email',
-                                  controller:
-                                      bookingProvider!.shipperemailController,
-                                  labeText: 'Email Address',
-                                  keyboardType: TextInputType.emailAddress,
-                                  requiredText: 'Enter Your Email ',
-                                ),
+                                // BookingTextFieldWidgets(
+                                //   hintText: 'Email',
+                                //   controller:
+                                //       bookingProvider!.shipperemailController,
+                                //   labeText: 'Email Address',
+                                //   keyboardType: TextInputType.emailAddress,
+                                //   requiredText: 'Enter Your Email ',
+                                // ),
                                 BookingTextFieldWidgets(
                                   hintText: 'Number',
                                   controller: bookingProvider!

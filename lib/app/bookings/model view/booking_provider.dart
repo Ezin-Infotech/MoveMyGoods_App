@@ -15,6 +15,7 @@ import 'package:mmg/app/bookings/model/booking_weight_model.dart';
 import 'package:mmg/app/bookings/model/goods_type_model.dart';
 import 'package:mmg/app/bookings/model/vehicle_details_model.dart';
 import 'package:mmg/app/bookings/services/booking_services.dart';
+import 'package:mmg/app/utils/common%20widgets/dialogs.dart';
 import 'package:mmg/app/utils/common%20widgets/loading_overlay.dart';
 import 'package:mmg/app/utils/enums.dart';
 
@@ -263,13 +264,13 @@ class BookingProvider with ChangeNotifier {
     // notifyListeners();
     try {
       final goodsResponse = await services.getGoodsWeightService(data: {
-        "sourcelatitude": 12.2958104,
-        "sourcelongitude": 76.6393805,
-        "destinationlatitude": 12.2544597,
-        "destinationlongitude": 76.7170574,
-        "sCountry": "India",
-        "sState": "Karnataka",
-        "sCity": "Mysore Division"
+        "sourcelatitude": sourceLatitude,
+        "sourcelongitude": sourceLongitude,
+        "destinationlatitude": destinationLatitude,
+        "destinationlongitude": destinationLongitude,
+        "sCountry": sCountry,
+        "sState": sState,
+        "sCity": sCity
       });
       goodsWeightData = goodsResponse.data!;
       print(bookingDetail);
@@ -319,16 +320,16 @@ class BookingProvider with ChangeNotifier {
     // notifyListeners();
     try {
       final goodsResponse = await services.getBookingFarePriceService(data: {
-        "sourcelatitude": 12.2544597,
-        "sourcelongitude": 76.7170574,
-        "destinationlatitude": 12.2958104,
-        "destinationlongitude": 76.6393805,
+        "sourcelatitude": sourceLatitude,
+        "sourcelongitude": sourceLongitude,
+        "destinationlatitude": destinationLatitude,
+        "destinationlongitude": destinationLongitude,
         "vehicleCategoryId":
             goodsVehicleDetailsModel.data![0].vehicleCategoryId,
-        "sCountry": "India",
-        "sState": "Karnataka",
-        "sCity": "Mysore Division",
-        "referenceId": "",
+        "sCountry": sCountry,
+        "sState": sState,
+        "sCity": sCity,
+        "referenceId": goodsVehicleDetailsModel.data![0].vendorId,
         "vendorType": goodsVehicleDetailsModel.data![0].vendorType,
         "profileId": "b0270f1e-bed8-47cb-b490-662f9f4b51ff",
         "goodsvalue": int.parse(goodsValueController.text),
@@ -408,6 +409,7 @@ class BookingProvider with ChangeNotifier {
         } else {
           searchResults = [];
           for (var place in response.data['predictions']) {
+            print(response.data['predictions']);
             searchResults.add(
               PlaceSuggestion(
                 name: place['description'],
@@ -425,20 +427,120 @@ class BookingProvider with ChangeNotifier {
     }
   }
 
-  Future<LatLng> getPlaceDetails(String placeId) async {
+  Future<LatLng> getPlaceDetails(
+      String placeId, BuildContext context, bool isSource) async {
     try {
       final response = await Dio().get(
         '$_baseUrl/details/json',
         queryParameters: {
           'place_id': placeId,
-          'fields': 'geometry',
+          'fields': 'geometry,address_components,formatted_address',
           'key': _apiKey,
         },
       );
+      print('PLACE DETAILS: ${response.data}');
 
       if (response.statusCode == 200) {
-        print('PLACE DETAILS: ${response.data}');
         final location = response.data['result']['geometry']['location'];
+        if (isSource) {
+          sourceLatitude = double.parse(location['lat'].toString());
+          sourceLongitude = double.parse(location['lng'].toString());
+        } else {
+          destinationLatitude = location['lat'];
+          destinationLongitude = location['lng'];
+        }
+
+        if (isSource) {
+          sStreet = response.data["result"]["formatted_address"];
+          try {
+            for (int i = 0;
+                i < response.data["result"]["address_components"].length;
+                i++) {
+              print(
+                  "response ==== ${response.data["result"]["address_components"][i]["types"]}");
+              if (response.data["result"]["address_components"][i]["types"]
+                  .contains("administrative_area_level_2")) {
+                print(
+                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
+                sCity = response.data["result"]["address_components"][i]
+                    ["long_name"];
+              } else if (response.data["result"]["address_components"][i]
+                      ["types"]
+                  .contains("administrative_area_level_1")) {
+                sState = response.data["result"]["address_components"][i]
+                    ["long_name"];
+                print(
+                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
+              } else if (response.data["result"]["address_components"][i]
+                      ["types"]
+                  .contains("country")) {
+                print(
+                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
+                sCountry = response.data["result"]["address_components"][i]
+                    ["long_name"];
+              } else if (response.data["result"]["address_components"][i]
+                      ["types"]
+                  .contains("neighborhood")) {
+                print(
+                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
+                sLandMark = response.data["result"]["address_components"][i]
+                    ["long_name"];
+              } else if (response.data["result"]["address_components"][i]
+                      ["types"]
+                  .contains("postal_code")) {
+                print(
+                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
+                sPincode = response.data["result"]["address_components"][i]
+                    ["long_name"][0];
+              }
+            }
+          } catch (e) {
+            print("response ==== ERROR $e");
+          }
+
+          // sStreet = data["formatted_address"];
+        } else {
+          dStreet = response.data["result"]["formatted_address"];
+          try {
+            for (int i = 0;
+                i < response.data["result"]["address_components"].length;
+                i++) {
+              print(
+                  "response ==== ${response.data["result"]["address_components"][i]["types"]}");
+              if (response.data["result"]["address_components"][i]["types"]
+                  .contains("administrative_area_level_2")) {
+                print(
+                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
+                dCity = response.data["result"]["address_components"][i]
+                    ["long_name"];
+              } else if (response.data["result"]["address_components"][i]
+                      ["types"]
+                  .contains("administrative_area_level_1")) {
+                dState = response.data["result"]["address_components"][i]
+                    ["long_name"];
+                print(
+                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
+              } else if (response.data["result"]["address_components"][i]
+                      ["types"]
+                  .contains("country")) {
+                print(
+                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
+                dCountry = response.data["result"]["address_components"][i]
+                    ["long_name"];
+              } else if (response.data["result"]["address_components"][i]
+                      ["types"]
+                  .contains("postal_code")) {
+                print(
+                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
+                dPincode = response.data["result"]["address_components"][i]
+                    ["long_name"][0];
+              }
+            }
+          } catch (e) {
+            print("response ==== ERROR $e");
+          }
+        }
+
         return LatLng(location['lat'], location['lng']);
       } else {
         throw Exception("Failed to load place details");
@@ -448,54 +550,97 @@ class BookingProvider with ChangeNotifier {
     }
   }
 
+  //Booking Variables
+
+  num sourceLatitude = 0;
+  num sourceLongitude = 0;
+  num destinationLatitude = 0;
+  num destinationLongitude = 0;
+  num vehicleCategoryId = 0;
+  String sStreet = '';
+  String sCity = '';
+  String sState = '';
+  String sCountry = '';
+  String sLandMark = '';
+  String dStreet = '';
+  String dCity = '';
+  String dState = '';
+  String dCountry = '';
+  String sPincode = '';
+  String dPincode = '';
+
   ConfirmBookingStatus confirmBookingStatus = ConfirmBookingStatus.initial;
   confirmBookingFn({required BuildContext context}) async {
     confirmBookingStatus = ConfirmBookingStatus.loading;
     LoadingOverlayDark.of(context).show();
     // notifyListeners();
+    print(sourceLatitude);
+    print(sourceLongitude);
+    print(destinationLatitude);
+    print(destinationLongitude);
+    print(goodsVehicleDetailsModel.data![0].vehicleCategoryId);
+    print(sStreet);
+    print(sCity);
+    print(sState);
+    print(sCountry);
+    print(sLandMark);
+    print(sPincode);
+    print(goodsVehicleDetailsModel.data![0].vendorId);
+    print(goodsVehicleDetailsModel.data![0].vendorType);
+
+    print(goodsValueController.text);
+    print(bookingFarePriceDetailsModel.data!.labourCharges);
+
+    print(goodsVehicleDetailsModel.data![0].vehicleId);
+
+    print(goodsTypeId);
+    print(goodsWeightId);
+    print(dStreet);
+    print(dCity);
+
     try {
       final confirmBookingResponse =
           await services.postConfirmBookingService(data: {
-        "sourcelatitude": 12.2958104,
-        "sourcelongitude": 76.6393805,
-        "destinationlatitude": 12.9532583,
-        "destinationlongitude": 77.5434616,
-        "vehicleCategoryId": 152,
-        "sStreet": "Mysuru, Karnataka, India",
-        "sCity": "Mysore Division",
-        "sState": "Karnataka",
-        "sCountry": "India",
-        "sLandMark": "Mysuru",
-        "sPincode": "",
-        "referenceId": "95827126",
-        "vendorType": "FRANCHISE",
+        "sourcelatitude": sourceLatitude,
+        "sourcelongitude": sourceLongitude,
+        "destinationlatitude": destinationLatitude,
+        "destinationlongitude": destinationLongitude,
+        "vehicleCategoryId":
+            goodsVehicleDetailsModel.data![0].vehicleCategoryId,
+        "sStreet": sStreet,
+        "sCity": sCity,
+        "sState": sState,
+        "sCountry": sCountry,
+        "sLandMark": sLandMark,
+        "sPincode": sPincode,
+        "referenceId": goodsVehicleDetailsModel.data![0].vendorId,
+        "vendorType": goodsVehicleDetailsModel.data![0].vendorType,
         "profileId": "ba255ec8-908b-4c44-933f-9898b10f04e3",
-        "goodsvalue": 500,
-        "labourCharges": 0,
+        "goodsvalue": goodsValueController.text,
+        "labourCharges": bookingFarePriceDetailsModel.data!.labourCharges,
         "ewayBillNo": "",
         "ewayBillDate": "",
-        "numberofLabours": 5,
-        "vehicleId": "92478668",
+        "numberofLabours": 0,
+        "vehicleId": goodsVehicleDetailsModel.data![0].vehicleId,
         "pickUpDateTime": 1710761005194,
-        "goodsTypeId": 10,
+        "goodsTypeId": goodsTypeId,
         "status": "PENDING",
-        "goodsWeightId": 1,
+        "goodsWeightId": goodsWeightId,
         "fodBy": 1, // Deafault 1
         "advCompType": 2, // deafault 2
         "paymentMode": 1, //1 cash 2 means online
-        "dStreet":
-            "XG3V+9CQ, Mysore Rd, Telecom Colony, Srinagar, Banashankari, Bengaluru, Karnataka 560026, India",
-        "dCity": "Bangalore Division",
-        "dState": "Karnataka",
-        "dCountry": "India",
-        "dPincode": "560026",
-        "consignorName": "Pranav",
-        "consignorNumber": "7034888756",
-        "consigneeName": "pranav",
-        "consigneeNumber": "7034888756",
+        "dStreet": dStreet,
+        "dCity": dCity,
+        "dState": dState,
+        "dCountry": dCountry,
+        "dPincode": dPincode,
+        "consignorName": shipperNameController.text,
+        "consignorNumber": shipperMobileNoController.text,
+        "consigneeName": receiverNameController.text,
+        "consigneeNumber": receiverMobileNoController.text,
         "consigneeGST": "",
         "consigneePAN": "",
-        // "bookedGoodsTypes": 1,
+        "bookedGoodsTypes": 1,
         "bookedItems": [],
         "bookingType": "",
         "totalNoOfTon": "",
@@ -506,17 +651,24 @@ class BookingProvider with ChangeNotifier {
       LoadingOverlayDark.of(context).hide();
       getBookingDetailsByIdFn(
           id: confirmBookingResponse["data"]["id"].toString());
-
+      Get.back();
       Get.toNamed(AppRoutes.bookingSuccessFullyCompletedScreen);
 
       confirmBookingStatus = ConfirmBookingStatus.loaded;
       notifyListeners();
       // ignore: deprecated_member_use
-    } catch (e) {
+    } on DioError catch (e) {
       LoadingOverlayDark.of(context).hide();
       print('bookingDetail $e');
       confirmBookingStatus = ConfirmBookingStatus.error;
       notifyListeners();
+      errorBottomSheetDialogs(
+        isDismissible: false,
+        enableDrag: false,
+        context: context,
+        title: '${e.response!.data['message']}',
+        subtitle: '',
+      );
     }
   }
 }
