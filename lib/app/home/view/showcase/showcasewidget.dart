@@ -11,6 +11,7 @@ class MyShowCaseWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ShowCaseWidget(
       enableShowcase: true,
+      // autoPlay: true,
       builder: Builder(
         builder: (context) => const GlobalScreen(),
       ),

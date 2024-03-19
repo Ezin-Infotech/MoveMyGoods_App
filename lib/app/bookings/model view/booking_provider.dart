@@ -480,9 +480,9 @@ class BookingProvider with ChangeNotifier {
         "goodsTypeId": 10,
         "status": "PENDING",
         "goodsWeightId": 1,
-        "fodBy": 1,
-        "advCompType": 2,
-        "paymentMode": 1,
+        "fodBy": 1, // Deafault 1
+        "advCompType": 2, // deafault 2
+        "paymentMode": 1, //1 cash 2 means online
         "dStreet":
             "XG3V+9CQ, Mysore Rd, Telecom Colony, Srinagar, Banashankari, Bengaluru, Karnataka 560026, India",
         "dCity": "Bangalore Division",
@@ -495,7 +495,7 @@ class BookingProvider with ChangeNotifier {
         "consigneeNumber": "7034888756",
         "consigneeGST": "",
         "consigneePAN": "",
-        "bookedGoodsTypes": 1,
+        // "bookedGoodsTypes": 1,
         "bookedItems": [],
         "bookingType": "",
         "totalNoOfTon": "",

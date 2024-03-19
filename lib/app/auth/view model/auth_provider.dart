@@ -80,6 +80,47 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  bool isStrongPassword(String password) {
+    // Check if the password length is at least 8 characters
+    if (password.length < 8) {
+      return false;
+    }
+
+    // Check if the password contains at least one uppercase letter
+    if (!password.contains(RegExp(r'[A-Z]'))) {
+      return false;
+    }
+
+    // Check if the password contains at least one lowercase letter
+    if (!password.contains(RegExp(r'[a-z]'))) {
+      return false;
+    }
+
+    // Check if the password contains at least one digit
+    if (!password.contains(RegExp(r'[0-9]'))) {
+      return false;
+    }
+
+    // Check if the password contains at least one special character
+    if (!password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+      return false;
+    }
+
+    // If all conditions are met, the password is considered strong
+    return true;
+  }
+
+  bool isEmail(String text) {
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(text);
+  }
+
+// Check if the entered text is a 10-digit phone number
+  bool isPhoneNumber(String text) {
+    final phoneRegex = RegExp(r'^[0-9]{10}$');
+    return phoneRegex.hasMatch(text);
+  }
+
   /* Login */
   onboardSignInFn({required BuildContext context}) async {
     LoadingOverlay.of(context).show();

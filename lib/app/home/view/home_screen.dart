@@ -13,8 +13,7 @@ import 'package:mmg/app/utils/enums.dart';
 import 'package:mmg/app/utils/routes/route_names.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-
-import '../../settings/view/widgets/theme.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -113,14 +112,35 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? value.getAllBookingCountStatus ==
                                 GetAllBookingCountStatus.loading
                             ? Shimmer.fromColors(
-                                baseColor: AppConstants.appMainGreyColor,
+                                baseColor: Colors.grey.shade500,
                                 highlightColor: Colors.grey.shade500,
-                                child: const SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  // child: Center(
-                                  //   child: CircularProgressIndicator(),
-                                  // ),
+                                direction: ShimmerDirection.btt,
+                                period: const Duration(milliseconds: 1000),
+                                child: Container(
+                                  width: 105,
+                                  height: 75,
+                                  decoration: const BoxDecoration(
+                                      color: Color(0xffE8E8E8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color.fromARGB(
+                                              145, 158, 158, 158),
+                                          offset: Offset(
+                                            5.0,
+                                            5.0,
+                                          ),
+                                          blurRadius: 10.0,
+                                          spreadRadius: 1.0,
+                                        ), //BoxShadow
+                                        BoxShadow(
+                                          color: Colors.white,
+                                          offset: Offset(0.0, 0.0),
+                                          blurRadius: 0.0,
+                                          spreadRadius: 0.0,
+                                        ), //BoxShadow
+                                      ],
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
                                 ))
                             :
                             // const SizedBox(
@@ -130,49 +150,76 @@ class _HomeScreenState extends State<HomeScreen> {
                             //       child: CircularProgressIndicator(),
                             //     ),
                             //   )
-                            SmallBoxontainerWidget(
-                                subTitle: value.bookingCountData.data == null
-                                    ? '0'
-                                    : index == 0
-                                        ? value.bookingCountData.data!.total
-                                            .toString()
-                                        : index == 1
-                                            ? value.bookingCountData.data!.total
-                                                .toString()
-                                            : index == 2
-                                                ? value.bookingCountData.data!
-                                                    .pending
-                                                    .toString()
-                                                : index == 3
-                                                    ? value.bookingCountData
-                                                        .data!.active
-                                                        .toString()
-                                                    : index == 4
-                                                        ? value.bookingCountData
-                                                            .data!.completed
-                                                            .toString()
-                                                        : index == 5
-                                                            ? value
-                                                                .bookingCountData
-                                                                .data!
-                                                                .cancelled
-                                                                .toString()
-                                                            : "0",
-                                title: value.bookingTiltes[index],
-                                numberColor: index == 0
-                                    ? const Color(0xffab00af)
+                            Showcase(
+                                key: index == 0
+                                    ? value.globalKey1
                                     : index == 1
-                                        ? const Color(0xff006eef)
+                                        ? value.globalKey2
                                         : index == 2
-                                            ? const Color(0xff847f00)
+                                            ? value.globalKey3
                                             : index == 3
-                                                ? const Color(0xff00c108)
+                                                ? value.globalKey4
                                                 : index == 4
-                                                    ? const Color(0xff009ba4)
-                                                    : index == 5
-                                                        ? const Color(
-                                                            0xffDF0E0E)
-                                                        : null,
+                                                    ? value.globalKey5
+                                                    : value.globalKey6,
+                                description: index == 0
+                                    ? value.descriptions[index]
+                                    : index == 1
+                                        ? value.descriptions[index]
+                                        : index == 2
+                                            ? value.descriptions[index]
+                                            : index == 3
+                                                ? value.descriptions[index]
+                                                : index == 4
+                                                    ? value.descriptions[index]
+                                                    : value.descriptions[index],
+                                child: SmallBoxontainerWidget(
+                                  subTitle: value.bookingCountData.data == null
+                                      ? '0'
+                                      : index == 0
+                                          ? value.bookingCountData.data!.total
+                                              .toString()
+                                          : index == 1
+                                              ? value
+                                                  .bookingCountData.data!.total
+                                                  .toString()
+                                              : index == 2
+                                                  ? value.bookingCountData.data!
+                                                      .pending
+                                                      .toString()
+                                                  : index == 3
+                                                      ? value.bookingCountData
+                                                          .data!.active
+                                                          .toString()
+                                                      : index == 4
+                                                          ? value
+                                                              .bookingCountData
+                                                              .data!
+                                                              .completed
+                                                              .toString()
+                                                          : index == 5
+                                                              ? value
+                                                                  .bookingCountData
+                                                                  .data!
+                                                                  .cancelled
+                                                                  .toString()
+                                                              : "0",
+                                  title: value.bookingTiltes[index],
+                                  numberColor: index == 0
+                                      ? const Color(0xffab00af)
+                                      : index == 1
+                                          ? const Color(0xff006eef)
+                                          : index == 2
+                                              ? const Color(0xff847f00)
+                                              : index == 3
+                                                  ? const Color(0xff00c108)
+                                                  : index == 4
+                                                      ? const Color(0xff009ba4)
+                                                      : index == 5
+                                                          ? const Color(
+                                                              0xffDF0E0E)
+                                                          : null,
+                                ),
                               )
                         : SmallBoxontainerWidget(
                             subTitle: '0',
