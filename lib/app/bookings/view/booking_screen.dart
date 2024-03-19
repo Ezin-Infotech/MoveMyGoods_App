@@ -18,6 +18,8 @@ import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/common widgets/custom_text.dart';
+import '../../utils/common widgets/dialogs.dart';
+import 'widgets/drop_down_widgets.dart';
 
 class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key});
@@ -196,10 +198,20 @@ class _BookingScreenState extends State<BookingScreen> {
                             );
                           },
                           onEditingProgress: (value, value2) {
-                            booking.searchLocation(
-                              query: value,
-                              dest: false,
-                            );
+                            if (value.isNotEmpty) {
+                              booking.searchLocation(
+                                query: value,
+                                dest: false,
+                              );
+                            } else {
+                              errorBottomSheetDialogs(
+                                isDismissible: false,
+                                enableDrag: false,
+                                context: context,
+                                title: 'please select Your location',
+                                subtitle: '',
+                              );
+                            }
                           },
                         );
                       },
@@ -325,7 +337,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       text: 'Goods Weight *',
                     ),
                     const SizeBoxH(8),
-                    // const DropdownInsideTextFormField(),
+                    const DropdownInsideTextFormField(),
                     // const SizeBoxH(8),
                     booking.showGoodsWeight
                         ? booking.getGoodsWeightStatus ==
@@ -516,7 +528,6 @@ class _BookingScreenState extends State<BookingScreen> {
                                   controller:
                                       bookingProvider!.receiverNameController,
                                   labeText: 'Name',
-                                  requiredText: 'Enter Your Name',
                                 ),
                                 BookingTextFieldWidgets(
                                   hintText: 'Email',
@@ -524,7 +535,6 @@ class _BookingScreenState extends State<BookingScreen> {
                                       bookingProvider!.receiverEmailController,
                                   labeText: 'Email Address',
                                   keyboardType: TextInputType.emailAddress,
-                                  requiredText: 'Enter Your Email',
                                 ),
                                 BookingTextFieldWidgets(
                                   hintText: 'Number',
@@ -532,7 +542,6 @@ class _BookingScreenState extends State<BookingScreen> {
                                       .receiverMobileNoController,
                                   labeText: 'Mobile No.',
                                   keyboardType: TextInputType.phone,
-                                  requiredText: 'Enter Your Mobile No',
                                 ),
                                 // const SizeBoxH(10),
                                 // const CustomText(
@@ -552,7 +561,6 @@ class _BookingScreenState extends State<BookingScreen> {
                                   controller:
                                       bookingProvider!.receiverPanNoController,
                                   labeText: 'PAN No.',
-                                  requiredText: 'Enter Your PAN No ',
                                 ),
                                 // BookingTextFieldWidgets(
                                 //   hintText: '(eg.GHXXXXXXXX000)',
@@ -577,7 +585,6 @@ class _BookingScreenState extends State<BookingScreen> {
                                   controller:
                                       bookingProvider!.shipperNameController,
                                   labeText: 'Name',
-                                  requiredText: 'Enter Your Email ',
                                 ),
                                 BookingTextFieldWidgets(
                                   hintText: 'Email',
@@ -585,7 +592,6 @@ class _BookingScreenState extends State<BookingScreen> {
                                       bookingProvider!.shipperemailController,
                                   labeText: 'Email Address',
                                   keyboardType: TextInputType.emailAddress,
-                                  requiredText: 'Enter Your Email ',
                                 ),
                                 BookingTextFieldWidgets(
                                   hintText: 'Number',
@@ -593,7 +599,6 @@ class _BookingScreenState extends State<BookingScreen> {
                                       .shipperMobileNoController,
                                   labeText: 'Mobile No.',
                                   keyboardType: TextInputType.phone,
-                                  requiredText: 'Enter Your Number',
                                 ),
 
                                 BookingTextFieldWidgets(
@@ -601,7 +606,6 @@ class _BookingScreenState extends State<BookingScreen> {
                                   controller:
                                       bookingProvider!.shipperpanNOController,
                                   labeText: 'PAN No.',
-                                  requiredText: 'Enter Your PAN No',
                                 ),
                                 // BookingTextFieldWidgets(
                                 //   hintText: '(eg.GHXXXXXXXX000)',

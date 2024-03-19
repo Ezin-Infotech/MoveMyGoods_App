@@ -34,12 +34,29 @@ class HomeProvider with ChangeNotifier {
   final GlobalKey globalKey10 = GlobalKey();
   final GlobalKey globalKey11 = GlobalKey();
   final GlobalKey globalKey12 = GlobalKey();
+  final GlobalKey globalKey13 = GlobalKey();
+  final GlobalKey globalKey14 = GlobalKey();
+  final GlobalKey globalKey15 = GlobalKey();
+  final GlobalKey globalKey16 = GlobalKey();
+  final GlobalKey globalKey17 = GlobalKey();
+  final GlobalKey globalKey18 = GlobalKey();
 
   List<String> descriptions = [
     'Welcome to your digital hub! Our app home is your gateway to seamless navigation',
     'You can connect\n your watch',
     'Unlock exclusive rewards with our loyalty tier system',
     'Your virtual shopping companion awaits',
+    'Meet your new virtual assistant.You can chat with us',
+    'Meet your new virtual assistant.You can chat with us',
+  ];
+
+  List<String> descriptions1 = [
+    'Welcome to your digital hub! Our app home is your gateway to seamless navigation',
+    'You can connect\n your watch',
+    'Unlock exclusive rewards with our loyalty tier system',
+    'Your virtual shopping companion awaits',
+    'Meet your new virtual assistant.You can chat with us',
+    'Meet your new virtual assistant.You can chat with us',
     'Meet your new virtual assistant.You can chat with us',
     'Meet your new virtual assistant.You can chat with us',
   ];
