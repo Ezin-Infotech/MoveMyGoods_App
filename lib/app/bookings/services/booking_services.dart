@@ -51,7 +51,7 @@ class BookingServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    print(response);
+    print("getBookingDetailsByIdService $response");
     return bookingDetailsModelFromJson(jsonEncode(response.data));
   }
 
@@ -131,7 +131,7 @@ class BookingServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    print(response);
+    print("postConfirmBookingService: $response");
     return response.data;
   }
 }

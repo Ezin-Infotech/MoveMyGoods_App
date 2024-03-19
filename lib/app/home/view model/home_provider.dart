@@ -71,6 +71,7 @@ class HomeProvider with ChangeNotifier {
   getBookingCountFn() async {
     getAllBookingCountStatus = GetAllBookingCountStatus.loading;
     try {
+      print('dashboardBookingCountService reached');
       final countRespose = await services.dashboardBookingCountService();
 
       bookingCountData = countRespose;
@@ -79,6 +80,7 @@ class HomeProvider with ChangeNotifier {
       notifyListeners();
       // ignore: deprecated_member_use
     } catch (e) {
+      print('dashboardBookingCountService $e');
       getAllBookingCountStatus = GetAllBookingCountStatus.error;
       notifyListeners();
     }

@@ -16,7 +16,7 @@ class BookingTextFieldWidgets extends StatelessWidget {
 
   final bool? readOnly;
   final String? requiredText;
-
+  final Widget? suffixIcon;
   BookingTextFieldWidgets(
       {required this.controller,
       required this.labeText,
@@ -27,6 +27,7 @@ class BookingTextFieldWidgets extends StatelessWidget {
       this.requiredText,
       this.readOnly = false,
       this.onTap,
+      this.suffixIcon,
       super.key});
 
   @override
@@ -40,6 +41,7 @@ class BookingTextFieldWidgets extends StatelessWidget {
         ),
         const SizeBoxH(8),
         CommonTextForm(
+          suffixIcon: suffixIcon,
           readOnly: readOnly,
           maxLength: maxLength,
           controller: controller,

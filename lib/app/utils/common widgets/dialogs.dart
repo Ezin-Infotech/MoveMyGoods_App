@@ -197,6 +197,8 @@ void failurtoast({title, duration = 2, bool? isSuccess = false}) {
 }
 
 void successtoast({title, duration = 2}) {
+  FocusManager.instance.primaryFocus?.unfocus();
+
   Get.showSnackbar(
     GetSnackBar(
       icon: const Icon(

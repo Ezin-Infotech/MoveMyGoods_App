@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:mmg/app/home/model/booking_count_model.dart';
 import 'package:mmg/app/utils/apppref.dart';
@@ -16,7 +17,8 @@ class HomeServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    print(response);
+
+    print("dashboardBookingCountService: $response");
     return dashboardBookingCountModelFromJson(jsonEncode(response.data));
   }
 }

@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:intl/intl.dart';
 import 'package:mmg/app/auth/modal/city_list_model.dart';
 import 'package:mmg/app/auth/modal/country_model.dart';
 import 'package:mmg/app/auth/modal/profile_model.dart';
@@ -449,7 +450,8 @@ class AuthProvider with ChangeNotifier {
   TextEditingController stateController = TextEditingController();
   TextEditingController cityController = TextEditingController();
 
-  setProfileValues({required BuildContext context}) {
+  setProfileValues({required BuildContext context}) async {
+    // LoadingOverlay.of(context).show();
     final data = context.read<AuthProvider>().profileDataModel;
     firstNameController.text = data.data!.firstName.toString();
     lastNameController.text = data.data!.lastName.toString();
@@ -462,6 +464,22 @@ class AuthProvider with ChangeNotifier {
     alternativeNumberController.text = data.data!.alternativeNumber.toString();
     profileEmailController.text = data.data!.emailId.toString();
     genderId = int.parse(data.data!.genderId.toString());
+    termsAndConditionsBoolean =
+        data.data!.customer!.isTermsAndCondition ?? false;
+    termsAndConditionsUuid = data.data!.customer!.termsAndConditionsId ?? '';
+
+    convertTimeStampToFormattedSateFn(timeMilliSecond: data.data!.dob!.toInt());
+    notifyListeners();
+    await changeCountryController(
+        id: data.data!.address![0].countryId.toString(),
+        value: data.data!.address![0].countryName.toString());
+    await changeStateController(
+        id: data.data!.address![0].stateId.toString(),
+        value: data.data!.address![0].stateName.toString());
+    await changeCityController(
+        id: data.data!.address![0].cityId.toString(),
+        value: data.data!.address![0].cityName.toString());
+    // LoadingOverlay.of(context).hide();
   }
 
   clearProfileValues({required BuildContext context}) {
@@ -469,12 +487,19 @@ class AuthProvider with ChangeNotifier {
     lastNameController.clear();
     mobileNumberController.clear();
     addressLineOneController.clear();
+
     addressLineTwoController.clear();
     landMarkController.clear();
     selectStateController.clear();
     picCodeController.clear();
     alternativeNumberController.clear();
+    countryId = '';
+    stateId = '';
+    cityId = '';
+    termsAndConditionsUuid = '';
+    timeStampDob = 0;
     genderId = 3;
+    dateController.clear();
   }
 
   setGenderId({required int value}) {
@@ -485,6 +510,36 @@ class AuthProvider with ChangeNotifier {
   String countryId = '';
   String stateId = '';
   String cityId = '';
+  String termsAndConditionsUuid = '';
+  int timeStampDob = 0;
+
+  convertToTimeStampFn({required BuildContext context}) async {
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      // initialDate: DateTime.now(),
+      firstDate: DateTime(1940),
+      lastDate: DateTime(2006),
+    );
+    if (pickedDate != null) {
+      timeStampDob = pickedDate.millisecondsSinceEpoch;
+      dateController.text = DateFormat("yyyy-MM-dd").format(pickedDate);
+      notifyListeners();
+    }
+    print(dateController.text);
+    notifyListeners();
+  }
+
+  convertTimeStampToFormattedSateFn({
+    required int timeMilliSecond,
+  }) {
+    timeStampDob = timeMilliSecond;
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(timeStampDob);
+    String formattedDate = DateFormat("yyyy-MM-dd").format(dateTime);
+    dateController.text = formattedDate.toString();
+
+    print("format $formattedDate");
+    notifyListeners();
+  }
 
   createProfileFN({required BuildContext context}) async {
     LoadingOverlay.of(context).show();
@@ -498,7 +553,7 @@ class AuthProvider with ChangeNotifier {
         "emailId": emailController.text,
         "roleId": 1,
         "genderId": genderId,
-        "dob": "577477800000",
+        "dob": timeStampDob,
         "password": passwordController.text,
         "confirmPassword": confirmPasswordController.text,
         "profileSource": "app",
@@ -578,5 +633,65 @@ class AuthProvider with ChangeNotifier {
     cityId = id;
     notifyListeners();
     print(cityController.text);
+  }
+
+  updateProfileFN({required BuildContext context}) async {
+    LoadingOverlay.of(context).show();
+    final data = context.read<AuthProvider>().profileDataModel;
+    try {
+      await services.putUpdateProfileService(data: {
+        "id": data.data!.id ?? '',
+        "firstName": firstNameController.text,
+        "lastName": lastNameController.text,
+        "mobileNumber": mobileNumberController.text,
+        "alternativeNumber": alternativeNumberController.text,
+        "emailId": emailController.text,
+        "roleId": 1,
+        "genderId": genderId,
+        "dob": timeStampDob,
+        "password": passwordController.text,
+        "confirmPassword": confirmPasswordController.text,
+        "profileSource": "app",
+        "address": [
+          {
+            "address1": addressLineOneController.text,
+            "address2": addressLineTwoController.text,
+            "landmark": landMarkController.text,
+            "cityId": cityId.isEmpty ? 0 : int.parse(cityId),
+            "stateId": stateId.isEmpty ? 0 : int.parse(stateId),
+            "countryId": countryId.isEmpty ? 0 : int.parse(countryId),
+            "pincode":
+                picCodeController.text.isEmpty ? 0 : picCodeController.text,
+            "type": data.data!.address![0].type ?? '',
+            "uuid": data.data!.address![0].uuid ?? '',
+            "isActive": data.data!.address![0].isActive
+          }
+        ],
+        "customer": {
+          "customerId": data.data!.customer!.customerId ?? '',
+          "customerTypeId": data.data!.customer!.customerTypeId ?? 1,
+          "customerTypeName": data.data!.customer!.customerTypeName ?? '',
+          "isTermsAndCondition":
+              data.data!.customer!.isTermsAndCondition ?? true,
+          "termsAndConditionsId":
+              data.data!.customer!.termsAndConditionsId ?? '',
+        }
+      });
+      getUserProfileDetailsFn();
+      FocusManager.instance.primaryFocus?.unfocus();
+      LoadingOverlay.of(context).hide();
+      Get.back();
+      successtoast(title: 'Profile Updated Successfully.');
+      // ignore: deprecated_member_use
+    } on DioError catch (e) {
+      LoadingOverlay.of(context).hide();
+      errorBottomSheetDialogs(
+        isDismissible: false,
+        enableDrag: false,
+        context: context,
+        title: '${e.response!.data['message']}',
+        subtitle: '',
+      );
+    }
   }
 }
