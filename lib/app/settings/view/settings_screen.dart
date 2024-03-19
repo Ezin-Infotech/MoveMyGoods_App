@@ -88,7 +88,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     )
                   : Padding(
                       padding: const EdgeInsets.all(8.0),
-<<<<<<< HEAD
                       child: Showcase(
                         key: homeProvider.globalKey9,
                         description: 'user profile',
@@ -125,47 +124,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             )
                           ],
                         ),
-=======
-                      child: Row(
-                        children: [
-                          obj.getUserProfilePicStatus ==
-                                  GetUserProfilePicStatus.loading
-                              ? const CircularProgressIndicator()
-                              : obj.profileDataModel.data == null
-                                  ? const SizedBox.shrink()
-                                  : CircleAvatar(
-                                      maxRadius: 20,
-                                      backgroundImage: NetworkImage(
-                                          "https://storage.googleapis.com/common-mmg/${obj.userProfilePic![0].path}"),
-                                    ),
-                          SizeBoxV(Responsive.width * 2),
-                          obj.profileDataModel.data == null
-                              ? const SizedBox.shrink()
-                              : Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "${obj.profileDataModel.data!.firstName ?? ''}  ${obj.profileDataModel.data!.lastName ?? ''}",
-                                      style:
-                                          context.textTheme.bodySmall!.copyWith(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    SizeBoxH(Responsive.height * 0.1),
-                                    Text(
-                                      obj.profileDataModel.data!.mobileNumber ??
-                                          '',
-                                      style:
-                                          context.textTheme.bodySmall!.copyWith(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                      ),
-                                    )
-                                  ],
-                                )
-                        ],
->>>>>>> 33499795dca22aeebfedc445289c0594a5c76418
                       ),
                     ),
               obj.isUserLogged ? const Divider() : const SizedBox.shrink(),
