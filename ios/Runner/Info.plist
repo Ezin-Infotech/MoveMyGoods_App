@@ -49,5 +49,10 @@
 	<string>We are use this location to find nearest restaurent you can proceed with location if you dont need see nearest restaurent you can skip the location part</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We are use this location to find nearest restaurent you can proceed with location if you dont need see nearest restaurent you can skip the location part</string>
+	<key>NSCameraUsageDescription</key>
+	<string>App needs access to the camera to take photos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App needs access to your photo library to select images</string>
+
 </dict>
 </plist>

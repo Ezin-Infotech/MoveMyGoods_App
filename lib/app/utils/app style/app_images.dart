@@ -9,4 +9,6 @@ class AppImages {
   static String filterLogo = 'assets/mingcute_filter-2-fill.png';
   static String smallvehicleImage = 'assets/download (1) 1.png';
   static String profileImage = 'assets/Base.png';
+  static String selectCamera = 'assets/images/camera.png';
+  static String selectGallery = 'assets/images/gallery.png';
 }

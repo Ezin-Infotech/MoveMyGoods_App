@@ -39,22 +39,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Expanded(
-                            child: InkWell(
-                              onTap: () => Get.toNamed(AppRoutes.login),
-                              child: Container(
-                                height: Responsive.height * 5,
-                                decoration: BoxDecoration(
-                                  color: AppColors.secondPrimary,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'Login',
-                                    style: context.textTheme.bodyMedium!
-                                        .copyWith(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700),
+                            child: Showcase(
+                              key: homeProvider.globalKey10,
+                              description: 'You had account please login',
+                              child: InkWell(
+                                onTap: () => Get.toNamed(AppRoutes.login),
+                                child: Container(
+                                  height: Responsive.height * 5,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.secondPrimary,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'Login',
+                                      style: context.textTheme.bodyMedium!
+                                          .copyWith(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -62,22 +66,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                           const SizeBoxV(16),
                           Expanded(
-                            child: InkWell(
-                              onTap: () => Get.toNamed(AppRoutes.signUp),
-                              child: Container(
-                                height: Responsive.height * 5,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: AppColors.primary),
-                                alignment: Alignment.center,
-                                child: Center(
-                                  child: Text(
-                                    'Signup',
-                                    style: context.textTheme.bodyMedium!
-                                        .copyWith(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700),
+                            child: Showcase(
+                              key: homeProvider.globalKey11,
+                              description: 'You have not account please Signup',
+                              child: InkWell(
+                                onTap: () => Get.toNamed(AppRoutes.signUp),
+                                child: Container(
+                                  height: Responsive.height * 5,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: AppColors.primary),
+                                  alignment: Alignment.center,
+                                  child: Center(
+                                    child: Text(
+                                      'Signup',
+                                      style: context.textTheme.bodyMedium!
+                                          .copyWith(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -88,42 +96,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     )
                   : Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Showcase(
-                        key: homeProvider.globalKey9,
-                        description: 'user profile',
-                        child: Row(
-                          children: [
-                            obj.getUserProfilePicStatus ==
-                                    GetUserProfilePicStatus.loading
-                                ? const CircularProgressIndicator()
-                                : CircleAvatar(
-                                    maxRadius: 20,
-                                    backgroundImage: NetworkImage(
-                                        "https://storage.googleapis.com/common-mmg/${obj.userProfilePic![0].path}"),
-                                  ),
-                            SizeBoxV(Responsive.width * 2),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "${obj.profileDataModel.data!.firstName ?? ''}  ${obj.profileDataModel.data!.lastName ?? ''}",
-                                  style: context.textTheme.bodySmall!.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 12,
-                                  ),
+                      child: Row(
+                        children: [
+                          obj.getUserProfilePicStatus ==
+                                  GetUserProfilePicStatus.loading
+                              ? const CircularProgressIndicator()
+                              : CircleAvatar(
+                                  maxRadius: 20,
+                                  backgroundImage: NetworkImage(
+                                      "https://storage.googleapis.com/common-mmg/${obj.userProfilePic![0].path}"),
                                 ),
-                                SizeBoxH(Responsive.height * 0.1),
-                                Text(
-                                  obj.profileDataModel.data!.mobileNumber ?? '',
-                                  style: context.textTheme.bodySmall!.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 12,
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
+                          SizeBoxV(Responsive.width * 2),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${obj.profileDataModel.data!.firstName ?? ''}  ${obj.profileDataModel.data!.lastName ?? ''}",
+                                style: context.textTheme.bodySmall!.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              SizeBoxH(Responsive.height * 0.1),
+                              Text(
+                                obj.profileDataModel.data!.mobileNumber ?? '',
+                                style: context.textTheme.bodySmall!.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12,
+                                ),
+                              )
+                            ],
+                          )
+                        ],
                       ),
                     ),
               obj.isUserLogged ? const Divider() : const SizedBox.shrink(),
