@@ -1,5 +1,9 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/settings/view/webview/terms_and_privacy.dart';
 import 'package:mmg/app/settings/view/widgets/profile_page.dart';
@@ -45,6 +49,45 @@ class SettingsProvider with ChangeNotifier {
     Icons.logout
   ];
   TextEditingController dateController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController otp1Controller = TextEditingController();
+  TextEditingController otp2Controller = TextEditingController();
+  TextEditingController otp3Controller = TextEditingController();
+  TextEditingController otp4Controller = TextEditingController();
+
+  bool validPhoneNumber = false;
+
+  validPhoneNumberFn(bool value) {
+    validPhoneNumber = value;
+    notifyListeners();
+  }
+
+  ValueNotifier<File> emptyFile = ValueNotifier<File>(File(''));
+
+  ValueNotifier<File?> userPhotoFile = ValueNotifier<File?>(null);
+
+  String passporthintText = '';
+  String userPhotohintText = '';
+
+  Future pickImageFromGalleryOrCamera(bool isGallery, context) async {
+    try {
+      final image = await ImagePicker().pickImage(
+          source: isGallery ? ImageSource.gallery : ImageSource.camera);
+      if (image == null) return;
+      final File imageTemporary = File(image.path);
+
+      userPhotoFile.value = imageTemporary;
+      List<String> parts = imageTemporary.path.split('/');
+      String fileName = parts.last;
+      userPhotohintText = fileName;
+
+      log(userPhotohintText);
+
+      notifyListeners();
+    } on Exception catch (e) {
+      log(e.toString());
+    }
+  }
 
   int loadingPercentage = 0;
 

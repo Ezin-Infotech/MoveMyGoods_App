@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisCount: 3,
                   crossAxisSpacing: 14,
                   mainAxisSpacing: 46,
-                  childAspectRatio: 8 / 6),
+                  childAspectRatio: 8 / 6.5),
               itemBuilder: (context, int index) {
                 return Consumer<AuthProvider>(builder: (context, auth, _) {
                   return Consumer<HomeProvider>(builder: (context, value, _) {
@@ -246,18 +246,22 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(
             height: 24,
           ),
-          ButtonWidgets(
-            onPressed: () {
-              if (AppPref.userToken != '') {
-                context
-                    .read<BookingProvider>()
-                    .changeShowRecieverDetails(isShow: false);
-                context.read<BookingProvider>().clearBooingVariables();
-                Get.toNamed(AppRoutes.bookingScreen);
-              } else {
-                Get.toNamed(AppRoutes.login);
-              }
-            },
+          Showcase(
+            key: context.read<HomeProvider>().globalKey7,
+            description: 'Take Order',
+            child: ButtonWidgets(
+              onPressed: () {
+                if (AppPref.userToken != '') {
+                  context
+                      .read<BookingProvider>()
+                      .changeShowRecieverDetails(isShow: false);
+                  context.read<BookingProvider>().clearBooingVariables();
+                  Get.toNamed(AppRoutes.bookingScreen);
+                } else {
+                  Get.toNamed(AppRoutes.login);
+                }
+              },
+            ),
           ),
         ],
       ),
