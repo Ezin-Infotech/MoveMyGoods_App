@@ -18,7 +18,6 @@ import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/common widgets/custom_text.dart';
-import '../../utils/common widgets/dialogs.dart';
 
 class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key});
@@ -196,20 +195,10 @@ class _BookingScreenState extends State<BookingScreen> {
                             );
                           },
                           onEditingProgress: (value, value2) {
-                            if (value.isNotEmpty) {
-                              booking.searchLocation(
-                                query: value,
-                                dest: false,
-                              );
-                            } else {
-                              errorBottomSheetDialogs(
-                                isDismissible: false,
-                                enableDrag: false,
-                                context: context,
-                                title: 'please select Your location',
-                                subtitle: '',
-                              );
-                            }
+                            booking.searchLocation(
+                              query: value,
+                              dest: false,
+                            );
                           },
                         );
                       },
@@ -561,6 +550,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                   controller:
                                       bookingProvider!.receiverNameController,
                                   labeText: 'Name',
+                                  requiredText: 'Enter Your name ',
                                 ),
                                 // BookingTextFieldWidgets(
                                 //   hintText: 'Email',
@@ -576,6 +566,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                       .receiverMobileNoController,
                                   labeText: 'Mobile No.',
                                   keyboardType: TextInputType.phone,
+                                  requiredText: 'enter mobile number ',
                                 ),
                                 // const SizeBoxH(10),
                                 // const CustomText(
@@ -636,6 +627,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                       .shipperMobileNoController,
                                   labeText: 'Mobile No.',
                                   keyboardType: TextInputType.phone,
+                                  requiredText: 'Please enter Mobile Number',
                                 ),
 
                                 // BookingTextFieldWidgets(
