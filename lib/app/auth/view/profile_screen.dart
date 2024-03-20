@@ -166,7 +166,6 @@ class SignUpProfileScreen extends StatelessWidget {
                 return ListTile(title: Text(suggestion.name.toString()));
               },
               onSuggestionSelected: (suggestion) {
-                print("$suggestion tapped");
                 context.read<AuthProvider>().changeCountryController(
                     id: suggestion.id.toString(),
                     value: suggestion.name.toString());
@@ -204,7 +203,6 @@ class SignUpProfileScreen extends StatelessWidget {
                 return ListTile(title: Text(suggestion.name.toString()));
               },
               onSuggestionSelected: (suggestion) {
-                print("$suggestion tapped");
                 context.read<AuthProvider>().changeStateController(
                     id: suggestion.id.toString(),
                     value: suggestion.name.toString());
@@ -239,7 +237,6 @@ class SignUpProfileScreen extends StatelessWidget {
                 return ListTile(title: Text(suggestion.name.toString()));
               },
               onSuggestionSelected: (suggestion) {
-                print("$suggestion tapped");
                 context.read<AuthProvider>().changeCityController(
                     id: suggestion.id.toString(),
                     value: suggestion.name.toString());

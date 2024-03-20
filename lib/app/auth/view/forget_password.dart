@@ -10,8 +10,8 @@ import 'package:provider/provider.dart';
 
 import '../../utils/common widgets/button.dart';
 
-class forgetPasswordScreen extends StatelessWidget {
-  const forgetPasswordScreen({super.key});
+class ForgetPasswordScreen extends StatelessWidget {
+  const ForgetPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -13,6 +13,7 @@ import 'package:mmg/app/auth/modal/state_list_model.dart';
 import 'package:mmg/app/auth/modal/terms_n_condition_model.dart';
 import 'package:mmg/app/auth/modal/user_profile_picture_model.dart';
 import 'package:mmg/app/auth/services/auth_services.dart';
+import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/home/view%20model/home_provider.dart';
 import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/common%20widgets/dialogs.dart';
@@ -135,6 +136,10 @@ class AuthProvider with ChangeNotifier {
       // clearLoginController();
       isUserLoggedFn(isLogged: true);
       context.read<HomeProvider>().getBookingCountFn();
+      context.read<BookingProvider>().getGoodsTypeFn();
+      context.read<AuthProvider>().getUserProfilePicFn();
+      context.read<AuthProvider>().getUserProfileDetailsFn();
+      context.read<HomeProvider>().getBookingCountFn();
       getCountryFn(context: context);
       Get.offNamed(AppRoutes.bookingScreen);
       // ignore: deprecated_member_use
@@ -165,10 +170,9 @@ class AuthProvider with ChangeNotifier {
     } else {
       LoadingOverlay.of(context).show();
       try {
-        final signInDataResponse = await services.postSignUpOtpService(
+        await services.postSignUpOtpService(
             email: signUpEmailController.text,
             phone: signUpPhoneController.text);
-        print(signInDataResponse);
         LoadingOverlay.of(context).hide();
         Get.offNamed(AppRoutes.otpScreen, arguments: {
           'isFromForgotPassword': false,
@@ -309,7 +313,6 @@ class AuthProvider with ChangeNotifier {
   getCountryFn({required BuildContext context}) async {
     try {
       final countryResponse = await services.getCountryService();
-      print('rrrrrrrrrrrrrrrr $countryResponse');
       countryList = countryResponse.data!.list!;
       // ignore: deprecated_member_use
     } on DioError catch (e) {
@@ -329,7 +332,6 @@ class AuthProvider with ChangeNotifier {
     try {
       final countryResponse =
           await services.getStateService(countryId: countryId);
-      print('rrrrrrrrrrrrrrrr $countryResponse');
       stateListElement = countryResponse.data!.list!;
       // ignore: deprecated_member_use
     } on DioError catch (e) {
@@ -348,7 +350,6 @@ class AuthProvider with ChangeNotifier {
   getCityFn() async {
     try {
       final countryResponse = await services.getCityService(stateId: stateId);
-      print('rrrrrrrrrrrrrrrr $countryResponse');
       cityListElement = countryResponse.data!.list!;
       // ignore: deprecated_member_use
     } on DioError catch (e) {
@@ -368,7 +369,6 @@ class AuthProvider with ChangeNotifier {
   getTermsNConditionFn() async {
     try {
       final countryResponse = await services.getTermsNConditionService();
-      print('rrrrrrrrrrrrrrrr $countryResponse');
       termsAndConditions = countryResponse.data!.list!;
       termsAndConditionsBoolean = true;
       notifyListeners();
@@ -414,7 +414,6 @@ class AuthProvider with ChangeNotifier {
   getUserProfileDetailsFn() async {
     getUserProfileDetailsStatus = GetUserProfileDetailsStatus.loading;
     try {
-      print("try getUserProfileDetailsFn");
       final countryResponse = await services.getProfileDetailService();
       profileDataModel = countryResponse;
       getUserProfileDetailsStatus = GetUserProfileDetailsStatus.loaded;
@@ -525,7 +524,6 @@ class AuthProvider with ChangeNotifier {
       dateController.text = DateFormat("yyyy-MM-dd").format(pickedDate);
       notifyListeners();
     }
-    print(dateController.text);
     notifyListeners();
   }
 
@@ -537,7 +535,6 @@ class AuthProvider with ChangeNotifier {
     String formattedDate = DateFormat("yyyy-MM-dd").format(dateTime);
     dateController.text = formattedDate.toString();
 
-    print("format $formattedDate");
     notifyListeners();
   }
 
@@ -613,7 +610,6 @@ class AuthProvider with ChangeNotifier {
     cityListElement = [];
     cityId = '';
     getStateFn();
-    print(countryController.text);
   }
 
   changeStateController({required String id, required String value}) {
@@ -624,7 +620,6 @@ class AuthProvider with ChangeNotifier {
     cityListElement = [];
     cityId = '';
     getCityFn();
-    print(stateController.text);
   }
 
   changeCityController({required String id, required String value}) {
@@ -632,7 +627,6 @@ class AuthProvider with ChangeNotifier {
     cityController.text = value;
     cityId = id;
     notifyListeners();
-    print(cityController.text);
   }
 
   updateProfileFN({required BuildContext context}) async {

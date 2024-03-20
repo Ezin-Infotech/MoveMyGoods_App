@@ -8,7 +8,6 @@ import 'package:mmg/app/utils/backend/urls.dart';
 class HomeServices extends Urls {
   /* Dashboard Booking Count */
   Future<DashboardBookingCountModel> dashboardBookingCountService() async {
-    print('reached');
     final response = await dio.get('$bookingCount/${AppPref.userProfileId}',
         options: Options(
           headers: {
@@ -18,7 +17,6 @@ class HomeServices extends Urls {
           },
         ));
 
-    print("dashboardBookingCountService: $response");
     return dashboardBookingCountModelFromJson(jsonEncode(response.data));
   }
 }

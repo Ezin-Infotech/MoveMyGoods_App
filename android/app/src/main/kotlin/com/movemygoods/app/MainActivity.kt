@@ -1,4 +1,4 @@
-package com.eatplek.user
+package com.movemygoods.app
 
 import io.flutter.embedding.android.FlutterActivity
 

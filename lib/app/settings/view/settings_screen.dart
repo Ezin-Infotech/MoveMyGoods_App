@@ -24,6 +24,11 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final homeProvider = Provider.of<HomeProvider>(context, listen: false);
     return CommonScaffold(
@@ -96,39 +101,47 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     )
                   : Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          obj.getUserProfilePicStatus ==
-                                  GetUserProfilePicStatus.loading
-                              ? const CircularProgressIndicator()
-                              : CircleAvatar(
-                                  maxRadius: 20,
-                                  backgroundImage: NetworkImage(
-                                      "https://storage.googleapis.com/common-mmg/${obj.userProfilePic![0].path}"),
-                                ),
-                          SizeBoxV(Responsive.width * 2),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "${obj.profileDataModel.data!.firstName ?? ''}  ${obj.profileDataModel.data!.lastName ?? ''}",
-                                style: context.textTheme.bodySmall!.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              SizeBoxH(Responsive.height * 0.1),
-                              Text(
-                                obj.profileDataModel.data!.mobileNumber ?? '',
-                                style: context.textTheme.bodySmall!.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12,
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
+                      child: obj.userProfilePic == null ||
+                              obj.userProfilePic!.isEmpty
+                          ? const SizedBox.shrink()
+                          : Row(
+                              children: [
+                                obj.getUserProfilePicStatus ==
+                                        GetUserProfilePicStatus.loading
+                                    ? const CircularProgressIndicator()
+                                    : obj.userProfilePic == null
+                                        ? const SizedBox.shrink()
+                                        : CircleAvatar(
+                                            maxRadius: 20,
+                                            backgroundImage: NetworkImage(
+                                                "https://storage.googleapis.com/common-mmg/${obj.userProfilePic![0].path}"),
+                                          ),
+                                SizeBoxV(Responsive.width * 2),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${obj.profileDataModel.data!.firstName ?? ''}  ${obj.profileDataModel.data!.lastName ?? ''}",
+                                      style:
+                                          context.textTheme.bodySmall!.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                    SizeBoxH(Responsive.height * 0.1),
+                                    Text(
+                                      obj.profileDataModel.data!.mobileNumber ??
+                                          '',
+                                      style:
+                                          context.textTheme.bodySmall!.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 12,
+                                      ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
                     ),
               obj.isUserLogged ? const Divider() : const SizedBox.shrink(),
               ListView.separated(

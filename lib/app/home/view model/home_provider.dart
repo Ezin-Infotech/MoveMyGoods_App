@@ -42,23 +42,12 @@ class HomeProvider with ChangeNotifier {
   final GlobalKey globalKey18 = GlobalKey();
 
   List<String> descriptions = [
-    'Welcome to your digital hub! Our app home is your gateway to seamless navigation',
-    'You can connect\n your watch',
-    'Unlock exclusive rewards with our loyalty tier system',
-    'Your virtual shopping companion awaits',
-    'Meet your new virtual assistant.You can chat with us',
-    'Meet your new virtual assistant.You can chat with us',
-  ];
-
-  List<String> descriptions1 = [
-    'Welcome to your digital hub! Our app home is your gateway to seamless navigation',
-    'You can connect\n your watch',
-    'Unlock exclusive rewards with our loyalty tier system',
-    'Your virtual shopping companion awaits',
-    'Meet your new virtual assistant.You can chat with us',
-    'Meet your new virtual assistant.You can chat with us',
-    'Meet your new virtual assistant.You can chat with us',
-    'Meet your new virtual assistant.You can chat with us',
+    'This is your all Bookings count.',
+    'This is your Quotation Bookings count.',
+    'This is your Pending Bookings count.',
+    'This is your Active Bookings count.',
+    'This is your Completed Bookings count.',
+    'This is your Cancelled Bookings count.',
   ];
 
   int curentIndex = 0;
@@ -70,7 +59,7 @@ class HomeProvider with ChangeNotifier {
 
   List<String> bookingTiltes = [
     'All bookings',
-    'Bookings',
+    'Quotation',
     'Pending',
     'Active',
     'Completed',
@@ -88,7 +77,6 @@ class HomeProvider with ChangeNotifier {
   getBookingCountFn() async {
     getAllBookingCountStatus = GetAllBookingCountStatus.loading;
     try {
-      print('dashboardBookingCountService reached');
       final countRespose = await services.dashboardBookingCountService();
 
       bookingCountData = countRespose;
@@ -97,7 +85,6 @@ class HomeProvider with ChangeNotifier {
       notifyListeners();
       // ignore: deprecated_member_use
     } catch (e) {
-      print('dashboardBookingCountService $e');
       getAllBookingCountStatus = GetAllBookingCountStatus.error;
       notifyListeners();
     }

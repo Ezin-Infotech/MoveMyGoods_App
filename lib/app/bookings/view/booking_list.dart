@@ -54,7 +54,10 @@ class _BookingListScreenState extends State<BookingListScreen> {
               children: [
                 value.tempSelectedStatus == 'All'
                     ? Showcase(
-                        description: 'Current type booking',
+                        tooltipBackgroundColor: AppColors.primary,
+                        textColor: AppColors.kLight,
+                        tooltipPadding: const EdgeInsets.all(16),
+                        description: 'Current Booking Status',
                         key: homeProvider.globalKey9,
                         child: Text(
                           'All Bookings',
@@ -66,7 +69,10 @@ class _BookingListScreenState extends State<BookingListScreen> {
                         ),
                       )
                     : Showcase(
-                        description: 'Current type booking',
+                        tooltipBackgroundColor: AppColors.primary,
+                        textColor: AppColors.kLight,
+                        tooltipPadding: const EdgeInsets.all(16),
+                        description: 'Current Booking Status',
                         key: homeProvider.globalKey9,
                         child: Row(
                           children: [
@@ -121,7 +127,11 @@ class _BookingListScreenState extends State<BookingListScreen> {
                         ),
                       ),
                 Showcase(
-                  description: 'Bookign filter option',
+                  tooltipBackgroundColor: AppColors.primary,
+                  textColor: AppColors.kLight,
+                  tooltipPadding: const EdgeInsets.all(16),
+                  description:
+                      'Booking filter option, You can change filter option by selecting booking status.',
                   key: homeProvider.globalKey8,
                   child: IconButton(
                       icon: const Icon(
@@ -205,12 +215,14 @@ class _BookingListScreenState extends State<BookingListScreen> {
                         },
                         separatorBuilder: (context, index) =>
                             const SizeBoxH(16),
-                        itemCount: value.bookingata.list!.length),
+                        itemCount: 10),
                   )
                 : value.getBookingStatus == GetBookingStatus.initial ||
                         value.bookingata.list!.isEmpty ||
                         value.bookingata.list == null
-                    ? Container(
+                    ? SizedBox(
+                        height: 400,
+                        width: context.width,
                         child: const Center(
                           child: Text('No Bookings'),
                         ),
@@ -524,14 +536,12 @@ class FilterWidget extends StatelessWidget {
               ),
               const SizeBoxV(8),
               Expanded(
-                child: Container(
-                  child: Text(
-                    "$title Bookings",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
+                child: Text(
+                  "$title Bookings",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
               ),
             ],

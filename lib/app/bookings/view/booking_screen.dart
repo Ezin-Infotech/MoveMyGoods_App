@@ -18,7 +18,6 @@ import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/common widgets/custom_text.dart';
-import 'widgets/drop_down_widgets.dart';
 
 class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key});
@@ -170,8 +169,7 @@ class _BookingScreenState extends State<BookingScreen> {
                             PlaceSuggestion place = booking.searchResults
                                 .firstWhere((element) => element.name == da);
                             LatLng latLng = await booking.getPlaceDetails(
-                              place.placeId,
-                            );
+                                place.placeId, context, true);
                             onSelectLocation(latLng, true);
                             markers.add(Marker(
                               markerId: const MarkerId(""),
@@ -224,8 +222,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                 .destinationSearchResults
                                 .firstWhere((element) => element.name == da);
                             LatLng latLng = await booking.getPlaceDetails(
-                              place.placeId,
-                            );
+                                place.placeId, context, false);
                             onSelectLocation(latLng, false);
                             markers.add(Marker(
                               markerId: const MarkerId(""),
@@ -291,7 +288,6 @@ class _BookingScreenState extends State<BookingScreen> {
                               title: Text(suggestion.name.toString()));
                         },
                         onSuggestionSelected: (suggestion) {
-                          print("$suggestion tapped");
                           context
                               .read<BookingProvider>()
                               .changeGoodsTypeController(
@@ -308,14 +304,14 @@ class _BookingScreenState extends State<BookingScreen> {
                       keyboardType: TextInputType.number,
                       requiredText: 'Please enter Goods Value',
                     ),
-                    BookingTextFieldWidgets(
-                      hintText: 'Maximum 5 Labours',
-                      controller: bookingProvider!.numberOfLabourController,
-                      labeText: 'Number of Labours *',
-                      keyboardType: TextInputType.number,
-                      maxLength: 1,
-                      requiredText: 'Please enter Number of Labours',
-                    ),
+                    // BookingTextFieldWidgets(
+                    //   hintText: 'Maximum 5 Labours',
+                    //   controller: bookingProvider!.numberOfLabourController,
+                    //   labeText: 'Number of Labours *',
+                    //   keyboardType: TextInputType.number,
+                    //   maxLength: 1,
+                    //   requiredText: 'Please enter Number of Labours',
+                    // ),
                     // Text(
                     //   'Number of labours should not exceed more than 5',
                     //   style: context.textTheme.bodyMedium!
@@ -326,7 +322,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       text: 'Goods Weight *',
                     ),
                     const SizeBoxH(8),
-                    const DropdownInsideTextFormField(),
+                    // const DropdownInsideTextFormField(),
                     // const SizeBoxH(8),
                     booking.showGoodsWeight
                         ? booking.getGoodsWeightStatus ==
@@ -451,10 +447,44 @@ class _BookingScreenState extends State<BookingScreen> {
                                         fontSize: 16,
                                         color: const Color(0xff0D9F00)),
                               ),
-                              const Icon(
-                                Icons.arrow_drop_down,
-                                size: 28,
-                              )
+                              IconButton(
+                                  icon: const Icon(
+                                    Icons.arrow_drop_down,
+                                    size: 28,
+                                  ),
+                                  onPressed: () => priceDialog(
+                                        context: context,
+                                        baseFare: booking
+                                            .bookingFarePriceDetailsModel
+                                            .data!
+                                            .baseFare
+                                            .toString(),
+                                        cgst: booking
+                                            .bookingFarePriceDetailsModel
+                                            .data!
+                                            .cgst
+                                            .toString(),
+                                        costPerKm: booking
+                                            .bookingFarePriceDetailsModel
+                                            .data!
+                                            .perKm
+                                            .toString(),
+                                        distance: booking
+                                            .bookingFarePriceDetailsModel
+                                            .data!
+                                            .distance
+                                            .toString(),
+                                        labourCost: booking
+                                            .bookingFarePriceDetailsModel
+                                            .data!
+                                            .labourCharges
+                                            .toString(),
+                                        sgst: booking
+                                            .bookingFarePriceDetailsModel
+                                            .data!
+                                            .sgst
+                                            .toString(),
+                                      )),
                             ],
                           )
                         : const SizedBox.shrink(),
@@ -482,20 +512,23 @@ class _BookingScreenState extends State<BookingScreen> {
                     SizeBoxH(Responsive.height * 3),
                     booking.showRecieverDetails
                         ? const SizedBox.shrink()
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ButtonWidgets(
-                                buttonText: 'Continue',
-                                onPressed: () {
-                                  context
-                                      .read<BookingProvider>()
-                                      .changeShowRecieverDetails(isShow: true);
-                                  // context.push(const LoginScreen());
-                                },
-                              ),
-                            ],
-                          ),
+                        : booking.showFarePrice
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ButtonWidgets(
+                                    buttonText: 'Continue',
+                                    onPressed: () {
+                                      context
+                                          .read<BookingProvider>()
+                                          .changeShowRecieverDetails(
+                                              isShow: true);
+                                      // context.push(const LoginScreen());
+                                    },
+                                  ),
+                                ],
+                              )
+                            : const SizedBox.shrink(),
                     SizeBoxH(Responsive.height * 4),
                     Consumer<BookingProvider>(builder: (context, value, _) {
                       return value.showRecieverDetails
@@ -518,15 +551,16 @@ class _BookingScreenState extends State<BookingScreen> {
                                       bookingProvider!.receiverNameController,
                                   labeText: 'Name',
                                 ),
+                                // BookingTextFieldWidgets(
+                                //   hintText: 'Email',
+                                //   controller:
+                                //       bookingProvider!.receiverEmailController,
+                                //   labeText: 'Email Address',
+                                //   keyboardType: TextInputType.emailAddress,
+                                //   requiredText: 'Enter Your Email',
+                                // ),
                                 BookingTextFieldWidgets(
-                                  hintText: 'Email',
-                                  controller:
-                                      bookingProvider!.receiverEmailController,
-                                  labeText: 'Email Address',
-                                  keyboardType: TextInputType.emailAddress,
-                                ),
-                                BookingTextFieldWidgets(
-                                  hintText: 'Number',
+                                  hintText: 'Enter Your Mobile No',
                                   controller: bookingProvider!
                                       .receiverMobileNoController,
                                   labeText: 'Mobile No.',
@@ -545,12 +579,13 @@ class _BookingScreenState extends State<BookingScreen> {
                                 // ),
                                 // const SizeBoxH(8),
                                 // const DropdownInsideTextFormField(),
-                                BookingTextFieldWidgets(
-                                  hintText: '(eg.DUMPA1234)',
-                                  controller:
-                                      bookingProvider!.receiverPanNoController,
-                                  labeText: 'PAN No.',
-                                ),
+                                // BookingTextFieldWidgets(
+                                //   hintText: '(eg.DUMPA1234)',
+                                //   controller:
+                                //       bookingProvider!.receiverPanNoController,
+                                //   labeText: 'PAN No.',
+                                //   requiredText: 'Enter Your PAN No ',
+                                // ),
                                 // BookingTextFieldWidgets(
                                 //   hintText: '(eg.GHXXXXXXXX000)',
                                 //   controller:
@@ -574,14 +609,16 @@ class _BookingScreenState extends State<BookingScreen> {
                                   controller:
                                       bookingProvider!.shipperNameController,
                                   labeText: 'Name',
+                                  requiredText: 'Enter Your name ',
                                 ),
-                                BookingTextFieldWidgets(
-                                  hintText: 'Email',
-                                  controller:
-                                      bookingProvider!.shipperemailController,
-                                  labeText: 'Email Address',
-                                  keyboardType: TextInputType.emailAddress,
-                                ),
+                                // BookingTextFieldWidgets(
+                                //   hintText: 'Email',
+                                //   controller:
+                                //       bookingProvider!.shipperemailController,
+                                //   labeText: 'Email Address',
+                                //   keyboardType: TextInputType.emailAddress,
+                                //   requiredText: 'Enter Your Email ',
+                                // ),
                                 BookingTextFieldWidgets(
                                   hintText: 'Number',
                                   controller: bookingProvider!
@@ -590,12 +627,12 @@ class _BookingScreenState extends State<BookingScreen> {
                                   keyboardType: TextInputType.phone,
                                 ),
 
-                                BookingTextFieldWidgets(
-                                  hintText: '(eg.DUMPA1234)',
-                                  controller:
-                                      bookingProvider!.shipperpanNOController,
-                                  labeText: 'PAN No.',
-                                ),
+                                // BookingTextFieldWidgets(
+                                //   hintText: '(eg.DUMPA1234)',
+                                //   controller:
+                                //       bookingProvider!.shipperpanNOController,
+                                //   labeText: 'PAN No.',
+                                // ),
                                 // BookingTextFieldWidgets(
                                 //   hintText: '(eg.GHXXXXXXXX000)',
                                 //   controller:
@@ -637,5 +674,138 @@ class _BookingScreenState extends State<BookingScreen> {
     );
   }
 }
+// bookingFarePriceDetailsModel = goodsResponse;
 
-List<String> items = ['Item 1', 'Item 2', 'Item 3'];
+Future priceDialog(
+    {required BuildContext context,
+    required String distance,
+    required String baseFare,
+    required String costPerKm,
+    required String labourCost,
+    required String cgst,
+    required String sgst}) async {
+  return await showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          contentPadding: const EdgeInsets.all(16),
+          insetPadding: const EdgeInsets.all(16),
+          children: <Widget>[
+            Row(
+              children: [
+                Text(
+                  "Distance  :",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  distance,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                )
+              ],
+            ),
+            const SizeBoxH(10),
+            Row(
+              children: [
+                Text(
+                  "Base Fare  :",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  baseFare,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                )
+              ],
+            ),
+            const SizeBoxH(10),
+            Row(
+              children: [
+                Text(
+                  "Price Per Km  :",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  costPerKm,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                )
+              ],
+            ),
+            const SizeBoxH(10),
+            Row(
+              children: [
+                Text(
+                  "Labour Cost  :",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  labourCost,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                )
+              ],
+            ),
+            const SizeBoxH(10),
+            Row(
+              children: [
+                Text(
+                  "CGST  :",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  cgst,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                )
+              ],
+            ),
+            const SizeBoxH(10),
+            Row(
+              children: [
+                Text(
+                  "SGST  :",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  sgst,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                )
+              ],
+            ),
+          ],
+        );
+      });
+}

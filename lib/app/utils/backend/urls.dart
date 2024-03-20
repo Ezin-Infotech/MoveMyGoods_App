@@ -33,7 +33,7 @@ class Urls {
   final getAllProfile = '$baseUrl/user-profile/all';
 
   /* BOOKING */
-  final bookingCount = "$baseUrl/v1/dashboard/booking/Good#888";
+  final bookingCount = "$baseUrl/v1/dashboard/booking/profile";
   final bookingByStatus = "$baseUrl/v2";
 
   final countryUrl = "http://103.160.153.57:8085/mmg/api/v1/country";
@@ -57,10 +57,4 @@ class Urls {
       'http://103.160.153.57:8083/mmg/api/v2/profile/forgotpassword/mobile';
   final updatePassWord =
       'http://103.160.153.57:8083/mmg/api/v2/profile/password';
-  final getUserCoupon = '$baseUrl/coupon/get-all';
-  final getUserAllAdress = '$baseUrl/address';
-  final cartCheckout = '$baseUrl/order';
-  final createAdd = '$baseUrl/address/create';
-  final updateAdd = '$baseUrl/address/update';
-  final pharmaSearch = '$baseUrl/product/pharma';
 }

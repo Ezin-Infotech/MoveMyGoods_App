@@ -88,7 +88,7 @@ class RouteGenerator {
       case AppRoutes.forgetPasswordPage:
         return pagetransition(
           settings: settings,
-          widget: const forgetPasswordScreen(),
+          widget: const ForgetPasswordScreen(),
         );
       case AppRoutes.forgetPasswordEnterPage:
         return pagetransition(

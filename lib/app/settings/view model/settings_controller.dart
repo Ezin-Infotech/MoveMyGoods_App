@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:developer';
 import 'dart:io';
 
@@ -125,8 +127,7 @@ class SettingsProvider with ChangeNotifier {
       Get.to(const ProfileScreen());
     } else if (index == 2) {
       Get.to(const TermsAndPrivacy(
-        url:
-            'https://mail.google.com/mail/u/0/#search/zaya+%5C+/FMfcgzGwJvpfWWmqXxshHtJgmlXcfWhN',
+        url: 'http://movemygoods.in/termsandconditions',
       ));
     } else if (index == 3) {
       Get.to(const TermsAndPrivacy(
@@ -146,9 +147,6 @@ class SettingsProvider with ChangeNotifier {
             onTapYes: () {
               logoutUser(context: context);
               Get.back();
-              // value.foodCartProductRemovefn(
-              //     productIds:
-              //         items.product!.id.toString());
             },
           );
         },
@@ -159,8 +157,7 @@ class SettingsProvider with ChangeNotifier {
   userNotLoggedFn({required int index, required BuildContext context}) {
     if (index == 1) {
       Get.to(const TermsAndPrivacy(
-        url:
-            'https://mail.google.com/mail/u/0/#search/zaya+%5C+/FMfcgzGwJvpfWWmqXxshHtJgmlXcfWhN',
+        url: 'http://movemygoods.in/termsandconditions',
       ));
     } else if (index == 2) {
       Get.to(const TermsAndPrivacy(

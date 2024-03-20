@@ -23,6 +23,7 @@ class MyToggleIconButtonFilter extends StatefulWidget {
   const MyToggleIconButtonFilter({super.key, required this.isToggled});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyToggleIconButtonFilterState createState() =>
       _MyToggleIconButtonFilterState();
 }

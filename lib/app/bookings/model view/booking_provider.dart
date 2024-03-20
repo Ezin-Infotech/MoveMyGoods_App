@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 
 import 'package:dio/dio.dart';
@@ -15,6 +17,7 @@ import 'package:mmg/app/bookings/model/booking_weight_model.dart';
 import 'package:mmg/app/bookings/model/goods_type_model.dart';
 import 'package:mmg/app/bookings/model/vehicle_details_model.dart';
 import 'package:mmg/app/bookings/services/booking_services.dart';
+import 'package:mmg/app/utils/common%20widgets/dialogs.dart';
 import 'package:mmg/app/utils/common%20widgets/loading_overlay.dart';
 import 'package:mmg/app/utils/enums.dart';
 
@@ -54,25 +57,6 @@ class BookingProvider with ChangeNotifier {
 // 'COMPLETED'
 // 'ACTIVE'
 
-  List<String> lists = [
-    'DOCTOR',
-    'ENGINEER',
-    'DEVELOPER',
-    'SOCIALWORK',
-    'BUSINESS',
-    'OTHER'
-  ];
-
-  List<String> reciptContent = [
-    'DOCTOR',
-    'ENGINEER',
-    'DEVELOPER',
-    'SOCIALWORK',
-    'BUISSINESS',
-    'OTHER'
-  ];
-
-  List<String> goodsWight = ['100', '200', '300', '400', '500', '750'];
   changeShowRecieverDetails({required bool isShow}) {
     showRecieverDetails = isShow;
     notifyListeners();
@@ -121,14 +105,12 @@ class BookingProvider with ChangeNotifier {
     getBookingDetailStatus = GetBookingDetialsStatus.loading;
     // notifyListeners();
     try {
-      final countRespose = await services.getBookingDetailsByIdService(id: id);
-      bookingDetail = countRespose;
-      print("bookingDetail: $bookingDetail");
+      final countResponse = await services.getBookingDetailsByIdService(id: id);
+      bookingDetail = countResponse;
       getBookingDetailStatus = GetBookingDetialsStatus.loaded;
       notifyListeners();
       // ignore: deprecated_member_use
     } catch (e) {
-      print('bookingDetail $e');
       getBookingDetailStatus = GetBookingDetialsStatus.error;
       notifyListeners();
     }
@@ -141,8 +123,8 @@ class BookingProvider with ChangeNotifier {
     getBookingStatus = GetBookingStatus.loading;
     // notifyListeners();
     try {
-      final countRespose = await services.getAllBookingsService();
-      bookingata = countRespose.data!;
+      final countResponse = await services.getAllBookingsService();
+      bookingata = countResponse.data!;
 
       getBookingStatus = GetBookingStatus.loaded;
       notifyListeners();
@@ -157,9 +139,9 @@ class BookingProvider with ChangeNotifier {
     getBookingStatus = GetBookingStatus.loading;
     // notifyListeners();
     try {
-      final countRespose =
+      final countResponse =
           await services.getBookingsByStatusService(status: selectedStatus);
-      bookingata = countRespose.data!;
+      bookingata = countResponse.data!;
 
       getBookingStatus = GetBookingStatus.loaded;
       notifyListeners();
@@ -179,12 +161,10 @@ class BookingProvider with ChangeNotifier {
     try {
       final goodsResponse = await services.getGoodsTypeService();
       goodsTypeData = goodsResponse.data!;
-      print(bookingDetail);
       getGoodsTypeStatus = GetGoodsTypeStatus.loaded;
       notifyListeners();
       // ignore: deprecated_member_use
     } catch (e) {
-      print('bookingDetail $e');
       getGoodsTypeStatus = GetGoodsTypeStatus.error;
       notifyListeners();
     }
@@ -212,12 +192,29 @@ class BookingProvider with ChangeNotifier {
     shipperMobileNoController.clear();
     shipperpanNOController.clear();
     shipperGstNoController.clear();
-
     showRecieverDetails = false;
     showPriceDetails = false;
     showGoodsWeight = false;
     showVehicleImage = false;
     showFarePrice = false;
+    goodsWeightId = '';
+    goodsTypeId = '';
+    sourceLatitude = 0;
+    sourceLongitude = 0;
+    destinationLatitude = 0;
+    destinationLongitude = 0;
+    vehicleCategoryId = 0;
+    sStreet = '';
+    sCity = '';
+    sState = '';
+    sCountry = '';
+    sLandMark = '';
+    dStreet = '';
+    dCity = '';
+    dState = '';
+    dCountry = '';
+    sPincode = '';
+    dPincode = '';
   }
 
   String goodsWeightId = '';
@@ -231,14 +228,12 @@ class BookingProvider with ChangeNotifier {
       getGoodsVehicleDetailsFn();
     }
     getGoodsWeightFn();
-    print(goodsTypeController.text);
   }
 
   changeGoodsWeight({required String id}) {
     goodsWeightId = id;
     getGoodsVehicleDetailsFn();
     notifyListeners();
-    print(goodsWeightId);
   }
 
   changeGoodsWeightFn({required bool isShow}) {
@@ -263,22 +258,20 @@ class BookingProvider with ChangeNotifier {
     // notifyListeners();
     try {
       final goodsResponse = await services.getGoodsWeightService(data: {
-        "sourcelatitude": 12.2958104,
-        "sourcelongitude": 76.6393805,
-        "destinationlatitude": 12.2544597,
-        "destinationlongitude": 76.7170574,
-        "sCountry": "India",
-        "sState": "Karnataka",
-        "sCity": "Mysore Division"
+        "sourcelatitude": sourceLatitude,
+        "sourcelongitude": sourceLongitude,
+        "destinationlatitude": destinationLatitude,
+        "destinationlongitude": destinationLongitude,
+        "sCountry": sCountry,
+        "sState": sState,
+        "sCity": sCity
       });
       goodsWeightData = goodsResponse.data!;
-      print(bookingDetail);
       getGoodsWeightStatus = GetGoodsWeightStatus.loaded;
       showGoodsWeight = true;
       notifyListeners();
       // ignore: deprecated_member_use
     } catch (e) {
-      print('bookingDetail $e');
       getGoodsWeightStatus = GetGoodsWeightStatus.error;
       notifyListeners();
     }
@@ -297,14 +290,12 @@ class BookingProvider with ChangeNotifier {
           latitude: 12.2958104,
           longitude: 76.6393805);
       goodsVehicleDetailsModel = goodsResponse;
-      print(goodsVehicleDetailsModel);
       getGoodsVehicleStatus = GetGoodsVehicleStatus.loaded;
       showVehicleImage = true;
       getBookingFarePriceFn();
       notifyListeners();
       // ignore: deprecated_member_use
     } catch (e) {
-      print('bookingDetail $e');
       getGoodsVehicleStatus = GetGoodsVehicleStatus.error;
       notifyListeners();
     }
@@ -319,16 +310,16 @@ class BookingProvider with ChangeNotifier {
     // notifyListeners();
     try {
       final goodsResponse = await services.getBookingFarePriceService(data: {
-        "sourcelatitude": 12.2544597,
-        "sourcelongitude": 76.7170574,
-        "destinationlatitude": 12.2958104,
-        "destinationlongitude": 76.6393805,
+        "sourcelatitude": sourceLatitude,
+        "sourcelongitude": sourceLongitude,
+        "destinationlatitude": destinationLatitude,
+        "destinationlongitude": destinationLongitude,
         "vehicleCategoryId":
             goodsVehicleDetailsModel.data![0].vehicleCategoryId,
-        "sCountry": "India",
-        "sState": "Karnataka",
-        "sCity": "Mysore Division",
-        "referenceId": "",
+        "sCountry": sCountry,
+        "sState": sState,
+        "sCity": sCity,
+        "referenceId": goodsVehicleDetailsModel.data![0].vendorId,
         "vendorType": goodsVehicleDetailsModel.data![0].vendorType,
         "profileId": "b0270f1e-bed8-47cb-b490-662f9f4b51ff",
         "goodsvalue": int.parse(goodsValueController.text),
@@ -340,13 +331,11 @@ class BookingProvider with ChangeNotifier {
         "goodsTypeId": int.parse(goodsTypeId),
       });
       bookingFarePriceDetailsModel = goodsResponse;
-      print(bookingFarePriceDetailsModel);
       getBookingFarePriceStatus = GetBookingFarePriceStatus.loaded;
       showFarePrice = true;
       notifyListeners();
       // ignore: deprecated_member_use
     } catch (e) {
-      print('bookingDetail $e');
       getBookingFarePriceStatus = GetBookingFarePriceStatus.error;
       notifyListeners();
     }
@@ -394,7 +383,6 @@ class BookingProvider with ChangeNotifier {
         },
       );
       if (response.statusCode == 200) {
-        print("searchLocation: ${response.data}");
         if (dest) {
           destinationSearchResults = [];
           for (var place in response.data['predictions']) {
@@ -425,20 +413,84 @@ class BookingProvider with ChangeNotifier {
     }
   }
 
-  Future<LatLng> getPlaceDetails(String placeId) async {
+  Future<LatLng> getPlaceDetails(
+      String placeId, BuildContext context, bool isSource) async {
     try {
       final response = await Dio().get(
         '$_baseUrl/details/json',
         queryParameters: {
           'place_id': placeId,
-          'fields': 'geometry',
+          'fields': 'geometry,address_components,formatted_address',
           'key': _apiKey,
         },
       );
 
       if (response.statusCode == 200) {
-        print('PLACE DETAILS: ${response.data}');
         final location = response.data['result']['geometry']['location'];
+        if (isSource) {
+          sourceLatitude = double.parse(location['lat'].toString());
+          sourceLongitude = double.parse(location['lng'].toString());
+        } else {
+          destinationLatitude = location['lat'];
+          destinationLongitude = location['lng'];
+        }
+
+        if (isSource) {
+          sStreet = response.data["result"]["formatted_address"];
+
+          for (int i = 0;
+              i < response.data["result"]["address_components"].length;
+              i++) {
+            if (response.data["result"]["address_components"][i]["types"]
+                .contains("administrative_area_level_2")) {
+              sCity =
+                  response.data["result"]["address_components"][i]["long_name"];
+            } else if (response.data["result"]["address_components"][i]["types"]
+                .contains("administrative_area_level_1")) {
+              sState =
+                  response.data["result"]["address_components"][i]["long_name"];
+            } else if (response.data["result"]["address_components"][i]["types"]
+                .contains("country")) {
+              sCountry =
+                  response.data["result"]["address_components"][i]["long_name"];
+            } else if (response.data["result"]["address_components"][i]["types"]
+                .contains("neighborhood")) {
+              sLandMark =
+                  response.data["result"]["address_components"][i]["long_name"];
+            } else if (response.data["result"]["address_components"][i]["types"]
+                .contains("postal_code")) {
+              sPincode = response.data["result"]["address_components"][i]
+                  ["long_name"][0];
+            }
+          }
+
+          // sStreet = data["formatted_address"];
+        } else {
+          dStreet = response.data["result"]["formatted_address"];
+
+          for (int i = 0;
+              i < response.data["result"]["address_components"].length;
+              i++) {
+            if (response.data["result"]["address_components"][i]["types"]
+                .contains("administrative_area_level_2")) {
+              dCity =
+                  response.data["result"]["address_components"][i]["long_name"];
+            } else if (response.data["result"]["address_components"][i]["types"]
+                .contains("administrative_area_level_1")) {
+              dState =
+                  response.data["result"]["address_components"][i]["long_name"];
+            } else if (response.data["result"]["address_components"][i]["types"]
+                .contains("country")) {
+              dCountry =
+                  response.data["result"]["address_components"][i]["long_name"];
+            } else if (response.data["result"]["address_components"][i]["types"]
+                .contains("postal_code")) {
+              dPincode = response.data["result"]["address_components"][i]
+                  ["long_name"][0];
+            }
+          }
+        }
+
         return LatLng(location['lat'], location['lng']);
       } else {
         throw Exception("Failed to load place details");
@@ -448,6 +500,25 @@ class BookingProvider with ChangeNotifier {
     }
   }
 
+  //Booking Variables
+
+  num sourceLatitude = 0;
+  num sourceLongitude = 0;
+  num destinationLatitude = 0;
+  num destinationLongitude = 0;
+  num vehicleCategoryId = 0;
+  String sStreet = '';
+  String sCity = '';
+  String sState = '';
+  String sCountry = '';
+  String sLandMark = '';
+  String dStreet = '';
+  String dCity = '';
+  String dState = '';
+  String dCountry = '';
+  String sPincode = '';
+  String dPincode = '';
+
   ConfirmBookingStatus confirmBookingStatus = ConfirmBookingStatus.initial;
   confirmBookingFn({required BuildContext context}) async {
     confirmBookingStatus = ConfirmBookingStatus.loading;
@@ -456,67 +527,72 @@ class BookingProvider with ChangeNotifier {
     try {
       final confirmBookingResponse =
           await services.postConfirmBookingService(data: {
-        "sourcelatitude": 12.2958104,
-        "sourcelongitude": 76.6393805,
-        "destinationlatitude": 12.9532583,
-        "destinationlongitude": 77.5434616,
-        "vehicleCategoryId": 152,
-        "sStreet": "Mysuru, Karnataka, India",
-        "sCity": "Mysore Division",
-        "sState": "Karnataka",
-        "sCountry": "India",
-        "sLandMark": "Mysuru",
-        "sPincode": "",
-        "referenceId": "95827126",
-        "vendorType": "FRANCHISE",
+        "sourcelatitude": sourceLatitude,
+        "sourcelongitude": sourceLongitude,
+        "destinationlatitude": destinationLatitude,
+        "destinationlongitude": destinationLongitude,
+        "vehicleCategoryId":
+            goodsVehicleDetailsModel.data![0].vehicleCategoryId,
+        "sStreet": sStreet,
+        "sCity": sCity,
+        "sState": sState,
+        "sCountry": sCountry,
+        "sLandMark": sLandMark,
+        "sPincode": sPincode,
+        "referenceId": goodsVehicleDetailsModel.data![0].vendorId,
+        "vendorType": goodsVehicleDetailsModel.data![0].vendorType,
         "profileId": "ba255ec8-908b-4c44-933f-9898b10f04e3",
-        "goodsvalue": 500,
-        "labourCharges": 0,
+        "goodsvalue": goodsValueController.text,
+        "labourCharges": bookingFarePriceDetailsModel.data!.labourCharges,
         "ewayBillNo": "",
         "ewayBillDate": "",
-        "numberofLabours": 5,
-        "vehicleId": "92478668",
+        "numberofLabours": 0,
+        "vehicleId": goodsVehicleDetailsModel.data![0].vehicleId,
         "pickUpDateTime": 1710761005194,
-        "goodsTypeId": 10,
+        "goodsTypeId": goodsTypeId,
         "status": "PENDING",
-        "goodsWeightId": 1,
-        "fodBy": 1, // Deafault 1
-        "advCompType": 2, // deafault 2
+        "goodsWeightId": goodsWeightId,
+        "fodBy": 1, // Default 1
+        "advCompType": 2, // default 2
         "paymentMode": 1, //1 cash 2 means online
-        "dStreet":
-            "XG3V+9CQ, Mysore Rd, Telecom Colony, Srinagar, Banashankari, Bengaluru, Karnataka 560026, India",
-        "dCity": "Bangalore Division",
-        "dState": "Karnataka",
-        "dCountry": "India",
-        "dPincode": "560026",
-        "consignorName": "Pranav",
-        "consignorNumber": "7034888756",
-        "consigneeName": "pranav",
-        "consigneeNumber": "7034888756",
+        "dStreet": dStreet,
+        "dCity": dCity,
+        "dState": dState,
+        "dCountry": dCountry,
+        "dPincode": dPincode,
+        "consignorName": shipperNameController.text,
+        "consignorNumber": shipperMobileNoController.text,
+        "consigneeName": receiverNameController.text,
+        "consigneeNumber": receiverMobileNoController.text,
         "consigneeGST": "",
         "consigneePAN": "",
-        // "bookedGoodsTypes": 1,
+        "bookedGoodsTypes": 1,
         "bookedItems": [],
         "bookingType": "",
         "totalNoOfTon": "",
         "bookedSource": "Web",
         "bookedBy": "CUSTOMER"
       });
-      print("confirmBookingResponse: ${confirmBookingResponse["data"]["id"]}");
       LoadingOverlayDark.of(context).hide();
       getBookingDetailsByIdFn(
           id: confirmBookingResponse["data"]["id"].toString());
-
+      Get.back();
       Get.toNamed(AppRoutes.bookingSuccessFullyCompletedScreen);
 
       confirmBookingStatus = ConfirmBookingStatus.loaded;
       notifyListeners();
       // ignore: deprecated_member_use
-    } catch (e) {
+    } on DioError catch (e) {
       LoadingOverlayDark.of(context).hide();
-      print('bookingDetail $e');
       confirmBookingStatus = ConfirmBookingStatus.error;
       notifyListeners();
+      errorBottomSheetDialogs(
+        isDismissible: false,
+        enableDrag: false,
+        context: context,
+        title: '${e.response!.data['message']}',
+        subtitle: '',
+      );
     }
   }
 }
