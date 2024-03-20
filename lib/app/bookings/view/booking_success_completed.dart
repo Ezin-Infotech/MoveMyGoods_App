@@ -77,8 +77,6 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.only(left: 14, right: 14),
                 child: Consumer<BookingProvider>(builder: (context, obj, _) {
-                  print(
-                      '${Urls.imageBaseUrl}${obj.bookingDetail.data!.vehicleImage!.path}');
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -96,7 +94,7 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                       ),
                       SizeBoxH(Responsive.height * 1),
                       const OrderSlipHeadText(
-                        Heading: 'Order Summary',
+                        heading: 'Order Summary',
                       ),
                       TextFieldAndText(
                         textField: 'Order ID :',
@@ -141,7 +139,7 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                       ),
                       SizeBoxH(Responsive.height * 1),
                       const OrderSlipHeadText(
-                        Heading: 'Receiver Details',
+                        heading: 'Receiver Details',
                       ),
                       TextFieldAndText(
                         textField: 'Name :',
@@ -185,7 +183,7 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                       ),
                       SizeBoxH(Responsive.height * 1),
                       const OrderSlipHeadText(
-                        Heading: 'Shipper Details',
+                        heading: 'Shipper Details',
                       ),
                       TextFieldAndText(
                         textField: 'Name :',
@@ -257,16 +255,16 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
 }
 
 class OrderSlipHeadText extends StatelessWidget {
-  final String? Heading;
+  final String? heading;
   const OrderSlipHeadText({
     super.key,
-    this.Heading,
+    this.heading,
   });
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      Heading ?? '',
+      heading ?? '',
       style: context.textTheme.bodyLarge?.copyWith(
           fontWeight: FontWeight.w600, fontSize: 16, color: Colors.black),
     );

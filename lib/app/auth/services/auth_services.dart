@@ -66,7 +66,6 @@ class AuthServices extends Urls {
         headers: {'Content-Type': 'application/json', 'x-api-key': 'MMGATPL'},
       ),
     );
-    print(response);
     return response.data;
   }
 
@@ -86,7 +85,6 @@ class AuthServices extends Urls {
         "mobileNumber": phone
       },
     );
-    print("5555555555555 $response");
     return response.data;
   }
 
@@ -126,7 +124,6 @@ class AuthServices extends Urls {
                 'x-api-key': 'MMGATPL'
               },
             ));
-    print("Response getUserProfileDetailsFn  $response");
     return profileDataModelFromJson(jsonEncode(response.data));
   }
 
@@ -140,7 +137,6 @@ class AuthServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    print(response);
     return userProfilePicModelFromJson(jsonEncode(response.data));
   }
 
@@ -153,7 +149,6 @@ class AuthServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    print(response);
     return cityListModelFromJson(jsonEncode(response.data));
   }
 
@@ -166,7 +161,6 @@ class AuthServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    print(response);
     return stateListModelFromJson(jsonEncode(response.data));
   }
 
@@ -180,14 +174,12 @@ class AuthServices extends Urls {
       ),
       data: data,
     );
-    print(response);
     return response.data;
   }
 
   Future putUpdateProfileService({
     required dynamic data,
   }) async {
-    print(data);
     final response = await dio.put(
       createProfile,
       options: Options(
@@ -199,7 +191,6 @@ class AuthServices extends Urls {
       ),
       data: data,
     );
-    print(response);
     return response.data;
   }
 }

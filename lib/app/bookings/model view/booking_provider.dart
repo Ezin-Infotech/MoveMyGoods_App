@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 
 import 'package:dio/dio.dart';
@@ -55,25 +57,6 @@ class BookingProvider with ChangeNotifier {
 // 'COMPLETED'
 // 'ACTIVE'
 
-  List<String> lists = [
-    'DOCTOR',
-    'ENGINEER',
-    'DEVELOPER',
-    'SOCIALWORK',
-    'BUSINESS',
-    'OTHER'
-  ];
-
-  List<String> reciptContent = [
-    'DOCTOR',
-    'ENGINEER',
-    'DEVELOPER',
-    'SOCIALWORK',
-    'BUISSINESS',
-    'OTHER'
-  ];
-
-  List<String> goodsWight = ['100', '200', '300', '400', '500', '750'];
   changeShowRecieverDetails({required bool isShow}) {
     showRecieverDetails = isShow;
     notifyListeners();
@@ -122,14 +105,12 @@ class BookingProvider with ChangeNotifier {
     getBookingDetailStatus = GetBookingDetialsStatus.loading;
     // notifyListeners();
     try {
-      final countRespose = await services.getBookingDetailsByIdService(id: id);
-      bookingDetail = countRespose;
-      print("bookingDetail: $bookingDetail");
+      final countResponse = await services.getBookingDetailsByIdService(id: id);
+      bookingDetail = countResponse;
       getBookingDetailStatus = GetBookingDetialsStatus.loaded;
       notifyListeners();
       // ignore: deprecated_member_use
     } catch (e) {
-      print('bookingDetail $e');
       getBookingDetailStatus = GetBookingDetialsStatus.error;
       notifyListeners();
     }
@@ -142,8 +123,8 @@ class BookingProvider with ChangeNotifier {
     getBookingStatus = GetBookingStatus.loading;
     // notifyListeners();
     try {
-      final countRespose = await services.getAllBookingsService();
-      bookingata = countRespose.data!;
+      final countResponse = await services.getAllBookingsService();
+      bookingata = countResponse.data!;
 
       getBookingStatus = GetBookingStatus.loaded;
       notifyListeners();
@@ -158,9 +139,9 @@ class BookingProvider with ChangeNotifier {
     getBookingStatus = GetBookingStatus.loading;
     // notifyListeners();
     try {
-      final countRespose =
+      final countResponse =
           await services.getBookingsByStatusService(status: selectedStatus);
-      bookingata = countRespose.data!;
+      bookingata = countResponse.data!;
 
       getBookingStatus = GetBookingStatus.loaded;
       notifyListeners();
@@ -180,12 +161,10 @@ class BookingProvider with ChangeNotifier {
     try {
       final goodsResponse = await services.getGoodsTypeService();
       goodsTypeData = goodsResponse.data!;
-      print(bookingDetail);
       getGoodsTypeStatus = GetGoodsTypeStatus.loaded;
       notifyListeners();
       // ignore: deprecated_member_use
     } catch (e) {
-      print('bookingDetail $e');
       getGoodsTypeStatus = GetGoodsTypeStatus.error;
       notifyListeners();
     }
@@ -213,12 +192,29 @@ class BookingProvider with ChangeNotifier {
     shipperMobileNoController.clear();
     shipperpanNOController.clear();
     shipperGstNoController.clear();
-
     showRecieverDetails = false;
     showPriceDetails = false;
     showGoodsWeight = false;
     showVehicleImage = false;
     showFarePrice = false;
+    goodsWeightId = '';
+    goodsTypeId = '';
+    sourceLatitude = 0;
+    sourceLongitude = 0;
+    destinationLatitude = 0;
+    destinationLongitude = 0;
+    vehicleCategoryId = 0;
+    sStreet = '';
+    sCity = '';
+    sState = '';
+    sCountry = '';
+    sLandMark = '';
+    dStreet = '';
+    dCity = '';
+    dState = '';
+    dCountry = '';
+    sPincode = '';
+    dPincode = '';
   }
 
   String goodsWeightId = '';
@@ -232,14 +228,12 @@ class BookingProvider with ChangeNotifier {
       getGoodsVehicleDetailsFn();
     }
     getGoodsWeightFn();
-    print(goodsTypeController.text);
   }
 
   changeGoodsWeight({required String id}) {
     goodsWeightId = id;
     getGoodsVehicleDetailsFn();
     notifyListeners();
-    print(goodsWeightId);
   }
 
   changeGoodsWeightFn({required bool isShow}) {
@@ -273,13 +267,11 @@ class BookingProvider with ChangeNotifier {
         "sCity": sCity
       });
       goodsWeightData = goodsResponse.data!;
-      print(bookingDetail);
       getGoodsWeightStatus = GetGoodsWeightStatus.loaded;
       showGoodsWeight = true;
       notifyListeners();
       // ignore: deprecated_member_use
     } catch (e) {
-      print('bookingDetail $e');
       getGoodsWeightStatus = GetGoodsWeightStatus.error;
       notifyListeners();
     }
@@ -298,14 +290,12 @@ class BookingProvider with ChangeNotifier {
           latitude: 12.2958104,
           longitude: 76.6393805);
       goodsVehicleDetailsModel = goodsResponse;
-      print(goodsVehicleDetailsModel);
       getGoodsVehicleStatus = GetGoodsVehicleStatus.loaded;
       showVehicleImage = true;
       getBookingFarePriceFn();
       notifyListeners();
       // ignore: deprecated_member_use
     } catch (e) {
-      print('bookingDetail $e');
       getGoodsVehicleStatus = GetGoodsVehicleStatus.error;
       notifyListeners();
     }
@@ -341,13 +331,11 @@ class BookingProvider with ChangeNotifier {
         "goodsTypeId": int.parse(goodsTypeId),
       });
       bookingFarePriceDetailsModel = goodsResponse;
-      print(bookingFarePriceDetailsModel);
       getBookingFarePriceStatus = GetBookingFarePriceStatus.loaded;
       showFarePrice = true;
       notifyListeners();
       // ignore: deprecated_member_use
     } catch (e) {
-      print('bookingDetail $e');
       getBookingFarePriceStatus = GetBookingFarePriceStatus.error;
       notifyListeners();
     }
@@ -395,7 +383,6 @@ class BookingProvider with ChangeNotifier {
         },
       );
       if (response.statusCode == 200) {
-        print("searchLocation: ${response.data}");
         if (dest) {
           destinationSearchResults = [];
           for (var place in response.data['predictions']) {
@@ -409,7 +396,6 @@ class BookingProvider with ChangeNotifier {
         } else {
           searchResults = [];
           for (var place in response.data['predictions']) {
-            print(response.data['predictions']);
             searchResults.add(
               PlaceSuggestion(
                 name: place['description'],
@@ -438,7 +424,6 @@ class BookingProvider with ChangeNotifier {
           'key': _apiKey,
         },
       );
-      print('PLACE DETAILS: ${response.data}');
 
       if (response.statusCode == 200) {
         final location = response.data['result']['geometry']['location'];
@@ -452,92 +437,57 @@ class BookingProvider with ChangeNotifier {
 
         if (isSource) {
           sStreet = response.data["result"]["formatted_address"];
-          try {
-            for (int i = 0;
-                i < response.data["result"]["address_components"].length;
-                i++) {
-              print(
-                  "response ==== ${response.data["result"]["address_components"][i]["types"]}");
-              if (response.data["result"]["address_components"][i]["types"]
-                  .contains("administrative_area_level_2")) {
-                print(
-                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
-                sCity = response.data["result"]["address_components"][i]
-                    ["long_name"];
-              } else if (response.data["result"]["address_components"][i]
-                      ["types"]
-                  .contains("administrative_area_level_1")) {
-                sState = response.data["result"]["address_components"][i]
-                    ["long_name"];
-                print(
-                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
-              } else if (response.data["result"]["address_components"][i]
-                      ["types"]
-                  .contains("country")) {
-                print(
-                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
-                sCountry = response.data["result"]["address_components"][i]
-                    ["long_name"];
-              } else if (response.data["result"]["address_components"][i]
-                      ["types"]
-                  .contains("neighborhood")) {
-                print(
-                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
-                sLandMark = response.data["result"]["address_components"][i]
-                    ["long_name"];
-              } else if (response.data["result"]["address_components"][i]
-                      ["types"]
-                  .contains("postal_code")) {
-                print(
-                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
-                sPincode = response.data["result"]["address_components"][i]
-                    ["long_name"][0];
-              }
+
+          for (int i = 0;
+              i < response.data["result"]["address_components"].length;
+              i++) {
+            if (response.data["result"]["address_components"][i]["types"]
+                .contains("administrative_area_level_2")) {
+              sCity =
+                  response.data["result"]["address_components"][i]["long_name"];
+            } else if (response.data["result"]["address_components"][i]["types"]
+                .contains("administrative_area_level_1")) {
+              sState =
+                  response.data["result"]["address_components"][i]["long_name"];
+            } else if (response.data["result"]["address_components"][i]["types"]
+                .contains("country")) {
+              sCountry =
+                  response.data["result"]["address_components"][i]["long_name"];
+            } else if (response.data["result"]["address_components"][i]["types"]
+                .contains("neighborhood")) {
+              sLandMark =
+                  response.data["result"]["address_components"][i]["long_name"];
+            } else if (response.data["result"]["address_components"][i]["types"]
+                .contains("postal_code")) {
+              sPincode = response.data["result"]["address_components"][i]
+                  ["long_name"][0];
             }
-          } catch (e) {
-            print("response ==== ERROR $e");
           }
 
           // sStreet = data["formatted_address"];
         } else {
           dStreet = response.data["result"]["formatted_address"];
-          try {
-            for (int i = 0;
-                i < response.data["result"]["address_components"].length;
-                i++) {
-              print(
-                  "response ==== ${response.data["result"]["address_components"][i]["types"]}");
-              if (response.data["result"]["address_components"][i]["types"]
-                  .contains("administrative_area_level_2")) {
-                print(
-                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
-                dCity = response.data["result"]["address_components"][i]
-                    ["long_name"];
-              } else if (response.data["result"]["address_components"][i]
-                      ["types"]
-                  .contains("administrative_area_level_1")) {
-                dState = response.data["result"]["address_components"][i]
-                    ["long_name"];
-                print(
-                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
-              } else if (response.data["result"]["address_components"][i]
-                      ["types"]
-                  .contains("country")) {
-                print(
-                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
-                dCountry = response.data["result"]["address_components"][i]
-                    ["long_name"];
-              } else if (response.data["result"]["address_components"][i]
-                      ["types"]
-                  .contains("postal_code")) {
-                print(
-                    "response ==== ${response.data["result"]["address_components"][i]["long_name"]}");
-                dPincode = response.data["result"]["address_components"][i]
-                    ["long_name"][0];
-              }
+
+          for (int i = 0;
+              i < response.data["result"]["address_components"].length;
+              i++) {
+            if (response.data["result"]["address_components"][i]["types"]
+                .contains("administrative_area_level_2")) {
+              dCity =
+                  response.data["result"]["address_components"][i]["long_name"];
+            } else if (response.data["result"]["address_components"][i]["types"]
+                .contains("administrative_area_level_1")) {
+              dState =
+                  response.data["result"]["address_components"][i]["long_name"];
+            } else if (response.data["result"]["address_components"][i]["types"]
+                .contains("country")) {
+              dCountry =
+                  response.data["result"]["address_components"][i]["long_name"];
+            } else if (response.data["result"]["address_components"][i]["types"]
+                .contains("postal_code")) {
+              dPincode = response.data["result"]["address_components"][i]
+                  ["long_name"][0];
             }
-          } catch (e) {
-            print("response ==== ERROR $e");
           }
         }
 
@@ -574,30 +524,6 @@ class BookingProvider with ChangeNotifier {
     confirmBookingStatus = ConfirmBookingStatus.loading;
     LoadingOverlayDark.of(context).show();
     // notifyListeners();
-    print(sourceLatitude);
-    print(sourceLongitude);
-    print(destinationLatitude);
-    print(destinationLongitude);
-    print(goodsVehicleDetailsModel.data![0].vehicleCategoryId);
-    print(sStreet);
-    print(sCity);
-    print(sState);
-    print(sCountry);
-    print(sLandMark);
-    print(sPincode);
-    print(goodsVehicleDetailsModel.data![0].vendorId);
-    print(goodsVehicleDetailsModel.data![0].vendorType);
-
-    print(goodsValueController.text);
-    print(bookingFarePriceDetailsModel.data!.labourCharges);
-
-    print(goodsVehicleDetailsModel.data![0].vehicleId);
-
-    print(goodsTypeId);
-    print(goodsWeightId);
-    print(dStreet);
-    print(dCity);
-
     try {
       final confirmBookingResponse =
           await services.postConfirmBookingService(data: {
@@ -626,8 +552,8 @@ class BookingProvider with ChangeNotifier {
         "goodsTypeId": goodsTypeId,
         "status": "PENDING",
         "goodsWeightId": goodsWeightId,
-        "fodBy": 1, // Deafault 1
-        "advCompType": 2, // deafault 2
+        "fodBy": 1, // Default 1
+        "advCompType": 2, // default 2
         "paymentMode": 1, //1 cash 2 means online
         "dStreet": dStreet,
         "dCity": dCity,
@@ -647,7 +573,6 @@ class BookingProvider with ChangeNotifier {
         "bookedSource": "Web",
         "bookedBy": "CUSTOMER"
       });
-      print("confirmBookingResponse: ${confirmBookingResponse["data"]["id"]}");
       LoadingOverlayDark.of(context).hide();
       getBookingDetailsByIdFn(
           id: confirmBookingResponse["data"]["id"].toString());
@@ -659,7 +584,6 @@ class BookingProvider with ChangeNotifier {
       // ignore: deprecated_member_use
     } on DioError catch (e) {
       LoadingOverlayDark.of(context).hide();
-      print('bookingDetail $e');
       confirmBookingStatus = ConfirmBookingStatus.error;
       notifyListeners();
       errorBottomSheetDialogs(

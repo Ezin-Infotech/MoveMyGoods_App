@@ -124,7 +124,9 @@ class _HomeBookingListScreenState extends State<HomeBookingListScreen> {
                 : value.getBookingStatus == GetBookingStatus.initial ||
                         value.bookingata.list == null ||
                         value.bookingata.list!.isEmpty
-                    ? Container(
+                    ? SizedBox(
+                        height: 400,
+                        width: context.width,
                         child: const Center(
                           child: Text('No Bookings'),
                         ),

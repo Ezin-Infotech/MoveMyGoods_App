@@ -12,11 +12,9 @@ import 'package:mmg/app/utils/extensions.dart';
 import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
 
-import '../../../utils/app style/app_images.dart';
 import '../../../utils/app style/colors.dart';
 import '../../../utils/common widgets/textform.dart';
 import '../../view model/settings_controller.dart';
-import 'theme.dart';
 import 'validation_mobile_number.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -44,113 +42,113 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           SizeBoxH(Responsive.height * 2),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Container(
-              alignment: Alignment.bottomRight,
-              width: Responsive.width * 30,
-              height: Responsive.width * 30,
-              decoration: const ShapeDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                    'https://owpcstorage.s3.ap-south-1.amazonaws.com/Ellipse+3.png',
-                  ),
-                  fit: BoxFit.contain,
-                ),
-                color: Colors.white,
-                shape: CircleBorder(
-                  side: BorderSide.none,
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(right: 3, bottom: 3),
-                child: CircleAvatar(
-                  radius: 12,
-                  child: InkWell(
-                      onTap: () {
-                        showModalBottomSheet(
-                          backgroundColor: AppConstants.black,
-                          context: context,
-                          builder: (builder) {
-                            return SizedBox(
-                              width: Responsive.width * 100,
-                              height: Responsive.height * 25,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      settingsProvider
-                                          .pickImageFromGalleryOrCamera(
-                                              false, context);
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: SizedBox(
-                                      height: Responsive.height * 20,
-                                      width: 150,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                            height: 50,
-                                            width: 50,
-                                            child: Image.asset(
-                                                AppImages.selectCamera),
-                                          ),
-                                          const SizeBoxH(10),
-                                          const CustomText(
-                                            text: "Camera",
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      settingsProvider
-                                          .pickImageFromGalleryOrCamera(
-                                              true, context);
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: SizedBox(
-                                      height: Responsive.height * 20,
-                                      width: 150,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                            height: 50,
-                                            width: 50,
-                                            child: Image.asset(
-                                                AppImages.selectGallery),
-                                          ),
-                                          const SizeBoxH(10),
-                                          const CustomText(
-                                            text: "Gallery",
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        );
-                      },
-                      child: const Icon(Icons.camera_alt_rounded)),
-                ),
-              ),
-            ),
-          ]),
+          // Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          //   Container(
+          //     alignment: Alignment.bottomRight,
+          //     width: Responsive.width * 30,
+          //     height: Responsive.width * 30,
+          //     decoration: const ShapeDecoration(
+          //       image: DecorationImage(
+          //         image: NetworkImage(
+          //           'https://owpcstorage.s3.ap-south-1.amazonaws.com/Ellipse+3.png',
+          //         ),
+          //         fit: BoxFit.contain,
+          //       ),
+          //       color: Colors.white,
+          //       shape: CircleBorder(
+          //         side: BorderSide.none,
+          //       ),
+          //     ),
+          //     child: Padding(
+          //       padding: const EdgeInsets.only(right: 3, bottom: 3),
+          //       child: CircleAvatar(
+          //         radius: 12,
+          //         child: InkWell(
+          //             onTap: () {
+          //               showModalBottomSheet(
+          //                 backgroundColor: AppConstants.black,
+          //                 context: context,
+          //                 builder: (builder) {
+          //                   return SizedBox(
+          //                     width: Responsive.width * 100,
+          //                     height: Responsive.height * 25,
+          //                     child: Row(
+          //                       mainAxisAlignment:
+          //                           MainAxisAlignment.spaceEvenly,
+          //                       crossAxisAlignment: CrossAxisAlignment.center,
+          //                       children: [
+          //                         InkWell(
+          //                           onTap: () {
+          //                             settingsProvider
+          //                                 .pickImageFromGalleryOrCamera(
+          //                                     false, context);
+          //                             Navigator.of(context).pop();
+          //                           },
+          //                           child: SizedBox(
+          //                             height: Responsive.height * 20,
+          //                             width: 150,
+          //                             child: Column(
+          //                               mainAxisAlignment:
+          //                                   MainAxisAlignment.center,
+          //                               children: [
+          //                                 SizedBox(
+          //                                   height: 50,
+          //                                   width: 50,
+          //                                   child: Image.asset(
+          //                                       AppImages.selectCamera),
+          //                                 ),
+          //                                 const SizeBoxH(10),
+          //                                 const CustomText(
+          //                                   text: "Camera",
+          //                                 )
+          //                               ],
+          //                             ),
+          //                           ),
+          //                         ),
+          //                         InkWell(
+          //                           onTap: () {
+          //                             settingsProvider
+          //                                 .pickImageFromGalleryOrCamera(
+          //                                     true, context);
+          //                             Navigator.of(context).pop();
+          //                           },
+          //                           child: SizedBox(
+          //                             height: Responsive.height * 20,
+          //                             width: 150,
+          //                             child: Column(
+          //                               mainAxisAlignment:
+          //                                   MainAxisAlignment.center,
+          //                               children: [
+          //                                 SizedBox(
+          //                                   height: 50,
+          //                                   width: 50,
+          //                                   child: Image.asset(
+          //                                       AppImages.selectGallery),
+          //                                 ),
+          //                                 const SizeBoxH(10),
+          //                                 const CustomText(
+          //                                   text: "Gallery",
+          //                                 )
+          //                               ],
+          //                             ),
+          //                           ),
+          //                         ),
+          //                       ],
+          //                     ),
+          //                   );
+          //                 },
+          //               );
+          //             },
+          //             child: const Icon(Icons.camera_alt_rounded)),
+          //       ),
+          //     ),
+          //   ),
+          // ]),
           BookingTextFieldWidgets(
             labeText: 'First Name*',
-            hintText: 'jhon',
+            hintText: 'john',
             controller: profileProvider.firstNameController,
-            requiredText: 'Plese enter first name',
+            requiredText: 'Please enter first name',
           ),
           BookingTextFieldWidgets(
             labeText: 'Last Name**',
@@ -288,7 +286,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 return ListTile(title: Text(suggestion.name.toString()));
               },
               onSuggestionSelected: (suggestion) {
-                print("$suggestion tapped");
                 context.read<AuthProvider>().changeStateController(
                     id: suggestion.id.toString(),
                     value: suggestion.name.toString());
@@ -324,7 +321,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 return ListTile(title: Text(suggestion.name.toString()));
               },
               onSuggestionSelected: (suggestion) {
-                print("$suggestion tapped");
                 context.read<AuthProvider>().changeCityController(
                     id: suggestion.id.toString(),
                     value: suggestion.name.toString());

@@ -12,12 +12,12 @@ class BookingTextFieldWidgets extends StatelessWidget {
   final TextInputType? keyboardType;
   final dynamic Function(String)? onChanged;
   final int? maxLength;
-  dynamic Function()? onTap;
+  final dynamic Function()? onTap;
 
   final bool? readOnly;
   final String? requiredText;
   final Widget? suffixIcon;
-  BookingTextFieldWidgets(
+  const BookingTextFieldWidgets(
       {required this.controller,
       required this.labeText,
       required this.hintText,

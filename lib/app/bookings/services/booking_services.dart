@@ -51,7 +51,6 @@ class BookingServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    print("getBookingDetailsByIdService $response");
     return bookingDetailsModelFromJson(jsonEncode(response.data));
   }
 
@@ -64,7 +63,7 @@ class BookingServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    print(response);
+    print("GOODS RESPOnsE = $response");
     return goodsTypeModelFromJson(jsonEncode(response.data));
   }
 
@@ -102,7 +101,6 @@ class BookingServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    print(response);
     return goodsVehicleDetailsModelFromJson(jsonEncode(response.data));
   }
 
@@ -117,7 +115,6 @@ class BookingServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    print(response);
     return bookingFarePriceDetailsModelFromJson(jsonEncode(response.data));
   }
 
@@ -131,7 +128,6 @@ class BookingServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    print("postConfirmBookingService: $response");
     return response.data;
   }
 }

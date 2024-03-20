@@ -57,10 +57,4 @@ class Urls {
       'http://103.160.153.57:8083/mmg/api/v2/profile/forgotpassword/mobile';
   final updatePassWord =
       'http://103.160.153.57:8083/mmg/api/v2/profile/password';
-  final getUserCoupon = '$baseUrl/coupon/get-all';
-  final getUserAllAdress = '$baseUrl/address';
-  final cartCheckout = '$baseUrl/order';
-  final createAdd = '$baseUrl/address/create';
-  final updateAdd = '$baseUrl/address/update';
-  final pharmaSearch = '$baseUrl/product/pharma';
 }

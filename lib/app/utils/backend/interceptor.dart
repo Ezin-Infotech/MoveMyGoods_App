@@ -42,6 +42,7 @@ class ApiInterceptor extends Interceptor {
     if (isInvalidUser) {
       log('invaliiiiiiiiiiiiiiiiiiiiiiiiiiid');
       AppPref.userToken = '';
+      AuthProvider().checkIsUserLoggedOnCacheFn();
       AuthProvider().isUserLoggedFn(isLogged: false);
       // auth.signOut();
       // Get.offAllNamed(AppRoutes.login);
