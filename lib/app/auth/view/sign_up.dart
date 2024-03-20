@@ -94,13 +94,23 @@ class SignUpScreen extends StatelessWidget {
                               .signUpPhoneController.text.isNotEmpty) {
                             if (authProvider.isPhoneNumber(
                                 authProvider.signUpPhoneController.text)) {
-                              if (authProvider.isEmail(
-                                  authProvider.signUpEmailController.text)) {
-                                context
-                                    .read<AuthProvider>()
-                                    .getSignUpOTPFn(context: context);
-                              } else if (authProvider.isPhoneNumber(
-                                  authProvider.signUpPhoneController.text)) {
+                              if (authProvider
+                                  .signUpEmailController.text.isNotEmpty) {
+                                if (authProvider.isEmail(
+                                    authProvider.signUpEmailController.text)) {
+                                  context
+                                      .read<AuthProvider>()
+                                      .getSignUpOTPFn(context: context);
+                                } else {
+                                  errorBottomSheetDialogs(
+                                    isDismissible: false,
+                                    enableDrag: false,
+                                    context: context,
+                                    title: 'please enter valid  email',
+                                    subtitle: '',
+                                  );
+                                }
+                              } else {
                                 context
                                     .read<AuthProvider>()
                                     .getSignUpOTPFn(context: context);
