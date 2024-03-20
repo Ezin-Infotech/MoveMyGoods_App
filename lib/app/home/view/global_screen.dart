@@ -22,23 +22,19 @@ class _GlobalScreenState extends State<GlobalScreen> {
     final homeProvider = Provider.of<HomeProvider>(context, listen: false);
     log('message');
     ambiguate(WidgetsBinding.instance)?.addPostFrameCallback(
-      (_) => ShowCaseWidget.of(context).startShowCase([
-        homeProvider.globalKey1,
-        homeProvider.globalKey2,
-        homeProvider.globalKey3,
-        homeProvider.globalKey4,
-        homeProvider.globalKey5,
-        homeProvider.globalKey6,
-        homeProvider.globalKey7,
-        homeProvider.globalKey8,
-        homeProvider.globalKey9,
-        homeProvider.globalKey10,
-        homeProvider.globalKey11,
-        homeProvider.globalKey12,
-        homeProvider.globalKey13,
-        homeProvider.globalKey14,
-        homeProvider.globalKey15,
-      ]),
+      (_) => ShowCaseWidget.of(context).startShowCase(
+        [
+          homeProvider.globalKey1,
+          homeProvider.globalKey2,
+          homeProvider.globalKey3,
+          homeProvider.globalKey4,
+          homeProvider.globalKey5,
+          homeProvider.globalKey6,
+          homeProvider.globalKey7,
+          homeProvider.globalKey8,
+          homeProvider.globalKey9,
+        ],
+      ),
     );
     super.initState();
   }
