@@ -91,13 +91,11 @@ class SignUpScreen extends StatelessWidget {
                         textColor: AppColors.primary,
                         onPressed: () {
                           if (authProvider
-                                  .signUpPhoneController.text.isNotEmpty &&
-                              authProvider
-                                  .signUpEmailController.text.isNotEmpty) {
-                            if (authProvider.isStrongPassword(
-                                authProvider.signUpEmailController.text)) {
+                              .signUpPhoneController.text.isNotEmpty) {
+                            if (authProvider.isPhoneNumber(
+                                authProvider.signUpPhoneController.text)) {
                               if (authProvider.isEmail(
-                                  authProvider.signUpPhoneController.text)) {
+                                  authProvider.signUpEmailController.text)) {
                                 context
                                     .read<AuthProvider>()
                                     .getSignUpOTPFn(context: context);
@@ -106,25 +104,14 @@ class SignUpScreen extends StatelessWidget {
                                 context
                                     .read<AuthProvider>()
                                     .getSignUpOTPFn(context: context);
-                              } else {
-                                errorBottomSheetDialogs(
-                                  isDismissible: false,
-                                  enableDrag: false,
-                                  context: context,
-                                  title:
-                                      'please enter valid  email or phonenumber',
-                                  subtitle: '',
-                                );
                               }
                             } else {
                               errorBottomSheetDialogs(
                                 isDismissible: false,
                                 enableDrag: false,
                                 context: context,
-                                title:
-                                    ' please check below mention  contaions ',
-                                subtitle:
-                                    'please use at least 8 characters, one uppercase letter,one lowercase letter, least one digit,one special character',
+                                title: 'please enter valid  phonenumber',
+                                subtitle: '',
                               );
                             }
                           } else {
@@ -132,7 +119,7 @@ class SignUpScreen extends StatelessWidget {
                               isDismissible: false,
                               enableDrag: false,
                               context: context,
-                              title: 'please enter email and password',
+                              title: 'please enter Phone number',
                               subtitle: '',
                             );
                           }
