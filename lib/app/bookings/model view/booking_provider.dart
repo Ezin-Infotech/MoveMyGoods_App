@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -231,6 +232,7 @@ class BookingProvider with ChangeNotifier {
   }
 
   changeGoodsWeight({required String id}) {
+    log("changeGoodsWeight: $id");
     goodsWeightId = id;
     getGoodsVehicleDetailsFn();
     notifyListeners();

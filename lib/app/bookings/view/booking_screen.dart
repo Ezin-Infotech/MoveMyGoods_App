@@ -700,10 +700,11 @@ Future priceDialog(
       barrierDismissible: true,
       builder: (BuildContext context) {
         return SimpleDialog(
-          contentPadding: const EdgeInsets.all(16),
+          contentPadding: const EdgeInsets.all(38),
           insetPadding: const EdgeInsets.all(16),
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "Distance  :",
@@ -723,6 +724,7 @@ Future priceDialog(
             ),
             const SizeBoxH(10),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "Base Fare  :",
@@ -742,6 +744,7 @@ Future priceDialog(
             ),
             const SizeBoxH(10),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "Price Per Km  :",
@@ -761,6 +764,7 @@ Future priceDialog(
             ),
             const SizeBoxH(10),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "Labour Cost  :",
@@ -780,6 +784,7 @@ Future priceDialog(
             ),
             const SizeBoxH(10),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "CGST  :",
@@ -799,6 +804,7 @@ Future priceDialog(
             ),
             const SizeBoxH(10),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "SGST  :",

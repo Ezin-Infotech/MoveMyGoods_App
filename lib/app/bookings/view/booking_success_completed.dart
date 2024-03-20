@@ -96,36 +96,44 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                       const OrderSlipHeadText(
                         heading: 'Order Summary',
                       ),
+                      SizeBoxH(Responsive.height * 1),
                       TextFieldAndText(
                         textField: 'Order ID :',
                         text: obj.bookingDetail.data!.id.toString(),
                       ),
+                      SizeBoxH(Responsive.height * 1),
                       TextFieldAndText(
                         textField: 'Source : ',
-                        text: obj.bookingDetail.data!.sCity ?? '',
+                        text: obj.bookingDetail.data!.sStreet ?? '',
                       ),
+                      SizeBoxH(Responsive.height * 1),
                       TextFieldAndText(
                         textField: 'Destination : ',
-                        text: obj.bookingDetail.data!.dCity ?? '',
+                        text: obj.bookingDetail.data!.dStreet ?? '',
                       ),
+                      SizeBoxH(Responsive.height * 1),
                       TextFieldAndText(
                         textField: 'Goods Type : ',
                         text: obj.bookingDetail.data!.goodsTypeName!.name ?? '',
                       ),
+                      SizeBoxH(Responsive.height * 1),
                       TextFieldAndText(
                         textField: 'Goods Value : ',
                         text: obj.bookingDetail.data!.goodsvalue.toString(),
                       ),
+                      SizeBoxH(Responsive.height * 1),
                       TextFieldAndText(
                         textField: 'Number of Labours : ',
                         text:
                             obj.bookingDetail.data!.numberofLabours.toString(),
                       ),
+                      SizeBoxH(Responsive.height * 1),
                       TextFieldAndText(
                         textField: 'Goods Weight :',
                         text: obj.bookingDetail.data!.goodsWeightName!.weight
                             .toString(),
                       ),
+                      SizeBoxH(Responsive.height * 1),
                       SizeBoxH(Responsive.height * 2.5),
                       MediaQuery.removeViewPadding(
                         context: context,
@@ -141,6 +149,7 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                       const OrderSlipHeadText(
                         heading: 'Receiver Details',
                       ),
+                      SizeBoxH(Responsive.height * 1),
                       TextFieldAndText(
                         textField: 'Name :',
                         text: obj.bookingDetail.data!.consigneeName.toString(),
@@ -162,10 +171,10 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                       //   textField: 'Location : ',
                       //   text: '#1234567890',
                       // ),
-                      TextFieldAndText(
-                        textField: 'PAN No: ',
-                        text: obj.bookingDetail.data!.consigneePan.toString(),
-                      ),
+                      // TextFieldAndText(
+                      //   textField: 'PAN No: ',
+                      //   text: obj.bookingDetail.data!.consigneePan.toString(),
+                      // ),
                       // const TextFieldAndText(
                       //   textField: 'GST:',
                       //   text: '#1234567890',
@@ -206,10 +215,10 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                       //   textField: 'Location : ',
                       //   text: '#1234567890',
                       // ),
-                      TextFieldAndText(
-                        textField: 'PAN No: ',
-                        text: obj.bookingDetail.data!.consigneePan.toString(),
-                      ),
+                      // TextFieldAndText(
+                      //   textField: 'PAN No: ',
+                      //   text: obj.bookingDetail.data!.consigneePan.toString(),
+                      // ),
                       // const TextFieldAndText(
                       //   textField: 'GST:',
                       //   text: '#1234567890',
@@ -283,9 +292,11 @@ class TextFieldAndText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         SizeBoxH(Responsive.height * 0.5),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
