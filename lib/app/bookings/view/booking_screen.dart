@@ -18,7 +18,6 @@ import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/common widgets/custom_text.dart';
-import '../../utils/common widgets/dialogs.dart';
 import 'widgets/drop_down_widgets.dart';
 
 class BookingScreen extends StatefulWidget {
@@ -198,20 +197,10 @@ class _BookingScreenState extends State<BookingScreen> {
                             );
                           },
                           onEditingProgress: (value, value2) {
-                            if (value.isNotEmpty) {
-                              booking.searchLocation(
-                                query: value,
-                                dest: false,
-                              );
-                            } else {
-                              errorBottomSheetDialogs(
-                                isDismissible: false,
-                                enableDrag: false,
-                                context: context,
-                                title: 'please select Your location',
-                                subtitle: '',
-                              );
-                            }
+                            booking.searchLocation(
+                              query: value,
+                              dest: false,
+                            );
                           },
                         );
                       },
