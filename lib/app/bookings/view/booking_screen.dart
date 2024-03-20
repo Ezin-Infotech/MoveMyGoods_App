@@ -550,6 +550,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                   controller:
                                       bookingProvider!.receiverNameController,
                                   labeText: 'Name',
+                                  requiredText: 'Enter Your name ',
                                 ),
                                 // BookingTextFieldWidgets(
                                 //   hintText: 'Email',
@@ -565,6 +566,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                       .receiverMobileNoController,
                                   labeText: 'Mobile No.',
                                   keyboardType: TextInputType.phone,
+                                  requiredText: 'enter mobile number ',
                                 ),
                                 // const SizeBoxH(10),
                                 // const CustomText(
@@ -625,6 +627,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                       .shipperMobileNoController,
                                   labeText: 'Mobile No.',
                                   keyboardType: TextInputType.phone,
+                                  requiredText: 'Please enter Mobile Number',
                                 ),
 
                                 // BookingTextFieldWidgets(

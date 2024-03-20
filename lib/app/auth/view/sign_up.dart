@@ -9,6 +9,7 @@ import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/app style/responsive.dart';
+import '../../utils/common widgets/dialogs.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -89,7 +90,6 @@ class SignUpScreen extends StatelessWidget {
                         bgColor: AppColors.kLight,
                         textColor: AppColors.primary,
                         onPressed: () {
-<<<<<<< HEAD
                           if (authProvider
                               .signUpPhoneController.text.isNotEmpty) {
                             if (authProvider.isPhoneNumber(
@@ -134,57 +134,6 @@ class SignUpScreen extends StatelessWidget {
                             );
                           }
 
-=======
-                          // if (authProvider
-                          //         .signUpPhoneController.text.isNotEmpty &&
-                          //     authProvider
-                          //         .signUpEmailController.text.isNotEmpty) {
-                          //   if (authProvider.isStrongPassword(
-                          //       authProvider.signUpEmailController.text)) {
-                          //     if (authProvider.isEmail(
-                          //         authProvider.signUpPhoneController.text)) {
-                          //       context
-                          //           .read<AuthProvider>()
-                          //           .getSignUpOTPFn(context: context);
-                          //     } else if (authProvider.isPhoneNumber(
-                          //         authProvider.signUpPhoneController.text)) {
-                          //       context
-                          //           .read<AuthProvider>()
-                          //           .getSignUpOTPFn(context: context);
-                          //     } else {
-                          //       errorBottomSheetDialogs(
-                          //         isDismissible: false,
-                          //         enableDrag: false,
-                          //         context: context,
-                          //         title:
-                          //             'please enter valid  email or phonenumber',
-                          //         subtitle: '',
-                          //       );
-                          //     }
-                          //   } else {
-                          //     errorBottomSheetDialogs(
-                          //       isDismissible: false,
-                          //       enableDrag: false,
-                          //       context: context,
-                          //       title:
-                          //           ' please check below mention  contaions ',
-                          //       subtitle:
-                          //           'please use at least 8 characters, one uppercase letter,one lowercase letter, least one digit,one special character',
-                          //     );
-                          //   }
-                          // } else {
-                          //   errorBottomSheetDialogs(
-                          //     isDismissible: false,
-                          //     enableDrag: false,
-                          //     context: context,
-                          //     title: 'please enter email and password',
-                          //     subtitle: '',
-                          //   );
-                          // }
-                          context
-                              .read<AuthProvider>()
-                              .getSignUpOTPFn(context: context);
->>>>>>> 947c49a6bf832d38c1ddfa167dc61c7cb1163dce
                           // context.push(const LoginScreen());
                         }),
                   ),

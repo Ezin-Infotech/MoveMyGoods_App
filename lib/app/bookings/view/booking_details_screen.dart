@@ -235,6 +235,86 @@ class CompletedBookingScreen extends StatelessWidget {
               ),
             ),
             SizeBoxH(Responsive.height * 2),
+            Container(
+              width: Responsive.width * 100,
+              decoration: BoxDecoration(
+                  color: AppColors.kLight,
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(
+                    width: 1,
+                    color: const Color(0xffE9E9E9),
+                  ),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(
+                          0x40000000), // Color with opacity (hex value: 0x40)
+                      offset: Offset(0,
+                          1), // Offset from the top-left corner (0px horizontal, 1px vertical)
+                      blurRadius: 14.5, // Blur radius (14.5px)
+                      spreadRadius: -3, // Spread radius (-3px)
+                    )
+                  ]),
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                children: [
+                  Text(
+                    'Shipper details',
+                    style: context.textTheme.bodyLarge?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black),
+                  ),
+                  const Divider(
+                    color: Color(0xffDDDDDD),
+                    height: Checkbox.width,
+                    thickness: 1,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const TextField(
+                            textField: 'Name',
+                          ),
+                          SizeBoxH(Responsive.height * 1),
+                          const TextField(
+                            textField: 'Phone Number',
+                          ),
+                        ],
+                      ),
+                      const VerticalDivider(
+                        width: 10,
+                        thickness: 1,
+                        indent: 20,
+                        endIndent: 0,
+                        color: Color.fromARGB(255, 83, 13, 13),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizeBoxH(Responsive.height * 1),
+                          TextWidgets(
+                            text: '${obj.bookingDetail.data!.distance} KM',
+                          ),
+                          SizeBoxH(Responsive.height * 1),
+                          TextWidgets(
+                            text: '₹ ${obj.bookingDetail.data!.bookingAmount}',
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const Divider(
+                    color: Color(0xffDDDDDD),
+                    height: Checkbox.width,
+                    thickness: 1,
+                  ),
+                  SizeBoxH(Responsive.height * 1),
+                ],
+              ),
+            ),
             obj.showPriceDetails
                 ? Container(
                     width: Responsive.width * 100,
