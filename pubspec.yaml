@@ -35,7 +35,7 @@ dependencies:
   intl: ^0.19.0
   image_picker: ^1.0.7
   camera: ^0.10.5+9
-  dropdown_button2: ^2.3.9
+  dropdown_plus_plus: ^0.1.1+1
 
  
 

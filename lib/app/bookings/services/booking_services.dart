@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mmg/app/bookings/model/booking_details_model.dart';
 import 'package:mmg/app/bookings/model/booking_fare_price_details_model.dart';
 import 'package:mmg/app/bookings/model/booking_model.dart';
@@ -63,7 +64,9 @@ class BookingServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    print("GOODS RESPOnsE = $response");
+    if (kDebugMode) {
+      print("GOODS RESPOnsE = $response");
+    }
     return goodsTypeModelFromJson(jsonEncode(response.data));
   }
 
@@ -78,7 +81,9 @@ class BookingServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    print(response);
+    if (kDebugMode) {
+      print(response);
+    }
     return goodsWeightModelFromJson(jsonEncode(response.data));
   }
 

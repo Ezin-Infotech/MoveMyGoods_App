@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:math';
 
-import 'package:advanced_search/advanced_search.dart';
 import 'package:drop_down_search_field/drop_down_search_field.dart';
+import 'package:dropdown_plus_plus/dropdown_plus_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart' as http;
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
@@ -59,46 +61,105 @@ class _BookingScreenState extends State<BookingScreen> {
     ));
   }
 
-  void updatePolyline() {
-    if (fromLocation == null || destinationLocation == null) return;
+  // void updatePolyline() {
+  //   if (fromLocation == null || destinationLocation == null) return;
+  //   const String polylineIdVal = 'user_route';
+  //   const PolylineId polylineId = PolylineId(polylineIdVal);
+  //   final Polyline polyline = Polyline(
+  //     startCap: Cap.roundCap,
+  //     polylineId: polylineId,
+  //     points: [fromLocation!, destinationLocation!],
+  //     width: 5,
+  //     color: Colors.blue,
+  //   );
 
+  //   double southLat = min(
+  //     fromLocation!.latitude,
+  //     destinationLocation!.latitude,
+  //   );
+  //   double northLat = max(
+  //     fromLocation!.latitude,
+  //     destinationLocation!.latitude,
+  //   );
+  //   double westLng = min(
+  //     fromLocation!.longitude,
+  //     destinationLocation!.longitude,
+  //   );
+  //   double eastLng = max(
+  //     fromLocation!.longitude,
+  //     destinationLocation!.longitude,
+  //   );
+  //   LatLngBounds bounds = LatLngBounds(
+  //     southwest: LatLng(southLat, westLng),
+  //     northeast: LatLng(northLat, eastLng),
+  //   );
+  //   setState(() {
+  //     polylines.removeWhere((poly) => poly.polylineId == polylineId);
+  //     polylines.add(polyline);
+  //   });
+  //   Future.delayed(const Duration(milliseconds: 500), () {
+  //     mapController?.animateCamera(CameraUpdate.newLatLngBounds(bounds, 60));
+  //   });
+  // }
+
+  void updatePolyline() async {
+    if (fromLocation == null || destinationLocation == null) return;
+    List<LatLng> routePoints = await getRouteFromAPI(
+      fromLocation!,
+      destinationLocation!,
+    );
     const String polylineIdVal = 'user_route';
     const PolylineId polylineId = PolylineId(polylineIdVal);
     final Polyline polyline = Polyline(
       startCap: Cap.roundCap,
       polylineId: polylineId,
-      points: [fromLocation!, destinationLocation!],
+      points: routePoints,
       width: 5,
       color: Colors.blue,
-    );
-
-    double southLat = min(
-      fromLocation!.latitude,
-      destinationLocation!.latitude,
-    );
-    double northLat = max(
-      fromLocation!.latitude,
-      destinationLocation!.latitude,
-    );
-    double westLng = min(
-      fromLocation!.longitude,
-      destinationLocation!.longitude,
-    );
-    double eastLng = max(
-      fromLocation!.longitude,
-      destinationLocation!.longitude,
-    );
-    LatLngBounds bounds = LatLngBounds(
-      southwest: LatLng(southLat, westLng),
-      northeast: LatLng(northLat, eastLng),
     );
     setState(() {
       polylines.removeWhere((poly) => poly.polylineId == polylineId);
       polylines.add(polyline);
     });
-    Future.delayed(const Duration(milliseconds: 500), () {
-      mapController?.animateCamera(CameraUpdate.newLatLngBounds(bounds, 60));
-    });
+    adjustCameraToBounds(routePoints, mapController!);
+  }
+
+  Future<List<LatLng>> getRouteFromAPI(LatLng start, LatLng end) async {
+    String baseUrl = 'https://maps.googleapis.com/maps/api/directions/json';
+    String apiKey = 'AIzaSyBOHuJ-4CqJBjmSi_RugeonwPU5cBVqbeA';
+
+    String url = '$baseUrl?origin=${start.latitude},${start.longitude}'
+        '&destination=${end.latitude},${end.longitude}&key=$apiKey';
+
+    var response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      Map data = jsonDecode(response.body);
+      List steps = data['routes'][0]['legs'][0]['steps'];
+
+      List<LatLng> polylinePoints = [];
+      for (var step in steps) {
+        var point = step['end_location'];
+        polylinePoints.add(LatLng(point['lat'], point['lng']));
+      }
+
+      return polylinePoints;
+    } else {
+      throw Exception('Failed to load directions');
+    }
+  }
+
+  void adjustCameraToBounds(
+      List<LatLng> routePoints, GoogleMapController mapController) {
+    if (routePoints.isEmpty) return;
+    double southLat = routePoints.map((m) => m.latitude).reduce(min);
+    double northLat = routePoints.map((m) => m.latitude).reduce(max);
+    double westLng = routePoints.map((m) => m.longitude).reduce(min);
+    double eastLng = routePoints.map((m) => m.longitude).reduce(max);
+    LatLngBounds bounds = LatLngBounds(
+      southwest: LatLng(southLat, westLng),
+      northeast: LatLng(northLat, eastLng),
+    );
+    mapController.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
   }
 
   void onSelectLocation(LatLng location, bool isFromLocation) {
@@ -110,6 +171,8 @@ class _BookingScreenState extends State<BookingScreen> {
       updatePolyline();
     }
   }
+
+  DropdownEditingController<String>? dropdownEditingController;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -158,72 +221,18 @@ class _BookingScreenState extends State<BookingScreen> {
                     const SizeBoxH(8),
                     Consumer<BookingProvider>(
                       builder: (context, booking, _) {
-                        return AdvancedSearch(
-                          hintText: 'Search your location',
-                          borderRadius: 4,
-                          searchItems:
-                              booking.searchResults.map((e) => e.name).toList(),
-                          maxElementsToDisplay: 7,
-                          searchResultsBgColor: AppColors.bgColor,
-                          onItemTap: (index, da) async {
-                            PlaceSuggestion place = booking.searchResults
-                                .firstWhere((element) => element.name == da);
+                        return TextDropdownFormField(
+                          onChanged: (dynamic value) async {
+                            PlaceSuggestion place =
+                                booking.destinationSearchResults.firstWhere(
+                              (element) => element.name == value,
+                            );
                             LatLng latLng = await booking.getPlaceDetails(
-                                place.placeId, context, true);
+                              place.placeId,
+                              context,
+                              false,
+                            );
                             onSelectLocation(latLng, true);
-                            markers.add(Marker(
-                              markerId: const MarkerId(""),
-                              position: latLng,
-                              infoWindow: const InfoWindow(title: 'Source'),
-                              icon: BitmapDescriptor.defaultMarkerWithHue(
-                                BitmapDescriptor.hueGreen,
-                              ),
-                            ));
-                            mapController
-                                ?.animateCamera(CameraUpdate.newCameraPosition(
-                              CameraPosition(
-                                target: latLng,
-                                zoom: 15.1746,
-                              ),
-                            ));
-                          },
-                          onSearchClear: () {
-                            booking.searchResults.clear();
-                            bookingProvider?.searchLocation(
-                              query: '',
-                              dest: false,
-                            );
-                          },
-                          onEditingProgress: (value, value2) {
-                            booking.searchLocation(
-                              query: value,
-                              dest: false,
-                            );
-                          },
-                        );
-                      },
-                    ),
-                    const SizeBoxH(10),
-                    const CustomText(
-                      text: 'Destination *',
-                    ),
-                    const SizeBoxH(8),
-                    Consumer<BookingProvider>(
-                      builder: (context, booking, _) {
-                        return AdvancedSearch(
-                          hintText: 'Search your destination',
-                          borderRadius: 4,
-                          searchItems: booking.destinationSearchResults
-                              .map((e) => e.name)
-                              .toList(),
-                          maxElementsToDisplay: 7,
-                          onItemTap: (index, da) async {
-                            PlaceSuggestion place = booking
-                                .destinationSearchResults
-                                .firstWhere((element) => element.name == da);
-                            LatLng latLng = await booking.getPlaceDetails(
-                                place.placeId, context, false);
-                            onSelectLocation(latLng, false);
                             markers.add(Marker(
                               markerId: const MarkerId(""),
                               position: latLng,
@@ -241,22 +250,214 @@ class _BookingScreenState extends State<BookingScreen> {
                               ),
                             ));
                           },
-                          onSearchClear: () {
-                            booking.destinationSearchResults.clear();
-                            bookingProvider?.searchLocation(
-                              query: '',
-                              dest: true,
-                            );
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please select Destination';
+                            }
+                            return null;
                           },
-                          onEditingProgress: (value, value2) {
+                          dropdownHeight: 200,
+                          controller: dropdownEditingController,
+                          options:
+                              booking.searchResults.map((e) => e.name).toList(),
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            suffixIcon: Icon(Icons.arrow_drop_down),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
+                          ),
+                          cursorColor: Colors.green,
+                          dropdownItemColor: Colors.red,
+                          findFn: (String? value) {
+                            if (value == null) return Future.value([]);
+                            if (value.isEmpty) return Future.value([]);
                             booking.searchLocation(
                               query: value,
                               dest: true,
                             );
+                            List<String> results = booking
+                                .destinationSearchResults
+                                .map((e) => e.name)
+                                .toList();
+                            return Future.value(results);
                           },
                         );
                       },
                     ),
+                    // Consumer<BookingProvider>(
+                    //   builder: (context, booking, _) {
+                    //     return AdvancedSearch(
+                    //       hintText: 'Search your location',
+                    //       borderRadius: 4,
+                    //       searchItems:
+                    // booking.searchResults.map((e) => e.name).toList(),
+                    //       maxElementsToDisplay: 7,
+                    //       searchResultsBgColor: AppColors.bgColor,
+                    //       onItemTap: (index, da) async {
+                    // PlaceSuggestion place = booking.searchResults
+                    //     .firstWhere((element) => element.name == da);
+                    // LatLng latLng = await booking.getPlaceDetails(
+                    //     place.placeId, context, true);
+                    // onSelectLocation(latLng, true);
+                    // markers.add(Marker(
+                    //   markerId: const MarkerId(""),
+                    //   position: latLng,
+                    //   infoWindow: const InfoWindow(title: 'Source'),
+                    //   icon: BitmapDescriptor.defaultMarkerWithHue(
+                    //     BitmapDescriptor.hueGreen,
+                    //   ),
+                    // ));
+                    // mapController
+                    //     ?.animateCamera(CameraUpdate.newCameraPosition(
+                    //   CameraPosition(
+                    //     target: latLng,
+                    //     zoom: 15.1746,
+                    //   ),
+                    // ));
+                    //       },
+                    //       onSearchClear: () {
+                    //         booking.searchResults.clear();
+                    //         bookingProvider?.searchLocation(
+                    //           query: '',
+                    //           dest: false,
+                    //         );
+                    //       },
+                    //       onEditingProgress: (value, value2) {
+                    //         booking.searchLocation(
+                    //           query: value,
+                    //           dest: false,
+                    //         );
+                    //       },
+                    //     );
+                    //   },
+                    // ),
+                    const SizeBoxH(10),
+                    const CustomText(
+                      text: 'Destination *',
+                    ),
+                    const SizeBoxH(8),
+                    Consumer<BookingProvider>(
+                      builder: (context, booking, _) {
+                        return TextDropdownFormField(
+                          onChanged: (dynamic value) async {
+                            debugPrint("value is $value");
+                            PlaceSuggestion place =
+                                booking.destinationSearchResults.firstWhere(
+                              (element) => element.name == value,
+                            );
+                            LatLng latLng = await booking.getPlaceDetails(
+                              place.placeId,
+                              context,
+                              false,
+                            );
+                            onSelectLocation(latLng, false);
+                            debugPrint("latLng is $latLng");
+                            markers.add(Marker(
+                              markerId: const MarkerId(""),
+                              position: latLng,
+                              infoWindow:
+                                  const InfoWindow(title: 'Destination'),
+                              icon: BitmapDescriptor.defaultMarkerWithHue(
+                                BitmapDescriptor.hueRed,
+                              ),
+                            ));
+                            mapController
+                                ?.animateCamera(CameraUpdate.newCameraPosition(
+                              CameraPosition(
+                                target: latLng,
+                                zoom: 15.1746,
+                              ),
+                            ));
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please select Destination';
+                            }
+                            return null;
+                          },
+                          dropdownHeight: 200,
+                          controller: dropdownEditingController,
+                          options: booking.destinationSearchResults
+                              .map((e) => e.name)
+                              .toList(),
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            suffixIcon: Icon(Icons.arrow_drop_down),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
+                          ),
+                          cursorColor: Colors.green,
+                          dropdownItemColor: Colors.red,
+                          findFn: (String? value) {
+                            if (value == null) return Future.value([]);
+                            if (value.isEmpty) return Future.value([]);
+                            booking.searchLocation(
+                              query: value,
+                              dest: true,
+                            );
+                            List<String> results = booking
+                                .destinationSearchResults
+                                .map((e) => e.name)
+                                .toList();
+                            return Future.value(results);
+                          },
+                        );
+                      },
+                    ),
+                    const SizeBoxH(8),
+                    // Consumer<BookingProvider>(
+                    //   builder: (context, booking, _) {
+                    //     return AdvancedSearch(
+                    //       hintText: 'Search your destination',
+                    //       borderRadius: 4,
+                    //       searchItems: booking.destinationSearchResults
+                    //           .map((e) => e.name)
+                    //           .toList(),
+                    //       maxElementsToDisplay: 7,
+                    //       onItemTap: (index, da) async {
+                    // PlaceSuggestion place = booking
+                    //     .destinationSearchResults
+                    //     .firstWhere((element) => element.name == da);
+                    // LatLng latLng = await booking.getPlaceDetails(
+                    //     place.placeId, context, false);
+                    // onSelectLocation(latLng, false);
+                    // markers.add(Marker(
+                    //   markerId: const MarkerId(""),
+                    //   position: latLng,
+                    //   infoWindow:
+                    //       const InfoWindow(title: 'Destination'),
+                    //   icon: BitmapDescriptor.defaultMarkerWithHue(
+                    //     BitmapDescriptor.hueRed,
+                    //   ),
+                    // ));
+                    // mapController
+                    //     ?.animateCamera(CameraUpdate.newCameraPosition(
+                    //   CameraPosition(
+                    //     target: latLng,
+                    //     zoom: 15.1746,
+                    //   ),
+                    // ));
+                    //       },
+                    //       onSearchClear: () {
+                    //         booking.destinationSearchResults.clear();
+                    //         bookingProvider?.searchLocation(
+                    //           query: '',
+                    //           dest: true,
+                    //         );
+                    //       },
+                    //       onEditingProgress: (value, value2) {
+                    //         booking.searchLocation(
+                    //           query: value,
+                    //           dest: true,
+                    //         );
+                    //       },
+                    //     );
+                    //   },
+                    // ),
                     const SizeBoxH(10),
                     const CustomText(
                       text: 'Goods Type *',
