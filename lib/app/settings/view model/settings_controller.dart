@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
+import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/settings/view/webview/terms_and_privacy.dart';
 import 'package:mmg/app/settings/view/widgets/profile_page.dart';
 import 'package:mmg/app/utils/alert_dialog.dart';
@@ -71,7 +72,8 @@ class SettingsProvider with ChangeNotifier {
   String passporthintText = '';
   String userPhotohintText = '';
 
-  Future pickImageFromGalleryOrCamera(bool isGallery, context) async {
+  Future pickImageFromGalleryOrCamera(
+      bool isGallery, BuildContext context) async {
     try {
       final image = await ImagePicker().pickImage(
           source: isGallery ? ImageSource.gallery : ImageSource.camera);
@@ -79,11 +81,27 @@ class SettingsProvider with ChangeNotifier {
       final File imageTemporary = File(image.path);
 
       userPhotoFile.value = imageTemporary;
-      List<String> parts = imageTemporary.path.split('/');
+      // List<String> parts = imageTemporary.path.split('/');
+      // String fileName = parts.last;
+      // userPhotohintText = fileName;
+      String imagePath = imageTemporary.path;
+      String newPath = imagePath.replaceAll(".jpg", ".jpeg");
+
+      // Rename the file
+      File newFile = await File(imagePath).copy(newPath);
+      List<String> parts = newFile.path.split('/');
       String fileName = parts.last;
       userPhotohintText = fileName;
+      // Read the image file as bytes
+      List<int> imageBytes = await newFile.readAsBytes();
 
-      log(userPhotohintText);
+// Encode the bytes into base64
+      // String base64Image = base64Encode(imageBytes);
+      log("base64Image: ${newFile.path.toString()}");
+      context
+          .read<AuthProvider>()
+          .uploadImageFn(context: context, file: newFile, fileName: fileName);
+      log("imageBytes: ${fileName.toString()}");
 
       notifyListeners();
     } on Exception catch (e) {
@@ -119,6 +137,7 @@ class SettingsProvider with ChangeNotifier {
     AppPref.userToken = '';
     AppPref.userProfileId = '';
     context.read<AuthProvider>().isUserLoggedFn(isLogged: false);
+    context.read<BookingProvider>().clearBookingList();
   }
 
   userLoggedFn({required int index, required BuildContext context}) {

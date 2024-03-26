@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
@@ -15,6 +16,7 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
+      isBackButton: false,
       children: Container(
         width: Responsive.width * 100,
         decoration: BoxDecoration(
@@ -245,6 +247,7 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                           ButtonWidgets(
                             buttonText: 'Back to Home',
                             onPressed: () {
+                              Get.back();
                               // context.back()
                             },
                           ),

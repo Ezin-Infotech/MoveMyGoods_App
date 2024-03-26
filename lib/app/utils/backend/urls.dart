@@ -57,4 +57,5 @@ class Urls {
       'http://103.160.153.57:8083/mmg/api/v2/profile/forgotpassword/mobile';
   final updatePassWord =
       'http://103.160.153.57:8083/mmg/api/v2/profile/password';
+  final uploadImageUrl = 'http://103.160.153.57:8083/mmg/api/v2/image/role/1';
 }

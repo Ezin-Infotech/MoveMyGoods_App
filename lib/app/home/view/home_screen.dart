@@ -266,8 +266,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         .read<BookingProvider>()
                         .changeShowRecieverDetails(isShow: false);
                     context.read<BookingProvider>().clearBooingVariables();
+                    context
+                        .read<AuthProvider>()
+                        .sendShipperValues(context: context);
                     Get.toNamed(AppRoutes.bookingScreen);
                   } else {
+                    context.read<AuthProvider>().clearAuthFields();
                     Get.toNamed(AppRoutes.login);
                   }
                 },

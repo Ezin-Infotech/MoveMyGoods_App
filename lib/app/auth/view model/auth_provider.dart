@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -266,12 +267,7 @@ class AuthProvider with ChangeNotifier {
     if (forgetNewPasswordController.text.isEmpty &&
         forgetConfirmPasswordController.text.isEmpty) {
       failurtoast(title: 'Please fill all fields');
-    }
-    // else if(){
-
-    // }
-
-    else {
+    } else {
       LoadingOverlay.of(context).show();
       try {
         await services.updatePassWordService(
@@ -284,15 +280,6 @@ class AuthProvider with ChangeNotifier {
         Get.back();
         Get.back();
         failurtoast(title: 'Password Updated Successfully.', isSuccess: true);
-        // if (isFromForgot) {
-        //   Get.toNamed(AppRoutes.forgetPasswordEnterPage);
-        // } else {
-        //   Get.toNamed(AppRoutes.signUpProfileScreen);
-        //   getTermsNConditionFn();
-        // }
-
-        // clearLoginController();
-        // Get.offNamed(AppRoutes.otpScreen);
         // ignore: deprecated_member_use
       } on DioError catch (e) {
         LoadingOverlay.of(context).hide();
@@ -317,13 +304,6 @@ class AuthProvider with ChangeNotifier {
       // ignore: deprecated_member_use
     } on DioError catch (e) {
       log(e.message!);
-      // errorBottomSheetDialogs(
-      //     isDismissible: false,
-      //     enableDrag: false,
-      //     context: context,
-      //     title: '${e.response!.data['message']}',
-      //     subtitle: '',
-      //     isdarkmode: false);
     }
   }
 
@@ -336,13 +316,6 @@ class AuthProvider with ChangeNotifier {
       // ignore: deprecated_member_use
     } on DioError catch (e) {
       log(e.message!);
-      // errorBottomSheetDialogs(
-      //     isDismissible: false,
-      //     enableDrag: false,
-      //     context: context,
-      //     title: '${e.response!.data['message']}',
-      //     subtitle: '',
-      //     isdarkmode: false);
     }
   }
 
@@ -354,13 +327,6 @@ class AuthProvider with ChangeNotifier {
       // ignore: deprecated_member_use
     } on DioError catch (e) {
       log(e.message!);
-      // errorBottomSheetDialogs(
-      //     isDismissible: false,
-      //     enableDrag: false,
-      //     context: context,
-      //     title: '${e.response!.data['message']}',
-      //     subtitle: '',
-      //     isdarkmode: false);
     }
   }
 
@@ -375,13 +341,6 @@ class AuthProvider with ChangeNotifier {
       // ignore: deprecated_member_use
     } on DioError catch (e) {
       log(e.message!);
-      // errorBottomSheetDialogs(
-      //     isDismissible: false,
-      //     enableDrag: false,
-      //     context: context,
-      //     title: '${e.response!.data['message']}',
-      //     subtitle: '',
-      //     isdarkmode: false);
     }
   }
 
@@ -398,13 +357,6 @@ class AuthProvider with ChangeNotifier {
     } on DioError catch (e) {
       getUserProfilePicStatus = GetUserProfilePicStatus.error;
       log(e.message!);
-      // errorBottomSheetDialogs(
-      //     isDismissible: false,
-      //     enableDrag: false,
-      //     context: context,
-      //     title: '${e.response!.data['message']}',
-      //     subtitle: '',
-      //     isdarkmode: false);
     }
   }
 
@@ -421,13 +373,6 @@ class AuthProvider with ChangeNotifier {
     } on DioError catch (e) {
       getUserProfileDetailsStatus = GetUserProfileDetailsStatus.error;
       log("DioError getUserProfileDetailsFn${e.message!}");
-      // errorBottomSheetDialogs(
-      //     isDismissible: false,
-      //     enableDrag: false,
-      //     context: context,
-      //     title: '${e.response!.data['message']}',
-      //     subtitle: '',
-      //     isdarkmode: false);
     }
   }
 
@@ -478,6 +423,16 @@ class AuthProvider with ChangeNotifier {
     await changeCityController(
         id: data.data!.address![0].cityId.toString(),
         value: data.data!.address![0].cityName.toString());
+    // LoadingOverlay.of(context).hide();
+  }
+
+  sendShipperValues({required BuildContext context}) async {
+    // LoadingOverlay.of(context).show();
+    final data = context.read<AuthProvider>().profileDataModel;
+    context.read<BookingProvider>().setShipperDetails(
+        name: data.data!.firstName.toString(),
+        mobile: data.data!.mobileNumber.toString(),
+        gstNumber: '');
     // LoadingOverlay.of(context).hide();
   }
 
@@ -687,5 +642,66 @@ class AuthProvider with ChangeNotifier {
         subtitle: '',
       );
     }
+  }
+
+  /* UPLOAD PROFILE */
+  uploadImageFn(
+      {required BuildContext context,
+      required File file,
+      required dynamic fileName}) async {
+    LoadingOverlay.of(context).show();
+    try {
+      await services.postUploadImageService(file: file, imageName: fileName);
+      // signInData = signInDataResponse.data!;
+      LoadingOverlay.of(context).hide();
+    } on DioError catch (e) {
+      LoadingOverlay.of(context).hide();
+      errorBottomSheetDialogs(
+        isDismissible: false,
+        enableDrag: false,
+        context: context,
+        title: '${e.response!.data['message']}',
+        subtitle: '',
+      );
+    }
+  }
+
+  clearAuthFields() {
+    emailController = TextEditingController(text: '');
+    passWordController = TextEditingController(text: '');
+
+    forgetNewPasswordController = TextEditingController(text: '');
+    forgetConfirmPasswordController = TextEditingController(text: '');
+    forgetNewPassword = false;
+    signUpEmailController = TextEditingController(text: '');
+    signUpPhoneController = TextEditingController(text: '');
+    otp1Controller = TextEditingController(text: '');
+    otp2Controller = TextEditingController(text: '');
+    otp3Controller = TextEditingController(text: '');
+    otp4Controller = TextEditingController(text: '');
+    forgotPhoneNumberController = TextEditingController(text: '');
+    genderId = 1;
+    firstNameController = TextEditingController(text: '');
+    lastNameController = TextEditingController(text: '');
+    mobileNumberController = TextEditingController(text: '');
+    addressLineOneController = TextEditingController(text: '');
+    addressLineTwoController = TextEditingController(text: '');
+    landMarkController = TextEditingController(text: '');
+    selectStateController = TextEditingController(text: '');
+    picCodeController = TextEditingController(text: '');
+    alternativeNumberController = TextEditingController(text: '');
+    passwordController = TextEditingController(text: '');
+    confirmPasswordController = TextEditingController(text: '');
+    profileEmailController = TextEditingController(text: '');
+    dateController = TextEditingController(text: '');
+    countryController = TextEditingController(text: '');
+    stateController = TextEditingController(text: '');
+    cityController = TextEditingController(text: '');
+    countryId = '';
+    stateId = '';
+    cityId = '';
+    termsAndConditionsUuid = '';
+    timeStampDob = 0;
+    notifyListeners();
   }
 }

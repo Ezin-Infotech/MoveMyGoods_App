@@ -72,19 +72,24 @@ class BookingServices extends Urls {
 
   Future<GoodsWeightModel> getGoodsWeightService(
       {required dynamic data}) async {
-    final response = await dio.post(goodsWeightUrl,
-        data: data,
-        options: Options(
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ${AppPref.userToken}',
-            'x-api-key': 'MMGATPL'
-          },
-        ));
-    if (kDebugMode) {
-      print(response);
+    print('Goods Weight Response  $data');
+    try {
+      final response = await dio.post(goodsWeightUrl,
+          data: data,
+          options: Options(
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ${AppPref.userToken}',
+              'x-api-key': 'MMGATPL'
+            },
+          ));
+
+      print('Goods Weight Response  $response');
+      return goodsWeightModelFromJson(jsonEncode(response.data));
+    } catch (e) {
+      print('Goods Weight Response  $e');
+      return GoodsWeightModel();
     }
-    return goodsWeightModelFromJson(jsonEncode(response.data));
   }
 
   Future<GoodsVehicleDetailsModel> getGoodsVehicleDetailsService(
@@ -124,6 +129,7 @@ class BookingServices extends Urls {
   }
 
   Future postConfirmBookingService({required dynamic data}) async {
+    print('Goods Weight Response  $data');
     final response = await dio.post(confirmBookingUrl,
         data: data,
         options: Options(

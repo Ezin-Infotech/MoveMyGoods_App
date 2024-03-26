@@ -26,121 +26,122 @@ class _ValidationNumberSCreenState extends State<ValidationNumberSCreen> {
         Provider.of<SettingsProvider>(context, listen: false);
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     return CommonScaffold(
+        isBackButton: true,
         children: Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Consumer<SettingsProvider>(builder: (context, value, child) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizeBoxH(
-              Responsive.height * 10,
-            ),
-            Text(
-              'Validation of Mobile Number',
-              textAlign: TextAlign.center,
-              style: context.textTheme.bodyLarge?.copyWith(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w800),
-            ),
-            SizeBoxH(
-              Responsive.height * 2,
-            ),
-            CommonTextForm(
-              onChanged: (p0) {},
-              radius: 2,
-              fillColor: const Color(0xffe9ecef),
-              hintText: 'Mobile Number',
-              controller: settingProvider.phoneNumberController,
-              keyboardType: TextInputType.phone,
-            ),
-            SizeBoxH(
-              Responsive.height * 0.5,
-            ),
-            Row(
+          padding: const EdgeInsets.all(16.0),
+          child: Consumer<SettingsProvider>(builder: (context, value, child) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.error,
-                  color: AppColors.secondPrimary,
+                SizeBoxH(
+                  Responsive.height * 10,
                 ),
                 Text(
-                  'Verification needed',
+                  'Validation of Mobile Number',
                   textAlign: TextAlign.center,
                   style: context.textTheme.bodyLarge?.copyWith(
-                      color: AppColors.secondPrimary,
+                      color: Colors.black,
                       fontSize: 18,
-                      fontWeight: FontWeight.w600),
+                      fontWeight: FontWeight.w800),
                 ),
-              ],
-            ),
-            SizeBoxH(
-              Responsive.height * 2,
-            ),
-            value.validPhoneNumber == false
-                ? ButtonWidgets(
-                    onPressed: () {
-                      if ((authProvider
-                          .isPhoneNumber(value.phoneNumberController.text))) {
-                        value.validPhoneNumberFn(true);
-                      } else {
-                        errorBottomSheetDialogs(
-                          isDismissible: false,
-                          enableDrag: false,
-                          context: context,
-                          title: 'please enter valid phonenumber',
-                          subtitle: '',
-                        );
-                      }
-                    },
-                    buttonText: 'Sent OTP',
-                    bgColor: AppColors.secondPrimary,
-                  )
-                : const Text(''),
-            value.validPhoneNumber == true
-                ? Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          textFieldOTP(
-                              first: true,
-                              last: false,
-                              controller: value.otp1Controller),
-                          textFieldOTP(
-                              first: false,
-                              last: false,
-                              controller: value.otp2Controller),
-                          textFieldOTP(
-                              first: false,
-                              last: false,
-                              controller: value.otp3Controller),
-                          textFieldOTP(
-                              first: false,
-                              last: true,
-                              controller: value.otp4Controller),
-                        ],
-                      ),
-                      SizeBoxH(Responsive.height * 2.5),
-                      ButtonWidgets(
-                        onPressed: () {},
-                        buttonText: 'Verify',
+                SizeBoxH(
+                  Responsive.height * 2,
+                ),
+                CommonTextForm(
+                  onChanged: (p0) {},
+                  radius: 2,
+                  fillColor: const Color(0xffe9ecef),
+                  hintText: 'Mobile Number',
+                  controller: settingProvider.phoneNumberController,
+                  keyboardType: TextInputType.phone,
+                ),
+                SizeBoxH(
+                  Responsive.height * 0.5,
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.error,
+                      color: AppColors.secondPrimary,
+                    ),
+                    Text(
+                      'Verification needed',
+                      textAlign: TextAlign.center,
+                      style: context.textTheme.bodyLarge?.copyWith(
+                          color: AppColors.secondPrimary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+                SizeBoxH(
+                  Responsive.height * 2,
+                ),
+                value.validPhoneNumber == false
+                    ? ButtonWidgets(
+                        onPressed: () {
+                          if ((authProvider.isPhoneNumber(
+                              value.phoneNumberController.text))) {
+                            value.validPhoneNumberFn(true);
+                          } else {
+                            errorBottomSheetDialogs(
+                              isDismissible: false,
+                              enableDrag: false,
+                              context: context,
+                              title: 'please enter valid phonenumber',
+                              subtitle: '',
+                            );
+                          }
+                        },
+                        buttonText: 'Sent OTP',
                         bgColor: AppColors.secondPrimary,
-                      ),
-                      SizeBoxH(Responsive.height * 2.5),
-                      Text(
-                        'Resend OTP',
-                        style: context.textTheme.bodySmall?.copyWith(
-                            color: AppColors.secondPrimary,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400),
                       )
-                    ],
-                  )
-                : const Text('')
-          ],
-        );
-      }),
-    ));
+                    : const Text(''),
+                value.validPhoneNumber == true
+                    ? Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              textFieldOTP(
+                                  first: true,
+                                  last: false,
+                                  controller: value.otp1Controller),
+                              textFieldOTP(
+                                  first: false,
+                                  last: false,
+                                  controller: value.otp2Controller),
+                              textFieldOTP(
+                                  first: false,
+                                  last: false,
+                                  controller: value.otp3Controller),
+                              textFieldOTP(
+                                  first: false,
+                                  last: true,
+                                  controller: value.otp4Controller),
+                            ],
+                          ),
+                          SizeBoxH(Responsive.height * 2.5),
+                          ButtonWidgets(
+                            onPressed: () {},
+                            buttonText: 'Verify',
+                            bgColor: AppColors.secondPrimary,
+                          ),
+                          SizeBoxH(Responsive.height * 2.5),
+                          Text(
+                            'Resend OTP',
+                            style: context.textTheme.bodySmall?.copyWith(
+                                color: AppColors.secondPrimary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400),
+                          )
+                        ],
+                      )
+                    : const Text('')
+              ],
+            );
+          }),
+        ));
   }
 
   Widget textFieldOTP(

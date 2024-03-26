@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mmg/app/auth/modal/city_list_model.dart';
@@ -23,7 +25,7 @@ class AuthServices extends Urls {
       ),
       data: {"userName": email, "password": password, "roleId": 1},
     );
-    // print(response);
+    print(response);
     return response.data;
   }
 
@@ -38,7 +40,7 @@ class AuthServices extends Urls {
       ),
       data: {"mobileNumber": phone, "emailId": email, "roleId": 1},
     );
-    // print(response);
+    print(response);
     return response.data;
   }
 
@@ -53,7 +55,7 @@ class AuthServices extends Urls {
       ),
       data: {"otp": otp, "mobileNumber": phone},
     );
-    // print(response);
+    print(response);
     return response.data;
   }
 
@@ -97,7 +99,7 @@ class AuthServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    // print(response);
+    print(response);
     return countryModelFromJson(jsonEncode(response.data));
   }
 
@@ -110,7 +112,7 @@ class AuthServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    // print(response);
+    print(response);
     return getTermsNConditionModelFromJson(jsonEncode(response.data));
   }
 
@@ -191,6 +193,37 @@ class AuthServices extends Urls {
       ),
       data: data,
     );
+    return response.data;
+  }
+
+  Future postUploadImageService({
+    required File file,
+    required dynamic imageName,
+  }) async {
+    // Define your form data
+    log('${file.path}1111111111');
+    FormData formData = FormData.fromMap({
+      'file': file.openRead(),
+      'profileId': AppPref.userProfileId,
+      'category': "PROFILE",
+      'update': "true",
+    });
+
+    // Encode form data
+
+    final response = await dio.post(
+      uploadImageUrl,
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer ${AppPref.userToken}',
+          'Content-Type':
+              'multipart/form-data; boundary=----WebKitFormBoundarytxt9k6nW70O8sTxY',
+          'x-api-key': 'MMGATPL'
+        },
+      ),
+      data: formData,
+    );
+    print("1111111111111111111111111111111111111111111111 ${response.data}");
     return response.data;
   }
 }

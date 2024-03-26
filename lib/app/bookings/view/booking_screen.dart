@@ -179,6 +179,7 @@ class _BookingScreenState extends State<BookingScreen> {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
+      isBackButton: true,
       padding: 0,
       children: Consumer<BookingProvider>(builder: (context, booking, _) {
         return Form(
@@ -230,7 +231,7 @@ class _BookingScreenState extends State<BookingScreen> {
                             LatLng latLng = await booking.getPlaceDetails(
                               place.placeId,
                               context,
-                              false,
+                              true,
                             );
                             onSelectLocation(latLng, true);
                             markers.add(Marker(
@@ -464,38 +465,45 @@ class _BookingScreenState extends State<BookingScreen> {
                     ),
                     const SizeBoxH(8),
                     SizedBox(
-                      height: Responsive.height * 6,
-                      child: DropDownSearchField(
-                        hideKeyboard: true,
-                        hideOnEmpty: true,
-                        textFieldConfiguration: TextFieldConfiguration(
-                          controller: booking.goodsTypeController,
-                          autofocus: false,
-                          style: context.textTheme.bodyLarge!.copyWith(
-                              fontSize: 16, fontWeight: FontWeight.w400),
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
+                      height: Responsive.height * 7,
+                      child: Center(
+                        child: DropDownSearchField(
+                          hideKeyboard: true,
+                          hideOnEmpty: true,
+                          textFieldConfiguration: TextFieldConfiguration(
+                            controller: booking.goodsTypeController,
+                            autofocus: false,
+                            style: context.textTheme.bodyLarge!.copyWith(
+                                fontSize: 16, fontWeight: FontWeight.w400),
+                            decoration: const InputDecoration(
+                              suffixIcon: Icon(Icons.arrow_drop_down_rounded),
+                              border: OutlineInputBorder(),
+                            ),
                           ),
+                          suggestionsCallback: (pattern) async {
+                            return booking.goodsTypeData.list!.where((items) {
+                              return items.name
+                                  .toString()
+                                  .toLowerCase()
+                                  .contains(
+                                    pattern.toLowerCase(),
+                                  );
+                            }).toList();
+                          },
+                          itemBuilder: (context, suggestion) {
+                            return ListTile(
+                                title: Text(suggestion.name.toString()));
+                          },
+                          onSuggestionSelected: (suggestion) {
+                            print('Goods Weight Response $suggestion');
+                            context
+                                .read<BookingProvider>()
+                                .changeGoodsTypeController(
+                                    id: suggestion.id.toString(),
+                                    value: suggestion.name.toString());
+                          },
+                          displayAllSuggestionWhenTap: true,
                         ),
-                        suggestionsCallback: (pattern) async {
-                          return booking.goodsTypeData.list!.where((items) {
-                            return items.name.toString().toLowerCase().contains(
-                                  pattern.toLowerCase(),
-                                );
-                          }).toList();
-                        },
-                        itemBuilder: (context, suggestion) {
-                          return ListTile(
-                              title: Text(suggestion.name.toString()));
-                        },
-                        onSuggestionSelected: (suggestion) {
-                          context
-                              .read<BookingProvider>()
-                              .changeGoodsTypeController(
-                                  id: suggestion.id.toString(),
-                                  value: suggestion.name.toString());
-                        },
-                        displayAllSuggestionWhenTap: true,
                       ),
                     ),
                     BookingTextFieldWidgets(
@@ -737,6 +745,66 @@ class _BookingScreenState extends State<BookingScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
+                                  'Billing Details',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displaySmall!
+                                      .copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 18,
+                                          color: const Color(0xff222222)),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        MyToggleIconButton(
+                                          isToggled: value.billingId == 1,
+                                          onPressed: () {
+                                            context
+                                                .read<BookingProvider>()
+                                                .setBillingId(value: 1);
+                                          },
+                                        ),
+                                        Text(
+                                          'PAID',
+                                          style: context.textTheme.bodySmall!
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 14,
+                                                  color:
+                                                      const Color(0xffA8A4B0)),
+                                        )
+                                      ],
+                                    ),
+                                    const SizeBoxV(65),
+                                    Row(
+                                      children: [
+                                        MyToggleIconButton(
+                                          isToggled: value.billingId == 2,
+                                          onPressed: () {
+                                            context
+                                                .read<BookingProvider>()
+                                                .setBillingId(value: 2);
+                                          },
+                                        ),
+                                        Text(
+                                          'FOD',
+                                          style: context.textTheme.bodySmall!
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 14,
+                                                  color:
+                                                      const Color(0xffA8A4B0)),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+
+                                const SizeBoxH(15),
+                                Text(
                                   '*Receiver Details',
                                   style: Theme.of(context)
                                       .textTheme
@@ -789,12 +857,12 @@ class _BookingScreenState extends State<BookingScreen> {
                                 //   labeText: 'PAN No.',
                                 //   requiredText: 'Enter Your PAN No ',
                                 // ),
-                                // BookingTextFieldWidgets(
-                                //   hintText: '(eg.GHXXXXXXXX000)',
-                                //   controller:
-                                //       bookingProvider!.receiverGstNoController,
-                                //   labeText: 'GST No.',
-                                // ),
+                                BookingTextFieldWidgets(
+                                  hintText: '(eg.GHXXXXXXXX000)',
+                                  controller:
+                                      bookingProvider!.receiverGstNoController,
+                                  labeText: 'GST No.',
+                                ),
                                 SizeBoxH(Responsive.height * 2),
                                 Text(
                                   '*Shipper Details',
@@ -837,12 +905,12 @@ class _BookingScreenState extends State<BookingScreen> {
                                 //       bookingProvider!.shipperpanNOController,
                                 //   labeText: 'PAN No.',
                                 // ),
-                                // BookingTextFieldWidgets(
-                                //   hintText: '(eg.GHXXXXXXXX000)',
-                                //   controller:
-                                //       bookingProvider!.shipperGstNoController,
-                                //   labeText: 'GST No.',
-                                // ),
+                                BookingTextFieldWidgets(
+                                  hintText: '(eg.GHXXXXXXXX000)',
+                                  controller:
+                                      bookingProvider!.shipperGstNoController,
+                                  labeText: 'GST No.',
+                                ),
                                 SizeBoxH(Responsive.height * 2),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -850,12 +918,11 @@ class _BookingScreenState extends State<BookingScreen> {
                                     ButtonWidgets(
                                       buttonText: 'Book Now',
                                       onPressed: () {
-                                        if (_formKey.currentState!.validate()) {
-                                          context
-                                              .read<BookingProvider>()
-                                              .confirmBookingFn(
-                                                  context: context);
-                                        }
+                                        // if (_formKey.currentState!.validate()) {
+                                        context
+                                            .read<BookingProvider>()
+                                            .confirmBookingFn(context: context);
+                                        // }
                                         // Get.toNamed(AppRoutes
                                         //     .bookingSuccessFullyCompletedScreen);
                                         // context.push(const LoginScreen());

@@ -39,6 +39,7 @@ class _HomeBookingListScreenState extends State<HomeBookingListScreen> {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
+      isBackButton: true,
       // physics: const Sc(),
       children: Consumer<BookingProvider>(builder: (context, value, _) {
         return Column(

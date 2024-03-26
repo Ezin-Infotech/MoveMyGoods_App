@@ -18,11 +18,11 @@ import 'package:mmg/app/bookings/model/booking_weight_model.dart';
 import 'package:mmg/app/bookings/model/goods_type_model.dart';
 import 'package:mmg/app/bookings/model/vehicle_details_model.dart';
 import 'package:mmg/app/bookings/services/booking_services.dart';
+import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/common%20widgets/dialogs.dart';
 import 'package:mmg/app/utils/common%20widgets/loading_overlay.dart';
 import 'package:mmg/app/utils/enums.dart';
-
-import '../../utils/routes/route_names.dart';
+import 'package:mmg/app/utils/routes/route_names.dart';
 
 class BookingProvider with ChangeNotifier {
   TextEditingController sourceController = TextEditingController();
@@ -216,7 +216,28 @@ class BookingProvider with ChangeNotifier {
     dCountry = '';
     sPincode = '';
     dPincode = '';
+    billingId = 1;
   }
+
+  setShipperDetails({
+    required String name,
+    required String mobile,
+    required String gstNumber,
+  }) {
+    shipperNameController = TextEditingController(text: name);
+
+    shipperMobileNoController = TextEditingController(text: mobile);
+
+    shipperGstNoController = TextEditingController(text: gstNumber);
+    notifyListeners();
+  }
+
+  setBillingId({required int value}) {
+    billingId = value;
+    notifyListeners();
+  }
+
+  int billingId = 1;
 
   String goodsWeightId = '';
   String goodsTypeId = '';
@@ -224,11 +245,13 @@ class BookingProvider with ChangeNotifier {
     goodsTypeController.clear();
     goodsTypeController.text = value;
     goodsTypeId = id;
-    notifyListeners();
+    print('Goods Weight Response $goodsTypeId');
+    getGoodsWeightFn();
+
     if (goodsWeightId != '') {
       getGoodsVehicleDetailsFn();
     }
-    getGoodsWeightFn();
+    notifyListeners();
   }
 
   changeGoodsWeight({required String id}) {
@@ -259,6 +282,7 @@ class BookingProvider with ChangeNotifier {
     getGoodsWeightStatus = GetGoodsWeightStatus.loading;
     // notifyListeners();
     try {
+      print('Goods Weight Response winning');
       final goodsResponse = await services.getGoodsWeightService(data: {
         "sourcelatitude": sourceLatitude,
         "sourcelongitude": sourceLongitude,
@@ -268,6 +292,7 @@ class BookingProvider with ChangeNotifier {
         "sState": sState,
         "sCity": sCity
       });
+      print('Goods Weight Response $goodsWeightData');
       goodsWeightData = goodsResponse.data!;
       getGoodsWeightStatus = GetGoodsWeightStatus.loaded;
       showGoodsWeight = true;
@@ -323,7 +348,7 @@ class BookingProvider with ChangeNotifier {
         "sCity": sCity,
         "referenceId": goodsVehicleDetailsModel.data![0].vendorId,
         "vendorType": goodsVehicleDetailsModel.data![0].vendorType,
-        "profileId": "b0270f1e-bed8-47cb-b490-662f9f4b51ff",
+        "profileId": AppPref.userProfileId,
         "goodsvalue": int.parse(goodsValueController.text),
         "numberofLabours": int.parse(numberOfLabourController.text == ''
             ? '0'
@@ -543,7 +568,7 @@ class BookingProvider with ChangeNotifier {
         "sPincode": sPincode,
         "referenceId": goodsVehicleDetailsModel.data![0].vendorId,
         "vendorType": goodsVehicleDetailsModel.data![0].vendorType,
-        "profileId": "ba255ec8-908b-4c44-933f-9898b10f04e3",
+        "profileId": AppPref.userProfileId,
         "goodsvalue": goodsValueController.text,
         "labourCharges": bookingFarePriceDetailsModel.data!.labourCharges,
         "ewayBillNo": "",
@@ -596,6 +621,11 @@ class BookingProvider with ChangeNotifier {
         subtitle: '',
       );
     }
+  }
+
+  clearBookingList() {
+    bookingata = BookingData();
+    notifyListeners();
   }
 }
 

@@ -24,6 +24,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     return CommonScaffold(
+      isBackButton: true,
       children: SizedBox(
         height: Responsive.height * 80,
         child: Column(

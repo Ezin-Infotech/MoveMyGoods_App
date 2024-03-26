@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/utils/enums.dart';
 import 'package:provider/provider.dart';
@@ -8,9 +9,13 @@ import '../app style/colors.dart';
 
 class CommonScaffold extends StatelessWidget {
   final Widget children;
+  final bool isBackButton;
   final double? padding;
   const CommonScaffold(
-      {super.key, required this.children, this.padding = 16.0});
+      {super.key,
+      required this.children,
+      required this.isBackButton,
+      this.padding = 16.0});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +34,16 @@ class CommonScaffold extends StatelessWidget {
                   children: [
                     Row(
                       children: [
+                        isBackButton
+                            ? IconButton(
+                                onPressed: () => Get.back(),
+                                icon: Icon(
+                                  Icons.arrow_back_ios_rounded,
+                                  size: 20,
+                                  color: AppColors.kLight,
+                                ),
+                              )
+                            : const SizedBox.shrink(),
                         Image.asset(
                           AppImages.whiteLogo,
                           width: 44,
@@ -58,11 +73,12 @@ class CommonScaffold extends StatelessWidget {
                             )
                           : const CircleAvatar(
                               maxRadius: 20,
-                              backgroundImage: AssetImage('assets/avathar.png'),
+                              backgroundImage:
+                                  AssetImage('assets/avathar1.png'),
                             )
                   : const CircleAvatar(
                       maxRadius: 20,
-                      backgroundImage: AssetImage('assets/avathar.png'),
+                      backgroundImage: AssetImage('assets/avathar1.png'),
                     )
             ],
           );

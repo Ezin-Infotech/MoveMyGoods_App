@@ -32,6 +32,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     final homeProvider = Provider.of<HomeProvider>(context, listen: false);
     return CommonScaffold(
+      isBackButton: false,
       padding: 0,
       children: Consumer<SettingsProvider>(builder: (context, value, _) {
         return Consumer<AuthProvider>(builder: (context, obj, _) {

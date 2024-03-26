@@ -17,6 +17,7 @@ class ForgotPasswordEnterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     return CommonScaffold(
+      isBackButton: true,
       children: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

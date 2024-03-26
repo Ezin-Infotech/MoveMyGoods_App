@@ -53,7 +53,7 @@ class AllBookingScreen extends StatelessWidget {
             ),
             const CircleAvatar(
               maxRadius: 20,
-              backgroundImage: AssetImage('assets/avathar.png'),
+              backgroundImage: AssetImage('assets/avathar1.png'),
             )
           ],
         ),

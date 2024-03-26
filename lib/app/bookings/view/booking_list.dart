@@ -45,6 +45,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
   Widget build(BuildContext context) {
     final homeProvider = Provider.of<HomeProvider>(context, listen: false);
     return CommonScaffold(
+      isBackButton: false,
       // physics: const Sc(),
       children: Consumer<BookingProvider>(builder: (context, value, _) {
         return Column(
@@ -218,8 +219,8 @@ class _BookingListScreenState extends State<BookingListScreen> {
                         itemCount: 10),
                   )
                 : value.getBookingStatus == GetBookingStatus.initial ||
-                        value.bookingata.list!.isEmpty ||
-                        value.bookingata.list == null
+                        value.bookingata.list == null ||
+                        value.bookingata.list!.isEmpty
                     ? SizedBox(
                         height: 400,
                         width: context.width,
