@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:mmg/app/multyLanguage/translator.dart';
 import 'package:mmg/app/settings/view%20model/theme_notifier.dart';
 import 'package:mmg/app/settings/view/widgets/theme.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
@@ -30,6 +31,8 @@ class MyApp extends StatelessWidget {
               darkTheme: MyTheme.darkTheme,
               themeMode: them.themeMode,
               onGenerateRoute: RouteGenerator.generateRoute,
+              translations: LocaleString(),
+              locale: const Locale('en', 'US'),
             );
           });
         });

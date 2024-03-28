@@ -1,5 +1,6 @@
 import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:get/route_manager.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
@@ -163,14 +164,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 requiredText: 'Please enter first name',
               ),
               BookingTextFieldWidgets(
-                labeText: 'Last Name**',
+                labeText: 'Last Name*',
                 hintText: 'joseph',
                 controller: profileProvider.lastNameController,
                 requiredText: 'Please enter last name',
               ),
               BookingTextFieldWidgets(
                 readOnly: true,
-                labeText: 'Mobile Number',
+                labeText: 'Mobile Number'.tr,
                 hintText: '+919744213176',
                 suffixIcon: GestureDetector(
                   onTap: () {
@@ -185,8 +186,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 controller: profileProvider.mobileNumberController,
               ),
               const SizeBoxH(18),
-              const CustomText(
-                text: 'Date Of Birth',
+              CustomText(
+                text: 'Date Of Birth'.tr,
               ),
               const SizeBoxH(8),
               CommonTextForm(
@@ -225,7 +226,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           },
                         ),
                         Text(
-                          'Male',
+                          'Male'.tr,
                           style: context.textTheme.bodySmall!.copyWith(
                               fontWeight: FontWeight.w400,
                               fontSize: 14,
@@ -243,7 +244,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           },
                         ),
                         Text(
-                          'Female',
+                          'Female'.tr,
                           style: context.textTheme.bodySmall!.copyWith(
                               fontWeight: FontWeight.w400,
                               fontSize: 14,
@@ -255,23 +256,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 );
               }),
               BookingTextFieldWidgets(
-                labeText: 'Address Line 1',
+                labeText: 'Address Line 1'.tr,
                 hintText: 'Mysore Road',
                 controller: profileProvider.addressLineOneController,
               ),
               BookingTextFieldWidgets(
-                labeText: 'Address Line 2',
+                labeText: 'Address Line 2'.tr,
                 hintText: 'Near Canara Bank',
                 controller: profileProvider.addressLineTwoController,
               ),
               BookingTextFieldWidgets(
-                labeText: 'Landmark',
+                labeText: 'Landmark'.tr,
                 hintText: 'Near canara bank',
                 controller: profileProvider.landMarkController,
               ),
               const SizeBoxH(10),
-              const CustomText(
-                text: 'Select State *',
+              CustomText(
+                text: '${"Select State".tr} *',
               ),
               const SizeBoxH(8),
               SizedBox(
@@ -307,8 +308,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               const SizeBoxH(8),
-              const CustomText(
-                text: 'Select City *',
+              CustomText(
+                text: '${"Select City".tr} *',
               ),
               const SizeBoxH(8),
               SizedBox(
@@ -343,13 +344,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               BookingTextFieldWidgets(
                 keyboardType: TextInputType.number,
-                labeText: 'Pincode',
+                labeText: 'Pincode'.tr,
                 hintText: '0000001',
                 controller: profileProvider.picCodeController,
               ),
               BookingTextFieldWidgets(
                 keyboardType: TextInputType.phone,
-                labeText: 'Alternate Number',
+                labeText: 'Alternate Number'.tr,
                 hintText: '+919744213176',
                 controller: profileProvider.alternativeNumberController,
               ),
@@ -359,7 +360,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onPressed: () {
                     profileProvider.updateProfileFN(context: context);
                   },
-                  buttonText: 'Update',
+                  buttonText: 'Update'.tr,
                 ),
               )
             ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:get/route_manager.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/settings/view%20model/settings_controller.dart';
@@ -28,11 +29,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.initState();
   }
 
+  List<String> settingsText = [
+    'Profile'.tr,
+    'Dark Mode'.tr,
+    'Terms & Conditions'.tr,
+    'Privacy Policy'.tr,
+    'Contact Us'.tr,
+    'Version'.tr,
+    'Logout'.tr,
+  ];
+  List<String> userNotLoggedList = [
+    'Dark Mode'.tr,
+    'Terms & Conditions'.tr,
+    'Privacy Policy'.tr,
+    'Contact Us'.tr,
+    'Version'.tr,
+  ];
+
   @override
   Widget build(BuildContext context) {
     final homeProvider = Provider.of<HomeProvider>(context, listen: false);
     return CommonScaffold(
       isBackButton: false,
+      isSettings: true,
       padding: 0,
       children: Consumer<SettingsProvider>(builder: (context, value, _) {
         return Consumer<AuthProvider>(builder: (context, obj, _) {
@@ -58,7 +77,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   ),
                                   child: Center(
                                     child: Text(
-                                      'Login',
+                                      'Login'.tr,
                                       style: context.textTheme.bodyMedium!
                                           .copyWith(
                                               color: Colors.white,
@@ -74,7 +93,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           Expanded(
                             child: Showcase(
                               key: homeProvider.globalKey11,
-                              description: 'You have not account please Signup',
+                              description:
+                                  'You have not account please Sign up',
                               child: InkWell(
                                 onTap: () => Get.toNamed(AppRoutes.signUp),
                                 child: Container(
@@ -85,7 +105,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   alignment: Alignment.center,
                                   child: Center(
                                     child: Text(
-                                      'Signup',
+                                      'Sign Up'.tr,
                                       style: context.textTheme.bodyMedium!
                                           .copyWith(
                                               color: Colors.white,
@@ -163,8 +183,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ? value.settingsIcon[index]
                             : value.userNotLoggedIcon[index]),
                         title: Text(obj.isUserLogged
-                            ? value.settingsText[index]
-                            : value.userNotLoggedList[index]),
+                            ? settingsText[index]
+                            : userNotLoggedList[index]),
                         trailing: obj.isUserLogged
                             ? index == 1
                                 ? Consumer<ThemeNotifier>(
@@ -198,7 +218,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   separatorBuilder: (context, index) => const SizeBoxH(10),
                   itemCount: obj.isUserLogged
                       ? value.settingsIcon.length
-                      : value.userNotLoggedList.length)
+                      : userNotLoggedList.length)
             ],
           );
         });

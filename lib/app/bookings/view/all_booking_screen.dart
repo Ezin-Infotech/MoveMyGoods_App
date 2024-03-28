@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:mmg/app/utils/app%20style/app_images.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 
@@ -62,9 +63,9 @@ class AllBookingScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text(
-                'All Bookings',
-                style: TextStyle(
+              Text(
+                'All Bookings'.tr,
+                style: const TextStyle(
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w600,
                     fontSize: 18,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 
 class ButtonWidgets extends StatelessWidget {
@@ -46,7 +47,7 @@ class ButtonWidgets extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: Text(
-          buttonText ?? 'Book Now',
+          buttonText ?? 'Book Now'.tr,
           style: TextStyle(
               color: textColor ?? const Color(0xffFFFFFF),
               fontSize: textSize ?? 16,

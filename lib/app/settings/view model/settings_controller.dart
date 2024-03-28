@@ -17,23 +17,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SettingsProvider with ChangeNotifier {
-  List<String> settingsText = [
-    'Profile',
-    'Dark Mode',
-    'Terms & Conditions',
-    'Privacy Policy',
-    'Contact Us',
-    'Version',
-    'Logout'
-  ];
-  List<String> userNotLoggedList = [
-    'Dark Mode',
-    'Terms & Conditions',
-    'Privacy Policy',
-    'Contact Us',
-    'Version',
-  ];
-
   List<IconData> userNotLoggedIcon = [
     Icons.dark_mode,
     Icons.file_copy_rounded,

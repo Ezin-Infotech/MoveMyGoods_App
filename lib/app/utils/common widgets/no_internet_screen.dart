@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:get/route_manager.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
@@ -44,7 +45,7 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
               const SizeBoxH(30),
               // const SizeBoxH(16),
               Text(
-                "No internet connection!",
+                "No internet connection!".tr,
                 style: context.textTheme.bodyMedium!.copyWith(
                   color: const Color.fromARGB(255, 102, 102, 102),
                   fontWeight: FontWeight.w800,
@@ -53,7 +54,7 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
               ),
               const SizeBoxH(10),
               Text(
-                "Please check your internet connection and try again",
+                "Please check your internet connection and try again".tr,
                 style: context.textTheme.titleMedium!.copyWith(
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
@@ -66,7 +67,7 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
                     // LoadingOverlay.of(context).hide();
                     Get.back();
                   },
-                  buttonText: "Try Again"),
+                  buttonText: "Try Again".tr),
             ],
           ),
         ),

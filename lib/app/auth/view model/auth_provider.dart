@@ -13,6 +13,7 @@ import 'package:mmg/app/auth/modal/profile_model.dart';
 import 'package:mmg/app/auth/modal/state_list_model.dart';
 import 'package:mmg/app/auth/modal/terms_n_condition_model.dart';
 import 'package:mmg/app/auth/modal/user_profile_picture_model.dart';
+import 'package:mmg/app/auth/services/auth_http_service.dart';
 import 'package:mmg/app/auth/services/auth_services.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/home/view%20model/home_provider.dart';
@@ -651,10 +652,12 @@ class AuthProvider with ChangeNotifier {
       required dynamic fileName}) async {
     LoadingOverlay.of(context).show();
     try {
-      await services.postUploadImageService(file: file, imageName: fileName);
+      await postData(files: file);
+      // await services.postUploadImageService(file: file, imageName: fileName);
       // signInData = signInDataResponse.data!;
       LoadingOverlay.of(context).hide();
     } on DioError catch (e) {
+      log("ERROR message ${e.response!.data['message']}");
       LoadingOverlay.of(context).hide();
       errorBottomSheetDialogs(
         isDismissible: false,

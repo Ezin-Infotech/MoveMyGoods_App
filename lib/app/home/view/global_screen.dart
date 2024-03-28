@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:get/instance_manager.dart';
 import 'package:mmg/app/home/view%20model/home_provider.dart';
 import 'package:mmg/app/utils/app%20style/app_images.dart';
@@ -60,7 +61,7 @@ class _GlobalScreenState extends State<GlobalScreen> {
                     ? AppColors.primary
                     : const Color(0xff59575B),
               ),
-              title: const Text("Home"),
+              title: Text("Home".tr),
               selectedColor: AppColors.primaryBorder,
             ),
 
@@ -72,7 +73,7 @@ class _GlobalScreenState extends State<GlobalScreen> {
                     ? AppColors.primary
                     : const Color(0xff59575B),
               ),
-              title: const Text("Bookings"),
+              title: Text("Bookings".tr),
               selectedColor: AppColors.primaryBorder,
             ),
 
@@ -84,7 +85,7 @@ class _GlobalScreenState extends State<GlobalScreen> {
                     ? AppColors.primary
                     : const Color(0xff59575B),
               ),
-              title: const Text("Settings"),
+              title: Text("Settings".tr),
               selectedColor: AppColors.primaryBorder,
             ),
 

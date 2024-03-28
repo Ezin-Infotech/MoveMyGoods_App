@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
@@ -26,14 +27,14 @@ class ForgetPasswordScreen extends StatelessWidget {
           children: [
             SizeBoxH(Responsive.height * 5),
             Text(
-              'Forgot Password?',
+              '${'Forgot Password'.tr}?',
               style: context.textTheme.bodyLarge!.copyWith(
                   fontSize: 24,
                   fontWeight: FontWeight.w800,
                   color: AppColors.secondPrimary),
             ),
             const SizeBoxH(8),
-            Text('Enter Mobile Number and get OTP to verify',
+            Text('${"Enter Mobile Number and get OTP".tr} to ${"verify".tr}',
                 textAlign: TextAlign.center,
                 style: context.textTheme.bodySmall!.copyWith(
                     fontSize: 16,
@@ -46,14 +47,14 @@ class ForgetPasswordScreen extends StatelessWidget {
               enabledBorder: AppColors.secondPrimary,
               focusedBorder: AppColors.secondPrimary,
               fillColor: AppColors.bgColor,
-              hintText: 'Phone number',
+              hintText: 'Phone number'.tr,
               radius: 2,
               controller: authProvider.signUpPhoneController,
               keyboardType: TextInputType.number,
             ),
             SizeBoxH(Responsive.height * 3),
             ButtonWidgets(
-              buttonText: 'Send OTP',
+              buttonText: 'Send OTP'.tr,
               bgColor: AppColors.secondPrimary,
               textColor: Colors.white,
               onPressed: () {

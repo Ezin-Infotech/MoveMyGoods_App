@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:dropdown_plus_plus/dropdown_plus_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
@@ -216,8 +217,8 @@ class _BookingScreenState extends State<BookingScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: Responsive.height * 2),
-                    const CustomText(
-                      text: 'Source *',
+                    CustomText(
+                      text: '${"Source".tr} *',
                     ),
                     const SizeBoxH(8),
                     Consumer<BookingProvider>(
@@ -335,8 +336,8 @@ class _BookingScreenState extends State<BookingScreen> {
                     //   },
                     // ),
                     const SizeBoxH(10),
-                    const CustomText(
-                      text: 'Destination *',
+                    CustomText(
+                      text: '${"Destination".tr} *',
                     ),
                     const SizeBoxH(8),
                     Consumer<BookingProvider>(
@@ -460,8 +461,8 @@ class _BookingScreenState extends State<BookingScreen> {
                     //   },
                     // ),
                     const SizeBoxH(10),
-                    const CustomText(
-                      text: 'Goods Type *',
+                    CustomText(
+                      text: '${"Goods Type".tr} *',
                     ),
                     const SizeBoxH(8),
                     SizedBox(
@@ -509,7 +510,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     BookingTextFieldWidgets(
                       hintText: '300',
                       controller: bookingProvider!.goodsValueController,
-                      labeText: 'Goods Value *',
+                      labeText: '${"Goods Value".tr} *',
                       keyboardType: TextInputType.number,
                       requiredText: 'Please enter Goods Value',
                     ),
@@ -527,8 +528,8 @@ class _BookingScreenState extends State<BookingScreen> {
                     //       .copyWith(color: Colors.red),
                     // ),
                     const SizeBoxH(10),
-                    const CustomText(
-                      text: 'Goods Weight *',
+                    CustomText(
+                      text: '${"Goods Weight".tr} *',
                     ),
                     const SizeBoxH(8),
                     // const DropdownInsideTextFormField(),
@@ -745,7 +746,7 @@ class _BookingScreenState extends State<BookingScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Billing Details',
+                                  'Billing Details'.tr,
                                   style: Theme.of(context)
                                       .textTheme
                                       .displaySmall!
@@ -768,7 +769,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                           },
                                         ),
                                         Text(
-                                          'PAID',
+                                          'PAID'.tr,
                                           style: context.textTheme.bodySmall!
                                               .copyWith(
                                                   fontWeight: FontWeight.w400,
@@ -790,7 +791,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                           },
                                         ),
                                         Text(
-                                          'FOD',
+                                          'FOD'.tr,
                                           style: context.textTheme.bodySmall!
                                               .copyWith(
                                                   fontWeight: FontWeight.w400,
@@ -805,7 +806,7 @@ class _BookingScreenState extends State<BookingScreen> {
 
                                 const SizeBoxH(15),
                                 Text(
-                                  '*Receiver Details',
+                                  '*Receiver Details'.tr,
                                   style: Theme.of(context)
                                       .textTheme
                                       .displaySmall!
@@ -815,10 +816,10 @@ class _BookingScreenState extends State<BookingScreen> {
                                           color: const Color(0xff222222)),
                                 ),
                                 BookingTextFieldWidgets(
-                                  hintText: 'Name',
+                                  hintText: 'Name'.tr,
                                   controller:
                                       bookingProvider!.receiverNameController,
-                                  labeText: 'Name',
+                                  labeText: 'Name'.tr,
                                   requiredText: 'Enter Your name ',
                                 ),
                                 // BookingTextFieldWidgets(
@@ -830,12 +831,12 @@ class _BookingScreenState extends State<BookingScreen> {
                                 //   requiredText: 'Enter Your Email',
                                 // ),
                                 BookingTextFieldWidgets(
-                                  hintText: 'Enter Your Mobile No',
+                                  hintText: 'Enter Your Mobile No'.tr,
                                   controller: bookingProvider!
                                       .receiverMobileNoController,
-                                  labeText: 'Mobile No.',
+                                  labeText: 'Mobile No.'.tr,
                                   keyboardType: TextInputType.phone,
-                                  requiredText: 'enter mobile number ',
+                                  requiredText: 'enter mobile number'.tr,
                                 ),
                                 // const SizeBoxH(10),
                                 // const CustomText(
@@ -861,11 +862,11 @@ class _BookingScreenState extends State<BookingScreen> {
                                   hintText: '(eg.GHXXXXXXXX000)',
                                   controller:
                                       bookingProvider!.receiverGstNoController,
-                                  labeText: 'GST No.',
+                                  labeText: 'GST No.'.tr,
                                 ),
                                 SizeBoxH(Responsive.height * 2),
                                 Text(
-                                  '*Shipper Details',
+                                  '*Shipper Details'.tr,
                                   style: Theme.of(context)
                                       .textTheme
                                       .displaySmall!
@@ -876,11 +877,11 @@ class _BookingScreenState extends State<BookingScreen> {
                                 ),
                                 // SizeBoxH(Responsive.height * 1),
                                 BookingTextFieldWidgets(
-                                  hintText: 'Name',
+                                  hintText: 'Name'.tr,
                                   controller:
                                       bookingProvider!.shipperNameController,
-                                  labeText: 'Name',
-                                  requiredText: 'Enter Your name ',
+                                  labeText: 'Name'.tr,
+                                  requiredText: 'Enter Your name'.tr,
                                 ),
                                 // BookingTextFieldWidgets(
                                 //   hintText: 'Email',
@@ -891,12 +892,12 @@ class _BookingScreenState extends State<BookingScreen> {
                                 //   requiredText: 'Enter Your Email ',
                                 // ),
                                 BookingTextFieldWidgets(
-                                  hintText: 'Number',
+                                  hintText: 'Number'.tr,
                                   controller: bookingProvider!
                                       .shipperMobileNoController,
-                                  labeText: 'Mobile No.',
+                                  labeText: 'Mobile No.'.tr,
                                   keyboardType: TextInputType.phone,
-                                  requiredText: 'Please enter Mobile Number',
+                                  requiredText: 'Please enter Mobile Number'.tr,
                                 ),
 
                                 // BookingTextFieldWidgets(
@@ -909,14 +910,14 @@ class _BookingScreenState extends State<BookingScreen> {
                                   hintText: '(eg.GHXXXXXXXX000)',
                                   controller:
                                       bookingProvider!.shipperGstNoController,
-                                  labeText: 'GST No.',
+                                  labeText: 'GST No.'.tr,
                                 ),
                                 SizeBoxH(Responsive.height * 2),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     ButtonWidgets(
-                                      buttonText: 'Book Now',
+                                      buttonText: 'Book Now'.tr,
                                       onPressed: () {
                                         // if (_formKey.currentState!.validate()) {
                                         context

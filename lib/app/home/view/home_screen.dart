@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       children: [
                         Text(
-                          'Move My Goods',
+                          'Move My Goods'.tr,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: AppColors.primary,
@@ -258,7 +258,7 @@ class _HomeScreenState extends State<HomeScreen> {
               textColor: AppColors.kLight,
               tooltipPadding: const EdgeInsets.all(16),
               key: context.read<HomeProvider>().globalKey7,
-              description: 'Start Booking Now',
+              description: 'Start Booking Now'.tr,
               child: ButtonWidgets(
                 onPressed: () {
                   if (AppPref.userToken != '') {

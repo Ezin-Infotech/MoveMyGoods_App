@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
@@ -36,7 +37,7 @@ class SignUpScreen extends StatelessWidget {
                 children: [
                   Center(
                     child: Text(
-                      'Sign up',
+                      'Sign Up'.tr,
                       style: context.textTheme.bodyMedium!.copyWith(
                         color: const Color(0xffffffff),
                         fontSize: 22,
@@ -53,7 +54,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     controller: authProvider.signUpPhoneController,
                     fillColor: AppColors.bgColor,
-                    hintText: 'Mobile No',
+                    hintText: 'Mobile No.'.tr,
                     keyboardType: TextInputType.phone,
                   ),
                   const SizeBoxH(42),
@@ -87,7 +88,7 @@ class SignUpScreen extends StatelessWidget {
                   const SizeBoxH(31),
                   Center(
                     child: ButtonWidgets(
-                        buttonText: 'Verify',
+                        buttonText: 'Verify'.tr,
                         bgColor: AppColors.kLight,
                         textColor: AppColors.primary,
                         onPressed: () {
@@ -121,7 +122,7 @@ class SignUpScreen extends StatelessWidget {
                                 isDismissible: false,
                                 enableDrag: false,
                                 context: context,
-                                title: 'please enter valid  phonenumber',
+                                title: 'please enter valid  phone number',
                                 subtitle: '',
                               );
                             }

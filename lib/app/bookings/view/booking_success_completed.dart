@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:get/route_manager.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
@@ -50,7 +51,7 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
             ),
             // Image.asset('assets/success1.gif'),
             Text(
-              'Your order has been',
+              'Your Booking has been'.tr,
               textAlign: TextAlign.center,
               style: context.textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w400,
@@ -58,7 +59,7 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                   color: const Color(0xff0D9F00)),
             ),
             Text(
-              'Successfully Completed',
+              'Successfully Completed'.tr,
               textAlign: TextAlign.center,
               style: context.textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.w600,
@@ -95,43 +96,43 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                         ),
                       ),
                       SizeBoxH(Responsive.height * 1),
-                      const OrderSlipHeadText(
-                        heading: 'Order Summary',
+                      OrderSlipHeadText(
+                        heading: 'Order Summary'.tr,
                       ),
                       SizeBoxH(Responsive.height * 1),
                       TextFieldAndText(
-                        textField: 'Order ID :',
+                        textField: '${"Order ID".tr} :',
                         text: obj.bookingDetail.data!.id.toString(),
                       ),
                       SizeBoxH(Responsive.height * 1),
                       TextFieldAndText(
-                        textField: 'Source : ',
+                        textField: '${"Source".tr} : ',
                         text: obj.bookingDetail.data!.sStreet ?? '',
                       ),
                       SizeBoxH(Responsive.height * 1),
                       TextFieldAndText(
-                        textField: 'Destination : ',
+                        textField: '${"Destination".tr} : ',
                         text: obj.bookingDetail.data!.dStreet ?? '',
                       ),
                       SizeBoxH(Responsive.height * 1),
                       TextFieldAndText(
-                        textField: 'Goods Type : ',
+                        textField: '${"Goods Type".tr} : ',
                         text: obj.bookingDetail.data!.goodsTypeName!.name ?? '',
                       ),
                       SizeBoxH(Responsive.height * 1),
                       TextFieldAndText(
-                        textField: 'Goods Value : ',
+                        textField: '${"Goods Value".tr} : ',
                         text: obj.bookingDetail.data!.goodsvalue.toString(),
                       ),
                       SizeBoxH(Responsive.height * 1),
                       TextFieldAndText(
-                        textField: 'Number of Labours : ',
+                        textField: '${"Number of Labours".tr} : ',
                         text:
                             obj.bookingDetail.data!.numberofLabours.toString(),
                       ),
                       SizeBoxH(Responsive.height * 1),
                       TextFieldAndText(
-                        textField: 'Goods Weight :',
+                        textField: '${"Goods Weight".tr} :',
                         text: obj.bookingDetail.data!.goodsWeightName!.weight
                             .toString(),
                       ),
@@ -148,12 +149,12 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                         ),
                       ),
                       SizeBoxH(Responsive.height * 1),
-                      const OrderSlipHeadText(
-                        heading: 'Receiver Details',
+                      OrderSlipHeadText(
+                        heading: 'Receiver Details'.tr,
                       ),
                       SizeBoxH(Responsive.height * 1),
                       TextFieldAndText(
-                        textField: 'Name :',
+                        textField: '${"Name".tr} :',
                         text: obj.bookingDetail.data!.consigneeName.toString(),
                       ),
                       // const TextFieldAndText(
@@ -161,7 +162,7 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                       //   text: '#1234567890',
                       // ),
                       TextFieldAndText(
-                        textField: 'Mobile No: ',
+                        textField: '${"Mobile No".tr}: ',
                         text:
                             obj.bookingDetail.data!.consigneeNumber.toString(),
                       ),
@@ -193,11 +194,11 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                         ),
                       ),
                       SizeBoxH(Responsive.height * 1),
-                      const OrderSlipHeadText(
-                        heading: 'Shipper Details',
+                      OrderSlipHeadText(
+                        heading: 'Shipper Details'.tr,
                       ),
                       TextFieldAndText(
-                        textField: 'Name :',
+                        textField: '${"Name".tr} :',
                         text: obj.bookingDetail.data!.consignorName.toString(),
                       ),
                       // const TextFieldAndText(
@@ -205,7 +206,7 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                       //   text: '#1234567890',
                       // ),
                       TextFieldAndText(
-                        textField: 'Mobile No: ',
+                        textField: '${"Mobile No".tr}: ',
                         text:
                             obj.bookingDetail.data!.consignorNumber.toString(),
                       ),
@@ -230,7 +231,7 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Total Amount ₹ ${obj.bookingDetail.data!.totalAmount ?? ''} /-',
+                            '${"Total Amount".tr} ₹ ${obj.bookingDetail.data!.totalAmount ?? ''} /-',
                             textAlign: TextAlign.center,
                             style: context.textTheme.bodyLarge?.copyWith(
                               fontWeight: FontWeight.w700,
@@ -245,7 +246,7 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ButtonWidgets(
-                            buttonText: 'Back to Home',
+                            buttonText: 'Back to Home'.tr,
                             onPressed: () {
                               Get.back();
                               // context.back()

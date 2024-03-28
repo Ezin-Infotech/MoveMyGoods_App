@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:get/route_manager.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/settings/view%20model/theme_notifier.dart';
@@ -61,7 +62,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
                         description: 'Current Booking Status',
                         key: homeProvider.globalKey9,
                         child: Text(
-                          'All Bookings',
+                          'All Bookings'.tr,
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!
@@ -78,7 +79,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
                         child: Row(
                           children: [
                             Text(
-                              '${value.tempSelectedStatus} Bookings',
+                              '${value.tempSelectedStatus} Bookings'.tr,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge!
@@ -132,7 +133,8 @@ class _BookingListScreenState extends State<BookingListScreen> {
                   textColor: AppColors.kLight,
                   tooltipPadding: const EdgeInsets.all(16),
                   description:
-                      'Booking filter option, You can change filter option by selecting booking status.',
+                      'Booking filter option, You can change filter option by selecting booking status.'
+                          .tr,
                   key: homeProvider.globalKey8,
                   child: IconButton(
                       icon: const Icon(
@@ -224,8 +226,8 @@ class _BookingListScreenState extends State<BookingListScreen> {
                     ? SizedBox(
                         height: 400,
                         width: context.width,
-                        child: const Center(
-                          child: Text('No Bookings'),
+                        child: Center(
+                          child: Text('No Bookings'.tr),
                         ),
                       )
                     : Consumer<ThemeNotifier>(builder: (context, val, _) {
@@ -333,7 +335,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'Date',
+                                                'Date'.tr,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyLarge!
@@ -362,7 +364,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'Time',
+                                                'Time'.tr,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyLarge!
@@ -391,7 +393,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'Status',
+                                                'Status'.tr,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyLarge!
@@ -435,7 +437,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                                   ),
                                                   const SizeBoxV(8),
                                                   Text(
-                                                    item.status.toString(),
+                                                    item.status.toString().tr,
                                                     style: context
                                                         .textTheme.bodyLarge!
                                                         .copyWith(
@@ -485,28 +487,28 @@ Future filterDialog(BuildContext context) async {
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
-        return const SimpleDialog(
-          contentPadding: EdgeInsets.all(16),
-          insetPadding: EdgeInsets.all(16),
+        return SimpleDialog(
+          contentPadding: const EdgeInsets.all(16),
+          insetPadding: const EdgeInsets.all(16),
           children: <Widget>[
             FilterWidget(
-              title: 'All',
+              title: 'All'.tr,
             ),
-            SizeBoxH(10),
+            const SizeBoxH(10),
             FilterWidget(
-              title: 'Pending',
+              title: 'Pending'.tr,
             ),
-            SizeBoxH(10),
+            const SizeBoxH(10),
             FilterWidget(
-              title: 'Active',
+              title: 'Active'.tr,
             ),
-            SizeBoxH(10),
+            const SizeBoxH(10),
             FilterWidget(
-              title: 'Completed',
+              title: 'Completed'.tr,
             ),
-            SizeBoxH(10),
+            const SizeBoxH(10),
             FilterWidget(
-              title: 'Cancelled',
+              title: 'Cancelled'.tr,
             ),
           ],
         );

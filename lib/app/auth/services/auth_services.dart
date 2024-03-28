@@ -196,6 +196,35 @@ class AuthServices extends Urls {
     return response.data;
   }
 
+  // Future postUploadImageService({
+  //   required dynamic image,
+  //   required dynamic imageName,
+  // }) async {
+  //   // Define your form data
+
+  //   FormData formData = FormData.fromMap({
+  //     'profileId': AppPref.userProfileId,
+  //     'category': "PROFILE",
+  //     'update': true,
+  //     'file': await MultipartFile.fromFile(image, filename: imageName),
+  //     // Add more fields or files as needed
+  //   });
+
+  //   // Encode form data
+
+  //   final response = await dio.post(
+  //     uploadImageUrl,
+  //     options: Options(
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded',
+  //         'x-api-key': 'MMGATPL'
+  //       },
+  //     ),
+  //     data: formData,
+  //   );
+  //   print("1111111111111111111111111111111111111111111111 ${response}");
+  //   return response.data;
+  // }
   Future postUploadImageService({
     required File file,
     required dynamic imageName,
@@ -203,7 +232,7 @@ class AuthServices extends Urls {
     // Define your form data
     log('${file.path}1111111111');
     FormData formData = FormData.fromMap({
-      'file': file.openRead(),
+      'file': await MultipartFile.fromFile(file.path, filename: imageName),
       'profileId': AppPref.userProfileId,
       'category': "PROFILE",
       'update': "true",
@@ -216,8 +245,7 @@ class AuthServices extends Urls {
       options: Options(
         headers: {
           'Authorization': 'Bearer ${AppPref.userToken}',
-          'Content-Type':
-              'multipart/form-data; boundary=----WebKitFormBoundarytxt9k6nW70O8sTxY',
+          'Content-Type': 'application/x-www-form-urlencoded',
           'x-api-key': 'MMGATPL'
         },
       ),

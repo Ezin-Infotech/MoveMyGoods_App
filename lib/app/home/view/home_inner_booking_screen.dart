@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:get/route_manager.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/bookings/view/booking_list.dart';
@@ -56,7 +57,7 @@ class _HomeBookingListScreenState extends State<HomeBookingListScreen> {
                     : Row(
                         children: [
                           Text(
-                            '${value.tempSelectedStatus} Bookings',
+                            '${value.tempSelectedStatus} Bookings'.tr,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!
@@ -128,8 +129,8 @@ class _HomeBookingListScreenState extends State<HomeBookingListScreen> {
                     ? SizedBox(
                         height: 400,
                         width: context.width,
-                        child: const Center(
-                          child: Text('No Bookings'),
+                        child: Center(
+                          child: Text('No Bookings'.tr),
                         ),
                       )
                     : Consumer<ThemeNotifier>(builder: (context, val, _) {
@@ -176,7 +177,7 @@ class _HomeBookingListScreenState extends State<HomeBookingListScreen> {
                                     Row(
                                       children: [
                                         Text(
-                                          'Booking Id # ',
+                                          'Booking Id # '.tr,
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyLarge!
@@ -237,7 +238,7 @@ class _HomeBookingListScreenState extends State<HomeBookingListScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'Date',
+                                                'Date'.tr,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyLarge!
@@ -266,7 +267,7 @@ class _HomeBookingListScreenState extends State<HomeBookingListScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'Time',
+                                                'Time'.tr,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyLarge!
@@ -295,7 +296,7 @@ class _HomeBookingListScreenState extends State<HomeBookingListScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'Status',
+                                                'Status'.tr,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyLarge!
@@ -339,7 +340,7 @@ class _HomeBookingListScreenState extends State<HomeBookingListScreen> {
                                                   ),
                                                   const SizeBoxV(8),
                                                   Text(
-                                                    item.status.toString(),
+                                                    item.status.toString().tr,
                                                     style: context
                                                         .textTheme.bodyLarge!
                                                         .copyWith(

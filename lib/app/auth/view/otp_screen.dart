@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/utils/app%20style/app_images.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
@@ -32,17 +33,17 @@ class OtpScreenState extends State<OtpScreen> {
                   AppImages.blakLogo,
                 ),
                 SizeBoxH(Responsive.height * 2.5),
-                const Text(
-                  'Verification',
-                  style: TextStyle(
+                Text(
+                  'Verification'.tr,
+                  style: const TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizeBoxH(Responsive.height * 1),
-                const Text(
-                  "Enter your OTP code",
-                  style: TextStyle(
+                Text(
+                  "Enter your OTP code".tr,
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                     color: Colors.black38,
@@ -82,7 +83,7 @@ class OtpScreenState extends State<OtpScreen> {
                         ),
                         SizeBoxH(Responsive.height * 2.5),
                         ButtonWidgets(
-                          buttonText: 'Verify',
+                          buttonText: 'Verify'.tr,
                           width: double.infinity,
                           height: 50,
                           onPressed: () {
@@ -125,9 +126,9 @@ class OtpScreenState extends State<OtpScreen> {
                   }),
                 ),
                 SizeBoxH(Responsive.height * 2),
-                const Text(
-                  "Didn't you receive any code? ",
-                  style: TextStyle(
+                Text(
+                  "${"Didn't you receive any code?".tr} ",
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                     color: Colors.black38,
@@ -136,7 +137,7 @@ class OtpScreenState extends State<OtpScreen> {
                 ),
                 SizeBoxH(Responsive.height * 2),
                 Text(
-                  "Resend New Code ",
+                  "Resend New Code".tr,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

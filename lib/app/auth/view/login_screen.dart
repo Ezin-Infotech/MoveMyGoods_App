@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:get/route_manager.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/auth/view/sign_up.dart';
@@ -45,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     Center(
                       child: Text(
-                        'Welcome Back ',
+                        'Welcome Back'.tr,
                         style: context.textTheme.bodyMedium!.copyWith(
                           color: const Color(0xffffffff),
                           fontSize: 22,
@@ -54,8 +55,8 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     const SizeBoxH(20),
-                    const LabelText(
-                      text: 'Email / Phone',
+                    LabelText(
+                      text: 'Email / Phone'.tr,
                     ),
                     const SizeBoxH(8),
                     CommonTextForm(
@@ -70,8 +71,8 @@ class LoginScreen extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                     ),
                     const SizeBoxH(18),
-                    const LabelText(
-                      text: 'Password',
+                    LabelText(
+                      text: 'Password'.tr,
                     ),
                     const SizeBoxH(8),
                     Consumer<AuthProvider>(builder: (context, value, child) {
@@ -83,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         controller: value.passWordController,
                         fillColor: AppColors.bgColor,
-                        hintText: 'Enter Your Password',
+                        hintText: 'Enter Your Password'.tr,
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: value.loginShowPassword,
                         suffixIcon: GestureDetector(
@@ -127,7 +128,7 @@ class LoginScreen extends StatelessWidget {
                           onTap: () =>
                               Get.toNamed(AppRoutes.forgetPasswordPage),
                           child: Text(
-                            'Forgot Password?',
+                            '${'Forgot Password'.tr}?',
                             style: context.textTheme.bodyMedium!.copyWith(
                               color: const Color(0xffffffff),
                               fontSize: 15,
@@ -140,7 +141,7 @@ class LoginScreen extends StatelessWidget {
                     const SizeBoxH(31),
                     Center(
                       child: ButtonWidgets(
-                          buttonText: 'Login',
+                          buttonText: 'Login'.tr,
                           bgColor: AppColors.kLight,
                           textColor: AppColors.primary,
                           onPressed: () {
@@ -169,7 +170,7 @@ class LoginScreen extends StatelessWidget {
                                   isDismissible: false,
                                   enableDrag: false,
                                   context: context,
-                                  title: 'please enter email and password',
+                                  title: 'please enter email and password'.tr,
                                   subtitle: '');
                             }
 
@@ -181,7 +182,7 @@ class LoginScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Don’t have an account ? ',
+                          'Don’t have an account ?'.tr,
                           style: context.textTheme.bodyLarge!.copyWith(
                             color: const Color(0xffffffff),
                             fontSize: 12,
@@ -198,7 +199,7 @@ class LoginScreen extends StatelessWidget {
                             );
                           },
                           child: Text(
-                            'Sign Up',
+                            'Sign Up'.tr,
                             style: context.textTheme.bodyLarge!.copyWith(
                               color: const Color(0xffffffff),
                               fontSize: 12,
@@ -226,7 +227,7 @@ class LabelText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text ?? 'Email',
+      text ?? 'Email'.tr,
       style: context.textTheme.bodyMedium!.copyWith(
           fontSize: 14, fontWeight: FontWeight.w500, color: Colors.white),
     );

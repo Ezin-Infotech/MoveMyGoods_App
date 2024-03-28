@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
 import 'package:mmg/app/utils/extensions.dart';
 import 'package:provider/provider.dart';
@@ -24,14 +25,14 @@ class ForgotPasswordEnterScreen extends StatelessWidget {
           children: [
             SizeBoxH(Responsive.height * 5),
             Text(
-              'Enter Your Password ',
+              'Enter Your Password'.tr,
               style: context.textTheme.bodyLarge!.copyWith(
                   fontSize: 24,
                   fontWeight: FontWeight.w800,
                   color: AppColors.secondPrimary),
             ),
             const SizeBoxH(8),
-            Text('Enter your New Passsword here',
+            Text('Enter your New Passsword here'.tr,
                 textAlign: TextAlign.center,
                 style: context.textTheme.bodySmall!.copyWith(
                     fontSize: 16,
@@ -45,7 +46,7 @@ class ForgotPasswordEnterScreen extends StatelessWidget {
                 enabledBorder: AppColors.secondPrimary,
                 focusedBorder: AppColors.secondPrimary,
                 fillColor: AppColors.bgColor,
-                hintText: 'New Password',
+                hintText: 'New Password'.tr,
                 radius: 2,
                 controller: value.forgetNewPasswordController,
                 keyboardType: TextInputType.visiblePassword,
@@ -67,7 +68,7 @@ class ForgotPasswordEnterScreen extends StatelessWidget {
                 enabledBorder: AppColors.secondPrimary,
                 focusedBorder: AppColors.secondPrimary,
                 fillColor: AppColors.bgColor,
-                hintText: 'Confirm Password',
+                hintText: 'Confirm Password'.tr,
                 radius: 2,
                 controller: value.forgetConfirmPasswordController,
                 keyboardType: TextInputType.text,
@@ -83,7 +84,7 @@ class ForgotPasswordEnterScreen extends StatelessWidget {
             }),
             SizeBoxH(Responsive.height * 3),
             ButtonWidgets(
-              buttonText: 'Change Password',
+              buttonText: 'Change Password'.tr,
               bgColor: AppColors.secondPrimary,
               textColor: Colors.white,
               onPressed: () {

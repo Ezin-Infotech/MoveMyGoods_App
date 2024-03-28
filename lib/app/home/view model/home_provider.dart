@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mmg/app/bookings/view/booking_list.dart';
 import 'package:mmg/app/home/model/booking_count_model.dart';
 import 'package:mmg/app/home/services/home_services.dart';
@@ -42,12 +43,12 @@ class HomeProvider with ChangeNotifier {
   final GlobalKey globalKey18 = GlobalKey();
 
   List<String> descriptions = [
-    'This is your all Bookings count.',
-    'This is your Quotation Bookings count.',
-    'This is your Pending Bookings count.',
-    'This is your Active Bookings count.',
-    'This is your Completed Bookings count.',
-    'This is your Cancelled Bookings count.',
+    'This is your all Bookings count.'.tr,
+    'This is your Quotation Bookings count.'.tr,
+    'This is your Pending Bookings count.'.tr,
+    'This is your Active Bookings count.'.tr,
+    'This is your Completed Bookings count.'.tr,
+    'This is your Cancelled Bookings count.'.tr,
   ];
 
   int curentIndex = 0;
@@ -58,12 +59,12 @@ class HomeProvider with ChangeNotifier {
   }
 
   List<String> bookingTiltes = [
-    'All bookings',
-    'Quotation',
-    'Pending',
-    'Active',
-    'Completed',
-    'Cancelled',
+    'All bookings'.tr,
+    'Quotation'.tr,
+    'Pending'.tr,
+    'Active'.tr,
+    'Completed'.tr,
+    'Cancelled'.tr,
   ];
 
   /*-------- API SERVICES ------------*/

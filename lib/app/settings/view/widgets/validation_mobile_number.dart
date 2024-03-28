@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
@@ -37,7 +38,7 @@ class _ValidationNumberSCreenState extends State<ValidationNumberSCreen> {
                   Responsive.height * 10,
                 ),
                 Text(
-                  'Validation of Mobile Number',
+                  'Validation of Mobile Number'.tr,
                   textAlign: TextAlign.center,
                   style: context.textTheme.bodyLarge?.copyWith(
                       color: Colors.black,
@@ -51,7 +52,7 @@ class _ValidationNumberSCreenState extends State<ValidationNumberSCreen> {
                   onChanged: (p0) {},
                   radius: 2,
                   fillColor: const Color(0xffe9ecef),
-                  hintText: 'Mobile Number',
+                  hintText: 'Mobile Number'.tr,
                   controller: settingProvider.phoneNumberController,
                   keyboardType: TextInputType.phone,
                 ),
@@ -65,7 +66,7 @@ class _ValidationNumberSCreenState extends State<ValidationNumberSCreen> {
                       color: AppColors.secondPrimary,
                     ),
                     Text(
-                      'Verification needed',
+                      'Verification needed'.tr,
                       textAlign: TextAlign.center,
                       style: context.textTheme.bodyLarge?.copyWith(
                           color: AppColors.secondPrimary,
@@ -88,12 +89,12 @@ class _ValidationNumberSCreenState extends State<ValidationNumberSCreen> {
                               isDismissible: false,
                               enableDrag: false,
                               context: context,
-                              title: 'please enter valid phonenumber',
+                              title: 'please enter valid phone number'.tr,
                               subtitle: '',
                             );
                           }
                         },
-                        buttonText: 'Sent OTP',
+                        buttonText: 'Sent OTP'.tr,
                         bgColor: AppColors.secondPrimary,
                       )
                     : const Text(''),
@@ -124,12 +125,12 @@ class _ValidationNumberSCreenState extends State<ValidationNumberSCreen> {
                           SizeBoxH(Responsive.height * 2.5),
                           ButtonWidgets(
                             onPressed: () {},
-                            buttonText: 'Verify',
+                            buttonText: 'Verify'.tr,
                             bgColor: AppColors.secondPrimary,
                           ),
                           SizeBoxH(Responsive.height * 2.5),
                           Text(
-                            'Resend OTP',
+                            'Resend OTP'.tr,
                             style: context.textTheme.bodySmall?.copyWith(
                                 color: AppColors.secondPrimary,
                                 fontSize: 18,

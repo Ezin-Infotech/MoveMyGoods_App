@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
@@ -30,7 +31,8 @@ class CompletedBookingScreen extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '${obj.bookingDetail.data!.status.toString()} Bookings',
+                      '${obj.bookingDetail.data!.status.toString()} Bookings'
+                          .tr,
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           color: obj.bookingDetail.data!.status
                                       .toString()
@@ -101,7 +103,7 @@ class CompletedBookingScreen extends StatelessWidget {
                 RichText(
                   textAlign: TextAlign.start,
                   text: TextSpan(
-                      text: 'Booking Id # ',
+                      text: 'Booking Id # '.tr,
                       style: context.textTheme.bodyMedium
                           ?.copyWith(fontSize: 14, fontWeight: FontWeight.w600),
                       children: <TextSpan>[
@@ -142,8 +144,8 @@ class CompletedBookingScreen extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              const TextField(
-                                textField: 'Date :',
+                              TextField(
+                                textField: "${'Date'.tr} :",
                               ),
                               TextWidgets(
                                 text: dateFunction(
@@ -154,8 +156,8 @@ class CompletedBookingScreen extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              const TextField(
-                                textField: 'Time :',
+                              TextField(
+                                textField: '${'Time'.tr} :',
                               ),
                               TextWidgets(
                                 text: timeFunction(
@@ -167,8 +169,8 @@ class CompletedBookingScreen extends StatelessWidget {
                         ],
                       ),
                       const SizeBoxH(10),
-                      const TextField(
-                        textField: 'Source: ',
+                      TextField(
+                        textField: '${'Source'.tr}: ',
                       ),
                       const SizeBoxH(8),
                       TextWidgets(
@@ -176,8 +178,8 @@ class CompletedBookingScreen extends StatelessWidget {
                             '${obj.bookingDetail.data!.sStreet.toString()},${obj.bookingDetail.data!.sCity.toString()},${obj.bookingDetail.data!.sState.toString()},${obj.bookingDetail.data!.sCountry.toString()}  ',
                       ),
                       const SizeBoxH(10),
-                      const TextField(
-                        textField: 'Destination:  ',
+                      TextField(
+                        textField: '${"Destination".tr}:  ',
                       ),
                       const SizeBoxH(8),
                       TextWidgets(
@@ -185,8 +187,8 @@ class CompletedBookingScreen extends StatelessWidget {
                             '${obj.bookingDetail.data!.dStreet.toString()},${obj.bookingDetail.data!.dCity.toString()},${obj.bookingDetail.data!.dState.toString()},${obj.bookingDetail.data!.dCountry.toString()}  ',
                       ),
                       const SizeBoxH(10),
-                      const TextField(
-                        textField: 'Goods Type: ',
+                      TextField(
+                        textField: '${"Goods Type".tr}: ',
                       ),
                       const SizeBoxH(8),
                       TextWidgets(
@@ -197,8 +199,8 @@ class CompletedBookingScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const TextField(
-                            textField: 'Estimated Price:',
+                          TextField(
+                            textField: '${"Estimated Price".tr}:',
                           ),
                           const SizeBoxH(8),
                           Row(
@@ -218,7 +220,7 @@ class CompletedBookingScreen extends StatelessWidget {
                                                 isShow: true);
                                       },
                                       child: Text(
-                                        'View Price Details',
+                                        'View Price Details'.tr,
                                         textAlign: TextAlign.center,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 3,
@@ -261,7 +263,7 @@ class CompletedBookingScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        'Shipper details',
+                        'Shipper details'.tr,
                         style: context.textTheme.bodyLarge?.copyWith(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -278,12 +280,12 @@ class CompletedBookingScreen extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const TextField(
-                                textField: 'Name',
+                              TextField(
+                                textField: 'Name'.tr,
                               ),
                               SizeBoxH(Responsive.height * 1),
-                              const TextField(
-                                textField: 'Phone Number',
+                              TextField(
+                                textField: 'Phone Number'.tr,
                               ),
                             ],
                           ),
@@ -344,7 +346,7 @@ class CompletedBookingScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              'Price Details',
+                              'Price Details'.tr,
                               style: context.textTheme.bodyLarge?.copyWith(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
@@ -361,31 +363,31 @@ class CompletedBookingScreen extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const TextField(
-                                      textField: 'Distance',
+                                    TextField(
+                                      textField: 'Distance'.tr,
                                     ),
                                     SizeBoxH(Responsive.height * 1),
-                                    const TextField(
-                                      textField: 'Net Amount  ',
+                                    TextField(
+                                      textField: "${'Net Amount'.tr}  ",
                                     ),
                                     SizeBoxH(Responsive.height * 1),
-                                    const TextField(
-                                      textField: 'Base Fare ',
+                                    TextField(
+                                      textField: "${'Base Fare'.tr}  ",
                                     ),
                                     SizeBoxH(Responsive.height * 1),
-                                    const TextField(
-                                      textField: 'Price Per Km  ',
+                                    TextField(
+                                      textField: "${'Price Per Km'.tr}  ",
                                     ),
                                     SizeBoxH(Responsive.height * 1),
-                                    const TextField(
-                                      textField: 'Labour Cost ',
+                                    TextField(
+                                      textField: "${'Labour Cost'.tr}  ",
                                     ),
                                     SizeBoxH(Responsive.height * 1),
-                                    const TextField(
-                                      textField: 'CGST ',
+                                    TextField(
+                                      textField: "${'CGST'.tr}  ",
                                     ),
                                     SizeBoxH(Responsive.height * 1),
-                                    const TextField(textField: 'GST ')
+                                    TextField(textField: "${'GST'.tr}  ")
                                   ],
                                 ),
                                 const VerticalDivider(
@@ -443,7 +445,7 @@ class CompletedBookingScreen extends StatelessWidget {
                             ),
                             SizeBoxH(Responsive.height * 1),
                             Text(
-                              'Total Amount ₹${obj.bookingDetail.data!.totalAmount.toString()}/-',
+                              '${"Total Amount".tr} ₹${obj.bookingDetail.data!.totalAmount.toString()}/-',
                               textAlign: TextAlign.center,
                               style: context.textTheme.bodyLarge?.copyWith(
                                 fontWeight: FontWeight.w700,

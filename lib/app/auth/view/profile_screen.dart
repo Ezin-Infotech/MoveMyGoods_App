@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:intl/intl.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
@@ -31,19 +32,19 @@ class SignUpProfileScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BookingTextFieldWidgets(
-                labeText: 'First Name *',
+                labeText: '${'First Name'.tr}*',
                 hintText: 'john',
                 controller: authProvider.firstNameController,
                 requiredText: 'Please enter First Name',
               ),
               BookingTextFieldWidgets(
-                labeText: 'Last Name',
+                labeText: 'Last Name'.tr,
                 hintText: 'joseph',
                 controller: authProvider.lastNameController,
                 requiredText: 'Please enter Last Name',
               ),
               BookingTextFieldWidgets(
-                labeText: 'Mobile Number *',
+                labeText: "${'Mobile Number'.tr} *",
                 hintText: '+919744213176',
                 controller: authProvider.signUpPhoneController,
                 requiredText: 'Please enter Mobile Number',
@@ -62,7 +63,7 @@ class SignUpProfileScreen extends StatelessWidget {
                           },
                         ),
                         Text(
-                          'Male',
+                          'Male'.tr,
                           style: context.textTheme.bodySmall!.copyWith(
                               fontWeight: FontWeight.w400,
                               fontSize: 14,
@@ -80,7 +81,7 @@ class SignUpProfileScreen extends StatelessWidget {
                           },
                         ),
                         Text(
-                          'Female',
+                          'Female'.tr,
                           style: context.textTheme.bodySmall!.copyWith(
                               fontWeight: FontWeight.w400,
                               fontSize: 14,
@@ -92,7 +93,7 @@ class SignUpProfileScreen extends StatelessWidget {
                 );
               }),
               BookingTextFieldWidgets(
-                labeText: 'Date of Birth *',
+                labeText: '${'Date of Birth'.tr} *',
                 hintText: '12-01-1998',
                 controller: authProvider.dateController,
                 requiredText: 'Please enter Date Of Birth',
@@ -112,25 +113,25 @@ class SignUpProfileScreen extends StatelessWidget {
                 },
               ),
               BookingTextFieldWidgets(
-                labeText: 'Email *',
+                labeText: '${'Email'.tr} *',
                 hintText: 'john@example.com',
                 controller: authProvider.profileEmailController,
                 requiredText: 'Please enter Email',
               ),
               BookingTextFieldWidgets(
-                labeText: 'Address Line 1 *',
+                labeText: "${'Address Line 1'.tr} *",
                 hintText: 'Mysore Road',
                 controller: authProvider.addressLineOneController,
                 requiredText: 'Please enter Address Line 1',
               ),
               BookingTextFieldWidgets(
-                labeText: 'Address Line 2',
+                labeText: 'Address Line 2'.tr,
                 hintText: 'Near Canara Bank',
                 controller: authProvider.addressLineTwoController,
                 requiredText: 'Please enter Last Address Line 2',
               ),
               BookingTextFieldWidgets(
-                labeText: 'Landmark',
+                labeText: 'Landmark'.tr,
                 hintText: 'Near canara bank',
                 controller: authProvider.landMarkController,
                 requiredText: 'Please enter Landmark',
@@ -140,8 +141,8 @@ class SignUpProfileScreen extends StatelessWidget {
               //   hintText: 'Near canara bank',
               //   controller: authProvider.landMarkController,
               // ),
-              const CustomText(
-                text: 'Select Country *',
+              CustomText(
+                text: '${'Select Country'.tr} *',
               ),
               const SizeBoxH(8),
               SizedBox(
@@ -175,8 +176,8 @@ class SignUpProfileScreen extends StatelessWidget {
                 ),
               ),
 
-              const CustomText(
-                text: 'Select State *',
+              CustomText(
+                text: '${'Select State'.tr} *',
               ),
               const SizeBoxH(8),
               SizedBox(
@@ -211,8 +212,8 @@ class SignUpProfileScreen extends StatelessWidget {
                   displayAllSuggestionWhenTap: true,
                 ),
               ),
-              const CustomText(
-                text: 'Select City *',
+              CustomText(
+                text: '${'Select City'.tr} *',
               ),
               const SizeBoxH(8),
               SizedBox(
@@ -246,21 +247,21 @@ class SignUpProfileScreen extends StatelessWidget {
                 ),
               ),
               BookingTextFieldWidgets(
-                labeText: 'Alternate Number',
+                labeText: 'Alternate Number'.tr,
                 hintText: '+919744213176',
                 controller: authProvider.alternativeNumberController,
                 requiredText: 'Please enter Alternate Number',
                 keyboardType: TextInputType.phone,
               ),
               BookingTextFieldWidgets(
-                labeText: 'Password *',
+                labeText: "${'Password'.tr} *",
                 hintText: 'Password',
                 controller: authProvider.passwordController,
                 requiredText: 'Please enter Password',
                 onChanged: (p0) => log(p0),
               ),
               BookingTextFieldWidgets(
-                labeText: 'Confirm Password *',
+                labeText: "${'Confirm Password'.tr} *",
                 hintText: 'Confirm Password',
                 controller: authProvider.confirmPasswordController,
                 requiredText: 'Please enter Confirm Password',
@@ -272,7 +273,7 @@ class SignUpProfileScreen extends StatelessWidget {
               const SizeBoxH(20),
               Center(
                 child: ButtonWidgets(
-                  buttonText: 'Submit',
+                  buttonText: 'Submit'.tr,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       if (authProvider.confirmPasswordController.text ==
