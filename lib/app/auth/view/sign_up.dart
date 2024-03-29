@@ -131,7 +131,7 @@ class SignUpScreen extends StatelessWidget {
                               isDismissible: false,
                               enableDrag: false,
                               context: context,
-                              title: 'please enter Phone number'.tr,
+                              title: 'Please Enter Your Phone Number'.tr,
                               subtitle: '',
                             );
                           }
