@@ -4,8 +4,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get_instance/get_instance.dart';
 import 'package:get/route_manager.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
+import 'package:mmg/app/multyLanguage/controller/language_controller.dart';
 // import 'package:location/location.dart';
 import 'package:mmg/app/utils/routes/route_names.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +16,7 @@ class SplashProvider extends ChangeNotifier {
   bool checkingButton = false;
   bool isLoad = false;
   Future<void> changeScreen({required BuildContext context}) async {
+    checkLanguage();
     await Future.delayed(
       const Duration(seconds: 8),
     );
@@ -52,6 +55,20 @@ class SplashProvider extends ChangeNotifier {
     } on SocketException catch (_) {
       notifyListeners();
       return false;
+    }
+  }
+
+  void checkLanguage() async {
+    LanguageController languageController = Get.put(LanguageController());
+    if (await languageController.getLanguagesCode() != '') {
+      var locale = await languageController.getLanguagesCode();
+      Get.updateLocale(Locale(locale!));
+    } else {
+      var locale = languageController.defaultLanguage.languageCode != '' &&
+              languageController.defaultLanguage.languageCode != ''
+          ? Locale(languageController.defaultLanguage.languageCode.toString())
+          : const Locale('en');
+      Get.updateLocale(locale);
     }
   }
 }

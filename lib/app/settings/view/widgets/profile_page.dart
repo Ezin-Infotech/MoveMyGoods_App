@@ -37,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Profile',
+                'Profile'.tr,
                 style: context.textTheme.bodyLarge!.copyWith(
                   fontWeight: FontWeight.w600,
                   fontSize: 18,

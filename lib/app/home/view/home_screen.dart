@@ -38,6 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> bookingTiltes = [
+      'All bookings'.tr,
+      'Quotation'.tr,
+      'Pending'.tr,
+      'Active'.tr,
+      'Completed'.tr,
+      'Cancelled'.tr,
+    ];
     return Scaffold(
         body: SingleChildScrollView(
       physics: const ScrollPhysics(),
@@ -184,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   .cancelled
                                                                   .toString()
                                                               : "0",
-                                  title: value.bookingTiltes[index],
+                                  title: bookingTiltes[index],
                                   numberColor: index == 0
                                       ? const Color(0xffab00af)
                                       : index == 1
@@ -228,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   : value.descriptions[index],
                               child: SmallBoxontainerWidget(
                                 subTitle: '0',
-                                title: value.bookingTiltes[index],
+                                title: bookingTiltes[index],
                                 numberColor: index == 0
                                     ? const Color(0xffab00af)
                                     : index == 1

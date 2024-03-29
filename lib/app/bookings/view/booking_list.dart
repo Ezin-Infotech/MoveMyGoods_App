@@ -436,29 +436,35 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                                                     0xff0076E3),
                                                   ),
                                                   const SizeBoxV(8),
-                                                  Text(
-                                                    item.status.toString().tr,
-                                                    style: context
-                                                        .textTheme.bodyLarge!
-                                                        .copyWith(
-                                                            color: item.status ==
-                                                                    'PENDING'
-                                                                ? const Color(
-                                                                    0xffAE9C00)
-                                                                : item.status ==
-                                                                        'ACTIVE'
-                                                                    ? const Color(
-                                                                        0xff00A51A)
-                                                                    : item.status ==
-                                                                            'CANCELLED'
-                                                                        ? const Color(
-                                                                            0xffA51E00)
-                                                                        : const Color(
-                                                                            0xff0076E3),
-                                                            fontSize: 14,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
+                                                  SizedBox(
+                                                    width:
+                                                        Responsive.width * 25,
+                                                    child: Text(
+                                                      item.status.toString().tr,
+                                                      overflow:
+                                                          TextOverflow.clip,
+                                                      style: context
+                                                          .textTheme.bodyLarge!
+                                                          .copyWith(
+                                                              color: item.status ==
+                                                                      'PENDING'
+                                                                  ? const Color(
+                                                                      0xffAE9C00)
+                                                                  : item.status ==
+                                                                          'ACTIVE'
+                                                                      ? const Color(
+                                                                          0xff00A51A)
+                                                                      : item.status ==
+                                                                              'CANCELLED'
+                                                                          ? const Color(
+                                                                              0xffA51E00)
+                                                                          : const Color(
+                                                                              0xff0076E3),
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                    ),
                                                   ),
                                                 ],
                                               )

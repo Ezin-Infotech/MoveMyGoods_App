@@ -31,8 +31,7 @@ class CompletedBookingScreen extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '${obj.bookingDetail.data!.status.toString()} Bookings'
-                          .tr,
+                      '${obj.bookingDetail.data!.status.toString().tr} ${"Bookings".tr}',
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           color: obj.bookingDetail.data!.status
                                       .toString()

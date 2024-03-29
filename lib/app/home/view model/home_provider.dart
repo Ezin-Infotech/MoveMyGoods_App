@@ -58,15 +58,6 @@ class HomeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  List<String> bookingTiltes = [
-    'All bookings'.tr,
-    'Quotation'.tr,
-    'Pending'.tr,
-    'Active'.tr,
-    'Completed'.tr,
-    'Cancelled'.tr,
-  ];
-
   /*-------- API SERVICES ------------*/
 
   HomeServices services = HomeServices();

@@ -33,12 +33,14 @@ class LanguageController extends GetxController {
 
   getDefault() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.getString('language') ?? AppConstants.defaultLanguageApp;
+    return sharedPreferences.getString('language') ??
+        AppConstants.defaultLanguageApp;
   }
 
   Future<String?> getLanguagesCode() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getString('language') ?? 'en';
+    return sharedPreferences.getString('language') ??
+        AppConstants.defaultLanguageApp;
   }
 }
 
@@ -51,11 +53,6 @@ class AppConstants {
         languageName: 'English',
         countryCode: 'US',
         languageCode: 'en'),
-    // LanguageModel(
-    //     imageUrl: '',
-    //     languageName: 'عربي',
-    //     countryCode: 'AE',
-    //     languageCode: 'ar'),
     LanguageModel(
         imageUrl: '',
         languageName: 'हिन्दी',
@@ -71,10 +68,5 @@ class AppConstants {
         languageName: 'தமிழ்',
         countryCode: 'IN',
         languageCode: 'ta'),
-    // LanguageModel(
-    //     imageUrl: '',
-    //     languageName: 'Español',
-    //     countryCode: 'De',
-    //     languageCode: 'es'),
   ];
 }

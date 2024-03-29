@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:get/route_manager.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/settings/view%20model/theme_notifier.dart';
@@ -65,7 +66,7 @@ class SmallBoxontainerWidget extends StatelessWidget {
                 height: 12,
               ),
               Text(
-                title,
+                title.tr,
                 style: const TextStyle(
                     // color: Color(0xffFFFFFF),
                     fontSize: 16,

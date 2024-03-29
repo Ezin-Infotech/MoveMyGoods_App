@@ -50,7 +50,7 @@ class _HomeBookingListScreenState extends State<HomeBookingListScreen> {
               children: [
                 value.tempSelectedStatus == 'All'
                     ? Text(
-                        'All Bookings',
+                        'All Bookings'.tr,
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             fontSize: 18, fontWeight: FontWeight.w600),
                       )

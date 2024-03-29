@@ -706,7 +706,7 @@ class _BookingScreenState extends State<BookingScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                '*The price is an indicative and actual price may vary ',
+                                "*${'The price is an indicative and actual price may vary'.tr}",
                                 style: Theme.of(context)
                                     .textTheme
                                     .displaySmall!
@@ -727,7 +727,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   ButtonWidgets(
-                                    buttonText: 'Continue',
+                                    buttonText: 'Continue'.tr,
                                     onPressed: () {
                                       context
                                           .read<BookingProvider>()
@@ -968,7 +968,7 @@ Future priceDialog(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Distance  :",
+                  "${"Distance".tr}  :",
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
@@ -988,7 +988,7 @@ Future priceDialog(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Base Fare  :",
+                  "${"Base Fare".tr}  :",
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
@@ -1008,7 +1008,7 @@ Future priceDialog(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Price Per Km  :",
+                  "${"Price Per Km".tr}  :",
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
@@ -1028,7 +1028,7 @@ Future priceDialog(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Labour Cost  :",
+                  "${"Labour Cost".tr}  :",
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
@@ -1048,7 +1048,7 @@ Future priceDialog(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "CGST  :",
+                  "${"CGST".tr}  :",
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
@@ -1068,7 +1068,7 @@ Future priceDialog(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "SGST  :",
+                  "${"SGST".tr}  :",
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
