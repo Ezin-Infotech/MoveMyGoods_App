@@ -336,9 +336,9 @@ class UserLoggedTiles extends StatelessWidget {
             builder: (context) {
               return DeleteAlertDialog(
                 // isDarkMode: value.isDarkMode,
-                title: 'Logout',
-                content: 'Are you sure yow want to Logout?',
-                buttonLabel: 'Logout',
+                title: 'Logout'.tr,
+                content: 'Are you sure yow want to Logout?'.tr,
+                buttonLabel: 'Logout'.tr,
                 onTapYes: () {
                   context.read<SettingsProvider>().logoutUser(context: context);
                   Get.back();

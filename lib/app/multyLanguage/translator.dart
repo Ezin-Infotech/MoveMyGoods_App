@@ -100,22 +100,22 @@ class LocaleString extends Translations {
           "You had account please login": "You had account please login",
           "Verification needed": "Verification needed",
           "Validation of Mobile Numbe": "Validation of Mobile Numbe",
-          "please enter valid phone number": "please enter valid phone number",
+          "please enter valid  phone number":
+              "please enter valid  phone number",
           "Sent OTP": "Sent OTP",
           "Resend OTP": "Resend OTP",
           "Enter Mobile Number and get OTP": "Enter Mobile Number and get OTP",
           "Please Enter Your Phone Number": "Please Enter Your Phone Number",
           "Enter your OTP code": "Enter your OTP code",
           "Enter your New Passsword here": "Enter your New Passsword here",
-          "This is your all Bookings coun": "This is your all Bookings coun",
-          "This is your Quotation Bookings count":
-              "This is your Quotation Bookings count",
-          "This is your Pending Bookings count":
-              "This is your Pending Bookings count",
-          "This is your Active Bookings count":
-              "यह आपकी सक्रिय बुकिंग संख्या है",
-          "This is your Completed Bookings count":
-              "This is your Completed Bookings count",
+          "This is your all Bookings count.": "This is your all Bookings count",
+          "This is your Quotation Bookings count.":
+              "This is your Quotation Bookings count.",
+          "This is your Pending Bookings count.":
+              "This is your Pending Bookings count.",
+          "This is your Completed Bookings count.":
+              "This is your Completed Bookings count.",
+          "Start Booking Now": "Start Booking Now"
         },
         'hi_IN': {
           "Bookings": "बुकिंग के",
@@ -239,7 +239,7 @@ class LocaleString extends Translations {
           "You had account please login": "आपके पास खाता था कृपया लॉगिन करें",
           "Verification needed": "सत्यापन आवश्यक",
           "Validation of Mobile Numbe": "मोबाइल नंबर का सत्यापन",
-          "please enter valid phone number": "कृपया एक वैध नंबर डालें",
+          "please enter valid  phone number": "कृपया एक वैध नंबर डालें",
           "Sent OTP": "भेजा गया ओटीपी",
           "Resend OTP": "ओटीपी पुनः भेजें",
           "Enter Mobile Number and get OTP":
@@ -247,15 +247,18 @@ class LocaleString extends Translations {
           "Please Enter Your Phone Number": "कृपया अपना फोन नंबर दर्ज करें",
           "Enter your OTP code": "अपना ओटीपी कोड दर्ज करें",
           "Enter your New Passsword here": "यहां अपना नया पासवर्ड दर्ज करें",
-          "This is your all Bookings coun": "यह आपकी सभी बुकिंग संख्या है",
-          "This is your Quotation Bookings count":
+          "This is your all Bookings count.": "यह आपकी सभी बुकिंग संख्या है",
+          "This is your Quotation Bookings count.":
               "यह आपकी कोटेशन बुकिंग संख्या है",
-          "This is your Pending Bookings count":
+          "This is your Pending Bookings count.":
               "यह आपकी लंबित बुकिंग संख्या है",
-          "This is your Active Bookings count":
+          "This is your Active Bookings count.":
               "यह आपकी सक्रिय बुकिंग संख्या है",
-          "This is your Completed Bookings count":
-              "यह आपकी पूर्ण बुकिंग संख्या है"
+          "This is your Completed Bookings count.":
+              "यह आपकी पूर्ण बुकिंग संख्या है",
+          "Logout": "लॉग आउट",
+          "Start Booking Now": " अभी बुकिंग शुरू करें",
+          "Sign Up": "साइन अप करें"
         },
         'kn_IN': {
           "Bookings": "ಬುಕಿಂಗ್",
@@ -354,7 +357,7 @@ class LocaleString extends Translations {
               "ನೀವು ಖಾತೆಯನ್ನು ಹೊಂದಿದ್ದೀರಿ ದಯವಿಟ್ಟು ಲಾಗಿನ್ ಮಾಡಿ",
           "Verification needed": "ಪರಿಶೀಲನೆ ಅಗತ್ಯವಿದೆ",
           "Validation of Mobile Numbe": "ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯ ಮೌಲ್ಯೀಕರಣ",
-          "please enter valid phone number":
+          "please enter valid  phone number":
               "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಫೋನ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ",
           "Sent OTP": "ಒಟಿಪಿ ಕಳುಹಿಸಲಾಗಿದೆ",
           "Resend OTP": "ಒಟಿಪಿ ಮರುಕಳುಹಿಸು",
@@ -365,12 +368,17 @@ class LocaleString extends Translations {
           "Enter your OTP code": "ನಿಮ್ಮ OTP ಕೋಡ್ ನಮೂದಿಸಿ",
           "Enter your New Passsword here":
               "ನಿಮ್ಮ ಹೊಸ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ",
-          "This is your all Bookings coun": "ಇದು ನಿಮ್ಮ ಎಲ್ಲಾ ಬುಕಿಂಗ್ ಎಣಿಕೆ",
-          "This is your Quotation Bookings count":
+          "This is your all Bookings count.": "ಇದು ನಿಮ್ಮ ಎಲ್ಲಾ ಬುಕಿಂಗ್ ಎಣಿಕೆ",
+          "This is your Quotation Bookings count.":
               "ಇದು ನಿಮ್ಮ ಉದ್ಧರಣ ಬುಕಿಂಗ್ ಎಣಿಕೆ",
-          "This is your Pending Bookings count":
-              "This is your Pending Bookings count",
-          "This is your Active Bookings count": "ಇದು ನಿಮ್ಮ ಸಕ್ರಿಯ ಬುಕಿಂಗ್ ಎಣಿಕೆ"
+          "This is your Pending Bookings count.":
+              "ಇದು ನಿಮ್ಮ ಬಾಕಿ ಇರುವ ಬುಕಿಂಗ್ ಎಣಿಕೆ",
+          "This is your Active Bookings count.":
+              "ಇದು ನಿಮ್ಮ ಸಕ್ರಿಯ ಬುಕಿಂಗ್ ಎಣಿಕೆ",
+          "Cancel": "ರದ್ದುಮಾಡು",
+          "This is your Completed Bookings count.":
+              "ಇದು ನಿಮ್ಮ ಪೂರ್ಣಗೊಂಡ ಬುಕಿಂಗ್ ಎಣಿಕೆ",
+          "Start Booking Now": " ఇప్పుడే బుకింగ్ ప్రారంభించండి",
         },
         'ta_IN': {
           "Bookings": "முன்பதிவுகள்",
@@ -474,7 +482,8 @@ class LocaleString extends Translations {
               "உங்களுக்கு கணக்கு இருந்தது தயவு செய்து உள்நுழையவும்",
           "Verification needed": "சரிபார்ப்பு தேவை",
           "Validation of Mobile Numbe": "மொபைல் எண்ணின் சரிபார்ப்பு",
-          "please enter valid phone number": "சரியான தொலைபேசி எண்ணை உள்ளிடவும்",
+          "please enter valid  phone number":
+              "சரியான தொலைபேசி எண்ணை உள்ளிடவும்",
           "Sent OTP": "OTP அனுப்பப்பட்டது",
           "Resend OTP": "ஓடிபியை மீண்டும் அனுப்பு",
           "Enter Mobile Number and get OTP":
@@ -484,16 +493,23 @@ class LocaleString extends Translations {
           "Enter your OTP code": "உங்கள் OTP குறியீட்டை உள்ளிடவும்",
           "Enter your New Passsword here":
               "உங்கள் புதிய கடவுச்சொல்லை இங்கே உள்ளிடவும்",
-          "This is your all Bookings coun":
+          "This is your all Bookings count.":
               "இது உங்களின் அனைத்து முன்பதிவுகளின் எண்ணிக்கை",
-          "This is your Quotation Bookings count":
+          "This is your Quotation Bookings count.":
               "இது உங்கள் முன்பதிவுகளின் எண்ணிக்கை",
-          "This is your Pending Bookings count":
+          "This is your Pending Bookings count.":
               "இது உங்கள் நிலுவையில் உள்ள முன்பதிவுகளின் எண்ணிக்கை",
-          "This is your Active Bookings count":
-              "இது உங்கள் செயலில் உள்ள முன்பதிவுகளின் எண்ணிக்கை"
+          "This is your Active Bookings count.":
+              "இது உங்கள் செயலில் உள்ள முன்பதிவுகளின் எண்ணிக்கை",
+          "Cancel": "ரத்து செய்",
+          "This is your Completed Bookings count.":
+              "இது உங்கள் பூர்த்தி செய்யப்பட்ட முன்பதிவுகளின் எண்ணிக்கை",
+          "Start Booking Now": " இப்போதே முன்பதிவு செய்யத் தொடங்குங்கள்",
         },
         'te_IN': {
+          "This is your Completed Bookings count.":
+              "ఇది మీ పూర్తయిన బుకింగ్స్ కౌంట్",
+          "Cancel": "రద్దు చేయండి",
           "All Bookings": "అన్ని బుకింగ్‌లు",
           "THIS IS YOUR ALL BOOKING COUNT": "ఇది మీ మొత్తం బుకింగ్ కౌంట్",
           "QUOTATION": "కోటేషన్",
@@ -585,7 +601,7 @@ class LocaleString extends Translations {
           "You had account please login": "మీకు ఖాతా ఉంది దయచేసి లాగిన్ చేయండి",
           "Verification needed": "ధృవీకరణ అవసరం",
           "Validation of Mobile Number": "మొబైల్ నంబర్ యొక్క ధ్రువీకరణ",
-          "please enter valid phone number":
+          "please enter valid  phone number":
               "దయచేసి చెల్లుబాటు అయ్యే ఫోన్ నంబర్‌ను నమోదు చేయండి",
           "Sent OTP": "OTPని పంపండి",
           "Resend OTP": "OTP ను మళ్ళీ పంపు",
@@ -596,14 +612,13 @@ class LocaleString extends Translations {
           "Enter your New Passsword here":
               "మీ కొత్త పాస్‌వర్డ్‌ను ఇక్కడ నమోదు చేయండి",
           "This is your all Bookings count": "ఇది మీ మొత్తం బుకింగ్స్ కౌంట్",
-          "This is your Quotation Bookings count":
+          "This is your Quotation Bookings count.":
               "ఇది మీ కొటేషన్ బుకింగ్స్ కౌంట్",
-          "This is your Pending Bookings count":
+          "This is your Pending Bookings count.":
               "ఇది మీ పెండింగ్ బుకింగ్స్ కౌంట్",
-          "This is your Active Bookings count":
+          "This is your Active Bookings count.":
               "ఇది మీ యాక్టివ్ బుకింగ్‌ల కౌంట్",
-          "This is your Completed Bookings count":
-              "ఇది మీ పూర్తయిన బుకింగ్‌ల కౌంట్"
+          "Start Booking Now": " ಈಗ ಬುಕಿಂಗ್ ಪ್ರಾರಂಭಿಸಿ",
         }
       };
 }

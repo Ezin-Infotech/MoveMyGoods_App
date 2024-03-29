@@ -28,7 +28,7 @@ class DeleteAlertDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       backgroundColor: AppColors.kLight,
       title: Text(
-        title.tr,
+        title,
         style: context.textTheme.bodyMedium!.copyWith(
           color: AppColors.black,
           fontSize: 17,
