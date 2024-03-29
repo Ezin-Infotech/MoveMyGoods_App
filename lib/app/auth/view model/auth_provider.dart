@@ -5,7 +5,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mmg/app/auth/modal/city_list_model.dart';
 import 'package:mmg/app/auth/modal/country_model.dart';
@@ -257,7 +257,7 @@ class AuthProvider with ChangeNotifier {
         );
       }
     } else {
-      failurtoast(title: 'Please Enter Your Phone Number');
+      failurtoast(title: 'Please Enter Your Phone Number'.tr);
     }
   }
 
@@ -280,7 +280,8 @@ class AuthProvider with ChangeNotifier {
         Get.back();
         Get.back();
         Get.back();
-        failurtoast(title: 'Password Updated Successfully.', isSuccess: true);
+        failurtoast(
+            title: 'Password Updated Successfully.'.tr, isSuccess: true);
         // ignore: deprecated_member_use
       } on DioError catch (e) {
         LoadingOverlay.of(context).hide();

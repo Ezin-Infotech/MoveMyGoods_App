@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
@@ -143,9 +143,9 @@ class SettingsProvider with ChangeNotifier {
         builder: (context) {
           return DeleteAlertDialog(
             // isDarkMode: value.isDarkMode,
-            title: 'Logout',
-            content: 'Are you sure yow want to Logout?',
-            buttonLabel: 'Logout',
+            title: 'Logout'.tr,
+            content: 'Are you sure yow want to Logout?'.tr,
+            buttonLabel: 'Logout'.tr,
             onTapYes: () {
               logoutUser(context: context);
               Get.back();

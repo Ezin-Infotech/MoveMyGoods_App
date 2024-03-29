@@ -55,7 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           Expanded(
                             child: Showcase(
                               key: homeProvider.globalKey10,
-                              description: 'You had account please login',
+                              description: 'You had account please login'.tr,
                               child: InkWell(
                                 onTap: () => Get.toNamed(AppRoutes.login),
                                 child: Container(
@@ -83,7 +83,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             child: Showcase(
                               key: homeProvider.globalKey11,
                               description:
-                                  'You have not account please Sign up',
+                                  'You have not account please Sign up'.tr,
                               child: InkWell(
                                 onTap: () => Get.toNamed(AppRoutes.signUp),
                                 child: Container(

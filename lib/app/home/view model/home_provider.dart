@@ -48,7 +48,7 @@ class HomeProvider with ChangeNotifier {
     'This is your Pending Bookings count.'.tr,
     'This is your Active Bookings count.'.tr,
     'This is your Completed Bookings count.'.tr,
-    'This is your Cancelled Bookings count.'.tr,
+    'This is your Completed Bookings count.'.tr,
   ];
 
   int curentIndex = 0;

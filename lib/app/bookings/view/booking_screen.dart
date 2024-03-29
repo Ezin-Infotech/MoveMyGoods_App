@@ -647,7 +647,7 @@ class _BookingScreenState extends State<BookingScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Total Amount: ₹ ${booking.bookingFarePriceDetailsModel.data!.totalAmount} /-',
+                                '${"Total Amount".tr}: ₹ ${booking.bookingFarePriceDetailsModel.data!.totalAmount} /-',
                                 style: Theme.of(context)
                                     .textTheme
                                     .displaySmall!
@@ -820,7 +820,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                   controller:
                                       bookingProvider!.receiverNameController,
                                   labeText: 'Name'.tr,
-                                  requiredText: 'Enter Your name ',
+                                  requiredText: 'Enter Your name '.tr,
                                 ),
                                 // BookingTextFieldWidgets(
                                 //   hintText: 'Email',
