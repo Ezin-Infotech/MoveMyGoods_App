@@ -13,7 +13,7 @@ class LocaleString extends Translations {
           "THIS IS YOUR ALL PENDING COUNT": "THIS IS YOUR ALL PENDING COUNT",
           "ACTIVE": "ACTIVE",
           "THIS IS YOUR ACTIVE COUNT": "THIS IS YOUR ACTIVE COUNT",
-          "COMPLETED": "पुरा होना",
+          "COMPLETED": "COMPLETED",
           "THIS IS YOUR COMPLETED COUNT": "THIS IS YOUR COMPLETED COUNT",
           "CANCELLED": "CANCELLED",
           "THIS IS YOUR CANCELLED COUNT": "THIS IS YOUR CANCELLED COUNT",
@@ -91,7 +91,7 @@ class LocaleString extends Translations {
               "You have not account please Sign up",
           "You had account please login": "You had account please login",
           "Verification needed": "Verification needed",
-          "Validation of Mobile Numbe": "Validation of Mobile Numbe",
+          "Validation of Mobile Number": "Validation of Mobile Number",
           "please enter valid  phone number":
               "please enter valid  phone number",
           "Sent OTP": "Sent OTP",
@@ -100,16 +100,16 @@ class LocaleString extends Translations {
           "Please Enter Your Phone Number": "Please Enter Your Phone Number",
           "Enter your OTP code": "Enter your OTP code",
           "Enter your New Passsword here": "Enter your New Passsword here",
-          "This is your all Bookings coun": "This is your all Bookings coun",
+          "This is your all Bookings count": "This is your all Bookings count",
           "This is your Quotation Bookings count":
               "This is your Quotation Bookings count",
           "This is your Pending Bookings count":
               "This is your Pending Bookings count",
           "This is your Active Bookings count":
-              "यह आपकी सक्रिय बुकिंग संख्या है",
+              "This is your Active Bookings count",
           "This is your Completed Bookings count":
               "This is your Completed Bookings count",
-          "Settings": "Settings"
+          "Settings": "Settings",
           "This is your all Bookings count.": "This is your all Bookings count",
           "This is your Quotation Bookings count.":
               "This is your Quotation Bookings count.",
@@ -117,7 +117,7 @@ class LocaleString extends Translations {
               "This is your Pending Bookings count.",
           "This is your Completed Bookings count.":
               "This is your Completed Bookings count.",
-          "Start Booking Now": "Start Booking Now"
+          "Start Booking Now": "Start Booking Now",
         },
         'hi_IN': {
           "Bookings": "बुकिंग के",
@@ -254,6 +254,7 @@ class LocaleString extends Translations {
           "Enter your New Passsword here": "यहां अपना नया पासवर्ड दर्ज करें",
           "This is your all Bookings count": "यह आपकी सभी बुकिंग संख्या है",
           "This is your Quotation Bookings count":
+              "यह आपकी कोटेशन बुकिंग संख्या है",
           "This is your all Bookings count.": "यह आपकी सभी बुकिंग संख्या है",
           "This is your Quotation Bookings count.":
               "यह आपकी कोटेशन बुकिंग संख्या है",
@@ -387,7 +388,7 @@ class LocaleString extends Translations {
               "This is your Pending Bookings count",
           "This is your Active Bookings count":
               "ಇದು ನಿಮ್ಮ ಸಕ್ರಿಯ ಬುಕಿಂಗ್ ಎಣಿಕೆ",
-          "Settings": "ಸಂಯೋಜನೆಗಳು"
+          "Settings": "ಸಂಯೋಜನೆಗಳು",
           "This is your Pending Bookings count.":
               "ಇದು ನಿಮ್ಮ ಬಾಕಿ ಇರುವ ಬುಕಿಂಗ್ ಎಣಿಕೆ",
           "This is your Active Bookings count.":
@@ -519,7 +520,7 @@ class LocaleString extends Translations {
               "இது உங்கள் நிலுவையில் உள்ள முன்பதிவுகளின் எண்ணிக்கை",
           "This is your Active Bookings count":
               "இது உங்கள் செயலில் உள்ள முன்பதிவுகளின் எண்ணிக்கை",
-          "Settings": "அமைப்புகள்"
+          "Settings": "அமைப்புகள்",
           "This is your Active Bookings count.":
               "இது உங்கள் செயலில் உள்ள முன்பதிவுகளின் எண்ணிக்கை",
           "Cancel": "ரத்து செய்",
@@ -658,7 +659,7 @@ class LocaleString extends Translations {
               "ఇది మీ యాక్టివ్ బుకింగ్‌ల కౌంట్",
           "This is your Completed Bookings count":
               "ఇది మీ పూర్తయిన బుకింగ్‌ల కౌంట్",
-          "Settings": "సెట్టింగ్‌లు"
+          "Settings": "సెట్టింగ్‌లు",
           "Start Booking Now": " ಈಗ ಬುಕಿಂಗ್ ಪ್ರಾರಂಭಿಸಿ",
         }
       };
