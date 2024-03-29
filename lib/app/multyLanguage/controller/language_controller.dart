@@ -68,5 +68,10 @@ class AppConstants {
         languageName: 'தமிழ்',
         countryCode: 'IN',
         languageCode: 'ta'),
+    LanguageModel(
+        imageUrl: '',
+        languageName: 'తెలుగు',
+        countryCode: 'IN',
+        languageCode: 'te'),
   ];
 }
