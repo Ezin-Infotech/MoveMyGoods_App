@@ -108,7 +108,7 @@ class SignUpScreen extends StatelessWidget {
                                     isDismissible: false,
                                     enableDrag: false,
                                     context: context,
-                                    title: 'please enter valid  email',
+                                    title: 'please enter valid  email'.tr,
                                     subtitle: '',
                                   );
                                 }
@@ -122,7 +122,7 @@ class SignUpScreen extends StatelessWidget {
                                 isDismissible: false,
                                 enableDrag: false,
                                 context: context,
-                                title: 'please enter valid  phone number',
+                                title: 'please enter valid  phone number'.tr,
                                 subtitle: '',
                               );
                             }
@@ -131,7 +131,7 @@ class SignUpScreen extends StatelessWidget {
                               isDismissible: false,
                               enableDrag: false,
                               context: context,
-                              title: 'please enter Phone number',
+                              title: 'please enter Phone number'.tr,
                               subtitle: '',
                             );
                           }

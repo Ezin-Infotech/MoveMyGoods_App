@@ -28,19 +28,19 @@ class AllBookingScreen extends StatelessWidget {
                         width: 44,
                         height: 44,
                       ),
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Move My Goods',
-                            style: TextStyle(
+                            'Move My Goods'.tr,
+                            style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.white),
                           ),
                           Text(
-                            'Digital Logistic Platform',
-                            style: TextStyle(
+                            'Digital Logistic Platform'.tr,
+                            style: const TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w300,
                                 color: Colors.white),

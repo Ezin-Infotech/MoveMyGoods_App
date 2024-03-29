@@ -87,6 +87,35 @@ class LocaleString extends Translations {
           "Privacy Policy": "Privacy Policy",
           "Contact Us": "Contact Us",
           "Logout": "Logout",
+          "please enter email and password": "please enter email and password",
+          "Billing Details": "Billing Details",
+          "Enter Your name": "Enter Your name",
+          "GST No": "GST No",
+          "Your Booking has been": "Your Booking has been",
+          "Successfully Completed": "Successfully Completed",
+          "Order Summary": "Order Summary",
+          "Please enter address": "Please enter address",
+          "You have not account please Sign up":
+              "You have not account please Sign up",
+          "You had account please login": "You had account please login",
+          "Verification needed": "Verification needed",
+          "Validation of Mobile Numbe": "Validation of Mobile Numbe",
+          "please enter valid phone number": "please enter valid phone number",
+          "Sent OTP": "Sent OTP",
+          "Resend OTP": "Resend OTP",
+          "Enter Mobile Number and get OTP": "Enter Mobile Number and get OTP",
+          "Please Enter Your Phone Number": "Please Enter Your Phone Number",
+          "Enter your OTP code": "Enter your OTP code",
+          "Enter your New Passsword here": "Enter your New Passsword here",
+          "This is your all Bookings coun": "This is your all Bookings coun",
+          "This is your Quotation Bookings count":
+              "This is your Quotation Bookings count",
+          "This is your Pending Bookings count":
+              "This is your Pending Bookings count",
+          "This is your Active Bookings count":
+              "यह आपकी सक्रिय बुकिंग संख्या है",
+          "This is your Completed Bookings count":
+              "This is your Completed Bookings count",
         },
         'hi_IN': {
           "All Bookings": "सभी बुकिंग",
@@ -167,6 +196,36 @@ class LocaleString extends Translations {
           "Contact Us": "संपर्क करें",
           "Version": "संस्करण",
           "Logout": "लॉग आउट",
+          "please enter email and password": "कृपया ईमेल और पासवर्ड दर्ज करें",
+          "Billing Details": "बिलिंग विवरण",
+          "Enter Your name": "अपना नाम दर्ज करें",
+          "GST No": "जीएसटी नंबर",
+          "Your Booking has been": "आपकी बुकिंग हो गई है",
+          "Successfully Completed": "सफलतापूर्वक पूर्ण हुआ",
+          "Order Summary": "आदेश सारांश",
+          "Please enter address": "कृपया पता दर्ज करें",
+          "You have not account please Sign up":
+              "आपके पास खाता नहीं है कृपया साइन अप करें",
+          "You had account please login": "आपके पास खाता था कृपया लॉगिन करें",
+          "Verification needed": "सत्यापन आवश्यक",
+          "Validation of Mobile Numbe": "मोबाइल नंबर का सत्यापन",
+          "please enter valid phone number": "कृपया एक वैध नंबर डालें",
+          "Sent OTP": "भेजा गया ओटीपी",
+          "Resend OTP": "ओटीपी पुनः भेजें",
+          "Enter Mobile Number and get OTP":
+              "मोबाइल नंबर दर्ज करें और ओटीपी प्राप्त करें",
+          "Please Enter Your Phone Number": "कृपया अपना फोन नंबर दर्ज करें",
+          "Enter your OTP code": "अपना ओटीपी कोड दर्ज करें",
+          "Enter your New Passsword here": "यहां अपना नया पासवर्ड दर्ज करें",
+          "This is your all Bookings coun": "यह आपकी सभी बुकिंग संख्या है",
+          "This is your Quotation Bookings count":
+              "यह आपकी कोटेशन बुकिंग संख्या है",
+          "This is your Pending Bookings count":
+              "यह आपकी लंबित बुकिंग संख्या है",
+          "This is your Active Bookings count":
+              "यह आपकी सक्रिय बुकिंग संख्या है",
+          "This is your Completed Bookings count":
+              "यह आपकी पूर्ण बुकिंग संख्या है"
         },
         'kn_IN': {
           "All Bookings": "ಎಲ್ಲಾ ಬುಕಿಂಗ್",
@@ -248,6 +307,38 @@ class LocaleString extends Translations {
           "Contact Us": "ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ",
           "Version": "ಆವೃತ್ತಿ",
           "Logout": "ಲಾಗ್ ಔಟ್",
+          "please enter email and password":
+              "ದಯವಿಟ್ಟು ಇಮೇಲ್ ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ",
+          " Billing Details": "ರಶೀದಿ ವಿವರಗಳು",
+          "Enter Your name": "ನಿಮ್ಮ ಹೆಸರನ್ನು ನಮೂದಿಸಿ",
+          "GST No": "ಜಿಎಸ್ಟಿ ಸಂಖ್ಯೆ",
+          "Your Booking has been": "ನಿಮ್ಮ ಬುಕಿಂಗ್ ಆಗಿದೆ",
+          "Successfully Completed": "ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿದೆ",
+          "Order Summary": "ಆದೇಶ ಸಾರಾಂಶ",
+          "Please enter address": "ದಯವಿಟ್ಟು ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ",
+          "You have not account please Sign up":
+              "ನೀವು ಖಾತೆಯನ್ನು ಹೊಂದಿಲ್ಲ ದಯವಿಟ್ಟು ಸೈನ್ ಅಪ್ ಮಾಡಿ",
+          "You had account please login":
+              "ನೀವು ಖಾತೆಯನ್ನು ಹೊಂದಿದ್ದೀರಿ ದಯವಿಟ್ಟು ಲಾಗಿನ್ ಮಾಡಿ",
+          "Verification needed": "ಪರಿಶೀಲನೆ ಅಗತ್ಯವಿದೆ",
+          "Validation of Mobile Numbe": "ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯ ಮೌಲ್ಯೀಕರಣ",
+          "please enter valid phone number":
+              "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಫೋನ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ",
+          "Sent OTP": "ಒಟಿಪಿ ಕಳುಹಿಸಲಾಗಿದೆ",
+          "Resend OTP": "ಒಟಿಪಿ ಮರುಕಳುಹಿಸು",
+          "Enter Mobile Number and get OTP":
+              "ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ ಮತ್ತು OTP ಪಡೆಯಿರಿ",
+          "Please Enter Your Phone Number":
+              "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಫೋನ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ",
+          "Enter your OTP code": "ನಿಮ್ಮ OTP ಕೋಡ್ ನಮೂದಿಸಿ",
+          "Enter your New Passsword here":
+              "ನಿಮ್ಮ ಹೊಸ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ",
+          "This is your all Bookings coun": "ಇದು ನಿಮ್ಮ ಎಲ್ಲಾ ಬುಕಿಂಗ್ ಎಣಿಕೆ",
+          "This is your Quotation Bookings count":
+              "ಇದು ನಿಮ್ಮ ಉದ್ಧರಣ ಬುಕಿಂಗ್ ಎಣಿಕೆ",
+          "This is your Pending Bookings count":
+              "This is your Pending Bookings count",
+          "This is your Active Bookings count": "ಇದು ನಿಮ್ಮ ಸಕ್ರಿಯ ಬುಕಿಂಗ್ ಎಣಿಕೆ"
         },
         'ta_IN': {
           "All Bookings": "அனைத்து முன்பதிவுகள்",
@@ -337,6 +428,39 @@ class LocaleString extends Translations {
           "Contact Us": "எங்களை தொடர்பு கொள்ள",
           "Version": "பதிப்பு",
           "Logout": "வெளியேறு",
+          "please enter email and password":
+              "தயவுசெய்து மின்னஞ்சல் மற்றும் கடவுச்சொல்லை உள்ளிடவும்",
+          "Billing Details": "பில்லிங் விவரங்கள்",
+          "Enter Your name": "உங்கள் பெயரை உள்ளிடவும்",
+          "GST No": "ஜிஎஸ்டி எண்",
+          "Your Booking has been": "உங்கள் முன்பதிவு முடிந்தது",
+          "Successfully Completed": "வெற்றிகரமாக முடிக்கப்பட்டது",
+          "Order Summary": "ஆர்டர் சுருக்கம்",
+          "Please enter address": "தயவுசெய்து முகவரியை உள்ளிடவும்",
+          "You have not account please Sign up":
+              "உங்களிடம் கணக்கு இல்லை, பதிவு செய்யவும்",
+          "You had account please login":
+              "உங்களுக்கு கணக்கு இருந்தது தயவு செய்து உள்நுழையவும்",
+          "Verification needed": "சரிபார்ப்பு தேவை",
+          "Validation of Mobile Numbe": "மொபைல் எண்ணின் சரிபார்ப்பு",
+          "please enter valid phone number": "சரியான தொலைபேசி எண்ணை உள்ளிடவும்",
+          "Sent OTP": "OTP அனுப்பப்பட்டது",
+          "Resend OTP": "ஓடிபியை மீண்டும் அனுப்பு",
+          "Enter Mobile Number and get OTP":
+              "மொபைல் எண்ணை உள்ளிட்டு OTP பெறவும்",
+          "Please Enter Your Phone Number":
+              "தயவுசெய்து உங்கள் தொலைபேசி எண்ணை உள்ளிடவும்",
+          "Enter your OTP code": "உங்கள் OTP குறியீட்டை உள்ளிடவும்",
+          "Enter your New Passsword here":
+              "உங்கள் புதிய கடவுச்சொல்லை இங்கே உள்ளிடவும்",
+          "This is your all Bookings coun":
+              "இது உங்களின் அனைத்து முன்பதிவுகளின் எண்ணிக்கை",
+          "This is your Quotation Bookings count":
+              "இது உங்கள் முன்பதிவுகளின் எண்ணிக்கை",
+          "This is your Pending Bookings count":
+              "இது உங்கள் நிலுவையில் உள்ள முன்பதிவுகளின் எண்ணிக்கை",
+          "This is your Active Bookings count":
+              "இது உங்கள் செயலில் உள்ள முன்பதிவுகளின் எண்ணிக்கை"
         }
       };
 }

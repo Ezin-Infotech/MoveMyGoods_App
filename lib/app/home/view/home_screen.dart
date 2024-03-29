@@ -145,15 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10))),
                                   ))
-                              :
-                              // const SizedBox(
-                              //     width: 50,
-                              //     height: 50,
-                              //     child: Center(
-                              //       child: CircularProgressIndicator(),
-                              //     ),
-                              //   )
-                              SmallBoxontainerWidget(
+                              : SmallBoxontainerWidget(
                                   subTitle: value.bookingCountData.data == null
                                       ? '0'
                                       : index == 0
@@ -184,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   .cancelled
                                                                   .toString()
                                                               : "0",
-                                  title: value.bookingTiltes[index],
+                                  title: value.bookingTiltes[index].tr,
                                   numberColor: index == 0
                                       ? const Color(0xffab00af)
                                       : index == 1
@@ -216,16 +208,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ? value.globalKey5
                                                   : value.globalKey6,
                               description: index == 0
-                                  ? value.descriptions[index]
+                                  ? value.descriptions[index].tr
                                   : index == 1
-                                      ? value.descriptions[index]
+                                      ? value.descriptions[index].tr
                                       : index == 2
-                                          ? value.descriptions[index]
+                                          ? value.descriptions[index].tr
                                           : index == 3
-                                              ? value.descriptions[index]
+                                              ? value.descriptions[index].tr
                                               : index == 4
-                                                  ? value.descriptions[index]
-                                                  : value.descriptions[index],
+                                                  ? value.descriptions[index].tr
+                                                  : value
+                                                      .descriptions[index].tr,
                               child: SmallBoxontainerWidget(
                                 subTitle: '0',
                                 title: value.bookingTiltes[index],
