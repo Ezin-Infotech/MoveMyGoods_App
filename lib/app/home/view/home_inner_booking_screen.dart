@@ -177,7 +177,7 @@ class _HomeBookingListScreenState extends State<HomeBookingListScreen> {
                                     Row(
                                       children: [
                                         Text(
-                                          'Booking Id # '.tr,
+                                          "${'Booking Id'.tr} # ",
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyLarge!

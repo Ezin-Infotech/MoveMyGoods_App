@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     List<String> bookingTiltes = [
-      'All bookings'.tr,
+      'All Bookings'.tr,
       'Quotation'.tr,
       'Pending'.tr,
       'Active'.tr,

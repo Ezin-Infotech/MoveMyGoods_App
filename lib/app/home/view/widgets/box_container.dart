@@ -25,7 +25,7 @@ class SmallBoxontainerWidget extends StatelessWidget {
         overlayColor: const MaterialStatePropertyAll(Colors.transparent),
         onTap: () {
           context.read<BookingProvider>().filterFromHomeFunction(
-              status: title == 'All bookings' || title == 'Bookings'
+              status: title == 'All Bookings'.tr || title == 'Bookings'
                   ? 'All'
                   : title,
               context: context);

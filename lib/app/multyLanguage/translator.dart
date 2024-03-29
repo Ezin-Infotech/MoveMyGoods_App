@@ -1,11 +1,3 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : Foodies Full App Flutter
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2022-present initappz.
-*/
 import 'package:get/get.dart';
 
 class LocaleString extends Translations {
@@ -116,22 +108,26 @@ class LocaleString extends Translations {
               "यह आपकी सक्रिय बुकिंग संख्या है",
           "This is your Completed Bookings count":
               "This is your Completed Bookings count",
+          "Settings": "Settings"
         },
         'hi_IN': {
           "Bookings": "बुकिंग के",
           "Home": "डैशबोर्ड",
-          "All bookings": "सभी बुकिंग",
+          "All Bookings": "सभी बुकिंग",
           "This is your all Booking count.": "यह आपकी संपूर्ण बुकिंग संख्या है",
           "Quotation": "उद्धरण",
           "This is your Quotation Booking count.":
               "यह आपकी कोटेशन बुकिंग संख्या है",
           "Pending": "लंबित",
+          "PENDING": "लंबित",
           "This is your Pending Booking count.": "यह आपकी सभी लंबित गणनाएँ हैं",
           "Active": "सक्रिय",
           "This is your Active Booking count.": "यह आपकी सक्रिय गिनती है",
           "Completed": "पुरा होना",
+          "COMPLETED": "पुरा होना",
           "This is your all booking count.": "यह आपकी पूरी गिनती है",
           "Cancelled": "रद्द",
+          "CANCELLED": "रद्द",
           "This is your Cancelled Booking count.":
               "यह आपकी रद्द की गई गिनती है",
           "Book Now": "अभी बुक करें",
@@ -165,14 +161,14 @@ class LocaleString extends Translations {
               "कीमत सांकेतिक है और वास्तविक कीमत भिन्न हो सकती है ",
           "Continue": "जारी रखना ",
           "Receiver Details": "रिसीवर विवरण ",
-          "Name ": "नाम ",
+          "Name": "नाम ",
           "Mobile No.": "मोबाइल नहीं है। ",
           "Enter Your Mobile No.": "अपना मोबाइल नंबर दर्ज करें. ",
           "Shipper Details": "प्रेषक विवरण ",
           "Booking filter option, you can change filter option by selecting booking status":
               "बुकिंग फ़िल्टर विकल्प, आप बुकिंग स्थिति का चयन करके फ़िल्टर विकल्प बदल सकते हैं ",
           "Current booking status": "वर्तमान बुकिंग स्थिति ",
-          "All Bookings": "सभी बुकिंग ",
+          "All": "सभी",
           "Pending Bookings": "लंबित बुकिंग ",
           "Active Bookings": "सक्रिय बुकिंग ",
           "Completed Bookings": "बुकिंग पूरी हो गई ",
@@ -211,22 +207,22 @@ class LocaleString extends Translations {
           "Status": "स्थिति ",
           "Complected": "पूरा हुआ ",
           "Complected Bookings": "पूर्ण बुकिंग ",
-          "Estimated Price:": "अनुमानित मूल्य: ",
+          "Estimated Price": "अनुमानित मूल्य: ",
           "View Price Details": "मूल्य विवरण देखें ",
           "Price Details": "मूल्य विवरण ",
           "Distance": "दूरी ",
-          "Net Amount ": "शुद्ध राशि ",
+          "Net Amount": "शुद्ध राशि ",
           "Base Fare": "बेस किराया ",
-          "Price Per Km ": "कीमत प्रति किमी ",
+          "Price Per Km": "कीमत प्रति किमी ",
           "Labour Cost": "श्रम लागत ",
-          "CGST ": "सीजीएसटी ",
+          "CGST": "सीजीएसटी ",
           "Total Amount": "कुल राशि ",
           "Proceed to Pay": "रद्द की गई बुकिंग ",
           "GST No.": "जीएसटी नंबर ",
           "Select Location": "स्थान चुनें ",
           "Billing Details ": "बिलिंग विवरण ",
-          "PAID ": "चुकाया गया ",
-          "FOD ": "एफओडी ",
+          "PAID": "चुकाया गया ",
+          "FOD": "एफओडी ",
           "Your Booing has been Successfully Completed":
               "आपकी बूइंग सफलतापूर्वक पूरी हो गई है",
           "Enter Your name": "अपना नाम दर्ज करें",
@@ -247,7 +243,7 @@ class LocaleString extends Translations {
           "Please Enter Your Phone Number": "कृपया अपना फोन नंबर दर्ज करें",
           "Enter your OTP code": "अपना ओटीपी कोड दर्ज करें",
           "Enter your New Passsword here": "यहां अपना नया पासवर्ड दर्ज करें",
-          "This is your all Bookings coun": "यह आपकी सभी बुकिंग संख्या है",
+          "This is your all Bookings count": "यह आपकी सभी बुकिंग संख्या है",
           "This is your Quotation Bookings count":
               "यह आपकी कोटेशन बुकिंग संख्या है",
           "This is your Pending Bookings count":
@@ -255,9 +251,12 @@ class LocaleString extends Translations {
           "This is your Active Bookings count":
               "यह आपकी सक्रिय बुकिंग संख्या है",
           "This is your Completed Bookings count":
-              "यह आपकी पूर्ण बुकिंग संख्या है"
+              "यह आपकी पूर्ण बुकिंग संख्या है",
+          "Settings": "समायोजन",
+          "Version": "संस्करण",
         },
         'kn_IN': {
+          "All": "ಎಲ್ಲಾ",
           "Bookings": "ಬುಕಿಂಗ್",
           "Home": "डैशबोर्ड",
           "All Bookings": "ಎಲ್ಲಾ ಬುಕಿಂಗ್",
@@ -305,7 +304,7 @@ class LocaleString extends Translations {
               "ಬೆಲೆ ಸೂಚಕವಾಗಿದೆ ಮತ್ತು ನಿಜವಾದ ಬೆಲೆ ಬದಲಾಗಬಹುದು ",
           "Continue": "ಮುಂದುವರಿಸಿ ",
           "Receiver Details": "ಸ್ವೀಕರಿಸುವವರ ವಿವರಗಳು",
-          "Name ": "ಹೆಸರು ",
+          "Name": "ಹೆಸರು ",
           "Mobile No.": "ಮೊಬೈಲ್ ನಂ.",
           "Enter Your Mobile No.": "ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ. ",
           "Shipper Details": "ಸಾಗಣೆದಾರರ ವಿವರಗಳು",
@@ -370,10 +369,13 @@ class LocaleString extends Translations {
               "ಇದು ನಿಮ್ಮ ಉದ್ಧರಣ ಬುಕಿಂಗ್ ಎಣಿಕೆ",
           "This is your Pending Bookings count":
               "This is your Pending Bookings count",
-          "This is your Active Bookings count": "ಇದು ನಿಮ್ಮ ಸಕ್ರಿಯ ಬುಕಿಂಗ್ ಎಣಿಕೆ"
+          "This is your Active Bookings count":
+              "ಇದು ನಿಮ್ಮ ಸಕ್ರಿಯ ಬುಕಿಂಗ್ ಎಣಿಕೆ",
+          "Settings": "ಸಂಯೋಜನೆಗಳು"
         },
         'ta_IN': {
           "Bookings": "முன்பதிவுகள்",
+          "All": "அனைத்து",
           "All Bookings": "அனைத்து முன்பதிவுகள்",
           "THIS IS YOUR ALL BOOKING COUNT":
               "இது உங்களின் அனைத்து முன்பதிவு எண்ணிக்கை",
@@ -425,7 +427,7 @@ class LocaleString extends Translations {
               "விலை ஒரு குறிகாட்டியாகும் மற்றும் உண்மையான விலை மாறுபடலாம் ",
           "Continue": "தொடரவும் ",
           "Receiver Details": "பெறுநர் விவரங்கள் ",
-          "Name ": "பெயர் ",
+          "Name": "பெயர் ",
           "Mobile No.": "அலைபேசி எண் ",
           "Enter Your Mobile No.": "உங்கள் மொபைல் எண்ணை உள்ளிடவும். ",
           "Shipper Details": "ஏற்றுமதி செய்பவர் விவரங்கள் ",
@@ -491,25 +493,31 @@ class LocaleString extends Translations {
           "This is your Pending Bookings count":
               "இது உங்கள் நிலுவையில் உள்ள முன்பதிவுகளின் எண்ணிக்கை",
           "This is your Active Bookings count":
-              "இது உங்கள் செயலில் உள்ள முன்பதிவுகளின் எண்ணிக்கை"
+              "இது உங்கள் செயலில் உள்ள முன்பதிவுகளின் எண்ணிக்கை",
+          "Settings": "அமைப்புகள்"
         },
         'te_IN': {
           "All Bookings": "అన్ని బుకింగ్‌లు",
-          "THIS IS YOUR ALL BOOKING COUNT": "ఇది మీ మొత్తం బుకింగ్ కౌంట్",
-          "QUOTATION": "కోటేషన్",
-          "THIS IS YOUR QUOTATION BOOKING COUNT":
+          "All": "అన్ని",
+          "This is your all Booking count": "ఇది మీ మొత్తం బుకింగ్ కౌంట్",
+          "Quotation": "కోటేషన్",
+          "This is your Quotation Booking count":
               "ఇది మీ కొటేషన్ బుకింగ్ కౌంట్",
-          "PENDING": "పెండింగ్‌లో ఉంది",
-          "THIS IS YOUR ALL PENDING COUNT": "ఇది మీ పెండింగ్‌లో ఉన్న మొత్తం",
-          "ACTIVE": "యాక్టివ్",
-          "THIS IS YOUR ACTIVE COUNT": "ఇది మీ యాక్టివ్ కౌంట్",
-          "COMPLETED": "పూర్తయింది",
-          "THIS IS YOUR COMPLETED COUNT": "ఇది మీ పూర్తి చేసిన కౌంట్",
-          "CANCELLED": "రద్దు",
-          "THIS IS YOUR CANCELLED COUNT": "ఇది మీ రద్దు చేయబడిన కౌంట్",
+          "Pending": "పెండింగ్‌లో ఉంది",
+          "This is your Pending Booking count":
+              "ఇది మీ పెండింగ్‌లో ఉన్న మొత్తం",
+          "Active": "యాక్టివ్",
+          "This is your Active Booking count": "ఇది మీ యాక్టివ్ కౌంట్",
+          "Completed": "పూర్తయింది",
+          "This is your Completed Booking count": "ఇది మీ పూర్తి చేసిన కౌంట్",
+          "Cancelled": "రద్దు",
+          "This is your Cancelled Booking count": "ఇది మీ రద్దు చేయబడిన కౌంట్",
           "Welcome Back": "పునఃస్వాగతం",
           "Email / Phone": "ఇమెయిల్ / ఫోన్",
           "PASSWORD": "పాస్వర్డ్",
+          "PAID": "చెల్లించారు",
+          "FOD": "ఆహారం",
+          "Enter Your Mobile NO": "మీ మొబైల్ నంబర్‌ను నమోదు చేయండి",
           "forgot password?": "పాస్వర్డ్ మర్చిపోయారా?",
           "Login": "ప్రవేశించండి",
           "Sign Up": "చేరడం",
@@ -538,7 +546,7 @@ class LocaleString extends Translations {
               "ధర సూచిక మరియు వాస్తవ ధర మారవచ్చు",
           "Continue": "కొనసాగించు",
           "Receiver Details": "రిసీవర్ వివరాలు",
-          "Name ": "పేరు",
+          "Name": "పేరు",
           "Mobile No.": "మొబైల్ నెం.",
           "Enter Your Mobile No.": "మీ మొబైల్ నంబర్‌ని నమోదు చేయండి.",
           "Shipper Details": "షిప్పర్ వివరాలు",
@@ -546,16 +554,22 @@ class LocaleString extends Translations {
           "Booking filter option, you can change filter option by selecting booking status":
               "బుకింగ్ ఫిల్టర్ ఎంపిక, మీరు బుకింగ్ స్థితిని ఎంచుకోవడం ద్వారా ఫిల్టర్ ఎంపికను మార్చవచ్చు",
           "Current booking status": "Cప్రస్తుత బుకింగ్ స్థితి",
+          "Order ID": "ఆర్డర్ గుర్తింపు సంఖ్యా ",
           "All Booking": "అన్ని బుకింగ్",
           "Pending Booking": "పెండింగ్ బుకింగ్",
           "Active Booking": "యాక్టివ్ బుకింగ్",
           "Completed Booking": "బుకింగ్ పూర్తయింది",
           "Cancelled Booking": "బుకింగ్ రద్దు చేయబడింది",
-          "Profile": "ప్రొఫైల్ ",
+          "Number of Labours": "లేబర్స్ సంఖ్య ",
+          "Back to Home": "తిరిగి ఇంటికి ",
+          "Booking Id": "బుకింగ్ ఐడి ",
           "First Name": "మొదటి పేరు",
           "Last Name": "చివరి పేరు",
           "Mobile Number": "మొబైల్ నంబర్",
           "Date Of Birth": "పుట్టిన తేది",
+          "Date": "తేదీ ",
+          "Time": "సమయం ",
+          "Status": "స్థితి ",
           "Male": "పురుషుడు ",
           "Female": "స్త్రీ ",
           "Address Line 1": "చిరునామా లైన్  1",
@@ -570,6 +584,12 @@ class LocaleString extends Translations {
           "Terms & Conditions": "నిబంధనలు & షరతులు",
           "Privacy Policy": "గోప్యతా విధానం",
           "Contact Us": "Contact Us",
+          "Version": "సంస్కరణ ",
+          "Quotation Bookings": "కొటేషన్ బుకింగ్స్",
+          "Pending Bookings": "పెండింగ్ బుకింగ్‌లు",
+          "Active Bookings": "యాక్టివ్ బుకింగ్‌లు",
+          "Completed Bookings": "బుకింగ్‌లు పూర్తయ్యాయి",
+          "Cancelled Bookings": "బుకింగ్‌లు రద్దు చేయబడ్డాయి",
           "Logout": "లాగ్అవుట్",
           "please enter email and password":
               "దయచేసి ఇమెయిల్ మరియు పాస్‌వర్డ్‌ని నమోదు చేయండి",
@@ -603,7 +623,8 @@ class LocaleString extends Translations {
           "This is your Active Bookings count":
               "ఇది మీ యాక్టివ్ బుకింగ్‌ల కౌంట్",
           "This is your Completed Bookings count":
-              "ఇది మీ పూర్తయిన బుకింగ్‌ల కౌంట్"
+              "ఇది మీ పూర్తయిన బుకింగ్‌ల కౌంట్",
+          "Settings": "సెట్టింగ్‌లు"
         }
       };
 }

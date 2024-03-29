@@ -102,7 +102,7 @@ class CompletedBookingScreen extends StatelessWidget {
                 RichText(
                   textAlign: TextAlign.start,
                   text: TextSpan(
-                      text: 'Booking Id # '.tr,
+                      text: "${'Booking Id'.tr} # ",
                       style: context.textTheme.bodyMedium
                           ?.copyWith(fontSize: 14, fontWeight: FontWeight.w600),
                       children: <TextSpan>[
@@ -262,7 +262,7 @@ class CompletedBookingScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        'Shipper details'.tr,
+                        'Shipper Details'.tr,
                         style: context.textTheme.bodyLarge?.copyWith(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -284,7 +284,7 @@ class CompletedBookingScreen extends StatelessWidget {
                               ),
                               SizeBoxH(Responsive.height * 1),
                               TextField(
-                                textField: 'Phone Number'.tr,
+                                textField: 'Mobile No.'.tr,
                               ),
                             ],
                           ),
@@ -300,12 +300,13 @@ class CompletedBookingScreen extends StatelessWidget {
                             children: [
                               SizeBoxH(Responsive.height * 1),
                               TextWidgets(
-                                text: '${obj.bookingDetail.data!.distance} KM',
+                                text:
+                                    '${obj.bookingDetail.data!.consigneeName}',
                               ),
                               SizeBoxH(Responsive.height * 1),
                               TextWidgets(
                                 text:
-                                    '₹ ${obj.bookingDetail.data!.bookingAmount}',
+                                    '${obj.bookingDetail.data!.consigneeNumber}',
                               ),
                             ],
                           ),

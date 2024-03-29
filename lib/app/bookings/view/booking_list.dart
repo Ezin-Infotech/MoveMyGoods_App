@@ -274,7 +274,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                     Row(
                                       children: [
                                         Text(
-                                          'Booking Id # ',
+                                          "${'Booking Id'.tr} # ",
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyLarge!
@@ -546,7 +546,7 @@ class FilterWidget extends StatelessWidget {
               const SizeBoxV(8),
               Expanded(
                 child: Text(
-                  "$title Bookings",
+                  "$title ${"Bookings".tr}",
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
