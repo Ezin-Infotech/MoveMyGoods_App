@@ -144,7 +144,7 @@ class SettingsProvider with ChangeNotifier {
           return DeleteAlertDialog(
             // isDarkMode: value.isDarkMode,
             title: 'Logout'.tr,
-            content: 'Are you sure yow want to Logout?'.tr,
+            content: 'Are you sure you want to Logout?'.tr,
             buttonLabel: 'Logout'.tr,
             onTapYes: () {
               logoutUser(context: context);
