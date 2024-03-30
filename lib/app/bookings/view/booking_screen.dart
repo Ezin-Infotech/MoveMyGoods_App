@@ -707,6 +707,7 @@ class _BookingScreenState extends State<BookingScreen> {
                             children: [
                               Text(
                                 "*${'The price is an indicative and actual price may vary'.tr}",
+                                overflow: TextOverflow.ellipsis,
                                 style: Theme.of(context)
                                     .textTheme
                                     .displaySmall!

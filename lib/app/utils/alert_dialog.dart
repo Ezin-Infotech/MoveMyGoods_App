@@ -74,6 +74,7 @@ class DeleteAlertDialog extends StatelessWidget {
               ),
               child: Text(
                 buttonLabel ?? 'Remove'.tr,
+                overflow: TextOverflow.ellipsis,
                 style: context.textTheme.bodyMedium!.copyWith(
                   color: AppColors.kLight,
                   fontSize: 17,

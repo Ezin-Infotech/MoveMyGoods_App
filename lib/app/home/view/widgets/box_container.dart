@@ -67,6 +67,7 @@ class SmallBoxontainerWidget extends StatelessWidget {
               ),
               Text(
                 title.tr,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                     // color: Color(0xffFFFFFF),
                     fontSize: 16,

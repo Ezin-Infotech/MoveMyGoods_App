@@ -118,6 +118,14 @@ class LocaleString extends Translations {
           "This is your Completed Bookings count.":
               "This is your Completed Bookings count.",
           "Start Booking Now": "Start Booking Now",
+          "Home": "வீடு",
+          "Booking filter option, You can change filter option by selecting booking status.":
+              "முன்பதிவு வடிகட்டி விருப்பம், முன்பதிவு நிலையைத் தேர்ந்தெடுப்பதன் மூலம் வடிகட்டி விருப்பத்தை நீங்கள் மாற்றலாம்.",
+          "Current Booking Status.": "தற்போதைய முன்பதிவு நிலை.",
+          "Bookings": "முன்பதிவுகள்",
+          "Date": "தேதி",
+          "Time": "நேரம்",
+          "Status": "நிலை"
         },
         'hi_IN': {
           "Bookings": "बुकिंग के",
@@ -405,17 +413,22 @@ class LocaleString extends Translations {
           "THIS IS YOUR ALL BOOKING COUNT":
               "இது உங்களின் அனைத்து முன்பதிவு எண்ணிக்கை",
           "QUOTATION": "மேற்கோள்",
+          "Quotation": "மேற்கோள்",
           "THIS IS YOUR QUOTATION BOOKING COUNT":
               "இது உங்கள் முன்பதிவு எண்ணிக்கை",
           "PENDING": "நிலுவையில் உள்ளது",
+          "Pending": "நிலுவையில் உள்ளது",
           "THIS IS YOUR ALL PENDING COUNT":
               "இது உங்களின் அனைத்து நிலுவையிலுள்ள கணக்கு",
           "ACTIVE": "செயலில்",
+          "Active": "செயலில்",
           "THIS IS YOUR ACTIVE COUNT": "இது உங்கள் செயலில் உள்ள கணக்கு",
           "COMPLETED": "நிறைவு",
+          "Completed": "நிறைவு",
           "THIS IS YOUR COMPLETED COUNT":
               "இது உங்களின் பூர்த்தி செய்யப்பட்ட எண்ணிக்கை",
           "CANCELLED": "ரத்து செய்யப்பட்டது",
+          "Cancelled": "ரத்து செய்யப்பட்டது",
           "THIS IS YOUR CANCELLED COUNT":
               "இது உங்கள் ரத்துசெய்யப்பட்ட எண்ணிக்கை",
           "BOOKIN NOW": "இப்போது முன்பதிவு செய்யுங்கள்",
@@ -527,6 +540,16 @@ class LocaleString extends Translations {
           "This is your Completed Bookings count.":
               "இது உங்கள் பூர்த்தி செய்யப்பட்ட முன்பதிவுகளின் எண்ணிக்கை",
           "Start Booking Now": " இப்போதே முன்பதிவு செய்யத் தொடங்குங்கள்",
+          "Don’t have an account ?": "கணக்கு இல்லையா?",
+          "please enter valid  email": "சரியான மின்னஞ்சலை உள்ளிடவும்",
+          "GST No.": "ஜிஎஸ்டி எண்.",
+          "Order ID": "ஆர்டர் ஐடி",
+          "Back to Home": "முகப்புப் பக்கத்திற்குத் திரும்பு",
+          "Booking Id": "புக்கிங் ஐடி",
+          "View Price Details": "விலை விவரங்களைக் காண்க",
+          "Are you sure yow want to Logout?":
+              "நீங்கள் நிச்சயமாக வெளியேற விரும்புகிறீர்களா?",
+          "Validation of Mobile Number": "மொபைல் எண்ணின் சரிபார்ப்பு"
         },
         'te_IN': {
           "This is your Completed Bookings count.":

@@ -442,7 +442,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                                     child: Text(
                                                       item.status.toString().tr,
                                                       overflow:
-                                                          TextOverflow.clip,
+                                                          TextOverflow.ellipsis,
                                                       style: context
                                                           .textTheme.bodyLarge!
                                                           .copyWith(
