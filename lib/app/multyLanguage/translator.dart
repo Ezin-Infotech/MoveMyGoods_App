@@ -272,6 +272,7 @@ class LocaleString extends Translations {
           "Start Booking Now": " अभी बुकिंग शुरू करें",
           "Sign Up": "साइन अप करें",
           "Are you sure you want to Logout?": "क्या आप लॉग आउट करना चाहते हैं?",
+          "Current Booking Status": "वर्तमान बुकिंग स्थिति",
         },
         'kn_IN': {
           "All": "ಎಲ್ಲಾ",
@@ -331,7 +332,7 @@ class LocaleString extends Translations {
           "Shipper Details": "ಸಾಗಣೆದಾರರ ವಿವರಗಳು",
           "*Shipper Details": "ಸಾಗಣೆದಾರರ ವಿವರಗಳು",
           "Book Now": "ಸಾಗಣೆದಾರರ ವಿವರಗಳು",
-          "Booking filter option, you can change filter option by selecting booking status":
+          "Booking filter option, You can change filter option by selecting booking status.":
               "ಬುಕಿಂಗ್ ಫಿಲ್ಟರ್ ಆಯ್ಕೆ, ಬುಕಿಂಗ್ ಸ್ಥಿತಿಯನ್ನು ಆಯ್ಕೆ ಮಾಡುವ ಮೂಲಕ ನೀವು ಫಿಲ್ಟರ್ ಆಯ್ಕೆಯನ್ನು ಬದಲಾಯಿಸಬಹುದು",
           "Current booking status": "ಪ್ರಸ್ತುತ ಬುಕಿಂಗ್ ಸ್ಥಿತಿ ",
           "All Booking": "ಎಲ್ಲಾ ಬುಕಿಂಗ್",
@@ -431,6 +432,7 @@ class LocaleString extends Translations {
           "Quotation": "ಉದ್ಧರಣ",
           "Are you sure you want to Logout?":
               "ನೀವು ಲಾಗ್‌ಔಟ್ ಮಾಡಲು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
+          "Current Booking Status": "ಪ್ರಸ್ತುತ ಬುಕಿಂಗ್ ಸ್ಥಿತಿ",
         },
         'ta_IN': {
           "Bookings": "முன்பதிவுகள்",
