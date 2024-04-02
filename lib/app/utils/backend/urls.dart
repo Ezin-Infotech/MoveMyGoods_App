@@ -49,7 +49,8 @@ class Urls {
   final bookingFarePriceUrl =
       "http://103.160.153.57:8087/mmg/api/v2/booking/fare";
   final confirmBookingUrl = "http://103.160.153.57:8087/mmg/api/v2/booking";
-
+  final cancelBookingUrl =
+      "http://103.160.153.57:8087/mmg/api/v2/booking/status";
   final userProfileImage = "http://103.160.153.57:8083/mmg/api/v2/image";
   final userProfileDetails = 'http://103.160.153.57:8083/mmg/api/v2/profile';
   final createProfile = 'http://103.160.153.57:8083/mmg/api/v2/profile';

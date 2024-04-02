@@ -118,16 +118,25 @@ class LocaleString extends Translations {
           "This is your Completed Bookings count.":
               "This is your Completed Bookings count.",
           "Start Booking Now": "Start Booking Now",
-          "Home": "வீடு",
+          "Home": "Home",
           "Booking filter option, You can change filter option by selecting booking status.":
-              "முன்பதிவு வடிகட்டி விருப்பம், முன்பதிவு நிலையைத் தேர்ந்தெடுப்பதன் மூலம் வடிகட்டி விருப்பத்தை நீங்கள் மாற்றலாம்.",
-          "Current Booking Status.": "தற்போதைய முன்பதிவு நிலை.",
-          "Bookings": "முன்பதிவுகள்",
-          "Date": "தேதி",
-          "Time": "நேரம்",
-          "Status": "நிலை"
+              "Booking filter option, You can change filter option by selecting booking status.",
+          "Current Booking Status.": "Current Booking Status.",
+          "Bookings": "Bookings",
+          "Date": "Date",
+          "Time": "Time",
+          "Status": "Status",
+          "CANCEL": "CANCEL",
+          "Are you sure, you want to Cancel?":
+              "Are you sure, you want to Cancel?",
+          "Yes": "Yes",
+          "No": "No",
         },
         'hi_IN': {
+          "CANCEL": "रद्द करना",
+          "Are you sure, you want to Cancel?": "आप आप रद्द करना चाहते हैं?",
+          "Yes": "हाँ",
+          "No": "नहीं",
           "Bookings": "बुकिंग के",
           "Home": "डैशबोर्ड",
           "All Bookings": "सभी बुकिंग",
@@ -283,6 +292,11 @@ class LocaleString extends Translations {
           "Current Booking Status": "वर्तमान बुकिंग स्थिति",
         },
         'kn_IN': {
+          "CANCEL": "ರದ್ದುಮಾಡಿ",
+          "Are you sure, you want to Cancel?":
+              "ನೀವು ಖಚಿತವಾಗಿ, ರದ್ದುಗೊಳಿಸಲು ಬಯಸುವಿರಾ?",
+          "Yes": "ಹೌದು",
+          "No": "ಇಲ್ಲ",
           "All": "ಎಲ್ಲಾ",
           "Bookings": "ಬುಕಿಂಗ್",
           "Home": "डैशबोर्ड",
@@ -443,6 +457,11 @@ class LocaleString extends Translations {
           "Current Booking Status": "ಪ್ರಸ್ತುತ ಬುಕಿಂಗ್ ಸ್ಥಿತಿ",
         },
         'ta_IN': {
+          "CANCEL": "ரத்து செய்",
+          "Are you sure, you want to Cancel?":
+              "நிச்சயமாக, ரத்துசெய்ய விரும்புகிறீர்களா?",
+          "Yes": "ஆம்",
+          "No": "இல்லை",
           "Bookings": "முன்பதிவுகள்",
           "All": "அனைத்து",
           "All Bookings": "அனைத்து முன்பதிவுகள்",
@@ -588,6 +607,11 @@ class LocaleString extends Translations {
           "Validation of Mobile Number": "மொபைல் எண்ணின் சரிபார்ப்பு"
         },
         'te_IN': {
+          "CANCEL": "రద్దు చేయండి",
+          "Are you sure, you want to Cancel?":
+              "మీరు కచ్చితంగా రద్దు చెయ్యాలనుకుంటున్నారా?",
+          "Yes": "అవును",
+          "No": "నం",
           "This is your Completed Bookings count.":
               "ఇది మీ పూర్తయిన బుకింగ్స్ కౌంట్",
           "Cancel": "రద్దు చేయండి",

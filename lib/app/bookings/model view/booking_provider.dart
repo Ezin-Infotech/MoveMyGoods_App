@@ -18,11 +18,13 @@ import 'package:mmg/app/bookings/model/booking_weight_model.dart';
 import 'package:mmg/app/bookings/model/goods_type_model.dart';
 import 'package:mmg/app/bookings/model/vehicle_details_model.dart';
 import 'package:mmg/app/bookings/services/booking_services.dart';
+import 'package:mmg/app/home/view%20model/home_provider.dart';
 import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/common%20widgets/dialogs.dart';
 import 'package:mmg/app/utils/common%20widgets/loading_overlay.dart';
 import 'package:mmg/app/utils/enums.dart';
 import 'package:mmg/app/utils/routes/route_names.dart';
+import 'package:provider/provider.dart';
 
 class BookingProvider with ChangeNotifier {
   TextEditingController sourceController = TextEditingController();
@@ -240,6 +242,7 @@ class BookingProvider with ChangeNotifier {
   int billingId = 1;
 
   String goodsWeightId = '';
+  int goodsWeightIndex = -1;
   String goodsTypeId = '';
   changeGoodsTypeController({required String id, required String value}) {
     goodsTypeController.clear();
@@ -254,7 +257,8 @@ class BookingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  changeGoodsWeight({required String id}) {
+  changeGoodsWeight({required String id, required int index}) {
+    goodsWeightIndex = index;
     log("changeGoodsWeight: $id");
     goodsWeightId = id;
     getGoodsVehicleDetailsFn();
@@ -626,6 +630,39 @@ class BookingProvider with ChangeNotifier {
   clearBookingList() {
     bookingata = BookingData();
     notifyListeners();
+  }
+
+  cancelBookingFn({
+    required BuildContext context,
+    required String id,
+  }) async {
+    LoadingOverlayDark.of(context).show();
+    // notifyListeners();
+    try {
+      final confirmBookingResponse =
+          await services.cancelBookingService(bookingId: id);
+
+      LoadingOverlayDark.of(context).hide();
+
+      print(confirmBookingResponse);
+      successtoast(title: 'Your Booking is cancelled');
+
+      context.read<HomeProvider>().getBookingCountFn();
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
+      notifyListeners();
+      // ignore: deprecated_member_use
+    } on DioError catch (e) {
+      LoadingOverlayDark.of(context).hide();
+      notifyListeners();
+      errorBottomSheetDialogs(
+        isDismissible: false,
+        enableDrag: false,
+        context: context,
+        title: '${e.response!.data['message']}',
+        subtitle: '',
+      );
+    }
   }
 }
 

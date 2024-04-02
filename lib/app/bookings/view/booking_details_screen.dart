@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:get/route_manager.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
+import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
 import 'package:mmg/app/utils/enums.dart';
 import 'package:mmg/app/utils/extensions.dart';
@@ -25,6 +27,54 @@ class CompletedBookingScreen extends StatelessWidget {
       } else {
         return CommonScaffold(
             isBackButton: true,
+            floatingActionButton: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: obj.bookingDetail.data!.status.toString().toUpperCase() ==
+                      'PENDING'
+                  ? ButtonWidgets(
+                      bgColor: Colors.red[900],
+                      buttonText: 'CANCEL'.tr,
+                      width: context.width,
+                      onPressed: () {
+                        Get.defaultDialog(
+                          title: "CANCEL".tr,
+                          titleStyle: const TextStyle(fontSize: 20),
+                          content: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 18.0),
+                            child: Text("Are you sure, you want to Cancel?".tr),
+                          ),
+                          confirm: ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              context.read<BookingProvider>().cancelBookingFn(
+                                  context: context,
+                                  id: obj.bookingDetail.data!.id.toString());
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.redAccent,
+                                side: BorderSide.none),
+                            child: Text(
+                              "Yes".tr,
+                              style: context.textTheme.bodyMedium?.copyWith(
+                                  color: AppColors.kLight,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          cancel: OutlinedButton(
+                              onPressed: () => Get.back(),
+                              child: Text(
+                                "No".tr,
+                                style: context.textTheme.bodyMedium?.copyWith(
+                                    color: Colors.green[900],
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400),
+                              )),
+                        );
+                      },
+                    )
+                  : null,
+            ),
             children: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -457,7 +507,8 @@ class CompletedBookingScreen extends StatelessWidget {
                           ],
                         ),
                       )
-                    : const SizedBox.shrink()
+                    : const SizedBox.shrink(),
+                SizeBoxH(Responsive.height * 10),
               ],
             ));
       }

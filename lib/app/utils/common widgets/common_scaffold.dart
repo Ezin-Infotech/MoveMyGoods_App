@@ -11,6 +11,7 @@ import '../app style/colors.dart';
 
 class CommonScaffold extends StatefulWidget {
   final Widget children;
+  final Widget? floatingActionButton;
   final bool isBackButton;
   final double? padding;
   final bool? isSettings;
@@ -19,6 +20,7 @@ class CommonScaffold extends StatefulWidget {
       required this.children,
       required this.isBackButton,
       this.isSettings = false,
+      this.floatingActionButton,
       this.padding = 16.0});
 
   @override
@@ -31,6 +33,8 @@ class _CommonScaffoldState extends State<CommonScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: widget.floatingActionButton,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.primary,

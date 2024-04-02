@@ -141,4 +141,17 @@ class BookingServices extends Urls {
         ));
     return response.data;
   }
+
+  Future cancelBookingService({required String bookingId}) async {
+    final response = await dio.put(
+        "$cancelBookingUrl/CANCELLED/booking/$bookingId/profile/${AppPref.userProfileId}/role/9",
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${AppPref.userToken}',
+            'x-api-key': 'MMGATPL'
+          },
+        ));
+    return response.data;
+  }
 }

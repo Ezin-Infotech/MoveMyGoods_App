@@ -580,15 +580,12 @@ class _BookingScreenState extends State<BookingScreen> {
                                         return Row(
                                           children: [
                                             MyToggleIconButton(
-                                              isToggled: booking
-                                                      .goodsWeightData
-                                                      .fareWeightList![index]
-                                                      .weightId
-                                                      .toString() ==
-                                                  booking.goodsWeightId,
+                                              isToggled: index ==
+                                                  booking.goodsWeightIndex,
                                               onPressed: () => context
                                                   .read<BookingProvider>()
                                                   .changeGoodsWeight(
+                                                      index: index,
                                                       id: booking
                                                           .goodsWeightData
                                                           .fareWeightList![
