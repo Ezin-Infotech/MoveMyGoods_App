@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:get/route_manager.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
@@ -11,6 +12,7 @@ import 'package:provider/provider.dart';
 
 import '../../utils/app style/responsive.dart';
 import '../../utils/common widgets/dialogs.dart';
+import '../../utils/routes/route_names.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -113,9 +115,12 @@ class SignUpScreen extends StatelessWidget {
                                   );
                                 }
                               } else {
-                                context
-                                    .read<AuthProvider>()
-                                    .getSignUpOTPFn(context: context);
+                                Get.offNamed(AppRoutes.otpScreen, arguments: {
+                                  'isFromForgotPassword': false,
+                                });
+                                // context
+                                //     .read<AuthProvider>()
+                                //     .getSignUpOTPFn(context: context);
                               }
                             } else {
                               errorBottomSheetDialogs(

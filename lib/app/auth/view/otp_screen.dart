@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:get/route_manager.dart';
 import 'package:mmg/app/auth/view%20model/auth_provider.dart';
 import 'package:mmg/app/utils/app%20style/app_images.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
@@ -8,6 +9,8 @@ import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/extensions.dart';
 import 'package:mmg/app/utils/helpers.dart';
 import 'package:provider/provider.dart';
+
+import '../../utils/routes/route_names.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -87,6 +90,7 @@ class OtpScreenState extends State<OtpScreen> {
                           width: double.infinity,
                           height: 50,
                           onPressed: () {
+                            Get.toNamed(AppRoutes.signUpProfileScreen);
                             context.read<AuthProvider>().verifySignUpOTPFn(
                                 context: context,
                                 isFromForgot:

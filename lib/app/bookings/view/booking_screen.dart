@@ -252,12 +252,12 @@ class _BookingScreenState extends State<BookingScreen> {
                               ),
                             ));
                           },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please select Destination';
-                            }
-                            return null;
-                          },
+                          // validator: (value) {
+                          //   if (value == null || value.isEmpty) {
+                          //     return 'Please select Destination';
+                          //   }
+                          //   return null;
+                          // },
                           dropdownHeight: 200,
                           controller: dropdownEditingController,
                           options:
@@ -373,12 +373,12 @@ class _BookingScreenState extends State<BookingScreen> {
                               ),
                             ));
                           },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please select Destination';
-                            }
-                            return null;
-                          },
+                          // validator: (value) {
+                          //   if (value == null || value.isEmpty) {
+                          //     return 'Please select Destination';
+                          //   }
+                          //   return null;
+                          // },
                           dropdownHeight: 200,
                           controller: dropdownEditingController,
                           options: booking.destinationSearchResults
@@ -861,6 +861,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                   controller:
                                       bookingProvider!.receiverGstNoController,
                                   labeText: 'GST No.'.tr,
+                                  requiredText: 'Enter GST Number',
                                 ),
                                 SizeBoxH(Responsive.height * 2),
                                 Text(
@@ -909,6 +910,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                   controller:
                                       bookingProvider!.shipperGstNoController,
                                   labeText: 'GST No.'.tr,
+                                  requiredText: 'Enter GST Number',
                                 ),
                                 SizeBoxH(Responsive.height * 2),
                                 Row(
@@ -917,11 +919,13 @@ class _BookingScreenState extends State<BookingScreen> {
                                     ButtonWidgets(
                                       buttonText: 'Book Now'.tr,
                                       onPressed: () {
-                                        // if (_formKey.currentState!.validate()) {
-                                        context
-                                            .read<BookingProvider>()
-                                            .confirmBookingFn(context: context);
-                                        // }
+                                        print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+                                        if (_formKey.currentState!.validate()) {
+                                          context
+                                              .read<BookingProvider>()
+                                              .confirmBookingFn(
+                                                  context: context);
+                                        }
                                         // Get.toNamed(AppRoutes
                                         //     .bookingSuccessFullyCompletedScreen);
                                         // context.push(const LoginScreen());

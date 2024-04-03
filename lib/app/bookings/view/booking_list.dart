@@ -74,7 +74,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
                         tooltipBackgroundColor: AppColors.primary,
                         textColor: AppColors.kLight,
                         tooltipPadding: const EdgeInsets.all(16),
-                        description: 'Current Booking Status',
+                        description: 'Current Booking Status'.tr,
                         key: homeProvider.globalKey9,
                         child: Row(
                           children: [
