@@ -1,14 +1,19 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart' as http;
 // import 'package:location/location.dart';
 // import 'package:location/location.dart';
 import 'package:mmg/app/bookings/model/booking_details_model.dart';
@@ -18,12 +23,15 @@ import 'package:mmg/app/bookings/model/booking_weight_model.dart';
 import 'package:mmg/app/bookings/model/goods_type_model.dart';
 import 'package:mmg/app/bookings/model/vehicle_details_model.dart';
 import 'package:mmg/app/bookings/services/booking_services.dart';
+import 'package:mmg/app/bookings/services/pdf_download.dart';
 import 'package:mmg/app/home/view%20model/home_provider.dart';
 import 'package:mmg/app/utils/apppref.dart';
 import 'package:mmg/app/utils/common%20widgets/dialogs.dart';
 import 'package:mmg/app/utils/common%20widgets/loading_overlay.dart';
 import 'package:mmg/app/utils/enums.dart';
 import 'package:mmg/app/utils/routes/route_names.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 class BookingProvider with ChangeNotifier {
@@ -105,6 +113,7 @@ class BookingProvider with ChangeNotifier {
       GetBookingDetialsStatus.initial;
   BookingDetailsModel bookingDetail = BookingDetailsModel();
   getBookingDetailsByIdFn({required String id}) async {
+    print(id);
     getBookingDetailStatus = GetBookingDetialsStatus.loading;
     // notifyListeners();
     try {
@@ -604,6 +613,7 @@ class BookingProvider with ChangeNotifier {
         "bookedSource": "Web",
         "bookedBy": "CUSTOMER"
       });
+      log(confirmBookingResponse["data"]["id"].toString());
       LoadingOverlayDark.of(context).hide();
       getBookingDetailsByIdFn(
           id: confirmBookingResponse["data"]["id"].toString());
@@ -663,6 +673,61 @@ class BookingProvider with ChangeNotifier {
         subtitle: '',
       );
     }
+  }
+
+  Uint8List? bytes;
+
+  downloadBookingInvoiceFn({
+    required BuildContext context,
+    required String id,
+  }) async {
+    // LoadingOverlayDark.of(context).show();
+    // notifyListeners();
+    try {
+      log('711950406874');
+      final response = await HttpServerClient.get();
+      log('$response ----------------------------');
+      List<int> bytess = utf8.encode(response);
+
+      bytes = bytes;
+
+      log(bytes.toString());
+      notifyListeners();
+      // ignore: deprecated_member_use
+    } on DioError catch (e) {
+      log(e.toString());
+      LoadingOverlayDark.of(context).hide();
+      notifyListeners();
+      errorBottomSheetDialogs(
+        isDismissible: false,
+        enableDrag: false,
+        context: context,
+        title: '${e.response!.data['message']}',
+        subtitle: '',
+      );
+    }
+  }
+
+  String _pdfPath = '';
+  Future<void> fetchPdfData({required String id}) async {
+    log("PDF VIEWER message");
+    final response = await http.get(
+        Uri.parse(
+            'http://103.160.153.57:8087/mmg/api/v2/downloadInvoice/booking/$id'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${AppPref.userToken}',
+          'x-api-key': 'MMGATPL'
+        });
+
+    log("PDF VIEWER ${response.bodyBytes}");
+    final output = await getTemporaryDirectory();
+    final file = File("${output.path}/invoice.pdf");
+    await file.writeAsBytes(response.bodyBytes);
+    _pdfPath = file.path;
+    await OpenFile.open(_pdfPath);
+
+    log("PDF VIEWER $_pdfPath");
   }
 }
 

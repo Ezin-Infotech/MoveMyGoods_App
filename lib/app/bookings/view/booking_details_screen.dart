@@ -4,6 +4,7 @@ import 'package:get/route_manager.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
+import 'package:mmg/app/utils/backend/urls.dart';
 import 'package:mmg/app/utils/common%20widgets/button.dart';
 import 'package:mmg/app/utils/common%20widgets/common_scaffold.dart';
 import 'package:mmg/app/utils/enums.dart';
@@ -199,8 +200,9 @@ class CompletedBookingScreen extends StatelessWidget {
                               ),
                               TextWidgets(
                                 text: dateFunction(
-                                    createdAt:
-                                        obj.bookingDetail.data!.creationDate!),
+                                    createdAt: obj
+                                        .bookingDetail.data!.creationDate!
+                                        .toInt()),
                               )
                             ],
                           ),
@@ -211,12 +213,30 @@ class CompletedBookingScreen extends StatelessWidget {
                               ),
                               TextWidgets(
                                 text: timeFunction(
-                                    createdAt:
-                                        obj.bookingDetail.data!.creationDate!),
+                                    createdAt: obj
+                                        .bookingDetail.data!.creationDate!
+                                        .toInt()),
                               )
                             ],
                           ),
                         ],
+                      ),
+                      const SizeBoxH(10),
+                      TextField(
+                        textField: '${'Vehicle'.tr}: ',
+                      ),
+                      const SizeBoxH(8),
+                      Center(
+                        child: Container(
+                          height: 150,
+                          width: 150,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                    '${Urls.imageBaseUrl}${obj.bookingDetail.data!.vehicleImage!['path']}',
+                                  ),
+                                  fit: BoxFit.contain)),
+                        ),
                       ),
                       const SizeBoxH(10),
                       TextField(
@@ -290,90 +310,40 @@ class CompletedBookingScreen extends StatelessWidget {
                   ),
                 ),
                 SizeBoxH(Responsive.height * 2),
-                Container(
-                  width: Responsive.width * 100,
-                  decoration: BoxDecoration(
-                      color: AppColors.kLight,
-                      borderRadius: BorderRadius.circular(18),
-                      border: Border.all(
-                        width: 1,
-                        color: const Color(0xffE9E9E9),
-                      ),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Color(
-                              0x40000000), // Color with opacity (hex value: 0x40)
-                          offset: Offset(0,
-                              1), // Offset from the top-left corner (0px horizontal, 1px vertical)
-                          blurRadius: 14.5, // Blur radius (14.5px)
-                          spreadRadius: -3, // Spread radius (-3px)
-                        )
-                      ]),
-                  padding: const EdgeInsets.all(15),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Shipper Details'.tr,
-                        style: context.textTheme.bodyLarge?.copyWith(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black),
-                      ),
-                      const Divider(
-                        color: Color(0xffDDDDDD),
-                        height: Checkbox.width,
-                        thickness: 1,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TextField(
-                                textField: 'Name'.tr,
-                              ),
-                              SizeBoxH(Responsive.height * 1),
-                              TextField(
-                                textField: 'Mobile No.'.tr,
-                              ),
-                            ],
-                          ),
-                          const VerticalDivider(
-                            width: 10,
-                            thickness: 1,
-                            indent: 20,
-                            endIndent: 0,
-                            color: Color.fromARGB(255, 83, 13, 13),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizeBoxH(Responsive.height * 1),
-                              TextWidgets(
-                                text:
-                                    '${obj.bookingDetail.data!.consigneeName}',
-                              ),
-                              SizeBoxH(Responsive.height * 1),
-                              TextWidgets(
-                                text:
-                                    '${obj.bookingDetail.data!.consigneeNumber}',
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      const Divider(
-                        color: Color(0xffDDDDDD),
-                        height: Checkbox.width,
-                        thickness: 1,
-                      ),
-                      SizeBoxH(Responsive.height * 1),
-                    ],
-                  ),
+                obj.showPriceDetails
+                    ? PriceDetailsWidget(
+                        distance: '${obj.bookingDetail.data!.distance}',
+                        netAmount: "${obj.bookingDetail.data!.bookingAmount}",
+                        baseFare: "${obj.bookingDetail.data!.baseFare}",
+                        pricePerKm: "${obj.bookingDetail.data!.perKm}",
+                        labourCost: "${obj.bookingDetail.data!.labourCharges}",
+                        cGst: "${obj.bookingDetail.data!.cgst}",
+                        gSt: "${obj.bookingDetail.data!.sgst}",
+                        totalAmount:
+                            obj.bookingDetail.data!.totalAmount.toString())
+                    : const SizedBox.shrink(),
+                SizeBoxH(Responsive.height * 2),
+                ShipperDetailsWidget(
+                  cardName: 'Shipper',
+                  mobileNumber: '${obj.bookingDetail.data!.consignorNumber}',
+                  userName: '${obj.bookingDetail.data!.consignorName}',
                 ),
                 SizeBoxH(Responsive.height * 2),
-                obj.showPriceDetails
+                ShipperDetailsWidget(
+                  cardName: 'Receiver',
+                  mobileNumber: '${obj.bookingDetail.data!.consigneeNumber}',
+                  userName: '${obj.bookingDetail.data!.consigneeName}',
+                ),
+                SizeBoxH(Responsive.height * 2),
+                obj.bookingDetail.data!.driver != null ||
+                        obj.bookingDetail.data!.status
+                                .toString()
+                                .toUpperCase() ==
+                            'COMPLETED' ||
+                        obj.bookingDetail.data!.status
+                                .toString()
+                                .toUpperCase() ==
+                            'ACTIVE'
                     ? Container(
                         width: Responsive.width * 100,
                         decoration: BoxDecoration(
@@ -397,7 +367,7 @@ class CompletedBookingScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              'Price Details'.tr,
+                              'Driver Details'.tr,
                               style: context.textTheme.bodyLarge?.copyWith(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
@@ -408,6 +378,16 @@ class CompletedBookingScreen extends StatelessWidget {
                               height: Checkbox.width,
                               thickness: 1,
                             ),
+                            Container(
+                              height: 150,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                        '${Urls.imageBaseUrl}${obj.bookingDetail.data!.driverImage!['path']}',
+                                      ),
+                                      fit: BoxFit.contain)),
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -415,30 +395,12 @@ class CompletedBookingScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     TextField(
-                                      textField: 'Distance'.tr,
+                                      textField: 'Name'.tr,
                                     ),
                                     SizeBoxH(Responsive.height * 1),
                                     TextField(
-                                      textField: "${'Net Amount'.tr}  ",
+                                      textField: 'Mobile No.'.tr,
                                     ),
-                                    SizeBoxH(Responsive.height * 1),
-                                    TextField(
-                                      textField: "${'Base Fare'.tr}  ",
-                                    ),
-                                    SizeBoxH(Responsive.height * 1),
-                                    TextField(
-                                      textField: "${'Price Per Km'.tr}  ",
-                                    ),
-                                    SizeBoxH(Responsive.height * 1),
-                                    TextField(
-                                      textField: "${'Labour Cost'.tr}  ",
-                                    ),
-                                    SizeBoxH(Responsive.height * 1),
-                                    TextField(
-                                      textField: "${'CGST'.tr}  ",
-                                    ),
-                                    SizeBoxH(Responsive.height * 1),
-                                    TextField(textField: "${'GST'.tr}  ")
                                   ],
                                 ),
                                 const VerticalDivider(
@@ -454,37 +416,13 @@ class CompletedBookingScreen extends StatelessWidget {
                                     SizeBoxH(Responsive.height * 1),
                                     TextWidgets(
                                       text:
-                                          '${obj.bookingDetail.data!.distance} KM',
+                                          '${obj.bookingDetail.data!.driver?['firstName']} ${obj.bookingDetail.data!.driver?['lastName']}',
                                     ),
                                     SizeBoxH(Responsive.height * 1),
                                     TextWidgets(
                                       text:
-                                          '₹ ${obj.bookingDetail.data!.bookingAmount}',
+                                          "${obj.bookingDetail.data!.driver?['mobileNumber']}",
                                     ),
-                                    SizeBoxH(Responsive.height * 1),
-                                    TextWidgets(
-                                      text:
-                                          '₹ ${obj.bookingDetail.data!.baseFare}',
-                                    ),
-                                    SizeBoxH(Responsive.height * 1),
-                                    TextWidgets(
-                                      text:
-                                          '₹ ${obj.bookingDetail.data!.perKm}',
-                                    ),
-                                    SizeBoxH(Responsive.height * 1),
-                                    TextWidgets(
-                                      text:
-                                          '₹ ${obj.bookingDetail.data!.labourCharges}',
-                                    ),
-                                    SizeBoxH(Responsive.height * 1),
-                                    TextWidgets(
-                                      text: '₹ ${obj.bookingDetail.data!.cgst}',
-                                    ),
-                                    SizeBoxH(Responsive.height * 1),
-                                    TextWidgets(
-                                      text: '₹ ${obj.bookingDetail.data!.sgst}',
-                                    ),
-                                    SizeBoxH(Responsive.height * 1),
                                   ],
                                 ),
                               ],
@@ -495,16 +433,47 @@ class CompletedBookingScreen extends StatelessWidget {
                               thickness: 1,
                             ),
                             SizeBoxH(Responsive.height * 1),
-                            Text(
-                              '${"Total Amount".tr} ₹${obj.bookingDetail.data!.totalAmount.toString()}/-',
-                              textAlign: TextAlign.center,
-                              style: context.textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 16,
-                                color: const Color(0xff0D9F00),
-                              ),
-                            ),
                           ],
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+                SizeBoxH(Responsive.height * 2),
+                obj.bookingDetail.data!.status.toString().toUpperCase() ==
+                        'COMPLETED'
+                    ? InkWell(
+                        onTap: () {
+                          context.read<BookingProvider>().fetchPdfData(
+                              id: obj.bookingDetail.data?.id.toString() ?? '');
+                        },
+                        child: Container(
+                          width: Responsive.width * 100,
+                          decoration: BoxDecoration(
+                              color: AppColors.kLight,
+                              borderRadius: BorderRadius.circular(18),
+                              border: Border.all(
+                                width: 1,
+                                color: const Color(0xffE9E9E9),
+                              ),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color(
+                                      0x40000000), // Color with opacity (hex value: 0x40)
+                                  offset: Offset(0,
+                                      1), // Offset from the top-left corner (0px horizontal, 1px vertical)
+                                  blurRadius: 14.5, // Blur radius (14.5px)
+                                  spreadRadius: -3, // Spread radius (-3px)
+                                )
+                              ]),
+                          padding: const EdgeInsets.all(15),
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              TextWidgets(
+                                text: "Download Invoice",
+                              ),
+                              Icon(Icons.download_rounded)
+                            ],
+                          ),
                         ),
                       )
                     : const SizedBox.shrink(),
@@ -513,6 +482,99 @@ class CompletedBookingScreen extends StatelessWidget {
             ));
       }
     });
+  }
+}
+
+class ShipperDetailsWidget extends StatelessWidget {
+  final String cardName;
+  final String userName;
+  final String mobileNumber;
+  const ShipperDetailsWidget({
+    super.key,
+    required this.cardName,
+    required this.mobileNumber,
+    required this.userName,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: Responsive.width * 100,
+      decoration: BoxDecoration(
+          color: AppColors.kLight,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(
+            width: 1,
+            color: const Color(0xffE9E9E9),
+          ),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x40000000), // Color with opacity (hex value: 0x40)
+              offset: Offset(0,
+                  1), // Offset from the top-left corner (0px horizontal, 1px vertical)
+              blurRadius: 14.5, // Blur radius (14.5px)
+              spreadRadius: -3, // Spread radius (-3px)
+            )
+          ]),
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        children: [
+          Text(
+            '$cardName Details'.tr,
+            style: context.textTheme.bodyLarge?.copyWith(
+                fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
+          ),
+          const Divider(
+            color: Color(0xffDDDDDD),
+            height: Checkbox.width,
+            thickness: 1,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextField(
+                    textField: 'Name'.tr,
+                  ),
+                  SizeBoxH(Responsive.height * 1),
+                  TextField(
+                    textField: 'Mobile No.'.tr,
+                  ),
+                ],
+              ),
+              const VerticalDivider(
+                width: 10,
+                thickness: 1,
+                indent: 20,
+                endIndent: 0,
+                color: Color.fromARGB(255, 83, 13, 13),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizeBoxH(Responsive.height * 1),
+                  TextWidgets(
+                    text: userName,
+                  ),
+                  SizeBoxH(Responsive.height * 1),
+                  TextWidgets(
+                    text: mobileNumber,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const Divider(
+            color: Color(0xffDDDDDD),
+            height: Checkbox.width,
+            thickness: 1,
+          ),
+          SizeBoxH(Responsive.height * 1),
+        ],
+      ),
+    );
   }
 }
 
@@ -574,4 +636,159 @@ timeFunction({required int createdAt}) {
   }
   String convertedTime = "$formattedHour:$formattedMinute $period";
   return convertedTime;
+}
+
+class PriceDetailsWidget extends StatelessWidget {
+  final String distance;
+  final String netAmount;
+  final String baseFare;
+  final String pricePerKm;
+  final String labourCost;
+  final String cGst;
+  final String gSt;
+  final String totalAmount;
+  const PriceDetailsWidget({
+    super.key,
+    required this.distance,
+    required this.netAmount,
+    required this.baseFare,
+    required this.pricePerKm,
+    required this.labourCost,
+    required this.cGst,
+    required this.gSt,
+    required this.totalAmount,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: Responsive.width * 100,
+      decoration: BoxDecoration(
+          color: AppColors.kLight,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(
+            width: 1,
+            color: const Color(0xffE9E9E9),
+          ),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x40000000), // Color with opacity (hex value: 0x40)
+              offset: Offset(0,
+                  1), // Offset from the top-left corner (0px horizontal, 1px vertical)
+              blurRadius: 14.5, // Blur radius (14.5px)
+              spreadRadius: -3, // Spread radius (-3px)
+            )
+          ]),
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        children: [
+          Text(
+            'Price Details'.tr,
+            style: context.textTheme.bodyLarge?.copyWith(
+                fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
+          ),
+          const Divider(
+            color: Color(0xffDDDDDD),
+            height: Checkbox.width,
+            thickness: 1,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextField(
+                    textField: 'Distance'.tr,
+                  ),
+                  SizeBoxH(Responsive.height * 1),
+                  TextField(
+                    textField: "${'Net Amount'.tr}  ",
+                  ),
+                  SizeBoxH(Responsive.height * 1),
+                  TextField(
+                    textField: "${'Base Fare'.tr}  ",
+                  ),
+                  SizeBoxH(Responsive.height * 1),
+                  TextField(
+                    textField: "${'Price Per Km'.tr}  ",
+                  ),
+                  SizeBoxH(Responsive.height * 1),
+                  TextField(
+                    textField: "${'CGST'.tr}  ",
+                  ),
+                  SizeBoxH(Responsive.height * 1),
+                  TextField(textField: "${'GST'.tr}  ")
+                ],
+              ),
+              const VerticalDivider(
+                width: 10,
+                thickness: 1,
+                indent: 20,
+                endIndent: 0,
+                color: Color.fromARGB(255, 83, 13, 13),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizeBoxH(Responsive.height * 1),
+                  TextWidgets(
+                    text:
+                        '${double.parse(distance.toString()).formatTwoDigitsAfterDecimal()} KM',
+                  ),
+                  SizeBoxH(Responsive.height * 1),
+                  TextWidgets(
+                    text:
+                        '₹ ${double.parse(netAmount.toString()).formatTwoDigitsAfterDecimal()}',
+                  ),
+                  SizeBoxH(Responsive.height * 1),
+                  TextWidgets(
+                    text:
+                        '₹ ${double.parse(baseFare.toString()).formatTwoDigitsAfterDecimal()}',
+                  ),
+                  SizeBoxH(Responsive.height * 1),
+                  TextWidgets(
+                    text:
+                        '₹ ${double.parse(pricePerKm.toString()).formatTwoDigitsAfterDecimal()}',
+                  ),
+                  SizeBoxH(Responsive.height * 1),
+                  TextWidgets(
+                    text:
+                        '₹ ${double.parse(cGst.toString()).formatTwoDigitsAfterDecimal()}',
+                  ),
+                  SizeBoxH(Responsive.height * 1),
+                  TextWidgets(
+                    text:
+                        '₹ ${double.parse(gSt.toString()).formatTwoDigitsAfterDecimal()}',
+                  ),
+                  SizeBoxH(Responsive.height * 1),
+                ],
+              ),
+            ],
+          ),
+          const Divider(
+            color: Color(0xffDDDDDD),
+            height: Checkbox.width,
+            thickness: 1,
+          ),
+          SizeBoxH(Responsive.height * 1),
+          Text(
+            '${"Total Amount".tr} ₹ ${double.parse(totalAmount.toString()).formatTwoDigitsAfterDecimal()}/-',
+            textAlign: TextAlign.center,
+            style: context.textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.w700,
+              fontSize: 16,
+              color: const Color(0xff0D9F00),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+extension DoubleExtension on double {
+  String formatTwoDigitsAfterDecimal() {
+    return toStringAsFixed(2);
+  }
 }

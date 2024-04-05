@@ -84,7 +84,7 @@ class LocaleString extends Translations {
           "Enter Your name": "Enter Your name",
           "GST No": "GST No",
           "Your Booking has been": "Your Booking has been",
-          "Successfully Completed": "Successfully Completed",
+          "Successfully Placed": "Successfully Placed",
           "Order Summary": "Order Summary",
           "Please enter address": "Please enter address",
           "You have not account please Sign up":
@@ -228,8 +228,8 @@ class LocaleString extends Translations {
           "Terms & Conditions": "नियम एवं शर्तें ",
           "Privacy Policy": "गोपनीयता नीति ",
           "Contact Us": "संपर्क करें ",
-          "Your order has been Successfully Completed":
-              "आपका आदेश हो गया है सफलतापूर्वक पूर्ण हुआ ",
+          "Your order has been Successfully Placed":
+              "आपका ऑर्डर सफलतापूर्वक प्लेस हो गया है",
           "Order Summary": "आदेश सारांश",
           "Order ID": "आदेश कामतत्व ",
           "Number of Labours": " मजदूरों की संख्या ",
@@ -259,12 +259,12 @@ class LocaleString extends Translations {
           "Billing Details": "बिलिंग विवरण ",
           "PAID": "चुकाया गया ",
           "FOD": "एफओडी ",
-          "Your Booing has been Successfully Completed":
-              "आपकी बूइंग सफलतापूर्वक पूरी हो गई है",
+          "Your Booing has been Successfully Placed":
+              "आपकी हूटिंग सफलतापूर्वक लगा दी गई है",
           "Enter Your name": "अपना नाम दर्ज करें",
           "GST No": "जीएसटी नंबर",
           "Your Booking has been": "आपकी बुकिंग हो गई है",
-          "Successfully Completed": "सफलतापूर्वक पूर्ण हुआ",
+          "Successfully Placed": "सफलतापूर्वक स्थापित किया गया",
           "Please enter address": "कृपया पता दर्ज करें",
           "You have not account please Sign up":
               "आपके पास खाता नहीं है कृपया साइन अप करें",
@@ -412,7 +412,7 @@ class LocaleString extends Translations {
           "GST No": "ಜಿಎಸ್ಟಿ ಸಂಖ್ಯೆ",
           "GST No.": "ಜಿಎಸ್ಟಿ ಸಂಖ್ಯೆ.",
           "Your Booking has been": "ನಿಮ್ಮ ಬುಕಿಂಗ್ ಆಗಿದೆ",
-          "Successfully Completed": "ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿದೆ",
+          "Successfully Placed": "ಯಶಸ್ವಿಯಾಗಿ ಇರಿಸಲಾಗಿದೆ",
           "Order Summary": "ಆದೇಶ ಸಾರಾಂಶ",
           "Please enter address": "ದಯವಿಟ್ಟು ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ",
           "You have not account please Sign up":
@@ -580,7 +580,7 @@ class LocaleString extends Translations {
           "Enter Your name": "உங்கள் பெயரை உள்ளிடவும்",
           "GST No": "ஜிஎஸ்டி எண்",
           "Your Booking has been": "உங்கள் முன்பதிவு முடிந்தது",
-          "Successfully Completed": "வெற்றிகரமாக முடிக்கப்பட்டது",
+          "Successfully Placed": "வெற்றிகரமாக வைக்கப்பட்டது",
           "Order Summary": "ஆர்டர் சுருக்கம்",
           "Please enter address": "தயவுசெய்து முகவரியை உள்ளிடவும்",
           "You have not account please Sign up":
@@ -741,7 +741,7 @@ class LocaleString extends Translations {
           "Enter Your name": "మీ పేరు రాయుము, మీ పేరు రాయండి",
           "GST No": "GST నం",
           "Your Booking has been": "మీ బుకింగ్ జరిగింది",
-          "Successfully Completed": "జయప్రదంగా పూర్తయ్యింది",
+          "Successfully Placed": "విజయవంతంగా ఉంచబడింది",
           "Order Summary": "కొనుగోలు వివరణ",
           "Please enter address": "దయచేసి చిరునామాను నమోదు చేయండి",
           "You have not account please Sign up":

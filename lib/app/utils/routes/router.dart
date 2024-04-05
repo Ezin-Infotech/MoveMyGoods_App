@@ -9,6 +9,7 @@ import 'package:mmg/app/auth/view/sign_up.dart';
 import 'package:mmg/app/bookings/view/booking_details_screen.dart';
 import 'package:mmg/app/bookings/view/booking_screen.dart';
 import 'package:mmg/app/bookings/view/booking_success_completed.dart';
+import 'package:mmg/app/bookings/view/widgets/pdf_view_screen.dart';
 import 'package:mmg/app/home/view/home_inner_booking_screen.dart';
 import 'package:mmg/app/home/view/showcase/showcasewidget.dart';
 import 'package:mmg/app/splash/view/splash_screen.dart';
@@ -94,6 +95,11 @@ class RouteGenerator {
         return pagetransition(
           settings: settings,
           widget: const ForgotPasswordEnterScreen(),
+        );
+      case AppRoutes.pdfViewer:
+        return pagetransition(
+          settings: settings,
+          widget: PdfViewer(),
         );
     }
     return MaterialPageRoute(

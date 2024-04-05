@@ -8,6 +8,7 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
+import 'package:mmg/app/bookings/view/booking_details_screen.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
 import 'package:mmg/app/utils/backend/urls.dart';
@@ -161,6 +162,7 @@ class _BookingScreenState extends State<BookingScreen> {
       northeast: LatLng(northLat, eastLng),
     );
     mapController.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
+    setState(() {});
   }
 
   void onSelectLocation(LatLng location, bool isFromLocation) {
@@ -171,6 +173,7 @@ class _BookingScreenState extends State<BookingScreen> {
       destinationLocation = location;
       updatePolyline();
     }
+    setState(() {});
   }
 
   DropdownEditingController<String>? dropdownEditingController;
@@ -283,58 +286,13 @@ class _BookingScreenState extends State<BookingScreen> {
                                 .destinationSearchResults
                                 .map((e) => e.name)
                                 .toList();
+                            setState(() {});
                             return Future.value(results);
                           },
                         );
                       },
                     ),
-                    // Consumer<BookingProvider>(
-                    //   builder: (context, booking, _) {
-                    //     return AdvancedSearch(
-                    //       hintText: 'Search your location',
-                    //       borderRadius: 4,
-                    //       searchItems:
-                    // booking.searchResults.map((e) => e.name).toList(),
-                    //       maxElementsToDisplay: 7,
-                    //       searchResultsBgColor: AppColors.bgColor,
-                    //       onItemTap: (index, da) async {
-                    // PlaceSuggestion place = booking.searchResults
-                    //     .firstWhere((element) => element.name == da);
-                    // LatLng latLng = await booking.getPlaceDetails(
-                    //     place.placeId, context, true);
-                    // onSelectLocation(latLng, true);
-                    // markers.add(Marker(
-                    //   markerId: const MarkerId(""),
-                    //   position: latLng,
-                    //   infoWindow: const InfoWindow(title: 'Source'),
-                    //   icon: BitmapDescriptor.defaultMarkerWithHue(
-                    //     BitmapDescriptor.hueGreen,
-                    //   ),
-                    // ));
-                    // mapController
-                    //     ?.animateCamera(CameraUpdate.newCameraPosition(
-                    //   CameraPosition(
-                    //     target: latLng,
-                    //     zoom: 15.1746,
-                    //   ),
-                    // ));
-                    //       },
-                    //       onSearchClear: () {
-                    //         booking.searchResults.clear();
-                    //         bookingProvider?.searchLocation(
-                    //           query: '',
-                    //           dest: false,
-                    //         );
-                    //       },
-                    //       onEditingProgress: (value, value2) {
-                    //         booking.searchLocation(
-                    //           query: value,
-                    //           dest: false,
-                    //         );
-                    //       },
-                    //     );
-                    //   },
-                    // ),
+
                     const SizeBoxH(10),
                     CustomText(
                       text: '${"Destination".tr} *',
@@ -405,61 +363,14 @@ class _BookingScreenState extends State<BookingScreen> {
                                 .destinationSearchResults
                                 .map((e) => e.name)
                                 .toList();
+                            setState(() {});
                             return Future.value(results);
                           },
                         );
                       },
                     ),
-                    const SizeBoxH(8),
-                    // Consumer<BookingProvider>(
-                    //   builder: (context, booking, _) {
-                    //     return AdvancedSearch(
-                    //       hintText: 'Search your destination',
-                    //       borderRadius: 4,
-                    //       searchItems: booking.destinationSearchResults
-                    //           .map((e) => e.name)
-                    //           .toList(),
-                    //       maxElementsToDisplay: 7,
-                    //       onItemTap: (index, da) async {
-                    // PlaceSuggestion place = booking
-                    //     .destinationSearchResults
-                    //     .firstWhere((element) => element.name == da);
-                    // LatLng latLng = await booking.getPlaceDetails(
-                    //     place.placeId, context, false);
-                    // onSelectLocation(latLng, false);
-                    // markers.add(Marker(
-                    //   markerId: const MarkerId(""),
-                    //   position: latLng,
-                    //   infoWindow:
-                    //       const InfoWindow(title: 'Destination'),
-                    //   icon: BitmapDescriptor.defaultMarkerWithHue(
-                    //     BitmapDescriptor.hueRed,
-                    //   ),
-                    // ));
-                    // mapController
-                    //     ?.animateCamera(CameraUpdate.newCameraPosition(
-                    //   CameraPosition(
-                    //     target: latLng,
-                    //     zoom: 15.1746,
-                    //   ),
-                    // ));
-                    //       },
-                    //       onSearchClear: () {
-                    //         booking.destinationSearchResults.clear();
-                    //         bookingProvider?.searchLocation(
-                    //           query: '',
-                    //           dest: true,
-                    //         );
-                    //       },
-                    //       onEditingProgress: (value, value2) {
-                    //         booking.searchLocation(
-                    //           query: value,
-                    //           dest: true,
-                    //         );
-                    //       },
-                    //     );
-                    //   },
-                    // ),
+                    // const SizeBoxH(8),
+
                     const SizeBoxH(10),
                     CustomText(
                       text: '${"Goods Type".tr} *',
@@ -514,26 +425,12 @@ class _BookingScreenState extends State<BookingScreen> {
                       keyboardType: TextInputType.number,
                       requiredText: 'Please enter Goods Value',
                     ),
-                    // BookingTextFieldWidgets(
-                    //   hintText: 'Maximum 5 Labours',
-                    //   controller: bookingProvider!.numberOfLabourController,
-                    //   labeText: 'Number of Labours *',
-                    //   keyboardType: TextInputType.number,
-                    //   maxLength: 1,
-                    //   requiredText: 'Please enter Number of Labours',
-                    // ),
-                    // Text(
-                    //   'Number of labours should not exceed more than 5',
-                    //   style: context.textTheme.bodyMedium!
-                    //       .copyWith(color: Colors.red),
-                    // ),
+
                     const SizeBoxH(10),
                     CustomText(
                       text: '${"Goods Weight".tr} *',
                     ),
                     const SizeBoxH(8),
-                    // const DropdownInsideTextFormField(),
-                    // const SizeBoxH(8),
                     booking.showGoodsWeight
                         ? booking.getGoodsWeightStatus ==
                                 GetGoodsWeightStatus.loading
@@ -691,6 +588,11 @@ class _BookingScreenState extends State<BookingScreen> {
                                             .data!
                                             .sgst
                                             .toString(),
+                                        totalAmount: booking
+                                            .bookingFarePriceDetailsModel
+                                            .data!
+                                            .totalAmount
+                                            .toString(),
                                       )),
                             ],
                           )
@@ -702,17 +604,9 @@ class _BookingScreenState extends State<BookingScreen> {
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                "*${'The price is an indicative and actual price may vary'.tr}",
-                                overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displaySmall!
-                                    .copyWith(
-                                        fontFamily: 'Inter',
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
-                                        color: const Color(0xffF90000)),
+                              WarningText(
+                                warningText:
+                                    "*${'The price is an indicative and actual price may vary'.tr}",
                               ),
                             ],
                           )
@@ -861,7 +755,12 @@ class _BookingScreenState extends State<BookingScreen> {
                                   controller:
                                       bookingProvider!.receiverGstNoController,
                                   labeText: 'GST No.'.tr,
-                                  requiredText: 'Enter GST Number',
+                                  // requiredText: 'Enter GST Number',
+                                ),
+                                SizeBoxH(Responsive.height * 1),
+                                WarningText(
+                                  warningText:
+                                      "* ${'You need to pay GST charges to ATPL under FCM. If GST number is not provided.'.tr}",
                                 ),
                                 SizeBoxH(Responsive.height * 2),
                                 Text(
@@ -910,7 +809,12 @@ class _BookingScreenState extends State<BookingScreen> {
                                   controller:
                                       bookingProvider!.shipperGstNoController,
                                   labeText: 'GST No.'.tr,
-                                  requiredText: 'Enter GST Number',
+                                  // requiredText: 'Enter GST Number',
+                                ),
+                                SizeBoxH(Responsive.height * 1),
+                                WarningText(
+                                  warningText:
+                                      "* ${'You need to pay GST charges to ATPL under FCM. If GST number is not provided.'.tr}",
                                 ),
                                 SizeBoxH(Responsive.height * 2),
                                 Row(
@@ -948,7 +852,27 @@ class _BookingScreenState extends State<BookingScreen> {
     );
   }
 }
-// bookingFarePriceDetailsModel = goodsResponse;
+
+class WarningText extends StatelessWidget {
+  final String warningText;
+  const WarningText({
+    super.key,
+    required this.warningText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      warningText,
+      overflow: TextOverflow.clip,
+      style: Theme.of(context).textTheme.displaySmall!.copyWith(
+          fontFamily: 'Inter',
+          fontWeight: FontWeight.w400,
+          fontSize: 14,
+          color: const Color(0xffF90000)),
+    );
+  }
+}
 
 Future priceDialog(
     {required BuildContext context,
@@ -956,136 +880,28 @@ Future priceDialog(
     required String baseFare,
     required String costPerKm,
     required String labourCost,
+    required String totalAmount,
     required String cgst,
     required String sgst}) async {
   return await showDialog(
       context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-          contentPadding: const EdgeInsets.all(38),
-          insetPadding: const EdgeInsets.all(16),
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "${"Distance".tr}  :",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-                ),
-                Text(
-                  distance,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-                )
-              ],
-            ),
-            const SizeBoxH(10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "${"Base Fare".tr}  :",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-                ),
-                Text(
-                  baseFare,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-                )
-              ],
-            ),
-            const SizeBoxH(10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "${"Price Per Km".tr}  :",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-                ),
-                Text(
-                  costPerKm,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-                )
-              ],
-            ),
-            const SizeBoxH(10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "${"Labour Cost".tr}  :",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-                ),
-                Text(
-                  labourCost,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-                )
-              ],
-            ),
-            const SizeBoxH(10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "${"CGST".tr}  :",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-                ),
-                Text(
-                  cgst,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-                )
-              ],
-            ),
-            const SizeBoxH(10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "${"SGST".tr}  :",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-                ),
-                Text(
-                  sgst,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-                )
-              ],
-            ),
-          ],
+      builder: (context) {
+        return Dialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+          child: SizedBox(
+            height: 300.0,
+            width: 300.0,
+            child: PriceDetailsWidget(
+                distance: distance,
+                netAmount: baseFare,
+                baseFare: baseFare,
+                pricePerKm: costPerKm,
+                labourCost: labourCost,
+                cGst: cgst,
+                gSt: sgst,
+                totalAmount: totalAmount),
+          ),
         );
       });
 }

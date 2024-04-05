@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -23,7 +24,7 @@ class BookingServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    // print(response);
+    print(AppPref.userToken);
     return bookingModelFromJson(jsonEncode(response.data));
   }
 
@@ -38,7 +39,7 @@ class BookingServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
-    // print(response);
+    print(response.data);
     return bookingModelFromJson(jsonEncode(response.data));
   }
 
@@ -52,6 +53,7 @@ class BookingServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
+    print(response.data);
     return bookingDetailsModelFromJson(jsonEncode(response.data));
   }
 
@@ -139,6 +141,7 @@ class BookingServices extends Urls {
             'x-api-key': 'MMGATPL'
           },
         ));
+    print('Goods Weight Response  ${response.data}');
     return response.data;
   }
 
@@ -153,5 +156,20 @@ class BookingServices extends Urls {
           },
         ));
     return response.data;
+  }
+
+  Future downloadBookingInvoiceService({required String bookingId}) async {
+    log(bookingId);
+    final response = await dio.get(
+        "http://103.160.153.57:8087/mmg/api/v2/downloadInvoice/booking/711950406874",
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${AppPref.userToken}',
+            'x-api-key': 'MMGATPL'
+          },
+        ));
+    log(response.toString());
+    return response;
   }
 }

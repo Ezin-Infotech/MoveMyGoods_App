@@ -35,7 +35,8 @@ class Urls {
   /* BOOKING */
   final bookingCount = "$baseUrl/v1/dashboard/booking/profile";
   final bookingByStatus = "$baseUrl/v2";
-
+  final downloadBookingInvoice =
+      "http://103.160.153.57:8087/mmg/api/v2/downloadInvoice/booking/";
   final countryUrl = "http://103.160.153.57:8085/mmg/api/v1/country";
   final stateUrl = "http://103.160.153.57:8085/mmg/api/v1/State/country";
   final cityUrl = "http://103.160.153.57:8085/mmg/api/v1/city";

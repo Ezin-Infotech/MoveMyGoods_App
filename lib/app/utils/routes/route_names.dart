@@ -15,4 +15,5 @@ class AppRoutes {
       '/bookingSuccessFullyCompletedScreen';
   static const forgetPasswordPage = '/forgetPassword';
   static const forgetPasswordEnterPage = '/passwordEnterPage';
+  static const pdfViewer = '/pdfViewer';
 }
