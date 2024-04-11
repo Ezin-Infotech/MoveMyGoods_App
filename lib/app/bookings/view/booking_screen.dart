@@ -41,6 +41,10 @@ class _BookingScreenState extends State<BookingScreen> {
   LatLng? destinationLocation;
   bool hasFromLocationBeenSelected = false;
   String userCurrentLocation = 'Fetching...';
+  DropdownEditingController<String>? dropdownEditingController1;
+  DropdownEditingController<String>? dropdownEditingController2;
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -48,6 +52,11 @@ class _BookingScreenState extends State<BookingScreen> {
     bookingProvider = context.read<BookingProvider?>();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       getLatitudeAndLongitude();
+      dropdownEditingController1?.addListener(() {
+        setState(() {
+          debugPrint('data is  --------------------');
+        });
+      });
     });
   }
 
@@ -190,10 +199,6 @@ class _BookingScreenState extends State<BookingScreen> {
     setState(() {});
   }
 
-  DropdownEditingController<String>? dropdownEditingController;
-
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
@@ -253,6 +258,8 @@ class _BookingScreenState extends State<BookingScreen> {
                     const SizeBoxH(8),
                     Consumer<BookingProvider>(
                       builder: (context, booking, _) {
+                        // debugPrint(
+                        //     "data is ${booking.isHintTextHide == true ? userCurrentLocation = '' : userCurrentLocation = userCurrentLocation}");
                         return TextDropdownFormField(
                           onChanged: (dynamic value) async {
                             debugPrint("data is $value  on changed");
@@ -291,7 +298,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           //   return null;
                           // },
                           dropdownHeight: 200,
-                          controller: dropdownEditingController,
+                          controller: dropdownEditingController1,
                           options:
                               booking.searchResults.map((e) => e.name).toList(),
                           decoration: InputDecoration(
@@ -420,7 +427,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           //   return null;
                           // },
                           dropdownHeight: 200,
-                          controller: dropdownEditingController,
+                          controller: dropdownEditingController2,
                           options: booking.destinationSearchResults
                               .map((e) => e.name)
                               .toList(),
