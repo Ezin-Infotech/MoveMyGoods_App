@@ -55,6 +55,10 @@ class Urls {
   final userProfileImage = "http://103.160.153.57:8083/mmg/api/v2/image";
   final userProfileDetails = 'http://103.160.153.57:8083/mmg/api/v2/profile';
   final createProfile = 'http://103.160.153.57:8083/mmg/api/v2/profile';
+  final changePhoneGetOtp =
+      'http://103.160.153.57:8083/mmg/api/v2/profile/sms/otp';
+  final validatePhoneGetOtp =
+      'http://103.160.153.57:8083/mmg/api/v2/profile/validateOtp';
   final forgotPasswordGetOtp =
       'http://103.160.153.57:8083/mmg/api/v2/profile/forgotpassword/mobile';
   final updatePassWord =

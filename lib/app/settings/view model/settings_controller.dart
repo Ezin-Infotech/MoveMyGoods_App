@@ -35,18 +35,6 @@ class SettingsProvider with ChangeNotifier {
     Icons.logout
   ];
   TextEditingController dateController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController otp1Controller = TextEditingController();
-  TextEditingController otp2Controller = TextEditingController();
-  TextEditingController otp3Controller = TextEditingController();
-  TextEditingController otp4Controller = TextEditingController();
-
-  bool validPhoneNumber = false;
-
-  validPhoneNumberFn(bool value) {
-    validPhoneNumber = value;
-    notifyListeners();
-  }
 
   ValueNotifier<File> emptyFile = ValueNotifier<File>(File(''));
 

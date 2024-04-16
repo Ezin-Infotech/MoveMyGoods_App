@@ -284,6 +284,7 @@ class UserLoggedTiles extends StatelessWidget {
           isTrailing: false,
           onTap: () {
             context.read<AuthProvider>().setProfileValues(context: context);
+            context.read<AuthProvider>().getUserProfileDetailsFn();
             Get.to(const ProfileScreen());
           },
         ),

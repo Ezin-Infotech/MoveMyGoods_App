@@ -175,10 +175,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 BookingTextFieldWidgets(
                   readOnly: true,
                   labeText: 'Mobile Number'.tr,
-                  hintText: '+919744213176',
+                  hintText: '00000000000',
                   suffixIcon: GestureDetector(
                     onTap: () {
-                      settingsProvider.validPhoneNumberFn(false);
+                      profileProvider.validPhoneNumberFn(false);
                       Get.to(const ValidationNumberSCreen());
                     },
                     child: Icon(

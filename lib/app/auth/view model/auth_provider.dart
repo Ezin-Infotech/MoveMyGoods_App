@@ -670,10 +670,75 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
+  TextEditingController newPhoneNumberController = TextEditingController();
+  TextEditingController newPhoneOtp1Controller = TextEditingController();
+  TextEditingController newPhoneOtp2Controller = TextEditingController();
+  TextEditingController newPhoneOtp3Controller = TextEditingController();
+  TextEditingController newPhoneOtp4Controller = TextEditingController();
+
+  verifyPhoneNumberChangeOtpFn({required BuildContext context}) async {
+    LoadingOverlay.of(context).show();
+    final String otp =
+        '${newPhoneOtp1Controller.text}${newPhoneOtp2Controller.text}${newPhoneOtp3Controller.text}${newPhoneOtp4Controller.text}';
+    try {
+      await services.verifyPhoneNumberOtpService(data: {
+        "mobileNumber": newPhoneNumberController.text,
+        "otp": int.parse(otp),
+      });
+      FocusManager.instance.primaryFocus?.unfocus();
+      LoadingOverlay.of(context).hide();
+      mobileNumberController.text = newPhoneNumberController.text;
+      Get.back();
+      successtoast(title: 'Phone number verified Successfully.');
+      // ignore: deprecated_member_use
+    } on DioError catch (e) {
+      LoadingOverlay.of(context).hide();
+      errorBottomSheetDialogs(
+        isDismissible: false,
+        enableDrag: false,
+        context: context,
+        title: '${e.response!.data['message']}',
+        subtitle: '',
+      );
+    }
+  }
+
+  getPhoneNumberChangeOtpFn({required BuildContext context}) async {
+    LoadingOverlay.of(context).show();
+    try {
+      await services.getPhoneNumberChangeOtpService(data: {
+        "mobileNumber": newPhoneNumberController.text,
+        "emailId": "",
+        "roleId": 1
+      });
+
+      FocusManager.instance.primaryFocus?.unfocus();
+      LoadingOverlay.of(context).hide();
+      validPhoneNumberFn(true);
+      successtoast(title: 'Otp Sent to phone number Successfully.');
+      // ignore: deprecated_member_use
+    } on DioError catch (e) {
+      LoadingOverlay.of(context).hide();
+      errorBottomSheetDialogs(
+        isDismissible: false,
+        enableDrag: false,
+        context: context,
+        title: '${e.response!.data['message']}',
+        subtitle: '',
+      );
+    }
+  }
+
+  bool validPhoneNumber = false;
+
+  validPhoneNumberFn(bool value) {
+    validPhoneNumber = value;
+    notifyListeners();
+  }
+
   clearAuthFields() {
     emailController = TextEditingController(text: '');
     passWordController = TextEditingController(text: '');
-
     forgetNewPasswordController = TextEditingController(text: '');
     forgetConfirmPasswordController = TextEditingController(text: '');
     forgetNewPassword = false;

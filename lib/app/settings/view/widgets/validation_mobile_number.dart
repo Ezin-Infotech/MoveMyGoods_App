@@ -11,7 +11,6 @@ import '../../../utils/app style/responsive.dart';
 import '../../../utils/common widgets/button.dart';
 import '../../../utils/common widgets/dialogs.dart';
 import '../../../utils/helpers.dart';
-import '../../view model/settings_controller.dart';
 
 class ValidationNumberSCreen extends StatefulWidget {
   const ValidationNumberSCreen({super.key});
@@ -23,14 +22,12 @@ class ValidationNumberSCreen extends StatefulWidget {
 class _ValidationNumberSCreenState extends State<ValidationNumberSCreen> {
   @override
   Widget build(BuildContext context) {
-    final settingProvider =
-        Provider.of<SettingsProvider>(context, listen: false);
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     return CommonScaffold(
         isBackButton: true,
         children: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Consumer<SettingsProvider>(builder: (context, value, child) {
+          child: Consumer<AuthProvider>(builder: (context, value, child) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -53,7 +50,7 @@ class _ValidationNumberSCreenState extends State<ValidationNumberSCreen> {
                   radius: 2,
                   fillColor: const Color(0xffe9ecef),
                   hintText: 'Mobile Number'.tr,
-                  controller: settingProvider.phoneNumberController,
+                  controller: value.newPhoneNumberController,
                   keyboardType: TextInputType.phone,
                 ),
                 SizeBoxH(
@@ -81,9 +78,10 @@ class _ValidationNumberSCreenState extends State<ValidationNumberSCreen> {
                 value.validPhoneNumber == false
                     ? ButtonWidgets(
                         onPressed: () {
-                          if ((authProvider.isPhoneNumber(
-                              value.phoneNumberController.text))) {
-                            value.validPhoneNumberFn(true);
+                          if ((value.isPhoneNumber(
+                              value.newPhoneNumberController.text))) {
+                            authProvider.getPhoneNumberChangeOtpFn(
+                                context: context);
                           } else {
                             errorBottomSheetDialogs(
                               isDismissible: false,
@@ -107,24 +105,27 @@ class _ValidationNumberSCreenState extends State<ValidationNumberSCreen> {
                               textFieldOTP(
                                   first: true,
                                   last: false,
-                                  controller: value.otp1Controller),
+                                  controller: value.newPhoneOtp1Controller),
                               textFieldOTP(
                                   first: false,
                                   last: false,
-                                  controller: value.otp2Controller),
+                                  controller: value.newPhoneOtp2Controller),
                               textFieldOTP(
                                   first: false,
                                   last: false,
-                                  controller: value.otp3Controller),
+                                  controller: value.newPhoneOtp3Controller),
                               textFieldOTP(
                                   first: false,
                                   last: true,
-                                  controller: value.otp4Controller),
+                                  controller: value.newPhoneOtp4Controller),
                             ],
                           ),
                           SizeBoxH(Responsive.height * 2.5),
                           ButtonWidgets(
-                            onPressed: () {},
+                            onPressed: () {
+                              authProvider.verifyPhoneNumberChangeOtpFn(
+                                  context: context);
+                            },
                             buttonText: 'Verify'.tr,
                             bgColor: AppColors.secondPrimary,
                           ),

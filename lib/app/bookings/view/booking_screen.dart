@@ -40,12 +40,16 @@ class _BookingScreenState extends State<BookingScreen> {
   LatLng? fromLocation;
   LatLng? destinationLocation;
   bool hasFromLocationBeenSelected = false;
+  BitmapDescriptor sourceIcon = BitmapDescriptor.defaultMarker;
+  BitmapDescriptor destinationIcon = BitmapDescriptor.defaultMarker;
 
   @override
   void initState() {
     super.initState();
     bookingProvider = context.read<BookingProvider?>();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      sourceCustomIcon();
+      destinationCustomIcon();
       getLatitudeAndLongitude();
     });
   }
@@ -58,11 +62,40 @@ class _BookingScreenState extends State<BookingScreen> {
     mapController?.animateCamera(CameraUpdate.newCameraPosition(
       CameraPosition(
         target: currentLocation,
-        zoom: 15.1746,
+        zoom: 14,
       ),
     ));
+    markers.add(Marker(
+        markerId: const MarkerId(""),
+        position: currentLocation,
+        infoWindow: const InfoWindow(title: 'Destination'),
+        icon: sourceIcon));
+    onSelectLocation(currentLocation, true);
   }
 
+  void sourceCustomIcon() {
+    BitmapDescriptor.fromAssetImage(
+            const ImageConfiguration(), "assets/source.png")
+        .then(
+      (icon) {
+        setState(() {
+          sourceIcon = icon;
+        });
+      },
+    );
+  }
+
+  void destinationCustomIcon() {
+    BitmapDescriptor.fromAssetImage(
+            const ImageConfiguration(), "assets/destination.png")
+        .then(
+      (icon) {
+        setState(() {
+          destinationIcon = icon;
+        });
+      },
+    );
+  }
   // void updatePolyline() {
   //   if (fromLocation == null || destinationLocation == null) return;
   //   const String polylineIdVal = 'user_route';
@@ -243,9 +276,7 @@ class _BookingScreenState extends State<BookingScreen> {
                               position: latLng,
                               infoWindow:
                                   const InfoWindow(title: 'Destination'),
-                              icon: BitmapDescriptor.defaultMarkerWithHue(
-                                BitmapDescriptor.hueRed,
-                              ),
+                              icon: sourceIcon,
                             ));
                             mapController
                                 ?.animateCamera(CameraUpdate.newCameraPosition(
@@ -319,9 +350,7 @@ class _BookingScreenState extends State<BookingScreen> {
                               position: latLng,
                               infoWindow:
                                   const InfoWindow(title: 'Destination'),
-                              icon: BitmapDescriptor.defaultMarkerWithHue(
-                                BitmapDescriptor.hueRed,
-                              ),
+                              icon: destinationIcon,
                             ));
                             mapController
                                 ?.animateCamera(CameraUpdate.newCameraPosition(
@@ -781,14 +810,6 @@ class _BookingScreenState extends State<BookingScreen> {
                                   labeText: 'Name'.tr,
                                   requiredText: 'Enter Your name'.tr,
                                 ),
-                                // BookingTextFieldWidgets(
-                                //   hintText: 'Email',
-                                //   controller:
-                                //       bookingProvider!.shipperemailController,
-                                //   labeText: 'Email Address',
-                                //   keyboardType: TextInputType.emailAddress,
-                                //   requiredText: 'Enter Your Email ',
-                                // ),
                                 BookingTextFieldWidgets(
                                   hintText: 'Number'.tr,
                                   controller: bookingProvider!
@@ -797,13 +818,6 @@ class _BookingScreenState extends State<BookingScreen> {
                                   keyboardType: TextInputType.phone,
                                   requiredText: 'Please enter Mobile Number'.tr,
                                 ),
-
-                                // BookingTextFieldWidgets(
-                                //   hintText: '(eg.DUMPA1234)',
-                                //   controller:
-                                //       bookingProvider!.shipperpanNOController,
-                                //   labeText: 'PAN No.',
-                                // ),
                                 BookingTextFieldWidgets(
                                   hintText: '(eg.GHXXXXXXXX000)',
                                   controller:

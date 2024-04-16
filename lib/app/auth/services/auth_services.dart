@@ -126,6 +126,7 @@ class AuthServices extends Urls {
                 'x-api-key': 'MMGATPL'
               },
             ));
+    print(response);
     return profileDataModelFromJson(jsonEncode(response.data));
   }
 
@@ -184,6 +185,40 @@ class AuthServices extends Urls {
   }) async {
     final response = await dio.put(
       createProfile,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${AppPref.userToken}',
+          'x-api-key': 'MMGATPL'
+        },
+      ),
+      data: data,
+    );
+    return response.data;
+  }
+
+  Future getPhoneNumberChangeOtpService({
+    required dynamic data,
+  }) async {
+    final response = await dio.post(
+      changePhoneGetOtp,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${AppPref.userToken}',
+          'x-api-key': 'MMGATPL'
+        },
+      ),
+      data: data,
+    );
+    return response.data;
+  }
+
+  Future verifyPhoneNumberOtpService({
+    required dynamic data,
+  }) async {
+    final response = await dio.post(
+      validatePhoneGetOtp,
       options: Options(
         headers: {
           'Content-Type': 'application/json',
