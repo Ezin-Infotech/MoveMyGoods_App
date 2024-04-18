@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
@@ -401,6 +400,7 @@ class BookingProvider with ChangeNotifier {
       return Future.error('Location permissions are permanently denied');
     }
     Position position = await Geolocator.getCurrentPosition();
+
     return LatLng(position.latitude, position.longitude);
   }
 
@@ -414,13 +414,16 @@ class BookingProvider with ChangeNotifier {
     required bool dest,
   }) async {
     try {
+      String url =
+          'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$query&components=country:IN&key=$_apiKey';
       final response = await Dio().get(
-        '$_baseUrl/autocomplete/json',
-        queryParameters: {
-          'input': query,
-          // 'types': '(cities)',
-          'key': _apiKey,
-        },
+        url,
+        // '$_baseUrl/autocomplete/json',
+        // queryParameters: {
+        //   'input': query,
+        //   // 'types': '(cities)',
+        //   'key': _apiKey,
+        // },
       );
       if (response.statusCode == 200) {
         if (dest) {
@@ -454,7 +457,10 @@ class BookingProvider with ChangeNotifier {
   }
 
   Future<LatLng> getPlaceDetails(
-      String placeId, BuildContext context, bool isSource) async {
+    String placeId,
+    BuildContext context,
+    bool isSource,
+  ) async {
     try {
       final response = await Dio().get(
         '$_baseUrl/details/json',
@@ -687,10 +693,7 @@ class BookingProvider with ChangeNotifier {
       log('711950406874');
       final response = await HttpServerClient.get();
       log('$response ----------------------------');
-      List<int> bytess = utf8.encode(response);
-
       bytes = bytes;
-
       log(bytes.toString());
       notifyListeners();
       // ignore: deprecated_member_use

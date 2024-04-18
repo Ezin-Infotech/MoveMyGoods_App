@@ -130,12 +130,16 @@ class _ValidationNumberSCreenState extends State<ValidationNumberSCreen> {
                             bgColor: AppColors.secondPrimary,
                           ),
                           SizeBoxH(Responsive.height * 2.5),
-                          Text(
-                            'Resend OTP'.tr,
-                            style: context.textTheme.bodySmall?.copyWith(
-                                color: AppColors.secondPrimary,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w400),
+                          GestureDetector(
+                            onTap: () => authProvider.getPhoneNumberChangeOtpFn(
+                                context: context),
+                            child: Text(
+                              'Resend OTP'.tr,
+                              style: context.textTheme.bodySmall?.copyWith(
+                                  color: AppColors.secondPrimary,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400),
+                            ),
                           )
                         ],
                       )

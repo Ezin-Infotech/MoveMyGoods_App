@@ -80,8 +80,11 @@ class _CommonScaffoldState extends State<CommonScaffold> {
                   ? PopupMenuButton(
                       onSelected: (value) {},
                       surfaceTintColor: Colors.transparent,
-                      icon: const Icon(Icons.translate),
-                      iconColor: const Color(0xFF10274A),
+                      icon: const Icon(
+                        Icons.translate,
+                        color: Colors.white,
+                      ),
+                      iconColor: const Color.fromARGB(255, 255, 255, 255),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 0),
                       itemBuilder: (context) => AppConstants.languages.map((e) {

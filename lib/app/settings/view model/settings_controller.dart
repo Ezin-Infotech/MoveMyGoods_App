@@ -64,7 +64,7 @@ class SettingsProvider with ChangeNotifier {
       String fileName = parts.last;
       userPhotohintText = fileName;
       // Read the image file as bytes
-      List<int> imageBytes = await newFile.readAsBytes();
+      // List<int> imageBytes = await newFile.readAsBytes();
 
 // Encode the bytes into base64
       // String base64Image = base64Encode(imageBytes);

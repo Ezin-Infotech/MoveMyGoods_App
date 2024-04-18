@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:dio/dio.dart';
 import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:dropdown_plus_plus/dropdown_plus_plus.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,11 @@ class _BookingScreenState extends State<BookingScreen> {
   bool hasFromLocationBeenSelected = false;
   BitmapDescriptor sourceIcon = BitmapDescriptor.defaultMarker;
   BitmapDescriptor destinationIcon = BitmapDescriptor.defaultMarker;
+  String userCurrentLocation = 'Fetching...';
+  DropdownEditingController<String>? dropdownEditingController1;
+  DropdownEditingController<String>? dropdownEditingController2;
 
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
@@ -51,13 +56,20 @@ class _BookingScreenState extends State<BookingScreen> {
       sourceCustomIcon();
       destinationCustomIcon();
       getLatitudeAndLongitude();
+      dropdownEditingController1?.addListener(() {
+        setState(() {
+          debugPrint('data is  --------------------');
+        });
+      });
     });
   }
 
   void getLatitudeAndLongitude() async {
     LatLng? data = await bookingProvider?.getLocation();
+    currentLocation = data ?? const LatLng(12.2958, 76.6394);
+    await getPlaceName(currentLocation.latitude, currentLocation.longitude);
     setState(() {
-      currentLocation = data ?? const LatLng(12.2958, 76.6394);
+      onSelectLocation(currentLocation, true);
     });
     mapController?.animateCamera(CameraUpdate.newCameraPosition(
       CameraPosition(
@@ -71,6 +83,28 @@ class _BookingScreenState extends State<BookingScreen> {
         infoWindow: const InfoWindow(title: 'Destination'),
         icon: sourceIcon));
     onSelectLocation(currentLocation, true);
+  }
+
+  Future<void> getPlaceName(double lat, double lng) async {
+    String apiKey = "AIzaSyBOHuJ-4CqJBjmSi_RugeonwPU5cBVqbeA";
+    String url =
+        "https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$apiKey";
+
+    try {
+      Response response = await Dio().get(url);
+      if (response.statusCode == 200) {
+        Map<String, dynamic> responseData = response.data;
+        List<dynamic> results = responseData['results'];
+        if (results.isNotEmpty) {
+          userCurrentLocation = results[0]['formatted_address'];
+          debugPrint('data is Place name: $userCurrentLocation');
+        }
+      } else {
+        debugPrint('Failed to get place name: ${response.statusCode}');
+      }
+    } catch (e) {
+      debugPrint('Error fetching place name: $e');
+    }
   }
 
   void sourceCustomIcon() {
@@ -108,33 +142,21 @@ class _BookingScreenState extends State<BookingScreen> {
   //     color: Colors.blue,
   //   );
 
-  //   double southLat = min(
-  //     fromLocation!.latitude,
-  //     destinationLocation!.latitude,
-  //   );
-  //   double northLat = max(
-  //     fromLocation!.latitude,
-  //     destinationLocation!.latitude,
-  //   );
-  //   double westLng = min(
-  //     fromLocation!.longitude,
-  //     destinationLocation!.longitude,
-  //   );
-  //   double eastLng = max(
-  //     fromLocation!.longitude,
-  //     destinationLocation!.longitude,
-  //   );
-  //   LatLngBounds bounds = LatLngBounds(
-  //     southwest: LatLng(southLat, westLng),
-  //     northeast: LatLng(northLat, eastLng),
-  //   );
-  //   setState(() {
-  //     polylines.removeWhere((poly) => poly.polylineId == polylineId);
-  //     polylines.add(polyline);
-  //   });
-  //   Future.delayed(const Duration(milliseconds: 500), () {
-  //     mapController?.animateCamera(CameraUpdate.newLatLngBounds(bounds, 60));
-  //   });
+  //   try {
+  //     Response response = await Dio().get(url);
+  //     if (response.statusCode == 200) {
+  //       Map<String, dynamic> responseData = response.data;
+  //       List<dynamic> results = responseData['results'];
+  //       if (results.isNotEmpty) {
+  //         userCurrentLocation = results[0]['formatted_address'];
+  //         debugPrint('data is Place name: $userCurrentLocation');
+  //       }
+  //     } else {
+  //       debugPrint('Failed to get place name: ${response.statusCode}');
+  //     }
+  //   } catch (e) {
+  //     debugPrint('Error fetching place name: $e');
+  //   }
   // }
 
   void updatePolyline() async {
@@ -202,16 +224,49 @@ class _BookingScreenState extends State<BookingScreen> {
     if (isFromLocation) {
       fromLocation = location;
       hasFromLocationBeenSelected = true;
+      markers.add(Marker(
+        markerId: const MarkerId(""),
+        position: location,
+        infoWindow: const InfoWindow(title: 'Starting Point'),
+        icon: BitmapDescriptor.defaultMarkerWithHue(
+          BitmapDescriptor.hueCyan,
+        ),
+      ));
+      mapController?.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: location,
+            zoom: 15.1746,
+          ),
+        ),
+      );
     } else if (hasFromLocationBeenSelected && fromLocation != null) {
       destinationLocation = location;
+      markers.add(Marker(
+        markerId: const MarkerId(""),
+        position: location,
+        infoWindow: const InfoWindow(title: 'Destination'),
+        icon: BitmapDescriptor.defaultMarkerWithHue(
+          BitmapDescriptor.hueRed,
+        ),
+      ));
+      mapController?.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: location,
+            zoom: 15.1746,
+          ),
+        ),
+      );
+      updatePolyline();
+    }
+    if (hasFromLocationBeenSelected &&
+        fromLocation != null &&
+        destinationLocation != null) {
       updatePolyline();
     }
     setState(() {});
   }
-
-  DropdownEditingController<String>? dropdownEditingController;
-
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -226,12 +281,13 @@ class _BookingScreenState extends State<BookingScreen> {
               Consumer<BookingProvider>(
                 builder: (ctx, obj, _) {
                   return SizedBox(
-                    height: Responsive.height * 30,
+                    height: Responsive.height * 80,
                     child: GoogleMap(
                       myLocationEnabled: true,
                       zoomControlsEnabled: false,
-                      myLocationButtonEnabled: true,
-                      mapType: MapType.terrain,
+                      myLocationButtonEnabled: false, mapToolbarEnabled: true,
+                      buildingsEnabled: true,
+                      mapType: MapType.hybrid,
                       initialCameraPosition: CameraPosition(
                         target: currentLocation,
                         zoom: 14.4746,
@@ -240,6 +296,19 @@ class _BookingScreenState extends State<BookingScreen> {
                       polylines: polylines,
                       onMapCreated: (GoogleMapController controller) {
                         mapController = controller;
+                      },
+                      // onTap: (argument) => onSelectLocation(
+                      //   argument,
+                      //   false,
+                      // ),
+                      onTap: (argument) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => MapScreen(
+                              location: currentLocation,
+                            ),
+                          ),
+                        );
                       },
                     ),
                   );
@@ -259,8 +328,11 @@ class _BookingScreenState extends State<BookingScreen> {
                     const SizeBoxH(8),
                     Consumer<BookingProvider>(
                       builder: (context, booking, _) {
+                        // debugPrint(
+                        //     "data is ${booking.isHintTextHide == true ? userCurrentLocation = '' : userCurrentLocation = userCurrentLocation}");
                         return TextDropdownFormField(
                           onChanged: (dynamic value) async {
+                            debugPrint("data is $value  on changed");
                             PlaceSuggestion place =
                                 booking.destinationSearchResults.firstWhere(
                               (element) => element.name == value,
@@ -293,13 +365,19 @@ class _BookingScreenState extends State<BookingScreen> {
                           //   return null;
                           // },
                           dropdownHeight: 200,
-                          controller: dropdownEditingController,
+                          controller: dropdownEditingController1,
                           options:
                               booking.searchResults.map((e) => e.name).toList(),
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            suffixIcon: Icon(Icons.arrow_drop_down),
-                            contentPadding: EdgeInsets.symmetric(
+                          decoration: InputDecoration(
+                            hintText: userCurrentLocation,
+                            hintStyle: context.textTheme.bodyMedium!.copyWith(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                            border: const OutlineInputBorder(),
+                            suffixIcon: const Icon(Icons.arrow_drop_down),
+                            contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16,
                               vertical: 8,
                             ),
@@ -307,6 +385,8 @@ class _BookingScreenState extends State<BookingScreen> {
                           cursorColor: Colors.green,
                           dropdownItemColor: Colors.red,
                           findFn: (String? value) {
+                            userCurrentLocation = "";
+
                             if (value == null) return Future.value([]);
                             if (value.isEmpty) return Future.value([]);
                             booking.searchLocation(
@@ -367,7 +447,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           //   return null;
                           // },
                           dropdownHeight: 200,
-                          controller: dropdownEditingController,
+                          controller: dropdownEditingController2,
                           options: booking.destinationSearchResults
                               .map((e) => e.name)
                               .toList(),
@@ -587,6 +667,11 @@ class _BookingScreenState extends State<BookingScreen> {
                                   ),
                                   onPressed: () => priceDialog(
                                         context: context,
+                                        netAmount: booking
+                                            .bookingFarePriceDetailsModel
+                                            .data!
+                                            .actualFare
+                                            .toString(),
                                         baseFare: booking
                                             .bookingFarePriceDetailsModel
                                             .data!
@@ -690,7 +775,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                           },
                                         ),
                                         Text(
-                                          'PAID'.tr,
+                                          'Shipper'.tr,
                                           style: context.textTheme.bodySmall!
                                               .copyWith(
                                                   fontWeight: FontWeight.w400,
@@ -712,7 +797,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                           },
                                         ),
                                         Text(
-                                          'FOD'.tr,
+                                          'Receiver'.tr,
                                           style: context.textTheme.bodySmall!
                                               .copyWith(
                                                   fontWeight: FontWeight.w400,
@@ -892,6 +977,7 @@ Future priceDialog(
     {required BuildContext context,
     required String distance,
     required String baseFare,
+    required String netAmount,
     required String costPerKm,
     required String labourCost,
     required String totalAmount,
@@ -908,7 +994,7 @@ Future priceDialog(
             width: 300.0,
             child: PriceDetailsWidget(
                 distance: distance,
-                netAmount: baseFare,
+                netAmount: netAmount,
                 baseFare: baseFare,
                 pricePerKm: costPerKm,
                 labourCost: labourCost,
@@ -918,4 +1004,145 @@ Future priceDialog(
           ),
         );
       });
+}
+
+// import 'dart:convert';
+
+// import 'package:dio/dio.dart';
+// import 'package:flutter/material.dart';
+// import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+class MapScreen extends StatefulWidget {
+  const MapScreen({super.key, required this.location});
+  final LatLng location;
+  @override
+  _MapScreenState createState() => _MapScreenState();
+}
+
+class _MapScreenState extends State<MapScreen> {
+  GoogleMapController? _controller;
+  LatLng? fromLocation;
+  LatLng? toLocation;
+
+  final TextEditingController _searchController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pop(context, {'from': fromLocation, 'to': toLocation});
+        return false;
+      },
+      child: Scaffold(
+        body: Stack(
+          children: [
+            GoogleMap(
+              onMapCreated: (controller) {
+                _controller = controller;
+              },
+              initialCameraPosition: const CameraPosition(
+                target: LatLng(37.42796133580664, -122.085749655962),
+                zoom: 15,
+              ),
+              onTap: (LatLng latLng) {
+                setState(() {
+                  if (fromLocation == null) {
+                    fromLocation = latLng;
+                  } else {
+                    toLocation ??= latLng;
+                  }
+                });
+              },
+              markers: <Marker>{
+                if (fromLocation != null)
+                  Marker(
+                    markerId: const MarkerId('fromLocation'),
+                    position: fromLocation!,
+                    infoWindow: const InfoWindow(title: 'From Location'),
+                  ),
+                if (toLocation != null)
+                  Marker(
+                    markerId: const MarkerId('toLocation'),
+                    position: toLocation!,
+                    infoWindow: const InfoWindow(title: 'To Location'),
+                  ),
+              },
+            ),
+            Positioned(
+              top: 10,
+              left: 10,
+              right: 10,
+              child: SafeArea(
+                child: Container(
+                  color: Colors.white,
+                  child: TextFormField(
+                    controller: _searchController,
+                    decoration: InputDecoration(
+                      hintText: 'Search for a place...',
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.search),
+                        onPressed: () {
+                          searchPlaces(_searchController.text);
+                        },
+                      ),
+                      prefixIcon: IconButton(
+                        icon: const Icon(Icons.arrow_back),
+                        onPressed: () {
+                          Navigator.pop(
+                            context,
+                            {
+                              'from': fromLocation,
+                              'to': toLocation,
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void searchPlaces(String query) async {
+    String apiKey = 'AIzaSyBOHuJ-4CqJBjmSi_RugeonwPU5cBVqbeA';
+    String url =
+        'https://maps.googleapis.com/maps/api/place/textsearch/json?query=$query&key=$apiKey';
+
+    try {
+      Response response = await Dio().get(url);
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = jsonDecode(response.data);
+        List<dynamic> results = data['results'];
+
+        setState(() {
+          fromLocation = null;
+          toLocation = null;
+          for (var result in results) {
+            double lat = result['geometry']['location']['lat'];
+            double lng = result['geometry']['location']['lng'];
+            String name = result['name'];
+            Marker marker = Marker(
+              markerId: MarkerId(name),
+              position: LatLng(lat, lng),
+              infoWindow: InfoWindow(title: name),
+            );
+            _controller?.moveCamera(
+              CameraUpdate.newLatLng(
+                LatLng(lat, lng),
+              ),
+            );
+          }
+        });
+      } else {
+        print('Failed to fetch search results: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching search results: $e');
+    }
+  }
 }

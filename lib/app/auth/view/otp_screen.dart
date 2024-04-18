@@ -140,14 +140,19 @@ class OtpScreenState extends State<OtpScreen> {
                   textAlign: TextAlign.center,
                 ),
                 SizeBoxH(Responsive.height * 2),
-                Text(
-                  "Resend New Code".tr,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.secondPrimary,
+                GestureDetector(
+                  onTap: () => context
+                      .read<AuthProvider>()
+                      .getSignUpOTPFn(context: context),
+                  child: Text(
+                    "Resend New Code".tr,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.secondPrimary,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ],
             ),

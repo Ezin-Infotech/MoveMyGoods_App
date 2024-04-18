@@ -245,6 +245,9 @@ class BookingSuccessFullyCompletedScreen extends StatelessWidget {
                               ),
                               onPressed: () => priceDialog(
                                     context: context,
+                                    netAmount: obj
+                                        .bookingDetail.data!.actualFare
+                                        .toString(),
                                     baseFare: obj.bookingDetail.data!.baseFare
                                         .toString(),
                                     cgst:
