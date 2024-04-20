@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:dropdown_plus_plus/dropdown_plus_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -46,13 +47,16 @@ class _BookingScreenState extends State<BookingScreen> {
   String userCurrentLocation = 'Fetching...';
   DropdownEditingController<String>? dropdownEditingController1;
   DropdownEditingController<String>? dropdownEditingController2;
-
+  String _mapStyle = "";
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
     bookingProvider = context.read<BookingProvider?>();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      rootBundle.loadString("assets/map_style.txt").then((string) {
+        _mapStyle = string;
+      });
       sourceCustomIcon();
       destinationCustomIcon();
       getLatitudeAndLongitude();
@@ -287,7 +291,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       zoomControlsEnabled: false,
                       myLocationButtonEnabled: false, mapToolbarEnabled: true,
                       buildingsEnabled: true,
-                      mapType: MapType.hybrid,
+                      // mapType: MapType.hybrid,
                       initialCameraPosition: CameraPosition(
                         target: currentLocation,
                         zoom: 14.4746,
@@ -296,6 +300,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       polylines: polylines,
                       onMapCreated: (GoogleMapController controller) {
                         mapController = controller;
+                        mapController?.setMapStyle(_mapStyle);
                       },
                       // onTap: (argument) => onSelectLocation(
                       //   argument,

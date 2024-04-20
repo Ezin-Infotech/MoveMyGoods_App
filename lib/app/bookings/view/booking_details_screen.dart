@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:get/route_manager.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mmg/app/bookings/model%20view/booking_provider.dart';
+import 'package:mmg/app/bookings/view/widgets/active_vehicle_tracking_map.dart';
 import 'package:mmg/app/utils/app%20style/colors.dart';
 import 'package:mmg/app/utils/app%20style/responsive.dart';
 import 'package:mmg/app/utils/backend/urls.dart';
@@ -139,7 +141,6 @@ class CompletedBookingScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizeBoxH(Responsive.height * 1),
                 MediaQuery.removeViewPadding(
                   context: context,
                   removeLeft: true,
@@ -164,6 +165,19 @@ class CompletedBookingScreen extends StatelessWidget {
                               fontSize: 14, fontWeight: FontWeight.w400),
                         ),
                       ]),
+                ),
+                SizeBoxH(Responsive.height * 1),
+                ActiveBookingTrackingMapWidget(
+                  destination: LatLng(
+                      double.parse(obj.bookingDetail.data!.destinationlatitude
+                          .toString()),
+                      double.parse(obj.bookingDetail.data!.destinationlongitude
+                          .toString())),
+                  source: LatLng(
+                      double.parse(
+                          obj.bookingDetail.data!.sourcelatitude.toString()),
+                      double.parse(
+                          obj.bookingDetail.data!.sourcelongitude.toString())),
                 ),
                 const SizeBoxH(15),
                 Container(

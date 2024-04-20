@@ -223,6 +223,9 @@
         "Karnataka",
         "latlong",
         "Listtile",
+        "Mosquitto",
+        "movemygoods",
+        "Mqtt",
         "numberof",
         "pagetransition",
         "passporthint",
@@ -249,6 +252,7 @@
         "successtoast",
         "textform",
         "Vqbe",
+        "willtopic",
         "पुरा"
     ],
 }

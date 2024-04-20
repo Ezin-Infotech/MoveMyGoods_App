@@ -25,7 +25,7 @@ class AuthServices extends Urls {
       ),
       data: {"userName": email, "password": password, "roleId": 1},
     );
-    print(response);
+    log("111111111111111111111111111111111 $response");
     return response.data;
   }
 
