@@ -70,7 +70,7 @@ postData({required File files}) async {
 
     // Request was successful, handle response here
     var response = await http.Response.fromStream(streamedResponse);
-    print('Response: ${response.body}');
+    print('Responsewwwwwwwwwwwwwwwwwwwwwwwwww: ${response.body}');
   } catch (e) {
     print('Request failed with status: $e');
   }

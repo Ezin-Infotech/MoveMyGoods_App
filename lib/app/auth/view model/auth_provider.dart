@@ -653,6 +653,7 @@ class AuthProvider with ChangeNotifier {
       required dynamic fileName}) async {
     LoadingOverlay.of(context).show();
     try {
+      log("uploadImageFn");
       await postData(files: file);
       // await services.postUploadImageService(file: file, imageName: fileName);
       // signInData = signInDataResponse.data!;
